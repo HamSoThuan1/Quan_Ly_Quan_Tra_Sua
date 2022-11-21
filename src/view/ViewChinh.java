@@ -105,7 +105,7 @@ public class ViewChinh extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         lblDate = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblChucVu = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         pnMain = new javax.swing.JPanel();
 
@@ -422,9 +422,9 @@ public class ViewChinh extends javax.swing.JFrame {
         lblDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDate.setText("11:11:11 AM  20-11-2022");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Nhân viên");
-        jLabel3.setPreferredSize(new java.awt.Dimension(50, 13));
+        lblChucVu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblChucVu.setText("Quản lý");
+        lblChucVu.setPreferredSize(new java.awt.Dimension(50, 13));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setText("Nguyễn Duy Thành thoại");
@@ -443,7 +443,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -457,12 +457,12 @@ public class ViewChinh extends javax.swing.JFrame {
                     .addComponent(jButton7)
                     .addComponent(jButton8)
                     .addComponent(lblDate)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton8, jLabel3, jLabel4, lblDate});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton8, jLabel4, lblChucVu, lblDate});
 
         pnMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -551,8 +551,13 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        ViewGiaoCa v = new ViewGiaoCa();
-        v.setVisible(true);
+        if(lblChucVu.getText().equalsIgnoreCase("Nhân viên")){
+            ViewGiaoCaNhanVien v = new ViewGiaoCaNhanVien();
+            v.setVisible(true);
+        }else{
+            ViewGiaoCaQuanLy v = new ViewGiaoCaQuanLy();
+            v.setVisible(true);
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
@@ -595,7 +600,6 @@ public class ViewChinh extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -609,6 +613,7 @@ public class ViewChinh extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lblBanHang;
+    private javax.swing.JLabel lblChucVu;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblHoaDon;
     private javax.swing.JLabel lblKhachHang;

@@ -8,15 +8,15 @@ package view;
  *
  * @author kn134
  */
-public class ViewGiaoCa extends javax.swing.JFrame {
+public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
 
     /**
-     * Creates new form ViewGiaoCa
+     * Creates new form ViewGiaoCaNhanVien
      */
-    public ViewGiaoCa() {
+    public ViewGiaoCaNhanVien() {
         initComponents();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(ViewGiaoCa.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(ViewGiaoCaNhanVien.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -216,20 +216,20 @@ public class ViewGiaoCa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewGiaoCa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewGiaoCaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewGiaoCa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewGiaoCaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewGiaoCa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewGiaoCaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewGiaoCa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewGiaoCaNhanVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewGiaoCa().setVisible(true);
+                new ViewGiaoCaNhanVien().setVisible(true);
             }
         });
     }
