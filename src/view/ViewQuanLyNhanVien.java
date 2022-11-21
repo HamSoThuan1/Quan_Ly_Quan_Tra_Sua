@@ -298,7 +298,7 @@ private List<Nhanvien> listnv = new ArrayList<>();
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String 
+//        String 
     }//GEN-LAST:event_jButton1ActionPerformed
 
  public Nhanvien getNVbyfrom(){
