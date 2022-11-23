@@ -60,7 +60,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(102, 255, 255));
 
@@ -305,19 +304,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         jTabbedPane1.addTab("Sản phẩm", jPanel2);
         jPanel2.getAccessibleContext().setAccessibleName("");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1026, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 651, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Topping", jPanel3);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -375,7 +361,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButton1;
