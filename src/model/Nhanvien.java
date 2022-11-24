@@ -59,6 +59,12 @@ public class Nhanvien {
         this.Chucvu = Chucvu;
     }
 
+    public Nhanvien(String MaNV, String Matkhau) {
+        this.MaNV = MaNV;
+        this.Matkhau = Matkhau;
+    }
+    
+
     @Override
     public String toString() {
         return "Nhanvien{" + "MaNV=" + MaNV + ", HotenNv=" + HotenNv + ", SoDt=" + SoDt + ", Gioitinh=" + Gioitinh + ", Ngaysinh=" + Ngaysinh + ", Email=" + Email + ", Diachi=" + Diachi + ", Matkhau=" + Matkhau + ", Trangthai=" + Trangthai + ", Chucvu=" + Chucvu + '}';

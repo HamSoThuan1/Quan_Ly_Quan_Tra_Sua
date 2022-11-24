@@ -4,20 +4,30 @@
  */
 package view;
 
+import entity.setDangNhap;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Nhanvien;
+import repository.DangNhap_responsitory;
+import serviceimql.DangNhap_servicesimpl;
+
 
 /**
  *
  * @author Acer
  */
 public class ViewDangNhap extends javax.swing.JFrame {
-
+private List<Nhanvien> list;
+private DangNhap_servicesimpl dangNhap_services;
     /**
      * Creates new form ViewDangNhap
      */
     public ViewDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
+        list = new ArrayList<>();
+        dangNhap_services = new DangNhap_servicesimpl();
     }
 
     /**
@@ -169,29 +179,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
 
     private void btn_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhapActionPerformed
         // TODO add your handling code here:
-         String name = txt_TenDangNhap.getText();
-        String pass =  new String(pw_MatKhau.getPassword());
-        
-        StringBuilder sb = new StringBuilder();
-        
-        if(name.equals("")){
-            sb.append("Tên không được để trống \n");
-        }
-        if(pass.equals("")){
-            sb.append("Mật khẩu không được để trống \n");   
-        }
-        if(sb.length()>0){
-            JOptionPane.showMessageDialog(this, sb.toString(),"Invalidation",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        if(name.equals("fpt") && pass.equals("polytechnic")){
-            JOptionPane.showMessageDialog(this, "đăng nhập thành công");
-            ViewChinh view = new ViewChinh();
-            view.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(this, "tên hoặc mật khẩu không đúng định dạng","đăng nhập thất bai",JOptionPane.ERROR_MESSAGE);
-        }
+            DangNhap();
     }//GEN-LAST:event_btn_DangNhapActionPerformed
 
     private void cb_HienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_HienThiMouseClicked
@@ -237,7 +225,23 @@ public class ViewDangNhap extends javax.swing.JFrame {
             }
         });
     }
-
+public void DangNhap(){
+     String maNV = txt_TenDangNhap.getText();
+     String matKhau = new String(pw_MatKhau.getPassword());
+     setDangNhap.user = dangNhap_services.getOne(maNV, matKhau);
+      if(maNV.isEmpty()){
+          JOptionPane.showMessageDialog(this, "Ten dang nhap khong duoc de trong");
+      }else if(matKhau.isEmpty()){
+          JOptionPane.showMessageDialog(this, "mat khau khong duoc de trong");
+      }else if(setDangNhap.user!= null){
+          JOptionPane.showMessageDialog(this, "Dang nhap thanh cong");
+          ViewChinh view = new ViewChinh();
+          view.setVisible(true);
+          this.dispose();
+      }else{
+          JOptionPane.showMessageDialog(this, "ten dang nhap hoan mat khau khong dung");
+      }
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DangNhap;
     private javax.swing.JButton btn_DoiMatKhau;
