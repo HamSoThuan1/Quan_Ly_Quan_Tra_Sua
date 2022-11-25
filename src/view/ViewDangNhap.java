@@ -12,14 +12,15 @@ import model.Nhanvien;
 import repository.DangNhap_responsitory;
 import serviceimql.DangNhap_servicesimpl;
 
-
 /**
  *
  * @author Acer
  */
 public class ViewDangNhap extends javax.swing.JFrame {
-private List<Nhanvien> list;
-private DangNhap_servicesimpl dangNhap_services;
+
+    private List<Nhanvien> list;
+    private DangNhap_servicesimpl dangNhap_services;
+
     /**
      * Creates new form ViewDangNhap
      */
@@ -179,14 +180,14 @@ private DangNhap_servicesimpl dangNhap_services;
 
     private void btn_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhapActionPerformed
         // TODO add your handling code here:
-            DangNhap();
+        DangNhap();
     }//GEN-LAST:event_btn_DangNhapActionPerformed
 
     private void cb_HienThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cb_HienThiMouseClicked
         // TODO add your handling code here:
-        if(cb_HienThi.isSelected()){
-            pw_MatKhau.setEchoChar((char)0);
-        }else{
+        if (cb_HienThi.isSelected()) {
+            pw_MatKhau.setEchoChar((char) 0);
+        } else {
             pw_MatKhau.setEchoChar('*');
         }
     }//GEN-LAST:event_cb_HienThiMouseClicked
@@ -225,23 +226,24 @@ private DangNhap_servicesimpl dangNhap_services;
             }
         });
     }
-public void DangNhap(){
-     String maNV = txt_TenDangNhap.getText();
-     String matKhau = new String(pw_MatKhau.getPassword());
-     setDangNhap.user = dangNhap_services.getOne(maNV, matKhau);
-      if(maNV.isEmpty()){
-          JOptionPane.showMessageDialog(this, "Ten dang nhap khong duoc de trong");
-      }else if(matKhau.isEmpty()){
-          JOptionPane.showMessageDialog(this, "mat khau khong duoc de trong");
-      }else if(setDangNhap.user!= null){
-          JOptionPane.showMessageDialog(this, "Dang nhap thanh cong");
-          ViewChinh view = new ViewChinh();
-          view.setVisible(true);
-          this.dispose();
-      }else{
-          JOptionPane.showMessageDialog(this, "ten dang nhap hoan mat khau khong dung");
-      }
-}
+
+    public void DangNhap() {
+        String maNV = txt_TenDangNhap.getText();
+        String matKhau = new String(pw_MatKhau.getPassword());
+        setDangNhap.user = dangNhap_services.getOne(maNV, matKhau);
+        if (maNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập không được để trống");
+        } else if (matKhau.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
+        } else if (setDangNhap.user != null) {
+            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+            ViewChinh view = new ViewChinh();
+            view.setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng");
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DangNhap;
     private javax.swing.JButton btn_DoiMatKhau;

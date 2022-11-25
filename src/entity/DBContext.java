@@ -16,7 +16,7 @@ public class DBContext {
     
     public static final String HOSTNAME = "localhost";
     public static final String PORT = "1433";
-    public static final String DBNAME = "Quan_Ly_Quan_Tra_Sua";
+    public static final String DBNAME = "QLQTS";
     public static final String USERNAME = "sa";
     public static final String PASSWORD = "221003";
 
