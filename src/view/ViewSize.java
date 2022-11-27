@@ -32,7 +32,7 @@ public class ViewSize extends javax.swing.JFrame {
         model = new DefaultTableModel();
         tbl_Size.setModel(model);
 
-        String[] heard = {"STT", "Mã Size", "Tên Size", "Giá","Trạng thái"};
+        String[] heard = {"STT", "Mã Size", "Tên Size", "Giá", "Trạng thái"};
         model.setColumnIdentifiers(heard);
 
         setDefaultCloseOperation(ViewSize.DISPOSE_ON_CLOSE);

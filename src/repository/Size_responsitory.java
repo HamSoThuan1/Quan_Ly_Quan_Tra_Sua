@@ -20,14 +20,15 @@ import static repository.Nhanvien_repository.getallNV;
  * @author Acer
  */
 public class Size_responsitory {
-    public List<Size> getAllSizes(){     
+
+    public List<Size> getAllSizes() {
         String sql = "select * from SIZE";
-        try(Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
-              List<Size> sizes = new ArrayList<>();
-              ResultSet rs = pr.executeQuery();
-            while(rs.next()){
-               Size size = new Size( rs.getString(1),rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5));
-               sizes.add(size);
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
+            List<Size> sizes = new ArrayList<>();
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                Size size = new Size(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5));
+                sizes.add(size);
             }
             return sizes;
         } catch (Exception e) {
@@ -35,49 +36,59 @@ public class Size_responsitory {
         }
         return null;
     }
-  public boolean addSize(Size si){
-      String sql = "INSERT INTO [dbo].[SIZE]\n" +
-"           ([MaSize]\n" +
-"           ,[TenSize]\n" +
-"           ,[Gia]\n" +
-"           ,[TrangThai])\n" +
-"     VALUES\n" +
-"           (?,?,?,?)";
-      int check = 0;
-      try(Connection con = DBContext.getConnection();PreparedStatement pr = con.prepareStatement(sql)) {
-          pr.setObject(1, si.getMaSize());
-          pr.setObject(2, si.getTenSize());
-          pr.setObject(3, si.getGia());
-          pr.setObject(4, si.getTrangThai());
-          check = pr.executeUpdate();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      return check > 0;
-  }
-  public boolean deleteSize(String Ma){
-      String sql = "Delete from SIZE where MaSize = ?";
-      int check = 0;
-      try(Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)) {
-          pr.setObject(1, Ma);
-          check = pr.executeUpdate();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      return check > 0;
-  }
-  public boolean updateSize(Size si, String ma){
-      String sql = "Update SIZE set TenSize = ?, Gia = ?, TrangThai = ? where MaSize = ?";
-      int check = 0;
-      try(Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)) {
-          pr.setObject(1, si.getTenSize());
-          pr.setObject(2, si.getGia());
-          pr.setObject(3, si.getTrangThai());
-          pr.setObject(4, ma);
-          check = pr.executeUpdate();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      return check > 0;
-  }
+
+    public boolean addSize(Size si) {
+        String sql = "INSERT INTO [dbo].[SIZE]\n"
+                + "           ([MaSize]\n"
+                + "           ,[TenSize]\n"
+                + "           ,[Gia]\n"
+                + "           ,[TrangThai])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?)";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
+            pr.setObject(1, si.getMaSize());
+            pr.setObject(2, si.getTenSize());
+            pr.setObject(3, si.getGia());
+            pr.setObject(4, si.getTrangThai());
+            check = pr.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+
+    public boolean deleteSize(String Ma) {
+        String sql = "Delete from SIZE where MaSize = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
+            pr.setObject(1, Ma);
+            check = pr.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+
+    public boolean updateSize(Size si, String ma) {
+        String sql = "Update SIZE set TenSize = ?, Gia = ?, TrangThai = ? where MaSize = ?";
+        int check = 0;
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
+            pr.setObject(1, si.getTenSize());
+            pr.setObject(2, si.getGia());
+            pr.setObject(3, si.getTrangThai());
+            pr.setObject(4, ma);
+            check = pr.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+
+    public static void main(String[] args) {
+        List<Size> list = new Size_responsitory().getAllSizes();
+        for (Size size : list) {
+            System.out.println(size.toString());
+        }
+    }
 }

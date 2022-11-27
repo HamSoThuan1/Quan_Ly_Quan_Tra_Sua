@@ -9,6 +9,7 @@ package model;
  * @author Acer
  */
 public class Size {
+
     private String IdSize;
     private String MaSize;
     private String TenSize;
@@ -31,6 +32,11 @@ public class Size {
         this.TenSize = TenSize;
         this.gia = gia;
         this.trangThai = trangThai;
+    }
+
+    public Size(String TenSize, Double gia) {
+        this.TenSize = TenSize;
+        this.gia = gia;
     }
 
     public String getIdSize() {
@@ -78,7 +84,4 @@ public class Size {
         return "Size{" + "IdSize=" + IdSize + ", MaSize=" + MaSize + ", TenSize=" + TenSize + ", gia=" + gia + ", trangThai=" + trangThai + '}';
     }
 
-    
-   
-    
 }

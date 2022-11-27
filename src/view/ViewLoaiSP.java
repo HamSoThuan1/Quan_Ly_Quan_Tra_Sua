@@ -37,7 +37,7 @@ public class ViewLoaiSP extends javax.swing.JFrame {
         cbbTrangThai.setModel(combobox);
         loaiSPService = new LoaiSanPhamServiceImpl();
         
-        String[] heard = {"STT", "Mã Loại SP", "Tên Loại SP"};
+        String[] heard = {"STT", "Mã Loại SP", "Tên Loại SP", "Trạng thái"};
         model.setColumnIdentifiers(heard);
         
         list = loaiSPService.getAll();
@@ -45,6 +45,8 @@ public class ViewLoaiSP extends javax.swing.JFrame {
         
         Integer[] trangThai = {0,1};
         cbbTrangThai.setModel(new DefaultComboBoxModel(trangThai));
+        
+        setDefaultCloseOperation(ViewSize.DISPOSE_ON_CLOSE);
     }
     
     public void showData(List<LoaiSanPham> lists){
@@ -84,6 +86,7 @@ public class ViewLoaiSP extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         cbbTrangThai = new javax.swing.JComboBox<>();
+        btnQuayLai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +134,13 @@ public class ViewLoaiSP extends javax.swing.JFrame {
 
         cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnQuayLai.setText("Quay lại");
+        btnQuayLai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuayLaiActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,10 +165,12 @@ public class ViewLoaiSP extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtTenLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnThem)
-                            .addComponent(btnSua)))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btnThem)
+                                .addComponent(btnSua))
+                            .addComponent(btnQuayLai)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -182,8 +194,9 @@ public class ViewLoaiSP extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnQuayLai))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37))
         );
@@ -221,6 +234,13 @@ public class ViewLoaiSP extends javax.swing.JFrame {
         showData(list);
     }//GEN-LAST:event_btnSuaActionPerformed
 
+    private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
+        // TODO add your handling code here:
+        ViewQuanLySanPham view = new ViewQuanLySanPham();
+        view.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnQuayLaiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +277,7 @@ public class ViewLoaiSP extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnQuayLai;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JComboBox<String> cbbTrangThai;

@@ -9,6 +9,7 @@ package model;
  * @author hung2
  */
 public class LoaiSanPham {
+
     private String idLoaiSP;
     private String maLoaiSP;
     private String tenLoaiSP;
@@ -23,6 +24,10 @@ public class LoaiSanPham {
         this.tenLoaiSP = tenLoaiSP;
         this.trangThai = trangThai;
     }
+
+    public LoaiSanPham(String tenLoaiSP) {
+        this.tenLoaiSP = tenLoaiSP;
+    }  
 
     public String getIdLoaiSP() {
         return idLoaiSP;
@@ -60,6 +65,5 @@ public class LoaiSanPham {
     public String toString() {
         return "LoaiSanPham{" + "idLoaiSP=" + idLoaiSP + ", maLoaiSP=" + maLoaiSP + ", tenLoaiSP=" + tenLoaiSP + ", trangThai=" + trangThai + '}';
     }
-    
-    
+
 }
