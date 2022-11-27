@@ -4,6 +4,19 @@
  */
 package view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author kn134
@@ -38,7 +51,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_cb = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -99,7 +112,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_cb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"CA001", "NV001", "150000", "50000", "Giao ca"},
                 {null, null, null, null, null},
@@ -110,7 +123,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
                 "Mã ca", "Tên nhân viên", "Số tiền lúc đầu", "Số tiền doanh thu", "Ghi chú"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tbl_cb);
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel16.setText("Tổng tiền ca hiện hiện có :");
@@ -295,9 +308,9 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -306,10 +319,10 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
                             .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -328,6 +341,64 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        try {
+            XSSFWorkbook wordbook = new XSSFWorkbook();
+            XSSFSheet sheet = wordbook.createSheet("Giao ca");
+            XSSFRow row=null;
+            XSSFCell cell=null;
+            row=sheet.createRow(3);
+            
+            cell=row.createCell(0, CellType.STRING);
+            cell.setCellValue("Mã ca");
+            
+            cell=row.createCell(1, CellType.STRING);
+            cell.setCellValue("Mã nhân viên");
+            
+            cell=row.createCell(2, CellType.STRING);
+            cell.setCellValue("Số tiền lúc đầu");
+            
+            cell=row.createCell(3, CellType.STRING);
+            cell.setCellValue("Số tiền doanh thu");
+            
+            cell=row.createCell(4, CellType.STRING);
+            cell.setCellValue("Doanh thu");
+            for (int i = 0; i < tbl_cb.getRowCount(); i++) {
+                row=sheet.createRow(4+i);
+                cell=row.createCell(0, CellType.STRING);
+                cell.setCellValue((String) tbl_cb.getValueAt(i, 0));
+                
+                cell=row.createCell(1, CellType.STRING);
+                cell.setCellValue((String) tbl_cb.getValueAt(i, 1));
+                
+                cell=row.createCell(2, CellType.STRING);
+                cell.setCellValue((String) tbl_cb.getValueAt(i, 2));
+                
+                cell=row.createCell(3, CellType.STRING);
+                cell.setCellValue((String) tbl_cb.getValueAt(i, 3));
+                
+                cell=row.createCell(4, CellType.STRING);
+                cell.setCellValue((String) tbl_cb.getValueAt(i, 4));
+            }
+            JFileChooser j = new JFileChooser();
+            j.setDialogTitle("Hãy chọn địa chỉ muốn xuất file !");
+            int rs = j.showSaveDialog(null);
+            String Path = j.getSelectedFile().getAbsolutePath();
+            String name = j.getSelectedFile().getName();
+            String exclePath = Path + ".xlsx";
+            try {
+                FileOutputStream fos = new FileOutputStream(exclePath);
+                wordbook.write(fos);
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch(IOException ex){
+                ex.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(this, "Success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Eror");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -395,10 +466,10 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbl_cb;
     // End of variables declaration//GEN-END:variables
 }
