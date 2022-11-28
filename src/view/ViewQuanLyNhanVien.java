@@ -108,6 +108,9 @@ private List<Nhanvien> listtk = new ArrayList<>();
         });
         jScrollPane1.setViewportView(tblnhanvien);
 
+        txtsearch.setForeground(new java.awt.Color(204, 204, 204));
+        txtsearch.setText("Nhận mã NV");
+
         jButton1.setText("Tìm kiếm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

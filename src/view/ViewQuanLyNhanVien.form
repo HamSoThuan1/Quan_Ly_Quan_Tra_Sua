@@ -104,6 +104,12 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JTextField" name="txtsearch">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="cc" red="cc" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Nh&#x1ead;n m&#xe3; NV"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>

@@ -4,6 +4,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author QUANGMINH
@@ -14,12 +16,13 @@ public class Nhanvien {
     private String HotenNv;
     private String SoDt;
     private String Gioitinh;
-    private String Ngaysinh;
+    private Date Ngaysinh;
     private String Email;
     private String Diachi;
+    private String Chucvu;
     private String Matkhau;
     private int Trangthai;
-    private String Chucvu;
+    
 
     public String getID() {
         return ID;
@@ -29,7 +32,12 @@ public class Nhanvien {
         this.ID = ID;
     }
 
-    public Nhanvien(String ID, String MaNV, String HotenNv, String SoDt, String Gioitinh, String Ngaysinh, String Email, String Diachi, String Matkhau, int Trangthai, String Chucvu) {
+    
+
+    public Nhanvien() {
+    }
+
+    public Nhanvien(String ID, String MaNV, String HotenNv, String SoDt, String Gioitinh, Date Ngaysinh, String Email, String Diachi, String Chucvu, String Matkhau, int Trangthai) {
         this.ID = ID;
         this.MaNV = MaNV;
         this.HotenNv = HotenNv;
@@ -38,15 +46,12 @@ public class Nhanvien {
         this.Ngaysinh = Ngaysinh;
         this.Email = Email;
         this.Diachi = Diachi;
+        this.Chucvu = Chucvu;
         this.Matkhau = Matkhau;
         this.Trangthai = Trangthai;
-        this.Chucvu = Chucvu;
     }
 
-    public Nhanvien() {
-    }
-
-    public Nhanvien(String MaNV, String HotenNv, String SoDt, String Gioitinh, String Ngaysinh, String Email, String Diachi, String Matkhau, int Trangthai, String Chucvu) {
+    public Nhanvien(String MaNV, String HotenNv, String SoDt, String Gioitinh, Date Ngaysinh, String Email, String Diachi, String Chucvu, String Matkhau, int Trangthai) {
         this.MaNV = MaNV;
         this.HotenNv = HotenNv;
         this.SoDt = SoDt;
@@ -54,15 +59,15 @@ public class Nhanvien {
         this.Ngaysinh = Ngaysinh;
         this.Email = Email;
         this.Diachi = Diachi;
+        this.Chucvu = Chucvu;
         this.Matkhau = Matkhau;
         this.Trangthai = Trangthai;
-        this.Chucvu = Chucvu;
     }
+    
+    
 
-    public Nhanvien(String MaNV, String Matkhau) {
-        this.MaNV = MaNV;
-        this.Matkhau = Matkhau;
-    }
+    
+
     
 
     @Override
@@ -102,13 +107,11 @@ public class Nhanvien {
         this.Gioitinh = Gioitinh;
     }
 
-    public String getNgaysinh() {
-        return Ngaysinh;
-    }
-
-    public void setNgaysinh(String Ngaysinh) {
+    public Nhanvien(Date Ngaysinh) {
         this.Ngaysinh = Ngaysinh;
     }
+
+    
 
     public String getEmail() {
         return Email;
@@ -148,6 +151,14 @@ public class Nhanvien {
 
     public void setChucvu(String Chucvu) {
         this.Chucvu = Chucvu;
+    }
+
+    public Date getNgaysinh() {
+        return Ngaysinh;
+    }
+
+    public void setNgaysinh(Date Ngaysinh) {
+        this.Ngaysinh = Ngaysinh;
     }
     
     
