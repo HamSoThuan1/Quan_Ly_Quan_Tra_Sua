@@ -80,8 +80,8 @@ public class Nhanvien_repository {
     return JDBC_Helper.updateTongQuat(sql,nv.getMaNV());
     }
      public static int upfate(Nhanvien nv){
-    String sql="update NHANVIEN set MaNV=?,HoTenNV=?,SoDT=?,GioiTinh=?,NgaySinh=?,email=?,DiaChi=?,MatKhau=?,TrangThai=?,IdChucVu=? where MaNV=?";
-    return JDBC_Helper.updateTongQuat(sql,nv.getChucvu(),nv.getMaNV(),nv.getHotenNv(),nv.getSoDt(),nv.getGioitinh(),nv.getNgaysinh(),nv.getEmail(),nv.getDiachi(),nv.getMatkhau(),nv.getTrangthai(),nv.getChucvu(),nv.getMaNV());
+    String sql="update NHANVIEN set MaNV=?,HoTenNV=?,SoDT=?,GioiTinh=?,NgaySinh=?,email=?,DiaChi=?,MatKhau=?,TrangThai=?,ChucVu=? where MaNV=?";
+    return JDBC_Helper.updateTongQuat(sql,nv.getMaNV(),nv.getHotenNv(),nv.getSoDt(),nv.getGioitinh(),nv.getNgaysinh(),nv.getEmail(),nv.getDiachi(),nv.getMatkhau(),nv.getTrangthai(),nv.getChucvu(),nv.getMaNV());
     }
     public static void main(String[] args) {
         
