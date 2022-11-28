@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import model.SanPham;
 import repository.SanPhamRepository;
 import service.SanPhamService;
+import viewModel.SanPhamViewModel;
 
 /**
  *
@@ -96,6 +97,11 @@ public class SanPhamServiceImpl implements SanPhamService {
     @Override
     public List<SanPham> searchByTen(String tenSP) {
         return sanPham.searchByTen(tenSP);
+    }
+
+    @Override
+    public List<SanPhamViewModel> getAllSanPham() {
+        return sanPham.getAllSanPham();
     }
 
 }

@@ -4,7 +4,12 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import model.SanPham;
+import serviceimql.SanPhamServiceImpl;
+import viewModel.SanPhamViewModel;
 
 /**
  *
@@ -16,19 +21,23 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
      * Creates new form ViewQuanLyBanHang
      */
     
-    DefaultTableModel modelHD;
-    DefaultTableModel modelHDCT;
-    DefaultTableModel modelSP;
+    private List<SanPhamViewModel> listSP;
+    private DefaultTableModel modelHD;
+    private DefaultTableModel modelHDCT;
+    private DefaultTableModel modelSP;
+    private SanPhamServiceImpl sanPhamService;
     
     public ViewQuanLyBanHang() {
         initComponents();
         
+        listSP = new ArrayList<>();
         modelHD = new DefaultTableModel();
         modelHDCT = new DefaultTableModel();
         modelSP = new DefaultTableModel();
         tblHoaDon.setModel(modelHD);
         tblHoaDonCT.setModel(modelHDCT);
         tblSanPham.setModel(modelSP);
+        sanPhamService = new SanPhamServiceImpl();
         
         String[] heardHD = {"Mã HD", "Ngày Tạo", "Nhân Viên", "Trạng Thái"};
         modelHD.setColumnIdentifiers(heardHD);
@@ -36,9 +45,22 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         String[] heardHDCT = {"Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành tiền"};
         modelHDCT.setColumnIdentifiers(heardHDCT);
         
-        String[] heardSP = {"Mã SP", "Tên SP", "Loại SP", "Size", "Đơn Giá", "Mô Tả"};
+        String[] heardSP = {"STT", "Mã SP", "Tên SP", "Loại SP", "Đơn Giá", "Mô Tả"};
         modelSP.setColumnIdentifiers(heardSP);
         
+        listSP = sanPhamService.getAllSanPham();
+        showDataSanPham(listSP);
+    }
+    
+    public void showDataSanPham(List<SanPhamViewModel> lists){
+        modelSP.setRowCount(0);
+        int stt = 1;
+        for (SanPhamViewModel sanPham : lists) {
+            modelSP.addRow(new Object[]{
+                stt++, sanPham.getMaSP(), sanPham.getTenSP() + " (size " + sanPham.getSizeSP() + ")", sanPham.getLoaiSP(),
+                sanPham.getDonGia() + sanPham.getGiaSize(), sanPham.getMoTa()
+            });
+        }
     }
 
     /**

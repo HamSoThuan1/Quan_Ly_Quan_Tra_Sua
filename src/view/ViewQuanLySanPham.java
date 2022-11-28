@@ -284,6 +284,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         cbbLoaiSP1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(102, 255, 255));
 
@@ -610,6 +611,19 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         jTabbedPane1.addTab("Sản phẩm", jPanel2);
         jPanel2.getAccessibleContext().setAccessibleName("");
 
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1218, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 715, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Topping", jPanel6);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -731,6 +745,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblHinhAnh;
