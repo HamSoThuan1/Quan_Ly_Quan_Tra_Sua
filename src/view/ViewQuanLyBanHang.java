@@ -68,7 +68,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         String[] heardHD = {"Mã HD", "Ngày Tạo", "Nhân Viên", "Trạng Thái"};
         modelHD.setColumnIdentifiers(heardHD);
         
-        String[] heardHDCT = {"STT", "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá",};
+        String[] heardHDCT = {"STT", "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành tiền"};
         modelHDCT.setColumnIdentifiers(heardHDCT);
         
         String[] heardSP = {"STT", "Mã SP", "Tên SP", "Loại SP", "Đơn Giá", "Mô Tả"};
@@ -107,7 +107,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         int stt = 1;
         for (HoaDonChiTietViewModel hoaDonChiTiet : listgh) {
             modelHDCT.addRow(new Object[]{
-                stt++, hoaDonChiTiet.getMaSP(), hoaDonChiTiet.getTenSP() + " (size " + hoaDonChiTiet.getTenSize() + ")", hoaDonChiTiet.getSoLuong(), hoaDonChiTiet.getDonGia(),
+                stt++, hoaDonChiTiet.getMaSP(), hoaDonChiTiet.getTenSP() + " (size " + hoaDonChiTiet.getTenSize() + ")", hoaDonChiTiet.getSoLuong(), 
+                hoaDonChiTiet.getDonGia(), hoaDonChiTiet.getSoLuong() * hoaDonChiTiet.getDonGia()
             });
         }
     }
@@ -117,10 +118,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         for (int i = 0; i < tblHoaDonCT.getRowCount(); i++) {
             money += Double.parseDouble(tblHoaDonCT.getValueAt(i, 5).toString());
         }
-        txtTongTien.setText(String.valueOf(money));
+        lblTongTien.setText(String.valueOf(money));
     }
     
     public void themHoaDonChiTiet(){
+        loadTien();
         String soLuong = JOptionPane.showInputDialog("Nhập số lượng cần mua: ");
         int index = tblSanPham.getSelectedRow();
         SanPhamViewModel sp = listSP.get(index);
@@ -148,6 +150,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         }
         listHDCT.add(hoaDonCT);
         addTableHoaDonCT(listHDCT);
+        loadTien();
     }
     
     public void fillDataHoaDon(int index){
@@ -199,13 +202,13 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel12 = new javax.swing.JLabel();
+        lblTongTien = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        txtTongTien = new javax.swing.JTextField();
+        txtTienKhachDua = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        lblTienThua = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -433,8 +436,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Trân Châu Trắng - 7000đ", " " }));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setText("1.100.000");
+        lblTongTien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTongTien.setForeground(new java.awt.Color(255, 51, 51));
 
         jLabel13.setText("VNĐ");
 
@@ -444,8 +447,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
         jLabel16.setText("Tiền thừa:");
 
-        jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel17.setText("-20.000");
+        lblTienThua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblTienThua.setText("-20.000");
 
         jLabel18.setText("VNĐ");
 
@@ -484,7 +487,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jLabel16)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblTienThua, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel18))
                                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -504,13 +507,13 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                                             .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addComponent(jLabel10)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jLabel13))
                                             .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(txtTongTien)))
+                                                .addComponent(txtTienKhachDua)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel15))
                                     .addComponent(jLabel20))
@@ -550,20 +553,25 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel17)
+                    .addComponent(lblTienThua)
                     .addComponent(jLabel18))
                 .addGap(26, 26, 26)
                 .addComponent(jLabel20)
@@ -653,12 +661,10 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -680,10 +686,12 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblTienThua;
+    private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblHoaDonCT;
     private javax.swing.JTable tblSanPham;
     private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txtTongTien;
+    private javax.swing.JTextField txtTienKhachDua;
     // End of variables declaration//GEN-END:variables
 }

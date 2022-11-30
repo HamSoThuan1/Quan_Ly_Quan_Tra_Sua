@@ -21,6 +21,7 @@ import model.Topping;
 import serviceimql.LoaiSanPhamServiceImpl;
 import serviceimql.SanPhamServiceImpl;
 import serviceimql.Size_servicesimpl;
+import serviceimql.ToppingServiceImpl;
 
 
 /**
@@ -35,12 +36,13 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private List<SanPham> listSP;
     private List<LoaiSanPham> listLSP;
     private List<Size> listSz;
-    private  List<Topping> listtp;
+    private List<Topping> listtp;
     private DefaultTableModel model;
     private DefaultTableModel modeltp;
     private SanPhamServiceImpl sanPhamService;
     private LoaiSanPhamServiceImpl loaiSpService;
     private Size_servicesimpl sizeService;
+    private ToppingServiceImpl toppingService;
     private DefaultComboBoxModel comboboxLSP;
     private DefaultComboBoxModel comboboxLoaiSP;
     private DefaultComboBoxModel comboboxSz;
@@ -63,19 +65,24 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         sanPhamService = new SanPhamServiceImpl();
         loaiSpService = new LoaiSanPhamServiceImpl();
         sizeService = new Size_servicesimpl();
+        toppingService = new ToppingServiceImpl();
 
         String[] heard = {"STT", "Mã SP", "Tên SP", "Loại SP", "Size", "Đơn giá", "Giá size", "Hình ảnh", "Trạng thái", "Mô tả"};
         model.setColumnIdentifiers(heard);
+        
         String[] heardTopping = {"STT", "Mã Topping" , "Tên Topping", "Giá", "TrangThai"};
         modeltp.setColumnIdentifiers(heardTopping);
+        
         Integer[] trangThai = {0,1};
         cbo_trangThai.setModel(new DefaultComboBoxModel(trangThai));
 
         listSP = sanPhamService.getAll();
         listLSP = loaiSpService.getAll();
         listSz = sizeService.getAllSizes();
+        listtp = toppingService.getAllToppings();
 
         showDataSanPham(listSP);
+        showDataTopping(listtp);
         cbbLoaiSP(listLSP);
         cbbLoaiSanPham(listLSP);
         cbbSize(listSz);
@@ -327,7 +334,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         btn_them = new javax.swing.JButton();
         tbn_sua = new javax.swing.JButton();
         btn_xoa = new javax.swing.JButton();
-        btn_quaylai = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_topping = new javax.swing.JTable();
 
@@ -691,8 +697,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
-        btn_quaylai.setText("Quay Lại");
-
         tbl_topping.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -738,9 +742,8 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_them)
                     .addComponent(tbn_sua)
-                    .addComponent(btn_xoa)
-                    .addComponent(btn_quaylai))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btn_xoa))
+                .addContainerGap(338, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(319, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -775,12 +778,10 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel15)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbo_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btn_quaylai)))
+                    .addComponent(cbo_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Topping", jPanel6);
@@ -907,7 +908,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
-    private javax.swing.JButton btn_quaylai;
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_xoa;
     private javax.swing.ButtonGroup buttonGroup1;

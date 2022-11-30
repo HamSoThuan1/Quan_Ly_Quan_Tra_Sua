@@ -17,19 +17,27 @@ import model.Topping;
  * @author Acer
  */
 public class Topping_reponsitory {
-    public List<Topping> getAllToppings(){
+
+    public List<Topping> getAllToppings() {
         String sql = "select * from TOPPING";
-        try (Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)){
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             List<Topping> toppings = new ArrayList<>();
-             ResultSet rs = pr.executeQuery();
-             while(rs.next()){
-                 Topping t = new Topping(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5));
-                 toppings.add(t);
-             }
-             return toppings;
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                Topping t = new Topping(rs.getString(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getInt(5));
+                toppings.add(t);
+            }
+            return toppings;
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        List<Topping> list = new Topping_reponsitory().getAllToppings();
+        for (Topping topping : list) {
+            System.out.println(topping.toString());
+        }
     }
 }

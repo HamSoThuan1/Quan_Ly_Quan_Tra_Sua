@@ -625,9 +625,8 @@
                               <Component id="btn_them" min="-2" max="-2" attributes="0"/>
                               <Component id="tbn_sua" min="-2" max="-2" attributes="0"/>
                               <Component id="btn_xoa" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_quaylai" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="338" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace pref="319" max="32767" attributes="0"/>
@@ -672,14 +671,11 @@
                           <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="cbo_trangThai" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="btn_quaylai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="cbo_trangThai" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="292" max="-2" attributes="0"/>
-                          <EmptySpace pref="123" max="32767" attributes="0"/>
+                          <EmptySpace pref="124" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -760,11 +756,6 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xoaActionPerformed"/>
                   </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btn_quaylai">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Quay L&#x1ea1;i"/>
-                  </Properties>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane1">
                   <AuxValues>
