@@ -26,7 +26,41 @@ public class KhachHang_serviceimpl implements KhachHang_service {
         return khrp.getKHbyma(makh);
     }
 
+    public static void main(String[] args) {
+        new KhachHang_serviceimpl().GetallKH();
+    }
+
+    @Override
+    public String deleteKH(String Makh) {
+         boolean delete = khrp.deleteSize(Makh);
+       if(delete){
+           return "Xóa thành công";
+       }else{
+           return"Xóa thất bại";
+       }
+    }
     
+
+    @Override
+    public String updateKH(KhachHang kh, String makh) {
+          boolean update = khrp.updateKH(kh, makh);
+       if(update){
+           return"Sửa thành công";
+       }else{
+           return"Sửa thất bại";
+       }
+    }
+
+    @Override
+    public String add(KhachHang kh) {
+        boolean add = khrp.add(kh);
+        if (add) {
+            return " theem thanh cong";
+            
+        }else{
+            return " them that bai";
+        }
+    }
  
     
     

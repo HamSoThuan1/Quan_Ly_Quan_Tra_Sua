@@ -12,8 +12,13 @@ import model.KhachHang;
  * @author 84337
  */
 public interface KhachHang_service {
-  public List<KhachHang> GetallKH();
-  public List<KhachHang> GetKHbyma(String makh);
-        
-    }
 
+    public List<KhachHang> GetallKH();
+
+    public List<KhachHang> GetKHbyma(String makh);
+
+    String deleteKH(String Makh);
+
+    String updateKH(KhachHang kh, String makh);
+    String  add(KhachHang kh);
+}
