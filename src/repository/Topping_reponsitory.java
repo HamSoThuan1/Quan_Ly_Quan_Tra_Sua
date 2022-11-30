@@ -33,6 +33,45 @@ public class Topping_reponsitory {
         }
         return null;
     }
+    public boolean addTopping(Topping t){
+        String sql = "insert into TOPPING (MaTopping, TenTopping, Gia, TrangThai) values(?,?,?,?)";
+        int check = 0;
+        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)){
+            pr.setObject(1, t.getMaTopping());
+            pr.setObject(2, t.getTenToping());
+            pr.setObject(3, t.getGia());
+            pr.setObject(4, t.getTrangThai());
+            check = pr.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+    public boolean deleteTopping(String ma){
+        String sql = "delete from TOPPING where MaTopping = ?";
+        int check = 0;
+        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)){
+            pr.setObject(1, ma);
+            check = pr.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
+    public boolean updateTopping(Topping t, String ma){
+        String sql = "update TOPPING set TenTopping = ?, Gia = ?, TrangThai = ? where MaTopping = ?";
+        int check = 0;
+        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)){
+            pr.setObject(1, t.getTenToping());
+            pr.setObject(2, t.getGia());
+            pr.setObject(3, t.getTrangThai());
+            pr.setObject(4, ma);
+            check = pr.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check > 0;
+    }
 
     public static void main(String[] args) {
         List<Topping> list = new Topping_reponsitory().getAllToppings();

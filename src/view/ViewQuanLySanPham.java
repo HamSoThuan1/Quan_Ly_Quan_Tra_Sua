@@ -886,16 +886,35 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-       
+       Topping t = new Topping();
+       t.setMaTopping(txt_maTopping.getText());
+       t.setTenToping(txt_tenTopping.getText());
+       t.setGia(Double.parseDouble(txt_gia.getText()));
+       t.setTrangThai((int)cbo_trangThai.getSelectedItem());
+       JOptionPane.showMessageDialog(this, toppingService.addTopping(t));
+       listtp = toppingService.getAllToppings();
+        showDataTopping(listtp);
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         // TODO add your handling code here:
+        String MaTopping = txt_maTopping.getText();
+        JOptionPane.showMessageDialog(this, toppingService.deleteTopping(MaTopping));
+        listtp = toppingService.getAllToppings();
+        showDataTopping(listtp);
     }//GEN-LAST:event_btn_xoaActionPerformed
 
     private void tbn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbn_suaActionPerformed
         // TODO add your handling code here:
-        
+        Topping t = new Topping();
+        String ma = txt_maTopping.getText();
+        t.setMaTopping(ma);
+        t.setTenToping(txt_tenTopping.getText());
+        t.setGia(Double.parseDouble(txt_gia.getText()));
+        t.setTrangThai((int)cbo_trangThai.getSelectedItem());
+        JOptionPane.showMessageDialog(this, toppingService.updateTopping(t, ma));
+        listtp = toppingService.getAllToppings();
+        showDataTopping(listtp);
     }//GEN-LAST:event_tbn_suaActionPerformed
 
 

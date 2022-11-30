@@ -14,4 +14,7 @@ import model.Topping;
 public interface ToppingService {
 
     List<Topping> getAllToppings();
+     String addTopping(Topping t);
+     String deleteTopping(String ma);
+     String updateTopping(Topping t, String ma);
 }
