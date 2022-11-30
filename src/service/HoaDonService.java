@@ -5,22 +5,16 @@
 package service;
 
 import java.util.List;
-import model.SanPham;
-import viewModel.SanPhamViewModel;
+import model.HoaDon;
+import viewModel.HoaDonViewModel;
 
 /**
  *
  * @author Nguyen Thanh Hung
  */
-public interface SanPhamService {
+public interface HoaDonService {
 
-    List<SanPham> getAll();
-
-    String insert(SanPham sp);
-
-    String update(SanPham sp, String id);
-
-    String delete(String id);
+    List<HoaDonViewModel> getAll();
     
-    List<SanPham> searchByTen(String tenSP);
+    String insertHoaDon(HoaDon hd);
 }

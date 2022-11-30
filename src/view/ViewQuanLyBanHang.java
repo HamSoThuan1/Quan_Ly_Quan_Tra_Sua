@@ -4,11 +4,23 @@
  */
 package view;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.HoaDon;
+import model.LoaiSanPham;
+import model.Nhanvien;
 import model.SanPham;
+import serviceimql.HoaDonServiceImpl;
+import serviceimql.LoaiSanPhamServiceImpl;
+import serviceimql.Nhanvien_serviceimpl;
 import serviceimql.SanPhamServiceImpl;
+import serviceimql.SanPhamViewModelServiceImpl;
+import viewModel.HoaDonChiTietViewModel;
 import viewModel.SanPhamViewModel;
 
 /**
@@ -22,34 +34,54 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
      */
     
     private List<SanPhamViewModel> listSP;
+    private List<LoaiSanPham> listLSP;
+    private List<HoaDonChiTietViewModel> listHDCT;
     private DefaultTableModel modelHD;
     private DefaultTableModel modelHDCT;
     private DefaultTableModel modelSP;
-    private SanPhamServiceImpl sanPhamService;
+    private DefaultComboBoxModel comboboxLSP;
+    private SanPhamViewModelServiceImpl sanPhamService;
+    private LoaiSanPhamServiceImpl loaiSanPhamService;
+    private HoaDonServiceImpl hoaDonService;
+    private Nhanvien_serviceimpl nhanVienService;
+    private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
     
     public ViewQuanLyBanHang() {
         initComponents();
         
         listSP = new ArrayList<>();
+        listHDCT = new ArrayList<>();
+        listLSP = new ArrayList<>();
         modelHD = new DefaultTableModel();
         modelHDCT = new DefaultTableModel();
         modelSP = new DefaultTableModel();
+        comboboxLSP = new DefaultComboBoxModel();
         tblHoaDon.setModel(modelHD);
         tblHoaDonCT.setModel(modelHDCT);
         tblSanPham.setModel(modelSP);
-        sanPhamService = new SanPhamServiceImpl();
+        cbbLoaiSP.setModel(comboboxLSP);
+        sanPhamService = new SanPhamViewModelServiceImpl();
+        loaiSanPhamService = new LoaiSanPhamServiceImpl();
+        hoaDonService = new HoaDonServiceImpl();
+        nhanVienService = new Nhanvien_serviceimpl();
         
         String[] heardHD = {"Mã HD", "Ngày Tạo", "Nhân Viên", "Trạng Thái"};
         modelHD.setColumnIdentifiers(heardHD);
         
-        String[] heardHDCT = {"Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành tiền"};
+        String[] heardHDCT = {"STT", "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá",};
         modelHDCT.setColumnIdentifiers(heardHDCT);
         
         String[] heardSP = {"STT", "Mã SP", "Tên SP", "Loại SP", "Đơn Giá", "Mô Tả"};
         modelSP.setColumnIdentifiers(heardSP);
         
         listSP = sanPhamService.getAllSanPham();
+        listLSP = loaiSanPhamService.getAll();
         showDataSanPham(listSP);
+//        cbbLoaiSanPham(listLSP);
+        cbbLoaiSP.removeAllItems();
+        for (int i = 0; i < listLSP.size(); i++) {
+            cbbLoaiSP.addItem(listLSP.get(i).getTenLoaiSP().toString());
+        }
     }
     
     public void showDataSanPham(List<SanPhamViewModel> lists){
@@ -61,6 +93,74 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 sanPham.getDonGia() + sanPham.getGiaSize(), sanPham.getMoTa()
             });
         }
+    }
+    
+//    public void cbbLoaiSanPham(List<LoaiSanPham> listLsp) {
+//        cbbLoaiSP.setModel(comboboxLSP);
+//        for (LoaiSanPham loaiSanPham : listLsp) {
+//            comboboxLSP.addElement(loaiSanPham.getTenLoaiSP());
+//        }
+//    }
+//    
+    public void addTableHoaDonCT(List<HoaDonChiTietViewModel> listgh){
+        modelHDCT.setRowCount(0);
+        int stt = 1;
+        for (HoaDonChiTietViewModel hoaDonChiTiet : listgh) {
+            modelHDCT.addRow(new Object[]{
+                stt++, hoaDonChiTiet.getMaSP(), hoaDonChiTiet.getTenSP() + " (size " + hoaDonChiTiet.getTenSize() + ")", hoaDonChiTiet.getSoLuong(), hoaDonChiTiet.getDonGia(),
+            });
+        }
+    }
+    
+    public void loadTien() {
+        double money = 0;
+        for (int i = 0; i < tblHoaDonCT.getRowCount(); i++) {
+            money += Double.parseDouble(tblHoaDonCT.getValueAt(i, 5).toString());
+        }
+        txtTongTien.setText(String.valueOf(money));
+    }
+    
+    public void themHoaDonChiTiet(){
+        String soLuong = JOptionPane.showInputDialog("Nhập số lượng cần mua: ");
+        int index = tblSanPham.getSelectedRow();
+        SanPhamViewModel sp = listSP.get(index);
+        if(Integer.parseInt(soLuong) == 0){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập số lượng");
+            return;
+        }
+        listSP.set(index, sp);
+        showDataSanPham(listSP);
+        
+        HoaDonChiTietViewModel hoaDonCT = new HoaDonChiTietViewModel();
+        hoaDonCT.setIdHoaDonCT(sp.getIdSanPham());
+        hoaDonCT.setMaSP(sp.getMaSP());
+        hoaDonCT.setTenSP(sp.getTenSP());
+        hoaDonCT.setTenSize(sp.getSizeSP());
+        hoaDonCT.setSoLuong(Integer.parseInt(soLuong));
+        hoaDonCT.setDonGia(sp.getDonGia() + sp.getGiaSize());
+        for (HoaDonChiTietViewModel hoaDonct : listHDCT) {
+            if(sp.getIdSanPham().equals(hoaDonct.getIdHoaDonCT())){
+                int so_luong = hoaDonct.getSoLuong() + Integer.parseInt(soLuong);
+                hoaDonct.setSoLuong(so_luong);
+                addTableHoaDonCT(listHDCT);
+                return;
+            }
+        }
+        listHDCT.add(hoaDonCT);
+        addTableHoaDonCT(listHDCT);
+    }
+    
+    public void fillDataHoaDon(int index){
+        
+    }
+    
+    public void taoHoaDon(){
+        HoaDon hd = new HoaDon();
+        Nhanvien nv = new Nhanvien();
+        int index = hoaDonService.getAll().size() + 1;
+        hd.setIdHoaDon("HD" + index);
+        hd.setNgayTao(new Date());
+        
     }
 
     /**
@@ -75,7 +175,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnTaoHoaDon = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -86,10 +186,10 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        cbbLoaiSP = new javax.swing.JComboBox<>();
+        btnThemSP = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -102,7 +202,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtTongTien = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -131,7 +231,12 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblHoaDon);
 
-        jButton1.setText("Tạo Hóa Đơn");
+        btnTaoHoaDon.setText("Tạo Hóa Đơn");
+        btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoHoaDonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Hóa Đơn");
@@ -146,7 +251,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                         .addGap(16, 16, 16)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5)))
@@ -162,7 +267,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTaoHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -225,11 +330,27 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
         jLabel3.setText("Tìm kiếm");
 
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
         jLabel4.setText("Loại sản phẩm");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbLoaiSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbLoaiSP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbLoaiSPItemStateChanged(evt);
+            }
+        });
 
-        jButton2.setText("Thêm sản phẩm");
+        btnThemSP.setText("Thêm sản phẩm");
+        btnThemSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -241,7 +362,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 731, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,11 +372,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbbLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -268,15 +389,15 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbbLoaiSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 10, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnThemSP, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11))
         );
@@ -389,7 +510,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                                             .addGroup(jPanel3Layout.createSequentialGroup()
                                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextField2)))
+                                                .addComponent(txtTongTien)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel15))
                                     .addComponent(jLabel20))
@@ -437,7 +558,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTongTien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -488,14 +609,45 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnThemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemSPActionPerformed
+        // TODO add your handling code here:
+        themHoaDonChiTiet();
+    }//GEN-LAST:event_btnThemSPActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+        String tenSP = txtSearch.getText();
+        if (txtSearch.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên sản phẩm để tìm kiếm");
+            return;
+        } else {
+            List<SanPhamViewModel> lists = sanPhamService.searchByName(tenSP);
+            showDataSanPham(lists);
+        }
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void cbbLoaiSPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbLoaiSPItemStateChanged
+        // TODO add your handling code here:
+        String tenLoaiSP = cbbLoaiSP.getSelectedItem().toString();
+        if(cbbLoaiSP.getItemCount() > 0){
+            List<SanPhamViewModel> listlsp = sanPhamService.getByLoaiSanPham(tenLoaiSP);
+            showDataSanPham(listlsp);
+        }
+    }//GEN-LAST:event_cbbLoaiSPItemStateChanged
+
+    private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
+        // TODO add your handling code here:
+        taoHoaDon();
+    }//GEN-LAST:event_btnTaoHoaDonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnTaoHoaDon;
+    private javax.swing.JButton btnThemSP;
+    private javax.swing.JComboBox<String> cbbLoaiSP;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
@@ -528,10 +680,10 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblHoaDonCT;
     private javax.swing.JTable tblSanPham;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

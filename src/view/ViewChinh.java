@@ -27,31 +27,30 @@ public class ViewChinh extends javax.swing.JFrame {
     /**
      * Creates new form ViewChinh
      */
-
     private SetSize setSize = new SetSize();
     private SetColor setColor = new SetColor();
 
     public ViewChinh() {
         initComponents();
         this.setViewChinh(new ViewTrangChu());
-        new Thread(){
+        new Thread() {
             public void run() {
-                while (true) {                    
+                while (true) {
                     Calendar ca = new GregorianCalendar();
                     int dd = ca.get(Calendar.DAY_OF_MONTH);
                     int mm = ca.get(Calendar.MONTH);
                     int yy = ca.get(Calendar.YEAR);
-                    int hour =ca.get(Calendar.HOUR);
-                    int minute =ca.get(Calendar.MINUTE);
-                    int second =ca.get(Calendar.SECOND);
+                    int hour = ca.get(Calendar.HOUR);
+                    int minute = ca.get(Calendar.MINUTE);
+                    int second = ca.get(Calendar.SECOND);
                     int AM_PM = ca.get(Calendar.AM_PM);
                     String am;
-                    if(AM_PM==1){
-                        am="PM";
-                    }else{
-                        am="AM";
+                    if (AM_PM == 1) {
+                        am = "PM";
+                    } else {
+                        am = "AM";
                     }
-                    String time =hour+":"+minute+":"+second+":"+am+"   "+dd+"-"+mm+"-"+yy;
+                    String time = hour + ":" + minute + ":" + second + ":" + am + "   " + dd + "-" + mm + "-" + yy;
                     lblDate.setText(time);
                 }
             }
@@ -550,16 +549,16 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void lblKhachHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhachHangMousePressed
         // TODO add your handling code here:
-       this.setViewChinh(new ViewQuanLyKhachHang());
+        this.setViewChinh(new ViewQuanLyKhachHang());
         this.setColor.changeColorBtn("Khách Hàng", getBtn());
     }//GEN-LAST:event_lblKhachHangMousePressed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        if(lblChucVu.getText().equalsIgnoreCase("Nhân viên")){
+        if (lblChucVu.getText().equalsIgnoreCase("Nhân viên")) {
             ViewGiaoCaNhanVien v = new ViewGiaoCaNhanVien();
             v.setVisible(true);
-        }else{
+        } else {
             ViewGiaoCaQuanLy v = new ViewGiaoCaQuanLy();
             v.setVisible(true);
         }

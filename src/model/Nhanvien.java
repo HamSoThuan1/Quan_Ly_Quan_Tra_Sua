@@ -11,6 +11,7 @@ import java.util.Date;
  * @author QUANGMINH
  */
 public class Nhanvien {
+
     private String ID;
     private String MaNV;
     private String HotenNv;
@@ -22,7 +23,6 @@ public class Nhanvien {
     private String Chucvu;
     private String Matkhau;
     private int Trangthai;
-    
 
     public String getID() {
         return ID;
@@ -31,8 +31,6 @@ public class Nhanvien {
     public void setID(String ID) {
         this.ID = ID;
     }
-
-    
 
     public Nhanvien() {
     }
@@ -63,12 +61,10 @@ public class Nhanvien {
         this.Matkhau = Matkhau;
         this.Trangthai = Trangthai;
     }
-    
-    
 
-    
-
-    
+    public Nhanvien(String HotenNv) {
+        this.HotenNv = HotenNv;
+    }
 
     @Override
     public String toString() {
@@ -110,8 +106,6 @@ public class Nhanvien {
     public Nhanvien(Date Ngaysinh) {
         this.Ngaysinh = Ngaysinh;
     }
-
-    
 
     public String getEmail() {
         return Email;
@@ -160,6 +154,5 @@ public class Nhanvien {
     public void setNgaysinh(Date Ngaysinh) {
         this.Ngaysinh = Ngaysinh;
     }
-    
-    
+
 }
