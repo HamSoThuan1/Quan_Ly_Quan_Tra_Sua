@@ -28,13 +28,10 @@ public class DangNhap_responsitory {
             pr.setObject(2, MatKhau);
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
-<<<<<<< HEAD
+
                 Nhanvien nhanvien = new Nhanvien(rs.getString(1), null, null, null, null, null, null, null, rs.getString(2), 1);
                return nhanvien;
-=======
-                Nhanvien nv = new Nhanvien(rs.getString(1), null, null, null, null, null, null, rs.getString(2), 0, null);
-                return nv;
->>>>>>> 7d262ec6e989c347cad291015863911bce8053ee
+
             }
         } catch (Exception e) {
             e.printStackTrace();
