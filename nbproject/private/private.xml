@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< Updated upstream
-            <file>file:/C:/Users/kn134/OneDrive/Máy%20tính/DuAn/Quan_Ly_Quan_Tra_Sua/src/view/ViewGiaoCaQuanLy.java</file>
-=======
-            <file>file:/C:/Users/thang/OneDrive/Máy%20tính/DuAn1/Quan_Ly_Quan_Tra_Sua/src/serviceimql/KhuyenMai_serviceimpl.java</file>
-            <file>file:/C:/Users/thang/OneDrive/Máy%20tính/DuAn1/Quan_Ly_Quan_Tra_Sua/src/view/ViewQuanLyKhuyenMai.java</file>
-            <file>file:/C:/Users/thang/OneDrive/Máy%20tính/DuAn1/Quan_Ly_Quan_Tra_Sua/src/repository/Khuyenmai_repository.java</file>
-            <file>file:/C:/Users/thang/OneDrive/Máy%20tính/DuAn1/Quan_Ly_Quan_Tra_Sua/src/service/KhuyenMai_service.java</file>
->>>>>>> Stashed changes
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/view/ViewQuanLySanPham.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/view/ViewSize.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/serviceimql/Topping_servicesImpl.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/repository/Size_responsitory.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/service/Topping_services.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/repository/Topping_reponsitory.java</file>
         </group>
     </open-files>
 </project-private>

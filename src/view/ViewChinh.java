@@ -416,6 +416,11 @@ public class ViewChinh extends javax.swing.JFrame {
         });
 
         jButton7.setText("Đổi mật khẩu");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Đăng xuất");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -571,6 +576,13 @@ public class ViewChinh extends javax.swing.JFrame {
         view.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        ViewDoiMatKhau view = new ViewDoiMatKhau();
+        view.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

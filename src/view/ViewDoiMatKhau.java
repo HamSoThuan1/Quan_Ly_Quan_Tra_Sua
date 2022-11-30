@@ -182,8 +182,8 @@ public class ViewDoiMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_QuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuayLaiActionPerformed
-        ViewDangNhap view = new ViewDangNhap();
-        new ViewDangNhap().setVisible(true);
+        ViewChinh view = new ViewChinh();
+        new ViewChinh().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_QuayLaiActionPerformed
 
