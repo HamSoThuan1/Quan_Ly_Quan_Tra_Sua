@@ -142,34 +142,10 @@ public class SanPhamRepository {
         return null;
     }
 
-    public List<SanPhamViewModel> getAllSanPham() {
-        String query = "SELECT IdSanPham, MaSP, TenSP, TenLoaiSP, TenSize, DonGia, Gia,MoTa\n"
-                + "FROM SANPHAM JOIN LOAISP ON SANPHAM.IdLoaiSP = LOAISP.IdLoaiSP\n"
-                + "		JOIN SIZE ON SANPHAM.IdSize = SIZE.IdSize";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            List<SanPhamViewModel> listSP = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPhamViewModel sp = new SanPhamViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getString(5), rs.getDouble(6), rs.getDouble(7), rs.getString(8));
-                listSP.add(sp);
-            }
-            return listSP;
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
-        }
-        return null;
-    }
-
     public static void main(String[] args) {
         List<SanPham> list = new SanPhamRepository().getAll();
         for (SanPham sanPham : list) {
             System.out.println(sanPham.toString());
         }
-        
-        List<SanPhamViewModel> lists = new SanPhamRepository().getAllSanPham();
-        for (SanPhamViewModel sp : lists) {
-            System.out.println(sp.toString());
-        } 
     }
 }

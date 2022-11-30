@@ -18,7 +18,11 @@ public class DBContext {
     public static final String PORT = "1433";
     public static final String DBNAME = "QLQTS";
     public static final String USERNAME = "sa";
+<<<<<<< HEAD
     public static final String PASSWORD = "221003";
+=======
+    public static final String PASSWORD = "123456";
+>>>>>>> 7d262ec6e989c347cad291015863911bce8053ee
 
     public static Connection getConnection() {
         // Create a variable for the connection string.

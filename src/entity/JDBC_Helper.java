@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entity;
+
 import java.sql.*;
 
 /**
@@ -10,21 +11,22 @@ import java.sql.*;
  * @author kn134
  */
 public class JDBC_Helper {
-    public static ResultSet selectTongQuat(String sql,Object...params){
-        PreparedStatement pstm=null;
-        ResultSet rs=null;
-        Connection con=null;
+
+    public static ResultSet selectTongQuat(String sql, Object... params) {
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        Connection con = null;
         try {
-            con=DBContext.getConnection();
-            pstm=con.prepareStatement(sql);
+            con = DBContext.getConnection();
+            pstm = con.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
-                pstm.setObject(i+1, params[i]);
+                pstm.setObject(i + 1, params[i]);
             }
             rs = pstm.executeQuery();
             return rs;
         } catch (SQLException e) {
             e.printStackTrace();
-            close(con, pstm,rs);
+            close(con, pstm, rs);
             return null;
         }
     }
@@ -46,21 +48,21 @@ public class JDBC_Helper {
             e.printStackTrace();
         }
     }
-    public static int updateTongQuat(String sql,Object...params){
-        PreparedStatement pstm=null;
-        Connection con=null ;
+
+    public static int updateTongQuat(String sql, Object... params) {
+        PreparedStatement pstm = null;
+        Connection con = null;
         try {
-            con=DBContext.getConnection();
-            pstm=con.prepareStatement(sql);
+            con = DBContext.getConnection();
+            pstm = con.prepareStatement(sql);
             for (int i = 0; i < params.length; i++) {
-                pstm.setObject(i+1, params[i]);
+                pstm.setObject(i + 1, params[i]);
             }
             return pstm.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
-        }
-        finally{
+        } finally {
             close(con, pstm);
         }
     }

@@ -23,6 +23,4 @@ public interface SanPhamService {
     String delete(String id);
     
     List<SanPham> searchByTen(String tenSP);
-    
-    List<SanPhamViewModel> getAllSanPham();
 }

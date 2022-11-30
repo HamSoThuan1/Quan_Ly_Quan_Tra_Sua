@@ -11,6 +11,8 @@ import java.util.Date;
  * @author 84337
  */
 public class KhachHang {
+
+    private String idKhachHang;
     private String makh;
     private String tenkh;
     private boolean gioitinh;
@@ -23,6 +25,18 @@ public class KhachHang {
     public KhachHang() {
     }
 
+    public KhachHang(String idKhachHang, String makh, String tenkh, boolean gioitinh, Date ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
+        this.idKhachHang = idKhachHang;
+        this.makh = makh;
+        this.tenkh = tenkh;
+        this.gioitinh = gioitinh;
+        this.ngaysinh = ngaysinh;
+        this.sodt = sodt;
+        this.diachi = diachi;
+        this.ghichu = ghichu;
+        this.trangthai = trangthai;
+    }
+
     public KhachHang(String makh, String tenkh, boolean gioitinh, Date ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
         this.makh = makh;
         this.tenkh = tenkh;
@@ -32,6 +46,18 @@ public class KhachHang {
         this.diachi = diachi;
         this.ghichu = ghichu;
         this.trangthai = trangthai;
+    }
+
+    public KhachHang(String tenkh) {
+        this.tenkh = tenkh;
+    }
+
+    public String getIdKhachHang() {
+        return idKhachHang;
+    }
+
+    public void setIdKhachHang(String idKhachHang) {
+        this.idKhachHang = idKhachHang;
     }
 
     public String getMakh() {
@@ -102,5 +128,5 @@ public class KhachHang {
     public String toString() {
         return "KhachHang{" + "makh=" + makh + ", tenkh=" + tenkh + ", gioitinh=" + gioitinh + ", ngaysinh=" + ngaysinh + ", sodt=" + sodt + ", diachi=" + diachi + ", ghichu=" + ghichu + ", trangthai=" + trangthai + '}';
     }
-    
+
 }

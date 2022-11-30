@@ -99,9 +99,4 @@ public class SanPhamServiceImpl implements SanPhamService {
         return sanPham.searchByTen(tenSP);
     }
 
-    @Override
-    public List<SanPhamViewModel> getAllSanPham() {
-        return sanPham.getAllSanPham();
-    }
-
 }
