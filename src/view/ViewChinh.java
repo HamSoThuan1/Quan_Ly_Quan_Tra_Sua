@@ -527,7 +527,7 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void lblBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMousePressed
         // TODO add your handling code here:
-        this.setViewChinh(new ViewQuanLyBanHang(mac));
+        this.setViewChinh(new ViewQuanLyBanHang());
         this.setColor.changeColorBtn("Bán hàng", getBtn());
     }//GEN-LAST:event_lblBanHangMousePressed
 
