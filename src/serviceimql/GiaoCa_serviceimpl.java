@@ -27,5 +27,10 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     public int add(GiaoCaViewModel gcvm) {
         return gcrepos.add(gcvm);
     }
+
+    @Override
+    public List<GiaoCaViewModel> getAllGiaoCaViewModel() {
+        return gcrepos.getAllGiaoCaViewModel();
+    }
     
 }

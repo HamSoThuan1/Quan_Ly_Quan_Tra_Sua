@@ -24,6 +24,7 @@ import viewModel.GiaoCaViewModel;
  */
 public class ViewDangNhap extends javax.swing.JFrame {
     private List<Nhanvien> list=new ArrayList<>();
+    private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
     
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
@@ -58,7 +59,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         btn_DangNhap = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btn_Thoat = new javax.swing.JButton();
-        lblidnhanvien = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Đăng nhập");
@@ -143,10 +143,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addComponent(btn_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Thoat)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblidnhanvien)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -170,9 +166,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_DoiMatKhau)
                             .addComponent(btn_DangNhap)
-                            .addComponent(btn_Thoat))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblidnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btn_Thoat)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -263,15 +257,24 @@ public class ViewDangNhap extends javax.swing.JFrame {
         }
         String idnhanvien = nv.getID();
         Date dt = new Date();
-        String maca ="CA01";
+        int stt =gcservice.getAllGiaoCaViewModel().size()+1;
+        String maca = "CA"+stt;
         double SoTienBanDau = 1000000;
-//        String maca ="CA"+gcservice.getAllGiaoCa().size()+1+"";
         GiaoCaViewModel gcvm = new GiaoCaViewModel(maca, dt, SoTienBanDau, idnhanvien);
         gcservice.add(gcvm);
         this.dispose();
-//        ViewXacNhanCa v = new ViewXacNhanCa();
-        ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(idnhanvien);
+        listgcvm=(List<GiaoCaViewModel>) gcservice.getAllGiaoCaViewModel();
+        String mac=listgcvm.get(listgcvm.size()-1).getMaca();
+        ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(mac);
+//        ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(idnhanvien);
         v.setVisible(true);
+        System.out.println(mac);
+        
+        
+        
+        
+        
+        
 
 
 
@@ -298,7 +301,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField lblidnhanvien;
     private javax.swing.JPasswordField pw_MatKhau;
     private javax.swing.JTextField txt_TenDangNhap;
     // End of variables declaration//GEN-END:variables

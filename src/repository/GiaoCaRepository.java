@@ -57,9 +57,29 @@ public class GiaoCaRepository {
             return null;
         }
     }
+    public static List<GiaoCaViewModel> getAllGiaoCaViewModel(){
+        List<GiaoCaViewModel> listgcvm = new ArrayList<>();
+        ResultSet rs;
+        String sql = "select MaCa,thoidiembatdau,sotienbandau,idnhanvien from giaoca order by CONVERT(int,SUBSTRING(MaCa,3,3)) asc";
+        rs=JDBC_Helper.selectTongQuat(sql);
+        try {
+            while (rs.next()) {
+                String maca = rs.getString(1);
+                Date tdbd = rs.getDate(2);
+                double tbd = rs.getDouble(3);
+                String idnv = rs.getString(4);
+                GiaoCaViewModel gcvm = new GiaoCaViewModel(maca, tdbd, tbd, idnv);
+                listgcvm.add(gcvm);
+            }
+            return listgcvm;
+        } catch (Exception e) {
+            return null;
+        }
+    }
     public static void main(String[] args) {
-        List<GiaoCa> listgc = new GiaoCaRepository().getAllGiaoCa();
-        for (GiaoCa x : listgc) {
+        List<GiaoCaViewModel> listgcvm = new ArrayList<>();
+        listgcvm=getAllGiaoCaViewModel();
+        for (GiaoCaViewModel x : listgcvm) {
             System.out.println(x.toString());
         }
     }
