@@ -5,11 +5,13 @@
 package repository;
 
 import entity.DBContext;
+import entity.JDBC_Helper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.HoaDon;
 import model.Nhanvien;
@@ -39,6 +41,25 @@ public class HoaDonRepository {
             e.printStackTrace(System.out);
         }
         return null;
+    }
+    public static List<HoaDonViewModel> getAllHDVM() {
+        List<HoaDonViewModel> listhdvm = new ArrayList<>();
+        ResultSet rs;
+        String sql = "select mahD,ngaytao,trangthai,idnhanvien from HOADON";
+        rs=JDBC_Helper.selectTongQuat(sql);
+        try {
+            while (rs.next()) {
+                String ma = rs.getString(1);
+                Date dt = rs.getDate(2);
+                int tt = rs.getInt(3);
+                String id = rs.getString(4);
+                HoaDonViewModel hdvm = new HoaDonViewModel(ma, dt, tt, id);
+                listhdvm.add(hdvm);
+            }
+            return listhdvm;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public boolean insertHoaDon(HoaDonViewModel hd) {
@@ -74,7 +95,8 @@ public class HoaDonRepository {
         }
     }
 
-//    public int add(HoaDonViewModel hd) {
-////        String sql = ""
-//    }
+    public int add(HoaDonViewModel hd) {
+        String sql = "insert into hoadon(mahd,ngaytao,trangthai,idnhanvien) values(?,?,?,?)";
+        return JDBC_Helper.updateTongQuat(sql, hd.getMaHD(),hd.getNgayTao(),hd.getTrangThai(),hd.getIdNhanVien());
+    }
 }

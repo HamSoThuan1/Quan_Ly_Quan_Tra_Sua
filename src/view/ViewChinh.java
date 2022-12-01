@@ -23,18 +23,17 @@ import javax.swing.JPanel;
  * @author hung2
  */
 public class ViewChinh extends javax.swing.JFrame {
-    
+    private final String mac;
 
     /**
      * Creates new form ViewChinh
      */
     private SetSize setSize = new SetSize();
     private SetColor setColor = new SetColor();
-    private String String;
-    private String mac;
 
     public ViewChinh(String mac) {
         initComponents();
+        this.mac=mac;
         this.setViewChinh(new ViewTrangChu());
         new Thread() {
             public void run() {
@@ -528,7 +527,6 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void lblBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMousePressed
         // TODO add your handling code here:
-//        System.out.println(mac);
         this.setViewChinh(new ViewQuanLyBanHang(mac));
         this.setColor.changeColorBtn("Bán hàng", getBtn());
     }//GEN-LAST:event_lblBanHangMousePressed

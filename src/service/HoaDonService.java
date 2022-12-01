@@ -15,6 +15,5 @@ import viewModel.HoaDonViewModel;
 public interface HoaDonService {
 
     List<HoaDon> getAll();
-//    public int addHD(HoaDonViewModel hd);
-    
+    public int add(HoaDonViewModel hd);
 }

@@ -26,10 +26,9 @@ public class HoaDonServiceImpl implements HoaDonService {
         return hoaDon.getAll();
     }
 
-//    @Override
-//    public int addHD(HoaDonViewModel hd) {
-//        return hoaDon.add(hd);
-//    }
-
+    @Override
+    public int add(HoaDonViewModel hd) {
+        return hoaDon.add(hd);
+    }
 
 }

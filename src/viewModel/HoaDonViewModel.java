@@ -11,31 +11,19 @@ import java.util.Date;
  * @author Nguyen Thanh Hung
  */
 public class HoaDonViewModel {
-    private String idHoaDon;
     private String maHD;
     private Date ngayTao;
     private int trangThai;
     private String idNhanVien;
-    private String idKhachHang;
 
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String idHoaDon, String maHD, Date ngayTao, int trangThai, String idNhanVien, String idKhachHang) {
-        this.idHoaDon = idHoaDon;
+    public HoaDonViewModel(String maHD, Date ngayTao, int trangThai, String idNhanVien) {
         this.maHD = maHD;
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
         this.idNhanVien = idNhanVien;
-        this.idKhachHang = idKhachHang;
-    }
-
-    public String getIdHoaDon() {
-        return idHoaDon;
-    }
-
-    public void setIdHoaDon(String idHoaDon) {
-        this.idHoaDon = idHoaDon;
     }
 
     public String getMaHD() {
@@ -70,18 +58,9 @@ public class HoaDonViewModel {
         this.idNhanVien = idNhanVien;
     }
 
-    public String getIdKhachHang() {
-        return idKhachHang;
-    }
-
-    public void setIdKhachHang(String idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
-
     @Override
     public String toString() {
-        return "HoaDonViewModel{" + "idHoaDon=" + idHoaDon + ", maHD=" + maHD + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", idNhanVien=" + idNhanVien + ", idKhachHang=" + idKhachHang + '}';
+        return "HoaDonViewModel{" + "maHD=" + maHD + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", idNhanVien=" + idNhanVien + '}';
     }
-    
     
 }

@@ -35,6 +35,7 @@ import viewModel.SanPhamViewModel;
  * @author hung2
  */
 public class ViewQuanLyBanHang extends javax.swing.JPanel {
+    private final String mac;
     private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
@@ -56,11 +57,10 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private HoaDonService hoaDonService= new HoaDonServiceImpl();
     private Nhanvien_serviceimpl nhanVienService;
     private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-    private String mac;
     
     public ViewQuanLyBanHang(String mac) {
-        System.out.println(this.mac);
         initComponents();
+        this.mac=mac;
         listSP = new ArrayList<>();
         listHDCT = new ArrayList<>();
         listLSP = new ArrayList<>();
@@ -670,15 +670,13 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         // TODO add your handling code here:
-//        System.out.println(mac);
-//        HoaDonViewModel hd = new HoaDonViewModel();
-//        int index = hoaDonService.getAll().size() + 1;
-//        hd.setMaHD("HD" + index);
-//        hd.setNgayTao(new Date());
-//        hd.setTrangThai(0);
-//        hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
-//        System.out.println(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
-//        hoaDonService.add(hd);
+        HoaDonViewModel hd = new HoaDonViewModel();
+        int index = hoaDonService.getAll().size() + 1;
+        hd.setMaHD("HD" + index);
+        hd.setNgayTao(new Date());
+        hd.setTrangThai(0);
+        hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+        hoaDonService.add(hd);
 //        taoHoaDon(mac);
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
