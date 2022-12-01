@@ -18,19 +18,21 @@ public class HoaDonServiceImpl implements HoaDonService {
 
     HoaDonRepository hoaDon = new HoaDonRepository();
 
+
     @Override
-    public List<HoaDonViewModel> getAll() {
-        return hoaDon.getAll();
+    public String insertHoaDon(HoaDonViewModel hd) {
+        boolean insert = hoaDon.insertHoaDon(hd);
+        if (insert) {
+            return "Thêm thành công";
+        } else {
+            return "Thêm thất bại";
+        }
     }
 
     @Override
-    public String insertHoaDon(HoaDon hd) {
-        boolean insert = hoaDon.insertHoaDon(hd);
-        if (insert) {
-            return "Thành công";
-        } else {
-            return "Thất bại";
-        }
+    public List<HoaDon> getAll() {
+        return hoaDon.getAll();
     }
+
 
 }

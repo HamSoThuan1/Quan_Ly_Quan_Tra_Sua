@@ -14,20 +14,20 @@ public class HoaDonViewModel {
     private String idHoaDon;
     private String maHD;
     private Date ngayTao;
-    private String tenNV;
-    private String tenKH;
     private int trangThai;
+    private String idNhanVien;
+    private String idKhachHang;
 
     public HoaDonViewModel() {
     }
 
-    public HoaDonViewModel(String idHoaDon, String maHD, Date ngayTao, String tenNV, String tenKH, int trangThai) {
+    public HoaDonViewModel(String idHoaDon, String maHD, Date ngayTao, int trangThai, String idNhanVien, String idKhachHang) {
         this.idHoaDon = idHoaDon;
         this.maHD = maHD;
         this.ngayTao = ngayTao;
-        this.tenNV = tenNV;
-        this.tenKH = tenKH;
         this.trangThai = trangThai;
+        this.idNhanVien = idNhanVien;
+        this.idKhachHang = idKhachHang;
     }
 
     public String getIdHoaDon() {
@@ -54,22 +54,6 @@ public class HoaDonViewModel {
         this.ngayTao = ngayTao;
     }
 
-    public String getTenNV() {
-        return tenNV;
-    }
-
-    public void setTenNV(String tenNV) {
-        this.tenNV = tenNV;
-    }
-
-    public String getTenKH() {
-        return tenKH;
-    }
-
-    public void setTenKH(String tenKH) {
-        this.tenKH = tenKH;
-    }
-
     public int getTrangThai() {
         return trangThai;
     }
@@ -78,9 +62,26 @@ public class HoaDonViewModel {
         this.trangThai = trangThai;
     }
 
+    public String getIdNhanVien() {
+        return idNhanVien;
+    }
+
+    public void setIdNhanVien(String idNhanVien) {
+        this.idNhanVien = idNhanVien;
+    }
+
+    public String getIdKhachHang() {
+        return idKhachHang;
+    }
+
+    public void setIdKhachHang(String idKhachHang) {
+        this.idKhachHang = idKhachHang;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonViewModel{" + "idHoaDon=" + idHoaDon + ", maHD=" + maHD + ", ngayTao=" + ngayTao + ", tenNV=" + tenNV + ", tenKH=" + tenKH + ", trangThai=" + trangThai + '}';
+        return "HoaDonViewModel{" + "idHoaDon=" + idHoaDon + ", maHD=" + maHD + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", idNhanVien=" + idNhanVien + ", idKhachHang=" + idKhachHang + '}';
     }
+    
     
 }

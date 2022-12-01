@@ -48,8 +48,8 @@ public class KhachHang {
         this.trangthai = trangthai;
     }
 
-    public KhachHang(String tenkh) {
-        this.tenkh = tenkh;
+    public KhachHang(String idKhachHang) {
+        this.idKhachHang = idKhachHang;
     }
 
     public String getIdKhachHang() {

@@ -62,8 +62,8 @@ public class Nhanvien {
         this.Trangthai = Trangthai;
     }
 
-    public Nhanvien(String HotenNv) {
-        this.HotenNv = HotenNv;
+    public Nhanvien(String ID) {
+        this.ID = ID;
     }
 
     @Override

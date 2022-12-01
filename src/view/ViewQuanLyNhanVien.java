@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package view;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import model.Nhanvien;
@@ -15,15 +16,18 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import serviceimql.Nhanvien_serviceimpl;
 import service.nhanvien_service;
+
 /**
  *
  * @author hung2
  */
 public class ViewQuanLyNhanVien extends javax.swing.JPanel {
-private List<Nhanvien> listnv = new ArrayList<>();
-private List<Nhanvien> listtk = new ArrayList<>();
+
+    private List<Nhanvien> listnv = new ArrayList<>();
+    private List<Nhanvien> listtk = new ArrayList<>();
     private final nhanvien_service nvservice;
     DefaultTableModel model;
+
     /**
      * Creates new form ViewQuanLyNhanVien
      */
@@ -342,41 +346,41 @@ private List<Nhanvien> listtk = new ArrayList<>();
 
     private void tblnhanvienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblnhanvienMouseClicked
         int index = tblnhanvien.getSelectedRow();
-        model=(DefaultTableModel) tblnhanvien.getModel();
-        String ma=model.getValueAt(index,0).toString();
+        model = (DefaultTableModel) tblnhanvien.getModel();
+        String ma = model.getValueAt(index, 0).toString();
         Nhanvien nv = nvservice.getNVbyma(ma);
         showdetail(nv);
     }//GEN-LAST:event_tblnhanvienMouseClicked
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         Nhanvien nv = null;
-    try {
-        nv = getNVbyfrom();
-    } catch (ParseException ex) {
-        Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            nv = getNVbyfrom();
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nvservice.add(nv);
         filltotablenv();
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
         Nhanvien nv = null;
-    try {
-        nv = getNVbyfrom();
-    } catch (ParseException ex) {
-        Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            nv = getNVbyfrom();
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nvservice.update(nv);
         filltotablenv();
     }//GEN-LAST:event_btnsuaActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         Nhanvien nv = null;
-    try {
-        nv = getNVbyfrom();
-    } catch (ParseException ex) {
-        Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            nv = getNVbyfrom();
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
         nvservice.delete(nv);
         filltotablenv();
     }//GEN-LAST:event_btnxoaActionPerformed
@@ -386,27 +390,27 @@ private List<Nhanvien> listtk = new ArrayList<>();
         filltotabletk(ma);
     }//GEN-LAST:event_jButton1ActionPerformed
 
- public Nhanvien getNVbyfrom() throws ParseException{
-    String manv = txtmaNV.getText();
-    String hoten = txtHotenNV.getText();
-    String sodt = txtsoDT.getText();
-    
-    Date Ngaysinh = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaysinh.getText());
-    String gt=rdoNam.isSelected()?"Nam":"Nu";
-    String email=txtemail.getText();
-    String diachi=txtdiachi.getText();
-    String matkhau=txtmatkhau.getText();
-    int trangthai;
-    String tt = (String) cbott.getSelectedItem();
-    if(tt.equals("Dang hoat dong")){
-        trangthai=1;
-    }else{
-        trangthai=0;
-    }
-     
-    String chucvu = (String) cbochucvu.getSelectedItem();
-    Nhanvien nv = new Nhanvien(manv, hoten, sodt, gt, Ngaysinh, email, diachi, chucvu, matkhau, trangthai);
-    return nv;
+    public Nhanvien getNVbyfrom() throws ParseException {
+        String manv = txtmaNV.getText();
+        String hoten = txtHotenNV.getText();
+        String sodt = txtsoDT.getText();
+
+        Date Ngaysinh = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaysinh.getText());
+        String gt = rdoNam.isSelected() ? "Nam" : "Nu";
+        String email = txtemail.getText();
+        String diachi = txtdiachi.getText();
+        String matkhau = txtmatkhau.getText();
+        int trangthai;
+        String tt = (String) cbott.getSelectedItem();
+        if (tt.equals("Dang hoat dong")) {
+            trangthai = 1;
+        } else {
+            trangthai = 0;
+        }
+
+        String chucvu = (String) cbochucvu.getSelectedItem();
+        Nhanvien nv = new Nhanvien(manv, hoten, sodt, gt, Ngaysinh, email, diachi, chucvu, matkhau, trangthai);
+        return nv;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnsua;
@@ -441,71 +445,74 @@ private List<Nhanvien> listtk = new ArrayList<>();
     private javax.swing.JTextField txtsoDT;
     // End of variables declaration//GEN-END:variables
  private void filltotablenv() {
-        
-        listnv= nvservice.GetallNV();
-        model=(DefaultTableModel) tblnhanvien.getModel();
+
+        listnv = nvservice.GetallNV();
+        model = (DefaultTableModel) tblnhanvien.getModel();
         model.setRowCount(0);
-        for(int i=0;i<listnv.size();i++){
-            String tt=null;
-            if(listnv.get(i).getTrangthai()==1){
-                tt="Dang hoat dong";
-            }if(listnv.get(i).getTrangthai()==0){
-                tt="Khong hoat dong";    
-                    }
-        Object[] data = new Object[]{
-        listnv.get(i).getMaNV(),listnv.get(i).getHotenNv(),listnv.get(i).getSoDt(),listnv.get(i).getMatkhau(),tt,listnv.get(i).getChucvu()
-        };
-        model.addRow(data);
-        }
-    }
- private void filltotabletk(String ma) {
-        listtk.removeAll(listtk);
-        Nhanvien nv = nvservice.getNVbyma(ma);
-        listtk.add(nv);
-        model=(DefaultTableModel) tblnhanvien.getModel();
-        model.setRowCount(0);
-        for(int i=0;i<listnv.size();i++){
-            String tt=null;
-            if(listnv.get(i).getTrangthai()==1){
-                tt="Dang hoat dong";
-            }if(listnv.get(i).getTrangthai()==0){
-                tt="Khong hoat dong";    
-                    }
-        Object[] data = new Object[]{
-        listtk.get(i).getMaNV(),listtk.get(i).getHotenNv(),listtk.get(i).getSoDt(),listtk.get(i).getMatkhau(),tt,listtk.get(i).getChucvu()
-        };
-        model.addRow(data);
+        for (int i = 0; i < listnv.size(); i++) {
+            String tt = null;
+            if (listnv.get(i).getTrangthai() == 1) {
+                tt = "Dang hoat dong";
+            }
+            if (listnv.get(i).getTrangthai() == 0) {
+                tt = "Khong hoat dong";
+            }
+            Object[] data = new Object[]{
+                listnv.get(i).getMaNV(), listnv.get(i).getHotenNv(), listnv.get(i).getSoDt(), listnv.get(i).getMatkhau(), tt, listnv.get(i).getChucvu()
+            };
+            model.addRow(data);
         }
     }
 
-    private void showdetail(Nhanvien nv ) {
-        String tt=null;
+    private void filltotabletk(String ma) {
+        listtk.removeAll(listtk);
+        Nhanvien nv = nvservice.getNVbyma(ma);
+        listtk.add(nv);
+        model = (DefaultTableModel) tblnhanvien.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < listnv.size(); i++) {
+            String tt = null;
+            if (listnv.get(i).getTrangthai() == 1) {
+                tt = "Dang hoat dong";
+            }
+            if (listnv.get(i).getTrangthai() == 0) {
+                tt = "Khong hoat dong";
+            }
+            Object[] data = new Object[]{
+                listtk.get(i).getMaNV(), listtk.get(i).getHotenNv(), listtk.get(i).getSoDt(), listtk.get(i).getMatkhau(), tt, listtk.get(i).getChucvu()
+            };
+            model.addRow(data);
+        }
+    }
+
+    private void showdetail(Nhanvien nv) {
+        String tt = null;
         txtmaNV.setText(nv.getMaNV());
         txtHotenNV.setText(nv.getHotenNv());
         txtsoDT.setText(nv.getSoDt());
-        txtngaysinh.setText(nv.getNgaysinh()+"");
+        txtngaysinh.setText(nv.getNgaysinh() + "");
         txtemail.setText(nv.getEmail());
         txtdiachi.setText(nv.getDiachi());
         txtmatkhau.setText(nv.getMatkhau());
-        
-        if(nv.getTrangthai()==0){
-            tt="Khong hoat dong";
+
+        if (nv.getTrangthai() == 0) {
+            tt = "Khong hoat dong";
         }
-        if(nv.getTrangthai()==1){
-            tt="Dang hoat dong";
+        if (nv.getTrangthai() == 1) {
+            tt = "Dang hoat dong";
         }
         cbott.setSelectedItem(tt);
         cbochucvu.setSelectedItem(nv.getChucvu());
-        if(nv.getGioitinh().equals("Nam")){
-        rdoNam.setSelected(true);
+        if (nv.getGioitinh().equals("Nam")) {
+            rdoNam.setSelected(true);
         }
-        if(nv.getGioitinh().equals("Nu")){
-        rdonu.setSelected(true);
+        if (nv.getGioitinh().equals("Nu")) {
+            rdonu.setSelected(true);
         }
     }
 
     private Object SimpleDateFormat(String mMddyyyy) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

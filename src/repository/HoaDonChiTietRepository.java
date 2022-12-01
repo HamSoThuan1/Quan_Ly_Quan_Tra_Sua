@@ -6,13 +6,14 @@ package repository;
 
 import java.util.List;
 import viewModel.HoaDonChiTietViewModel;
+import model.HoaDonChiTiet;
 
 /**
  *
  * @author Nguyen Thanh Hung
  */
 public class HoaDonChiTietRepository {
-    public List<HoaDonChiTietViewModel> getAll(){
+    public List<HoaDonChiTiet> getAll(){
         String query = "";
         return null;
     }

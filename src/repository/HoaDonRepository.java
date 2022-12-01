@@ -22,17 +22,17 @@ import viewModel.HoaDonViewModel;
  */
 public class HoaDonRepository {
 
-    public List<HoaDonViewModel> getAll() {
-        String query = "SELECT IdHoaDon, MaHD, NgayTao, HoTenNV, HoTenKH, HOADON.TrangThai\n"
-                + "FROM HOADON JOIN NHANVIEN ON HOADON.IdNhanVien = NHANVIEN.IdNhanVien\n"
-                + "			JOIN KHACHHANG ON HOADON.IdKhachHang = KHACHHANG.IdKhachHang";
+    public List<HoaDon> getAll() {
+        String query = "select * from HOADON";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            List<HoaDonViewModel> listHD = new ArrayList<>();
+            List<HoaDon> listHD = new ArrayList<>();
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                HoaDonViewModel hd = new HoaDonViewModel(rs.getString(1), rs.getString(2),
-                        rs.getDate(3), rs.getString(4), rs.getString(5), rs.getInt(6));
-                listHD.add(hd);
+                Nhanvien nv = new Nhanvien(rs.getString(1));
+                KhachHang kh = new KhachHang(rs.getString(2));
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3),
+                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6),
+                        rs.getDate(7), rs.getString(8), rs.getInt(9), nv, kh);
             }
             return listHD;
         } catch (SQLException e) {
@@ -41,25 +41,36 @@ public class HoaDonRepository {
         return null;
     }
 
-    public boolean insertHoaDon(HoaDon hd) {
+    public boolean insertHoaDon(HoaDonViewModel hd) {
         String query = "INSERT INTO [dbo].[HOADON]\n"
                 + "           ([MaHD]\n"
                 + "           ,[NgayTao]\n"
-                + "            ,[GhiChu]\n"
+                + "           ,[TongTien]\n"
                 + "           ,[TrangThai]\n"
                 + "           ,[IdNhanVien]\n"
                 + "           ,[IdKhachHang])\n"
                 + "     VALUES(?,?,?,?,?,?)";
         int check = 0;
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            ps.setObject(1, hd.getMaHD());
-            ps.setObject(2, hd.getNgayTao());
-            ps.setObject(3, hd.getTrangThai());
-            ps.setObject(4, hd.getIdNhanVien().getHotenNv());
-            ps.setObject(5, hd.getIdKhachHang().getTenkh());
+//            ps.setObject(1, hd.getMaHD());
+//            ps.setObject(2, hd.getNgayTao());
+//            ps.setObject(3, hd.getTongTien());
+//            ps.setObject(4, hd.getTrangThai());
+//            ps.setObject(5, hd.getTenNV());
+//            ps.setObject(6, hd.getTenKH());
+//            check = ps.executeUpdate();
+            System.out.println("Thành công");
         } catch (SQLException e) {
+            System.out.println("Thất bại");
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public static void main(String[] args) {
+        List<HoaDon> list = new HoaDonRepository().getAll();
+        for (HoaDon hoaDon : list) {
+            System.out.println(hoaDon.toString());
+        }
     }
 }

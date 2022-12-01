@@ -11,6 +11,7 @@ import java.util.Date;
  * @author Nguyen Thanh Hung
  */
 public class HoaDon {
+
     private String idHoaDon;
     private String MaHD;
     private Date ngayTao;
@@ -22,6 +23,7 @@ public class HoaDon {
     private int trangThai;
     private Nhanvien idNhanVien;
     private KhachHang idKhachHang;
+    private KhuyenMai idKhuyenMai;
 
     public HoaDon() {
     }
@@ -136,5 +138,5 @@ public class HoaDon {
     public void setIdKhachHang(KhachHang idKhachHang) {
         this.idKhachHang = idKhachHang;
     }
-    
+
 }

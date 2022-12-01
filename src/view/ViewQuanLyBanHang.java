@@ -15,12 +15,14 @@ import model.HoaDon;
 import model.LoaiSanPham;
 import model.Nhanvien;
 import model.SanPham;
+import model.Topping;
 import serviceimql.HoaDonServiceImpl;
 import serviceimql.LoaiSanPhamServiceImpl;
 import serviceimql.Nhanvien_serviceimpl;
 import serviceimql.SanPhamServiceImpl;
 import serviceimql.SanPhamViewModelServiceImpl;
 import viewModel.HoaDonChiTietViewModel;
+import viewModel.HoaDonViewModel;
 import viewModel.SanPhamViewModel;
 
 /**
@@ -36,6 +38,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private List<SanPhamViewModel> listSP;
     private List<LoaiSanPham> listLSP;
     private List<HoaDonChiTietViewModel> listHDCT;
+    private List<Topping> listTP;
     private DefaultTableModel modelHD;
     private DefaultTableModel modelHDCT;
     private DefaultTableModel modelSP;
@@ -52,6 +55,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         listSP = new ArrayList<>();
         listHDCT = new ArrayList<>();
         listLSP = new ArrayList<>();
+        listTP = new ArrayList<>();
         modelHD = new DefaultTableModel();
         modelHDCT = new DefaultTableModel();
         modelSP = new DefaultTableModel();
@@ -65,7 +69,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         hoaDonService = new HoaDonServiceImpl();
         nhanVienService = new Nhanvien_serviceimpl();
         
-        String[] heardHD = {"Mã HD", "Ngày Tạo", "Nhân Viên", "Trạng Thái"};
+        String[] heardHD = {"Mã HD", "Ngày Tạo", "Nhân Viên", "Khách hàng", "Trạng Thái"};
         modelHD.setColumnIdentifiers(heardHD);
         
         String[] heardHDCT = {"STT", "Mã SP", "Tên SP", "Số Lượng", "Đơn Giá", "Thành tiền"};
@@ -77,7 +81,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         listSP = sanPhamService.getAllSanPham();
         listLSP = loaiSanPhamService.getAll();
         showDataSanPham(listSP);
-//        cbbLoaiSanPham(listLSP);
         cbbLoaiSP.removeAllItems();
         for (int i = 0; i < listLSP.size(); i++) {
             cbbLoaiSP.addItem(listLSP.get(i).getTenLoaiSP().toString());
@@ -95,13 +98,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         }
     }
     
-//    public void cbbLoaiSanPham(List<LoaiSanPham> listLsp) {
-//        cbbLoaiSP.setModel(comboboxLSP);
-//        for (LoaiSanPham loaiSanPham : listLsp) {
-//            comboboxLSP.addElement(loaiSanPham.getTenLoaiSP());
-//        }
-//    }
-//    
     public void addTableHoaDonCT(List<HoaDonChiTietViewModel> listgh){
         modelHDCT.setRowCount(0);
         int stt = 1;
@@ -158,13 +154,16 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     }
     
     public void taoHoaDon(){
-        HoaDon hd = new HoaDon();
-        Nhanvien nv = new Nhanvien();
+        HoaDonViewModel hd = new HoaDonViewModel();
         int index = hoaDonService.getAll().size() + 1;
-        hd.setIdHoaDon("HD" + index);
+        hd.setMaHD("HD" + index);
         hd.setNgayTao(new Date());
-        
+        hd.setTrangThai(0);
+//        hd.setTenNV(ViewDangNhap.users.getMaNV());
+//        hd.setTenKH("Khách hàng lẻ");
+        hoaDonService.insertHoaDon(hd);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -290,6 +289,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblHoaDonCT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonCTMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblHoaDonCT);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -647,6 +651,14 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         taoHoaDon();
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
+
+    private void tblHoaDonCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonCTMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() >= 1){
+            ViewThongTinTopping topping = new ViewThongTinTopping();
+            topping.setVisible(true);
+        }
+    }//GEN-LAST:event_tblHoaDonCTMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

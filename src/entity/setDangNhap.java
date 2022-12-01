@@ -12,14 +12,14 @@ import model.Nhanvien;
  */
 public class setDangNhap {
 
-   
-   public static Nhanvien user = null;
-   
-   public static void clear(){
-       setDangNhap.user = null;
-   }
-   public static boolean  isLogin(){
-       return setDangNhap.user != null;
-   }
-  
+    public static Nhanvien user = null;
+
+    public static void clear() {
+        setDangNhap.user = null;
+    }
+
+    public static boolean isLogin() {
+        return setDangNhap.user != null;
+    }
+
 }

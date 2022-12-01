@@ -229,12 +229,12 @@ public class ViewDangNhap extends javax.swing.JFrame {
     public void DangNhap() {
         String maNV = txt_TenDangNhap.getText();
         String matKhau = new String(pw_MatKhau.getPassword());
-        setDangNhap.user = dangNhap_services.getOne(maNV, matKhau);
+        users = dangNhap_services.getOne(maNV, matKhau);
         if (maNV.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Tên đăng nhập không được để trống");
         } else if (matKhau.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
-        } else if (setDangNhap.user != null) {
+        } else if (users != null) {
             JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
             ViewChinh view = new ViewChinh();
             view.setVisible(true);
@@ -243,6 +243,9 @@ public class ViewDangNhap extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng");
         }
     }
+    
+    public static Nhanvien users;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DangNhap;
     private javax.swing.JButton btn_DoiMatKhau;
