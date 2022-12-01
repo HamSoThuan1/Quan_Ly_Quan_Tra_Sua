@@ -16,11 +16,16 @@ import model.LoaiSanPham;
 import model.Nhanvien;
 import model.SanPham;
 import model.Topping;
+import service.GiaoCa_service;
+import service.HoaDonService;
+import service.nhanvien_service;
+import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.HoaDonServiceImpl;
 import serviceimql.LoaiSanPhamServiceImpl;
 import serviceimql.Nhanvien_serviceimpl;
 import serviceimql.SanPhamServiceImpl;
 import serviceimql.SanPhamViewModelServiceImpl;
+import viewModel.GiaoCaViewModel;
 import viewModel.HoaDonChiTietViewModel;
 import viewModel.HoaDonViewModel;
 import viewModel.SanPhamViewModel;
@@ -30,6 +35,9 @@ import viewModel.SanPhamViewModel;
  * @author hung2
  */
 public class ViewQuanLyBanHang extends javax.swing.JPanel {
+    private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
+    private nhanvien_service nvservice = new Nhanvien_serviceimpl();
+    private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
 
     /**
      * Creates new form ViewQuanLyBanHang
@@ -45,13 +53,14 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private DefaultComboBoxModel comboboxLSP;
     private SanPhamViewModelServiceImpl sanPhamService;
     private LoaiSanPhamServiceImpl loaiSanPhamService;
-    private HoaDonServiceImpl hoaDonService;
+    private HoaDonService hoaDonService= new HoaDonServiceImpl();
     private Nhanvien_serviceimpl nhanVienService;
     private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+    private String mac;
     
-    public ViewQuanLyBanHang() {
+    public ViewQuanLyBanHang(String mac) {
+        System.out.println(this.mac);
         initComponents();
-        
         listSP = new ArrayList<>();
         listHDCT = new ArrayList<>();
         listLSP = new ArrayList<>();
@@ -66,7 +75,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         cbbLoaiSP.setModel(comboboxLSP);
         sanPhamService = new SanPhamViewModelServiceImpl();
         loaiSanPhamService = new LoaiSanPhamServiceImpl();
-        hoaDonService = new HoaDonServiceImpl();
         nhanVienService = new Nhanvien_serviceimpl();
         
         String[] heardHD = {"Mã HD", "Ngày Tạo", "Nhân Viên", "Khách hàng", "Trạng Thái"};
@@ -86,6 +94,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             cbbLoaiSP.addItem(listLSP.get(i).getTenLoaiSP().toString());
         }
     }
+
+//    ViewQuanLyBanHang(String mac) {
+//        System.out.println(this.mac);
+//    }
+
     
     public void showDataSanPham(List<SanPhamViewModel> lists){
         modelSP.setRowCount(0);
@@ -153,16 +166,16 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         
     }
     
-    public void taoHoaDon(){
-        HoaDonViewModel hd = new HoaDonViewModel();
-        int index = hoaDonService.getAll().size() + 1;
-        hd.setMaHD("HD" + index);
-        hd.setNgayTao(new Date());
-        hd.setTrangThai(0);
-//        hd.setTenNV(ViewDangNhap.users.getMaNV());
-//        hd.setTenKH("Khách hàng lẻ");
-        hoaDonService.insertHoaDon(hd);
-    }
+//    public void taoHoaDon(){
+//        HoaDonViewModel hd = new HoaDonViewModel();
+//        int index = hoaDonService.getAll().size() + 1;
+//        hd.setMaHD("HD" + index);
+//        hd.setNgayTao(new Date());
+//        hd.setTrangThai(0);
+//        hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+//        System.out.println(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+////        hoaDonService.add(hd);
+//    }
     
 
     /**
@@ -217,6 +230,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jButton5 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
+        lblMaCa = new javax.swing.JLabel();
 
         jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -598,20 +612,27 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMaCa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblMaCa, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -649,13 +670,22 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         // TODO add your handling code here:
-        taoHoaDon();
+//        System.out.println(mac);
+//        HoaDonViewModel hd = new HoaDonViewModel();
+//        int index = hoaDonService.getAll().size() + 1;
+//        hd.setMaHD("HD" + index);
+//        hd.setNgayTao(new Date());
+//        hd.setTrangThai(0);
+//        hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+//        System.out.println(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+//        hoaDonService.add(hd);
+//        taoHoaDon(mac);
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void tblHoaDonCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonCTMouseClicked
         // TODO add your handling code here:
         if(evt.getClickCount() >= 1){
-            ViewThongTinTopping topping = new ViewThongTinTopping();
+            ViewThongTinTopping topping = new ViewThongTinTopping(mac);
             topping.setVisible(true);
         }
     }//GEN-LAST:event_tblHoaDonCTMouseClicked
@@ -698,6 +728,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblMaCa;
     private javax.swing.JLabel lblTienThua;
     private javax.swing.JLabel lblTongTien;
     private javax.swing.JTable tblHoaDon;
@@ -706,4 +737,16 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTienKhachDua;
     // End of variables declaration//GEN-END:variables
+
+//    private void taoHoaDon(String mac) {
+//        System.out.println(mac);
+//        HoaDonViewModel hd = new HoaDonViewModel();
+//        int index = hoaDonService.getAll().size() + 1;
+//        hd.setMaHD("HD" + index);
+//        hd.setNgayTao(new Date());
+//        hd.setTrangThai(0);
+//        hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+//        System.out.println(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+//        hoaDonService.add(hd);
+//    }
 }

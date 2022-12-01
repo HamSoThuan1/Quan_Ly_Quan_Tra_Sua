@@ -268,7 +268,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(mac);
 //        ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(idnhanvien);
         v.setVisible(true);
-        System.out.println(mac);
         
         
         

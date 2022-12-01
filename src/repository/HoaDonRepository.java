@@ -73,4 +73,8 @@ public class HoaDonRepository {
             System.out.println(hoaDon.toString());
         }
     }
+
+//    public int add(HoaDonViewModel hd) {
+////        String sql = ""
+//    }
 }
