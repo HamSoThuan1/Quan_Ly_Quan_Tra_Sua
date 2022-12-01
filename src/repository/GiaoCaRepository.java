@@ -57,6 +57,24 @@ public class GiaoCaRepository {
             return null;
         }
     }
+//    public static GiaoCaViewModel getGiaoCaByMa(String maCa) {
+//        GiaoCaViewModel gcvm=null;
+//        ResultSet rs;
+//        String sql ="select MaCa,thoidiembatdau,sotienbandau,idnhanvien from giaoca where maca=?";
+//        rs=JDBC_Helper.selectTongQuat(sql,maCa);
+//        try {
+//            while(rs.next()){
+//                String maca = rs.getString(1);
+//                Date tdbd = rs.getDate(2);
+//                double tbd = rs.getDouble(3);
+//                String idnv = rs.getString(4);
+//                gcvm = new GiaoCaViewModel(maca, tdbd, tbd, idnv);
+//            }
+//            return gcvm;
+//        } catch (SQLException ex) {
+//            return null;
+//        }
+//    }
     public static List<GiaoCaViewModel> getAllGiaoCaViewModel(){
         List<GiaoCaViewModel> listgcvm = new ArrayList<>();
         ResultSet rs;
@@ -87,5 +105,29 @@ public class GiaoCaRepository {
     public int add(GiaoCaViewModel gcvm) {
         String sql="insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
         return JDBC_Helper.updateTongQuat(sql,gcvm.getMaca(),gcvm.getThoigianbatdau(),gcvm.getTienbandau(),gcvm.getIdnhanvien());
+    }
+
+    public GiaoCaViewModel getGiaoCaByMa(String mac) {
+        GiaoCaViewModel gcvm=null;
+        ResultSet rs;
+        String sql ="select MaCa,thoidiembatdau,sotienbandau,idnhanvien from giaoca where maca=?";
+        rs=JDBC_Helper.selectTongQuat(sql,mac);
+        try {
+            while(rs.next()){
+                String maca = rs.getString(1);
+                Date tdbd = rs.getDate(2);
+                double tbd = rs.getDouble(3);
+                String idnv = rs.getString(4);
+                gcvm = new GiaoCaViewModel(maca, tdbd, tbd, idnv);
+            }
+            return gcvm;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public int delete(String mac) {
+        String sql="delete from giaoca where maca=?";
+        return JDBC_Helper.updateTongQuat(sql,mac);
     }
 }

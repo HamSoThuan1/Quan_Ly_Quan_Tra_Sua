@@ -32,5 +32,15 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     public List<GiaoCaViewModel> getAllGiaoCaViewModel() {
         return gcrepos.getAllGiaoCaViewModel();
     }
+
+    @Override
+    public GiaoCaViewModel getGiaoCaByMa(String mac) {
+        return gcrepos.getGiaoCaByMa(mac);
+    }
+
+    @Override
+    public int delete(String mac) {
+        return gcrepos.delete(mac);
+    }
     
 }

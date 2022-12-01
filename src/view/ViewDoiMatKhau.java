@@ -182,9 +182,9 @@ public class ViewDoiMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_QuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuayLaiActionPerformed
-        ViewChinh view = new ViewChinh();
-        new ViewChinh().setVisible(true);
-        this.dispose();
+//        ViewChinh view = new ViewChinh();
+//        new ViewChinh().setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btn_QuayLaiActionPerformed
 
     private void btn_xacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xacNhanActionPerformed

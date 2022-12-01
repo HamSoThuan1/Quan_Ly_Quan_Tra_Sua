@@ -18,4 +18,8 @@ public interface GiaoCa_service {
     public List<GiaoCaViewModel> getAllGiaoCaViewModel();
 
     public int add(GiaoCaViewModel gcvm);
+
+    public GiaoCaViewModel getGiaoCaByMa(String mac);
+
+    public int delete(String mac);
 }
