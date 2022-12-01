@@ -17,4 +17,6 @@ public interface nhanvien_service {
     public int add(Nhanvien nv);
     public int delete (Nhanvien nv);
     public int update(Nhanvien nv);
+
+    public Nhanvien getNVByMaVaMatKhau(String maNV, String matKhau);
 }

@@ -6,20 +6,29 @@ package view;
 
 import entity.setDangNhap;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Nhanvien;
 import repository.DangNhap_responsitory;
+import service.GiaoCa_service;
+import service.nhanvien_service;
 import serviceimql.DangNhap_servicesimpl;
+import serviceimql.GiaoCa_serviceimpl;
+import serviceimql.Nhanvien_serviceimpl;
+import viewModel.GiaoCaViewModel;
 
 /**
  *
  * @author Acer
  */
 public class ViewDangNhap extends javax.swing.JFrame {
-
-    private List<Nhanvien> list;
-    private DangNhap_servicesimpl dangNhap_services;
+    private List<Nhanvien> list=new ArrayList<>();
+    
+    private nhanvien_service nvservice = new Nhanvien_serviceimpl();
+    private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
+    
+//    private DangNhap_servicesimpl dangNhap_services;
 
     /**
      * Creates new form ViewDangNhap
@@ -27,8 +36,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
     public ViewDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
-        list = new ArrayList<>();
-        dangNhap_services = new DangNhap_servicesimpl();
+//        dangNhap_services = new DangNhap_servicesimpl();
     }
 
     /**
@@ -50,8 +58,10 @@ public class ViewDangNhap extends javax.swing.JFrame {
         btn_DangNhap = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btn_Thoat = new javax.swing.JButton();
+        lblidnhanvien = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Đăng nhập");
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -133,6 +143,10 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addComponent(btn_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Thoat)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblidnhanvien)
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -156,7 +170,9 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_DoiMatKhau)
                             .addComponent(btn_DangNhap)
-                            .addComponent(btn_Thoat)))
+                            .addComponent(btn_Thoat))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblidnhanvien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -217,6 +233,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ViewDangNhap.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -229,23 +246,49 @@ public class ViewDangNhap extends javax.swing.JFrame {
     public void DangNhap() {
         String maNV = txt_TenDangNhap.getText();
         String matKhau = new String(pw_MatKhau.getPassword());
-        users = dangNhap_services.getOne(maNV, matKhau);
-        if (maNV.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tên đăng nhập không được để trống");
-        } else if (matKhau.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
-        } else if (users != null) {
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-            ViewChinh view = new ViewChinh();
-            view.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng");
+        if(maNV.equals("")){
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            txt_TenDangNhap.requestFocus();
+            return;
         }
+        if(pw_MatKhau.equals("")){
+            JOptionPane.showMessageDialog(this, "Không được để trống");
+            pw_MatKhau.requestFocus();
+            return;
+        }
+        Nhanvien nv = nvservice.getNVByMaVaMatKhau(maNV,matKhau);
+        if(nv==null){
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập lại");
+            return;
+        }
+        String idnhanvien = nv.getID();
+        Date dt = new Date();
+        String maca ="CA01";
+        double SoTienBanDau = 1000000;
+//        String maca ="CA"+gcservice.getAllGiaoCa().size()+1+"";
+        GiaoCaViewModel gcvm = new GiaoCaViewModel(maca, dt, SoTienBanDau, idnhanvien);
+        gcservice.add(gcvm);
+        this.dispose();
+//        ViewXacNhanCa v = new ViewXacNhanCa();
+        ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(idnhanvien);
+        v.setVisible(true);
+
+
+
+//        setDangNhap.user = dangNhap_services.getOne(maNV, matKhau);
+//        if (maNV.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Tên đăng nhập không được để trống");
+//        } else if (matKhau.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
+//        } else if (setDangNhap.user != null) {
+//            JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+//            ViewChinh view = new ViewChinh();
+//            view.setVisible(true);
+//            this.dispose();
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Tên đăng nhập hoặc mật khẩu không đúng");
+//        }
     }
-    
-    public static Nhanvien users;
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DangNhap;
     private javax.swing.JButton btn_DoiMatKhau;
@@ -255,6 +298,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField lblidnhanvien;
     private javax.swing.JPasswordField pw_MatKhau;
     private javax.swing.JTextField txt_TenDangNhap;
     // End of variables declaration//GEN-END:variables
