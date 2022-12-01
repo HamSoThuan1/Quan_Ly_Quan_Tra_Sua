@@ -106,17 +106,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel16.setText("Tiền chuyển khoản :");
 
-        jLabel17.setText("jLabel17");
-
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel18.setText("Tổng tiền ca hiện có : ");
 
-        jLabel19.setText("jLabel17");
-
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel20.setText("Tiền chủ thu :");
-
-        jLabel21.setText("jLabel17");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

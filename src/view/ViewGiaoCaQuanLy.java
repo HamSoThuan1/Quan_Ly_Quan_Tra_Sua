@@ -137,26 +137,6 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel19.setText("Ghi chú");
 
-        jLabel20.setText("jLabel20");
-
-        jLabel21.setText("jLabel20");
-
-        jLabel22.setText("jLabel20");
-
-        jLabel23.setText("jLabel20");
-
-        jLabel24.setText("jLabel20");
-
-        jLabel25.setText("jLabel20");
-
-        jLabel26.setText("jLabel20");
-
-        jLabel27.setText("jLabel20");
-
-        jLabel28.setText("jLabel20");
-
-        jTextField2.setText("jTextField2");
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
