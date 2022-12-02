@@ -8,9 +8,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.GiaoCa;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -25,7 +29,8 @@ import serviceimql.GiaoCa_serviceimpl;
  * @author kn134
  */
 public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
-
+    List<GiaoCa> listgc = new ArrayList<>();
+    DefaultTableModel model;
     private final String mac;
     private GiaoCa_service giaoca = new GiaoCa_serviceimpl();
 
@@ -44,6 +49,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
         lblsotienbandau.setText(giaoca.getAllGiaoCaByMaCa(mac).getTienchuthu()+"");
         lbltongtienhienco.setText(giaoca.getAllGiaoCaByMaCa(mac).getTienchuthu()+"");
         txttienphatsinh.setText(giaoca.getAllGiaoCaByMaCa(mac).getTienphatsinh()+"");  
+        fillGiaoCaToTable();
     }
 
 
@@ -454,4 +460,23 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
     private javax.swing.JTable tbl_cb;
     private javax.swing.JTextField txttienphatsinh;
     // End of variables declaration//GEN-END:variables
+
+    private void fillGiaoCaToTable() {
+//        listgc = giaoca.getAllGiaoCa();
+//        model = (DefaultTableModel) tblnhanvien.getModel();
+//        model.setRowCount(0);
+//        for (int i = 0; i < listnv.size(); i++) {
+//            String tt = null;
+//            if (listnv.get(i).getTrangthai() == 1) {
+//                tt = "Dang hoat dong";
+//            }
+//            if (listnv.get(i).getTrangthai() == 0) {
+//                tt = "Khong hoat dong";
+//            }
+//            Object[] data = new Object[]{
+//                listnv.get(i).getMaNV(), listnv.get(i).getHotenNv(), listnv.get(i).getSoDt(), listnv.get(i).getMatkhau(), tt, listnv.get(i).getChucvu()
+//            };
+//            model.addRow(data);
+//        }
+    }
 }

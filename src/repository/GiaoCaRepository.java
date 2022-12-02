@@ -5,12 +5,15 @@
 package repository;
 
 import entity.JDBC_Helper;
-import java.sql.*;
+import java.security.Timestamp;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.GiaoCa;
 import model.Nhanvien;
 import viewModel.GiaoCaViewModel;
+
 
 /**
  *
@@ -26,8 +29,8 @@ public class GiaoCaRepository {
             while (rs.next()) {
                 String id = rs.getString(1);
                 String ma=rs.getString(2);
-                Date tdbd = rs.getDate(3);
-                Date tdkt = rs.getDate(4);
+                java.sql.Timestamp tdbd = rs.getTimestamp(3);
+                java.sql.Timestamp tdkt = rs.getTimestamp(4);
                 double tbd = rs.getDouble(5);
                 double tdt = rs.getDouble(6);
                 double tps = rs.getDouble(7);
@@ -46,7 +49,7 @@ public class GiaoCaRepository {
 //                String matkhau = rs.getString(22);
 //                int trangthai=rs.getInt(23);
 //                Nhanvien nv = new Nhanvien(id, manv, hoten, sodt, gioitinh, ngaysinh, email, diachi, chucvu, matkhau, trangthai);
-                GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, thc, tps, tct, gc, idnv);
+                GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, tps, thc, tct, gc, idnv);
                 listgiaoca.add(giaoca);
             }
             return listgiaoca;
@@ -106,12 +109,14 @@ public class GiaoCaRepository {
             while(rs.next()){
                 String maca = rs.getString(1);
                 Date tdbd = rs.getDate(2);
+                String tba2 = rs.getDate(2).toString();
                 double tbd = rs.getDouble(3);
                 String idnv = rs.getString(4);
+                System.out.println(tba2);
                 gcvm = new GiaoCaViewModel(maca, tdbd, tbd, idnv);
             }
             return gcvm;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
@@ -130,8 +135,8 @@ public class GiaoCaRepository {
             while (rs.next()) {
                 String id = rs.getString(1);
                 String ma=rs.getString(2);
-                Date tdbd = rs.getDate(3);
-                Date tdkt = rs.getDate(4);
+                java.sql.Timestamp tdbd = rs.getTimestamp(3);
+                java.sql.Timestamp tdkt = rs.getTimestamp(4);
                 double tbd = rs.getDouble(5);
                 double tdt = rs.getDouble(6);
                 double tps = rs.getDouble(7);

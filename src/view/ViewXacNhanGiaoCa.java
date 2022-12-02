@@ -4,21 +4,27 @@
  */
 package view;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import service.GiaoCa_service;
 import serviceimql.GiaoCa_serviceimpl;
 import viewModel.GiaoCaViewModel;
+import java.time.LocalDateTime; // Import the LocalDateTime class
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author kn134
  */
 public class ViewXacNhanGiaoCa extends javax.swing.JFrame {
+    
     private final String mac;
     private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
-
+    private DateTimeFormatter dtft = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     /**
      * Creates new form ViewXacNhanGiaoCa
@@ -26,14 +32,17 @@ public class ViewXacNhanGiaoCa extends javax.swing.JFrame {
     public ViewXacNhanGiaoCa(String mac) {
         initComponents();
         setLocationRelativeTo(null);
-        this.mac=mac;
+        this.mac = mac;
         lblMaCa.setText(mac);
-//        gcservice.getGiaoCaByMa(mac).get;
-        lbltbd.setText(gcservice.getGiaoCaByMa(mac).getTienbandau()+"");
-        lbltgbd.setText(gcservice.getGiaoCaByMa(mac).getThoigianbatdau()+"");
+        lbltbd.setText(gcservice.getGiaoCaByMa(mac).getTienbandau() + "");
+        Date dt = gcservice.getGiaoCaByMa(mac).getThoigianbatdau();
+        System.out.println(dt);
+//        DateTimeFormatter dt = gcservice.getGiaoCaByMa(mac).getThoigianbatdau();
+        
+//        String gi = gcservice.getGiaoCaByMa(mac).getThoigianbatdau();
+//        System.out.println(dtft.format(gcservice.getGiaoCaByMa(mac).getThoigianbatdau()));
+//        lbltgbd.setText(dsf.format(gcservice.getGiaoCaByMa(mac).getThoigianbatdau()));
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.

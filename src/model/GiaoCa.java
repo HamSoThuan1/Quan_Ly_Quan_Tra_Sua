@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.security.Timestamp;
 import java.util.Date;
 
 /**
@@ -13,8 +14,8 @@ import java.util.Date;
 public class GiaoCa {
     private String idgiaoca;
     private String maca;
-    private Date thoidiembatdau;
-    private Date thoidiemketthuc;
+    private java.sql.Timestamp thoidiembatdau;
+    private java.sql.Timestamp thoidiemketthuc;
     private double tienbandau;
     private double tiendoanhthu;
     private double tonghienco;
@@ -26,7 +27,7 @@ public class GiaoCa {
     public GiaoCa() {
     }
 
-    public GiaoCa(String idgiaoca, String maca, Date thoidiembatdau, Date thoidiemketthuc, double tienbandau, double tiendoanhthu, double tonghienco, double tienphatsinh, double tienchuthu, String ghichu, String idnhanvien) {
+    public GiaoCa(String idgiaoca, String maca, java.sql.Timestamp thoidiembatdau, java.sql.Timestamp thoidiemketthuc, double tienbandau, double tiendoanhthu, double tonghienco, double tienphatsinh, double tienchuthu, String ghichu, String idnhanvien) {
         this.idgiaoca = idgiaoca;
         this.maca = maca;
         this.thoidiembatdau = thoidiembatdau;
@@ -56,19 +57,19 @@ public class GiaoCa {
         this.maca = maca;
     }
 
-    public Date getThoidiembatdau() {
+    public java.sql.Timestamp getThoidiembatdau() {
         return thoidiembatdau;
     }
 
-    public void setThoidiembatdau(Date thoidiembatdau) {
+    public void setThoidiembatdau(java.sql.Timestamp thoidiembatdau) {
         this.thoidiembatdau = thoidiembatdau;
     }
 
-    public Date getThoidiemketthuc() {
+    public java.sql.Timestamp getThoidiemketthuc() {
         return thoidiemketthuc;
     }
 
-    public void setThoidiemketthuc(Date thoidiemketthuc) {
+    public void setThoidiemketthuc(java.sql.Timestamp thoidiemketthuc) {
         this.thoidiemketthuc = thoidiemketthuc;
     }
 

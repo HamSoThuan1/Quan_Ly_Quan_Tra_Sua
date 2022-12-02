@@ -246,6 +246,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblHoaDon);
 
         btnTaoHoaDon.setText("Tạo Hóa Đơn");
@@ -760,6 +765,10 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             lblTongTien.setText("0");
         }
     }//GEN-LAST:event_btnXoaSanPhamActionPerformed
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblHoaDonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
