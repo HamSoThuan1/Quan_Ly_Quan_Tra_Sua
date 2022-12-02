@@ -527,7 +527,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jButton8" min="-2" pref="129" max="-2" attributes="0"/>
                   <EmptySpace pref="407" max="32767" attributes="0"/>
-                  <Component id="jLabel4" min="-2" pref="160" max="-2" attributes="0"/>
+                  <Component id="lblTenNV" min="-2" pref="160" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblChucVu" min="-2" pref="65" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -546,7 +546,7 @@
                       <Component id="jButton8" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblDate" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lblChucVu" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel4" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblTenNV" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -597,7 +597,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="lblTenNV">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="12" style="1"/>

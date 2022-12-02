@@ -118,5 +118,31 @@ public class Nhanvien_repository {
             return null;
         }
     }
+
+    public Nhanvien getNVbyid(String idnv) {
+        Nhanvien nv=null;
+        ResultSet rs;
+        String sql ="select * from NHANVIEN where idnhanvien=? ";
+        rs=JDBC_Helper.selectTongQuat(sql,idnv);
+        try {
+            while(rs.next()){
+           String ma=rs.getString(2);
+            String hoten=rs.getString(3);
+            String sodt=rs.getString(4);
+            String gioitinh=rs.getString(5);
+            Date ngaysinh=rs.getDate(6);
+            String email=rs.getString(7);
+            String diachi=rs.getString(8);
+            String chucvu=rs.getString(9);
+            String matkhau = rs.getString(10);
+            int trangthai=rs.getInt(11);
+            nv = new Nhanvien(ma, hoten, sodt, gioitinh, ngaysinh, email, diachi, chucvu, matkhau,trangthai);
+           
+            }
+            return nv;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
 }
 

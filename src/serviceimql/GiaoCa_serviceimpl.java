@@ -42,5 +42,10 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     public int delete(String mac) {
         return gcrepos.delete(mac);
     }
+
+    @Override
+    public GiaoCa getAllGiaoCaByMaCa(String mac) {
+        return gcrepos.getAllGiaoCaByMaCa(mac);
+    }
     
 }

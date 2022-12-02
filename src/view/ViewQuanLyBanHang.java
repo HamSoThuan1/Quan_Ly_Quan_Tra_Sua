@@ -16,11 +16,15 @@ import model.LoaiSanPham;
 import model.Nhanvien;
 import model.SanPham;
 import model.Topping;
+import service.GiaoCa_service;
+import service.nhanvien_service;
+import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.HoaDonServiceImpl;
 import serviceimql.LoaiSanPhamServiceImpl;
 import serviceimql.Nhanvien_serviceimpl;
 import serviceimql.SanPhamServiceImpl;
 import serviceimql.SanPhamViewModelServiceImpl;
+import viewModel.GiaoCaViewModel;
 import viewModel.HoaDonChiTietViewModel;
 import viewModel.HoaDonViewModel;
 import viewModel.SanPhamViewModel;
@@ -30,6 +34,10 @@ import viewModel.SanPhamViewModel;
  * @author hung2
  */
 public class ViewQuanLyBanHang extends javax.swing.JPanel {
+//    private final String mac;
+    private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
+    private nhanvien_service nvservice = new Nhanvien_serviceimpl();
+    private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
 
     /**
      * Creates new form ViewQuanLyBanHang
@@ -47,10 +55,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private HoaDonServiceImpl hoaDonService;
     private Nhanvien_serviceimpl nhanVienService;
     private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+    private final String mac;
 
-    public ViewQuanLyBanHang() {
+    public ViewQuanLyBanHang(String mac) {
         initComponents();
-
+        this.mac=mac;
         listSP = new ArrayList<>();
         listHDCT = new ArrayList<>();
         listLSP = new ArrayList<>();
@@ -703,6 +712,13 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         // TODO add your handling code here:
+        HoaDonViewModel hd = new HoaDonViewModel();
+        int index = hoaDonService.getAll().size() + 1;
+        hd.setMaHD("HD" + index);
+        hd.setNgayTao(new Date());
+        hd.setTrangThai(0);
+        hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
+        hoaDonService.add(hd);
 //        taoHoaDon();
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 

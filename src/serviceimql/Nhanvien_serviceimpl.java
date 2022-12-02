@@ -44,5 +44,10 @@ Nhanvien_repository nvrepos= new Nhanvien_repository();
     public Nhanvien getNVByMaVaMatKhau(String maNV, String matKhau) {
         return nvrepos.getNVByMaVaMatKhau(maNV,matKhau);
     }
+
+    @Override
+    public Nhanvien getNVbyid(String idnv) {
+        return nvrepos.getNVbyid(idnv);
+    }
     
 }

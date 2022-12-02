@@ -17,31 +17,27 @@ public class GiaoCa {
     private Date thoidiemketthuc;
     private double tienbandau;
     private double tiendoanhthu;
-    private double tiencchuyenkhoan;
-    private double tienmat;
-    private double tongtiencahienco;
-    private double tienchuthu;
+    private double tonghienco;
     private double tienphatsinh;
+    private double tienchuthu;
     private String ghichu;
-    private Nhanvien nhanvien;
+    private String idnhanvien;
 
     public GiaoCa() {
     }
 
-    public GiaoCa(String idgiaoca, String maca, Date thoidiembatdau, Date thoidiemketthuc, double tienbandau, double tiendoanhthu, double tiencchuyenkhoan, double tienmat, double tongtiencahienco, double tienchuthu, double tienphatsinh, String ghichu, Nhanvien nhanvien) {
+    public GiaoCa(String idgiaoca, String maca, Date thoidiembatdau, Date thoidiemketthuc, double tienbandau, double tiendoanhthu, double tonghienco, double tienphatsinh, double tienchuthu, String ghichu, String idnhanvien) {
         this.idgiaoca = idgiaoca;
         this.maca = maca;
         this.thoidiembatdau = thoidiembatdau;
         this.thoidiemketthuc = thoidiemketthuc;
         this.tienbandau = tienbandau;
         this.tiendoanhthu = tiendoanhthu;
-        this.tiencchuyenkhoan = tiencchuyenkhoan;
-        this.tienmat = tienmat;
-        this.tongtiencahienco = tongtiencahienco;
-        this.tienchuthu = tienchuthu;
+        this.tonghienco = tonghienco;
         this.tienphatsinh = tienphatsinh;
+        this.tienchuthu = tienchuthu;
         this.ghichu = ghichu;
-        this.nhanvien = nhanvien;
+        this.idnhanvien = idnhanvien;
     }
 
     public String getIdgiaoca() {
@@ -92,36 +88,12 @@ public class GiaoCa {
         this.tiendoanhthu = tiendoanhthu;
     }
 
-    public double getTiencchuyenkhoan() {
-        return tiencchuyenkhoan;
+    public double getTonghienco() {
+        return tonghienco;
     }
 
-    public void setTiencchuyenkhoan(double tiencchuyenkhoan) {
-        this.tiencchuyenkhoan = tiencchuyenkhoan;
-    }
-
-    public double getTienmat() {
-        return tienmat;
-    }
-
-    public void setTienmat(double tienmat) {
-        this.tienmat = tienmat;
-    }
-
-    public double getTongtiencahienco() {
-        return tongtiencahienco;
-    }
-
-    public void setTongtiencahienco(double tongtiencahienco) {
-        this.tongtiencahienco = tongtiencahienco;
-    }
-
-    public double getTienchuthu() {
-        return tienchuthu;
-    }
-
-    public void setTienchuthu(double tienchuthu) {
-        this.tienchuthu = tienchuthu;
+    public void setTonghienco(double tonghienco) {
+        this.tonghienco = tonghienco;
     }
 
     public double getTienphatsinh() {
@@ -132,6 +104,14 @@ public class GiaoCa {
         this.tienphatsinh = tienphatsinh;
     }
 
+    public double getTienchuthu() {
+        return tienchuthu;
+    }
+
+    public void setTienchuthu(double tienchuthu) {
+        this.tienchuthu = tienchuthu;
+    }
+
     public String getGhichu() {
         return ghichu;
     }
@@ -140,17 +120,17 @@ public class GiaoCa {
         this.ghichu = ghichu;
     }
 
-    public Nhanvien getNhanvien() {
-        return nhanvien;
+    public String getIdnhanvien() {
+        return idnhanvien;
     }
 
-    public void setNhanvien(Nhanvien nhanvien) {
-        this.nhanvien = nhanvien;
+    public void setIdnhanvien(String idnhanvien) {
+        this.idnhanvien = idnhanvien;
     }
 
     @Override
     public String toString() {
-        return "GiaoCa{" + "idgiaoca=" + idgiaoca + ", maca=" + maca + ", thoidiembatdau=" + thoidiembatdau + ", thoidiemketthuc=" + thoidiemketthuc + ", tienbandau=" + tienbandau + ", tiendoanhthu=" + tiendoanhthu + ", tiencchuyenkhoan=" + tiencchuyenkhoan + ", tienmat=" + tienmat + ", tongtiencahienco=" + tongtiencahienco + ", tienchuthu=" + tienchuthu + ", tienphatsinh=" + tienphatsinh + ", ghichu=" + ghichu + ", nhanvien=" + nhanvien + '}';
+        return "GiaoCa{" + "idgiaoca=" + idgiaoca + ", maca=" + maca + ", thoidiembatdau=" + thoidiembatdau + ", thoidiemketthuc=" + thoidiemketthuc + ", tienbandau=" + tienbandau + ", tiendoanhthu=" + tiendoanhthu + ", tonghienco=" + tonghienco + ", tienphatsinh=" + tienphatsinh + ", tienchuthu=" + tienchuthu + ", ghichu=" + ghichu + ", idnhanvien=" + idnhanvien + '}';
     }
     
 }

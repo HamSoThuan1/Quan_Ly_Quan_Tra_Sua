@@ -55,7 +55,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         txt_TenDangNhap = new javax.swing.JTextField();
         pw_MatKhau = new javax.swing.JPasswordField();
         cb_HienThi = new javax.swing.JCheckBox();
-        btn_DoiMatKhau = new javax.swing.JButton();
         btn_DangNhap = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btn_Thoat = new javax.swing.JButton();
@@ -79,16 +78,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         cb_HienThi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cb_HienThiMouseClicked(evt);
-            }
-        });
-
-        btn_DoiMatKhau.setBackground(new java.awt.Color(255, 0, 51));
-        btn_DoiMatKhau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_DoiMatKhau.setForeground(new java.awt.Color(255, 255, 255));
-        btn_DoiMatKhau.setText("Đổi Mật Khẩu");
-        btn_DoiMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_DoiMatKhauActionPerformed(evt);
             }
         });
 
@@ -137,9 +126,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
                             .addComponent(txt_TenDangNhap))
                         .addGap(17, 17, 17))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
-                        .addComponent(btn_DoiMatKhau)
-                        .addGap(18, 18, 18)
+                        .addGap(178, 178, 178)
                         .addComponent(btn_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_Thoat)
@@ -164,7 +151,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
                         .addComponent(cb_HienThi)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_DoiMatKhau)
                             .addComponent(btn_DangNhap)
                             .addComponent(btn_Thoat)))
                     .addGroup(layout.createSequentialGroup()
@@ -179,13 +165,9 @@ public class ViewDangNhap extends javax.swing.JFrame {
     private void btn_ThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThoatActionPerformed
         // TODO add your handling code here:
         System.exit(0);
+//        ViewDoiMatKhau view = new ViewDoiMatKhau();
+//        view.setVisible(true);
     }//GEN-LAST:event_btn_ThoatActionPerformed
-
-    private void btn_DoiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DoiMatKhauActionPerformed
-        // TODO add your handling code here:
-        ViewDoiMatKhau view = new ViewDoiMatKhau();
-        view.setVisible(true);
-    }//GEN-LAST:event_btn_DoiMatKhauActionPerformed
 
     private void btn_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhapActionPerformed
         // TODO add your handling code here:
@@ -266,7 +248,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
         listgcvm=(List<GiaoCaViewModel>) gcservice.getAllGiaoCaViewModel();
         String mac=listgcvm.get(listgcvm.size()-1).getMaca();
         ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(mac);
-//        ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(idnhanvien);
         v.setVisible(true);
         
         
@@ -293,7 +274,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_DangNhap;
-    private javax.swing.JButton btn_DoiMatKhau;
     private javax.swing.JButton btn_Thoat;
     private javax.swing.JCheckBox cb_HienThi;
     private javax.swing.JLabel jLabel1;

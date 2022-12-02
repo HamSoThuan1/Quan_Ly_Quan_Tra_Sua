@@ -17,6 +17,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import service.GiaoCa_service;
+import service.nhanvien_service;
+import serviceimql.GiaoCa_serviceimpl;
+import serviceimql.Nhanvien_serviceimpl;
 
 /**
  *
@@ -24,6 +28,9 @@ import javax.swing.JPanel;
  */
 public class ViewChinh extends javax.swing.JFrame {
     private final String mac;
+    private GiaoCa_service giaoca = new GiaoCa_serviceimpl();
+    private nhanvien_service nhanvien = new Nhanvien_serviceimpl();
+    
 
     /**
      * Creates new form ViewChinh
@@ -57,7 +64,12 @@ public class ViewChinh extends javax.swing.JFrame {
                 }
             }
         }.start();
+        String idnv =giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        lblTenNV.setText(nhanvien.getNVbyid(idnv).getHotenNv());
+        lblChucVu.setText(nhanvien.getNVbyid(idnv).getChucvu());
+        
 //        setExtendedState(getExtendedState() | ViewChinh.MAXIMIZED_BOTH);
+    
     }
 
 
@@ -108,7 +120,7 @@ public class ViewChinh extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         lblDate = new javax.swing.JLabel();
         lblChucVu = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblTenNV = new javax.swing.JLabel();
         pnMain = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -438,8 +450,8 @@ public class ViewChinh extends javax.swing.JFrame {
         lblChucVu.setText("Quản lý");
         lblChucVu.setPreferredSize(new java.awt.Dimension(50, 13));
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Nguyễn Duy Thành thoại");
+        lblTenNV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTenNV.setText("Nguyễn Duy Thành thoại");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -453,7 +465,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 407, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTenNV, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -470,11 +482,11 @@ public class ViewChinh extends javax.swing.JFrame {
                     .addComponent(jButton8)
                     .addComponent(lblDate)
                     .addComponent(lblChucVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(lblTenNV))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton8, jLabel4, lblChucVu, lblDate});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton8, lblChucVu, lblDate, lblTenNV});
 
         pnMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -527,7 +539,7 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void lblBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMousePressed
         // TODO add your handling code here:
-        this.setViewChinh(new ViewQuanLyBanHang());
+        this.setViewChinh(new ViewQuanLyBanHang(mac));
         this.setColor.changeColorBtn("Bán hàng", getBtn());
     }//GEN-LAST:event_lblBanHangMousePressed
 
@@ -563,11 +575,11 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        if (lblChucVu.getText().equalsIgnoreCase("Nhân viên")) {
-            ViewGiaoCaNhanVien v = new ViewGiaoCaNhanVien();
+        if (lblChucVu.getText().equalsIgnoreCase("Nhan vien")) {
+            ViewGiaoCaNhanVien v = new ViewGiaoCaNhanVien(mac);
             v.setVisible(true);
         } else {
-            ViewGiaoCaQuanLy v = new ViewGiaoCaQuanLy();
+            ViewGiaoCaQuanLy v = new ViewGiaoCaQuanLy(mac);
             v.setVisible(true);
         }
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -626,7 +638,6 @@ public class ViewChinh extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -646,6 +657,7 @@ public class ViewChinh extends javax.swing.JFrame {
     private javax.swing.JLabel lblKhuyenMai;
     private javax.swing.JLabel lblNhanVien;
     private javax.swing.JLabel lblSanPham;
+    private javax.swing.JLabel lblTenNV;
     private javax.swing.JLabel lblThongKe;
     private javax.swing.JLabel lblTrangChu;
     private javax.swing.JPanel pnMain;

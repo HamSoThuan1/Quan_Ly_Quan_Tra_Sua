@@ -9,7 +9,6 @@ package viewModel;
  * @author Nguyen Thanh Hung
  */
 public class SanPhamViewModel {
-
     private String idSanPham;
     private String maSP;
     private String tenSP;
@@ -111,5 +110,5 @@ public class SanPhamViewModel {
     public String toString() {
         return "SanPhamViewModel{" + "idSanPham=" + idSanPham + ", maSP=" + maSP + ", tenSP=" + tenSP + ", loaiSP=" + loaiSP + ", sizeSP=" + sizeSP + ", donGia=" + donGia + ", giaSize=" + giaSize + ", moTa=" + moTa + '}';
     }
-
+    
 }

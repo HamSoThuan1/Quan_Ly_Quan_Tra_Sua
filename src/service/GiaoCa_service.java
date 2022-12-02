@@ -22,4 +22,6 @@ public interface GiaoCa_service {
     public GiaoCaViewModel getGiaoCaByMa(String mac);
 
     public int delete(String mac);
+
+    public GiaoCa getAllGiaoCaByMaCa(String mac);
 }

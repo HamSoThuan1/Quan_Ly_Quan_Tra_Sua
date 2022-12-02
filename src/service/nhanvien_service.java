@@ -19,4 +19,6 @@ public interface nhanvien_service {
     public int update(Nhanvien nv);
 
     public Nhanvien getNVByMaVaMatKhau(String maNV, String matKhau);
+
+    public Nhanvien getNVbyid(String idnv);
 }
