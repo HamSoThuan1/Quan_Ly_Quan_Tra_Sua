@@ -5,11 +5,13 @@
 package repository;
 
 import entity.DBContext;
+import entity.JDBCHeper;
 import entity.JDBC_Helper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,23 +26,50 @@ import viewModel.HoaDonViewModel;
  */
 public class HoaDonRepository {
 
-    public List<HoaDon> getAll() {
-        String query = "select * from HOADON";
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-            List<HoaDon> listHD = new ArrayList<>();
-            ResultSet rs = ps.executeQuery();
+//    public List<HoaDon> getAll() {
+//        String query = "select * from HOADON";
+//        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+//            List<HoaDon> listHD = new ArrayList<>();
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                Nhanvien nv = new Nhanvien(rs.getString(1));
+//                KhachHang kh = new KhachHang(rs.getString(2));
+//                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3),
+//                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6),
+//                        rs.getDate(7), rs.getString(8), rs.getInt(9), nv, kh);
+//            }
+//            return listHD;
+//        } catch (SQLException e) {
+//            e.printStackTrace(System.out);
+//        }
+//        return null;
+//    }
+    public static List<HoaDon> getAllHoaDon() {
+        List<HoaDon> listHD = new ArrayList<>();
+        ResultSet rs;
+        String sql = "select *,CONVERT(int,SUBSTRING(MaHD,3,3)) as STT from HOADON order by STT";
+        rs = JDBCHeper.excuteQuery(sql);
+        try {
             while (rs.next()) {
-                Nhanvien nv = new Nhanvien(rs.getString(1));
-                KhachHang kh = new KhachHang(rs.getString(2));
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3),
-                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6),
-                        rs.getDate(7), rs.getString(8), rs.getInt(9), nv, kh);
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                Timestamp ngaytao = rs.getTimestamp(3);
+                double tongtien = rs.getDouble(4);
+                double tienaodungkm = rs.getDouble(5);
+                double tienKHthanhtoan = rs.getDouble(6);
+                Timestamp ngaythanhtoan = rs.getTimestamp(7);
+                String ghichu = rs.getString(8);
+                int trangthai = rs.getInt(9);
+                String idnhanvien = rs.getString(10);
+                String idkhachhang = rs.getString(11);
+                String idkhuyenmai = rs.getString(12);
+                HoaDon hd = new HoaDon(id, ma, ngaytao, tongtien, tienaodungkm, tienKHthanhtoan, ngaythanhtoan, ghichu, trangthai, idnhanvien, idkhachhang, idkhuyenmai);
+                listHD.add(hd);
             }
             return listHD;
-        } catch (SQLException e) {
-            e.printStackTrace(System.out);
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
     public static List<HoaDonViewModel> getAllHDVM() {
         List<HoaDonViewModel> listhdvm = new ArrayList<>();
@@ -89,9 +118,10 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-        List<HoaDon> list = new HoaDonRepository().getAll();
-        for (HoaDon hoaDon : list) {
-            System.out.println(hoaDon.toString());
+        List<HoaDon> list = new ArrayList<>();
+        list=getAllHoaDon();
+        for (HoaDon x : list) {
+            System.out.println(x.toString());
         }
     }
 

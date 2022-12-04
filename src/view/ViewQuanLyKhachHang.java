@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.KhachHang;
+import java.sql.*;
 import serviceimql.KhachHang_serviceimpl;
 
 /**
@@ -25,7 +26,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
     private List<KhachHang> listkh = new ArrayList<>();
     private KhachHang_serviceimpl khsv = new KhachHang_serviceimpl();
     private DefaultTableModel tblmodel = new DefaultTableModel();
-    private SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-DD");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * Creates new form ViewQuanLyKhachHang
@@ -49,7 +50,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         if (rdonu.isSelected()) {
             kh.setGioitinh(false);
         }
-        kh.setNgaysinh(date.parse(txtngay.getText()));
+        kh.setNgaysinh(Timestamp.valueOf(txtngay.getText()));
         kh.setSodt(txtso.getText());
         kh.setDiachi(txtdiachi.getText());
         kh.setGhichu(txtghichu.getText());
@@ -75,7 +76,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         if (rdonu.isSelected()) {
             kh.setGioitinh(false);
         }
-        kh.setNgaysinh(date.parse(txtngay.getText()+""));
+        kh.setNgaysinh(Timestamp.valueOf(txtngay.getText()));
         
         kh.setSodt(txtso.getText());
         kh.setDiachi(txtdiachi.getText());

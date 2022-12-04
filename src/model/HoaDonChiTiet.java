@@ -11,8 +11,10 @@ package model;
 public class HoaDonChiTiet {
 
     private String idHoaDonCT;
-    private SanPham idSanPham;
-    private HoaDon idHoaDon;
+//    private SanPham idSanPham;
+    private String idsanpham;
+//    private HoaDon idHoaDon;
+    private String idhoadon;
     private double donGia;
     private int soLuong;
     private double giaTopping;
@@ -21,10 +23,10 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String idHoaDonCT, SanPham idSanPham, HoaDon idHoaDon, double donGia, int soLuong, double giaTopping, int trangThai) {
+    public HoaDonChiTiet(String idHoaDonCT, String idsanpham, String idhoadon, double donGia, int soLuong, double giaTopping, int trangThai) {
         this.idHoaDonCT = idHoaDonCT;
-        this.idSanPham = idSanPham;
-        this.idHoaDon = idHoaDon;
+        this.idsanpham = idsanpham;
+        this.idhoadon = idhoadon;
         this.donGia = donGia;
         this.soLuong = soLuong;
         this.giaTopping = giaTopping;
@@ -39,20 +41,20 @@ public class HoaDonChiTiet {
         this.idHoaDonCT = idHoaDonCT;
     }
 
-    public SanPham getIdSanPham() {
-        return idSanPham;
+    public String getIdsanpham() {
+        return idsanpham;
     }
 
-    public void setIdSanPham(SanPham idSanPham) {
-        this.idSanPham = idSanPham;
+    public void setIdsanpham(String idsanpham) {
+        this.idsanpham = idsanpham;
     }
 
-    public HoaDon getIdHoaDon() {
-        return idHoaDon;
+    public String getIdhoadon() {
+        return idhoadon;
     }
 
-    public void setIdHoaDon(HoaDon idHoaDon) {
-        this.idHoaDon = idHoaDon;
+    public void setIdhoadon(String idhoadon) {
+        this.idhoadon = idhoadon;
     }
 
     public double getDonGia() {
@@ -89,7 +91,7 @@ public class HoaDonChiTiet {
 
     @Override
     public String toString() {
-        return "HoaDonChiTiet{" + "idHoaDonCT=" + idHoaDonCT + ", idSanPham=" + idSanPham + ", idHoaDon=" + idHoaDon + ", donGia=" + donGia + ", soLuong=" + soLuong + ", giaTopping=" + giaTopping + ", trangThai=" + trangThai + '}';
+        return "HoaDonChiTiet{" + "idHoaDonCT=" + idHoaDonCT + ", idsanpham=" + idsanpham + ", idhoadon=" + idhoadon + ", donGia=" + donGia + ", soLuong=" + soLuong + ", giaTopping=" + giaTopping + ", trangThai=" + trangThai + '}';
     }
-
+    
 }

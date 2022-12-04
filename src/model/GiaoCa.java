@@ -4,8 +4,8 @@
  */
 package model;
 
-import java.security.Timestamp;
 import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -14,8 +14,8 @@ import java.util.Date;
 public class GiaoCa {
     private String idgiaoca;
     private String maca;
-    private java.sql.Timestamp thoidiembatdau;
-    private java.sql.Timestamp thoidiemketthuc;
+    private Timestamp thoidiembatdau;
+    private Timestamp thoidiemketthuc;
     private double tienbandau;
     private double tiendoanhthu;
     private double tonghienco;

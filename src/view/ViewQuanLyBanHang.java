@@ -12,14 +12,18 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
+import model.KhachHang;
 import model.LoaiSanPham;
 import model.Nhanvien;
 import model.SanPham;
 import model.Topping;
 import service.GiaoCa_service;
+import service.HoaDonService;
+import service.KhachHang_service;
 import service.nhanvien_service;
 import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.HoaDonServiceImpl;
+import serviceimql.KhachHang_serviceimpl;
 import serviceimql.LoaiSanPhamServiceImpl;
 import serviceimql.Nhanvien_serviceimpl;
 import serviceimql.SanPhamServiceImpl;
@@ -36,13 +40,17 @@ import viewModel.SanPhamViewModel;
 public class ViewQuanLyBanHang extends javax.swing.JPanel {
 //    private final String mac;
     private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
+    private List<HoaDon> listHD = new ArrayList<>();
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
+    private HoaDonService hdservice = new HoaDonServiceImpl();
+    private DefaultTableModel model;
 
     /**
      * Creates new form ViewQuanLyBanHang
      */
     private List<SanPhamViewModel> listSP;
+    private List<KhachHang> listKH;
     private List<LoaiSanPham> listLSP;
     private List<HoaDonChiTietViewModel> listHDCT;
     private List<Topping> listTP;
@@ -54,6 +62,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private LoaiSanPhamServiceImpl loaiSanPhamService;
     private HoaDonServiceImpl hoaDonService;
     private Nhanvien_serviceimpl nhanVienService;
+    private KhachHang_service khachhang = new KhachHang_serviceimpl();
     private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
     private final String mac;
 
@@ -93,6 +102,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         for (int i = 0; i < listLSP.size(); i++) {
             cbbLoaiSP.addItem(listLSP.get(i).getTenLoaiSP().toString());
         }
+        fillHDToTable();
     }
 
     public void showDataSanPham(List<SanPhamViewModel> lists) {
@@ -718,7 +728,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         // TODO add your handling code here:
         HoaDonViewModel hd = new HoaDonViewModel();
-        int index = hoaDonService.getAll().size() + 1;
+        int index = hoaDonService.getAllHoaDon().size() + 1;
         hd.setMaHD("HD" + index);
         hd.setNgayTao(new Date());
         hd.setTrangThai(0);
@@ -824,4 +834,24 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtTienKhachDua;
     // End of variables declaration//GEN-END:variables
+
+    private void fillHDToTable() {
+        listHD=hdservice.getAllHoaDon();
+        model = (DefaultTableModel) tblHoaDon.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < listHD.size(); i++) {
+            String mahoadon = listHD.get(i).getMaHD();
+            String ngaytao = listHD.get(i).getNgayTao()+"";
+            String idnhanvien = listHD.get(i).getIdnhanvien();
+            String tennhanvien = nhanVienService.getNVbyid(idnhanvien).getHotenNv();
+//            String idkhachhang = listHD.get(i).getIdkhachhang();
+//            String tenKH = khachhang.getKHByID(idkhachhang).getTenkh();
+            int trangthai = listHD.get(i).getTrangThai();
+            
+            Object[] data = new Object[]{
+                mahoadon,ngaytao,tennhanvien,trangthai
+            };
+            model.addRow(data);
+        }
+    }
 }

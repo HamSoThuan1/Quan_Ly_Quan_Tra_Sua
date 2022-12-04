@@ -5,6 +5,7 @@
 package model;
 
 import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -14,21 +15,24 @@ public class HoaDon {
 
     private String idHoaDon;
     private String MaHD;
-    private Date ngayTao;
+    private Timestamp ngayTao;
     private double tongTien;
     private double tienApDungKM;
     private double tienKHThanhToan;
-    private Date ngayThanhToan;
+    private Timestamp ngayThanhToan;
     private String ghiChu;
     private int trangThai;
-    private Nhanvien idNhanVien;
-    private KhachHang idKhachHang;
-    private KhuyenMai idKhuyenMai;
+    private String idnhanvien;
+    private String idkhachhang;
+    private String idkm;
+//    private Nhanvien idNhanVien;
+//    private KhachHang idKhachHang;
+//    private KhuyenMai idKhuyenMai;
 
     public HoaDon() {
     }
 
-    public HoaDon(String idHoaDon, String MaHD, Date ngayTao, double tongTien, double tienApDungKM, double tienKHThanhToan, Date ngayThanhToan, String ghiChu, int trangThai, Nhanvien idNhanVien, KhachHang idKhachHang) {
+    public HoaDon(String idHoaDon, String MaHD, Timestamp ngayTao, double tongTien, double tienApDungKM, double tienKHThanhToan, Timestamp ngayThanhToan, String ghiChu, int trangThai, String idnhanvien, String idkhachhang, String idkm) {
         this.idHoaDon = idHoaDon;
         this.MaHD = MaHD;
         this.ngayTao = ngayTao;
@@ -38,17 +42,9 @@ public class HoaDon {
         this.ngayThanhToan = ngayThanhToan;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
-        this.idNhanVien = idNhanVien;
-        this.idKhachHang = idKhachHang;
-    }
-
-    public HoaDon(String idHoaDon, String MaHD, Date ngayTao, int trangThai, Nhanvien idNhanVien, KhachHang idKhachHang) {
-        this.idHoaDon = idHoaDon;
-        this.MaHD = MaHD;
-        this.ngayTao = ngayTao;
-        this.trangThai = trangThai;
-        this.idNhanVien = idNhanVien;
-        this.idKhachHang = idKhachHang;
+        this.idnhanvien = idnhanvien;
+        this.idkhachhang = idkhachhang;
+        this.idkm = idkm;
     }
 
     public String getIdHoaDon() {
@@ -67,11 +63,11 @@ public class HoaDon {
         this.MaHD = MaHD;
     }
 
-    public Date getNgayTao() {
+    public Timestamp getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Date ngayTao) {
+    public void setNgayTao(Timestamp ngayTao) {
         this.ngayTao = ngayTao;
     }
 
@@ -99,11 +95,11 @@ public class HoaDon {
         this.tienKHThanhToan = tienKHThanhToan;
     }
 
-    public Date getNgayThanhToan() {
+    public Timestamp getNgayThanhToan() {
         return ngayThanhToan;
     }
 
-    public void setNgayThanhToan(Date ngayThanhToan) {
+    public void setNgayThanhToan(Timestamp ngayThanhToan) {
         this.ngayThanhToan = ngayThanhToan;
     }
 
@@ -123,20 +119,33 @@ public class HoaDon {
         this.trangThai = trangThai;
     }
 
-    public Nhanvien getIdNhanVien() {
-        return idNhanVien;
+    public String getIdnhanvien() {
+        return idnhanvien;
     }
 
-    public void setIdNhanVien(Nhanvien idNhanVien) {
-        this.idNhanVien = idNhanVien;
+    public void setIdnhanvien(String idnhanvien) {
+        this.idnhanvien = idnhanvien;
     }
 
-    public KhachHang getIdKhachHang() {
-        return idKhachHang;
+    public String getIdkhachhang() {
+        return idkhachhang;
     }
 
-    public void setIdKhachHang(KhachHang idKhachHang) {
-        this.idKhachHang = idKhachHang;
+    public void setIdkhachhang(String idkhachhang) {
+        this.idkhachhang = idkhachhang;
     }
 
+    public String getIdkm() {
+        return idkm;
+    }
+
+    public void setIdkm(String idkm) {
+        this.idkm = idkm;
+    }
+
+    @Override
+    public String toString() {
+        return "HoaDon{" + "idHoaDon=" + idHoaDon + ", MaHD=" + MaHD + ", ngayTao=" + ngayTao + ", tongTien=" + tongTien + ", tienApDungKM=" + tienApDungKM + ", tienKHThanhToan=" + tienKHThanhToan + ", ngayThanhToan=" + ngayThanhToan + ", ghiChu=" + ghiChu + ", trangThai=" + trangThai + ", idnhanvien=" + idnhanvien + ", idkhachhang=" + idkhachhang + ", idkm=" + idkm + '}';
+    }
+    
 }

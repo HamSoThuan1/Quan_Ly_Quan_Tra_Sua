@@ -21,4 +21,6 @@ public interface KhachHang_service {
 
     String updateKH(KhachHang kh, String makh);
     String  add(KhachHang kh);
+
+    public KhachHang getKHByID(String idkhachhang);
 }

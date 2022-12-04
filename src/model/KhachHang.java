@@ -5,6 +5,7 @@
 package model;
 
 import java.util.Date;
+import java.sql.*;
 
 /**
  *
@@ -16,7 +17,7 @@ public class KhachHang {
     private String makh;
     private String tenkh;
     private boolean gioitinh;
-    private Date ngaysinh;
+    private Timestamp ngaysinh;
     private String sodt;
     private String diachi;
     private String ghichu;
@@ -25,7 +26,7 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String idKhachHang, String makh, String tenkh, boolean gioitinh, Date ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
+    public KhachHang(String idKhachHang, String makh, String tenkh, boolean gioitinh, Timestamp ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
         this.idKhachHang = idKhachHang;
         this.makh = makh;
         this.tenkh = tenkh;
@@ -37,7 +38,7 @@ public class KhachHang {
         this.trangthai = trangthai;
     }
 
-    public KhachHang(String makh, String tenkh, boolean gioitinh, Date ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
+    public KhachHang(String makh, String tenkh, boolean gioitinh, Timestamp ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
         this.makh = makh;
         this.tenkh = tenkh;
         this.gioitinh = gioitinh;
@@ -84,11 +85,11 @@ public class KhachHang {
         this.gioitinh = gioitinh;
     }
 
-    public Date getNgaysinh() {
+    public Timestamp getNgaysinh() {
         return ngaysinh;
     }
 
-    public void setNgaysinh(Date ngaysinh) {
+    public void setNgaysinh(Timestamp ngaysinh) {
         this.ngaysinh = ngaysinh;
     }
 
@@ -126,7 +127,7 @@ public class KhachHang {
 
     @Override
     public String toString() {
-        return "KhachHang{" + "makh=" + makh + ", tenkh=" + tenkh + ", gioitinh=" + gioitinh + ", ngaysinh=" + ngaysinh + ", sodt=" + sodt + ", diachi=" + diachi + ", ghichu=" + ghichu + ", trangthai=" + trangthai + '}';
+        return "KhachHang{" + "idKhachHang=" + idKhachHang + ", makh=" + makh + ", tenkh=" + tenkh + ", gioitinh=" + gioitinh + ", ngaysinh=" + ngaysinh + ", sodt=" + sodt + ", diachi=" + diachi + ", ghichu=" + ghichu + ", trangthai=" + trangthai + '}';
     }
-
+    
 }

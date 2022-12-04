@@ -25,7 +25,7 @@ public class ViewXacNhanGiaoCa extends javax.swing.JFrame {
     private final String mac;
     private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
-    private DateTimeFormatter dtft = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//    private DateTimeFormatter dtft = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**

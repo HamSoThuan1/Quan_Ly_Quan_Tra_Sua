@@ -61,7 +61,9 @@ public class KhachHang_serviceimpl implements KhachHang_service {
             return " them that bai";
         }
     }
- 
-    
-    
+
+    @Override
+    public KhachHang getKHByID(String idkhachhang) {
+        return khrp.getKHByID(idkhachhang);
+    }  
 }

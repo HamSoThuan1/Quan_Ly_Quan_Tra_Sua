@@ -6,6 +6,7 @@ package repository;
 
 import entity.DBContext;
 import entity.JDBCHeper;
+import entity.JDBC_Helper;
 import java.util.List;
 import model.KhachHang;
 import java.sql.*;
@@ -27,7 +28,7 @@ public class KhachHang_repository {
                 String ma = rs.getString(1);
                 String ten = rs.getString(2);
                 boolean gioitinh = rs.getBoolean(3);
-                Date ngaysinh = rs.getDate(4);
+                Timestamp ngaysinh = rs.getTimestamp(4);
                 String sodt = rs.getString(5);
                 String diachi = rs.getString(6);
                 String ghichu = rs.getString(7);
@@ -54,7 +55,7 @@ public class KhachHang_repository {
                 String ma = rs.getString(1);
                 String ten = rs.getString(2);
                 boolean gioitinh = rs.getBoolean(3);
-                Date ngaysinh = rs.getDate(4);
+                Timestamp ngaysinh = rs.getTimestamp(4);
                 String sodt = rs.getString(5);
                 String diachi = rs.getString(6);
                 String ghichu = rs.getString(7);
@@ -144,6 +145,30 @@ public class KhachHang_repository {
 
     public static void main(String[] args) {
         getallKH();
+    }
+
+    public KhachHang getKHByID(String idkhachhang) {
+        KhachHang kh = null;
+        ResultSet rs;
+        String sql = "select*from khachhang where idkhachhang=?";
+        rs=JDBC_Helper.selectTongQuat(sql, idkhachhang);
+        try {
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String hoten = rs.getString(3);
+                boolean gioitinh = rs.getBoolean(4);
+                Timestamp ngaysinh = rs.getTimestamp(5);
+                String sodt = rs.getString(6);
+                String diachi = rs.getString(7);
+                String ghichu = rs.getString(8);
+                int trangthai = rs.getInt(9);
+                kh = new KhachHang(id, ma, hoten, gioitinh, ngaysinh, sodt, diachi, ghichu, trangthai);
+            }
+            return kh;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }
