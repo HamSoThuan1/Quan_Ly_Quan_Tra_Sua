@@ -5,7 +5,6 @@
 package view;
 
 //import entity.setDangNhap;
-
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -19,36 +18,19 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import viewModel.GiaoCaViewModel1;
-
-////import java.sql.*;
-//import java.sql.Timestamp;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.List;
-//import javax.swing.JOptionPane;
-//import model.Nhanvien;
-//import repository.DangNhap_responsitory;
-//import service.GiaoCa_service;
-//import service.nhanvien_service;
-//import serviceimql.DangNhap_servicesimpl;
-//import serviceimql.GiaoCa_serviceimpl;
-//import serviceimql.Nhanvien_serviceimpl;
-//import viewModel.GiaoCaViewModel;
-
 /**
  *
  * @author Acer
  */
 public class ViewDangNhap extends javax.swing.JFrame {
-    private List<Nhanvien> list=new ArrayList<>();
+
+    private List<Nhanvien> list = new ArrayList<>();
     private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
     private List<GiaoCaViewModel1> listgcvm1 = new ArrayList<>();
-    
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
-    
-//    private DangNhap_servicesimpl dangNhap_services;
 
+//    private DangNhap_servicesimpl dangNhap_services;
     /**
      * Creates new form ViewDangNhap
      */
@@ -240,42 +222,34 @@ public class ViewDangNhap extends javax.swing.JFrame {
     public void DangNhap() {
         String maNV = txt_TenDangNhap.getText();
         String matKhau = new String(pw_MatKhau.getPassword());
-        if(maNV.equals("")){
+        if (maNV.equals("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             txt_TenDangNhap.requestFocus();
             return;
         }
-        if(pw_MatKhau.equals("")){
+        if (pw_MatKhau.equals("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống");
             pw_MatKhau.requestFocus();
             return;
         }
-        Nhanvien nv = nvservice.getNVByMaVaMatKhau(maNV,matKhau);
-        if(nv==null){
+        Nhanvien nv = nvservice.getNVByMaVaMatKhau(maNV, matKhau);
+        if (nv == null) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập lại");
             return;
         }
         String idnhanvien = nv.getID();
 //        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         Date dt = new Date();
-        int stt =gcservice.getAllGiaoCaViewModel().size()+1;
-        String maca = "CA"+stt;
+        int stt = gcservice.getAllGiaoCaViewModel().size() + 1;
+        String maca = "CA" + stt;
         double SoTienBanDau = 1000000;
         GiaoCaViewModel1 gcvm = new GiaoCaViewModel1(maca, dt, SoTienBanDau, idnhanvien);
         gcservice.add(gcvm);
         this.dispose();
-        listgcvm=(List<GiaoCaViewModel>) gcservice.getAllGiaoCaViewModel();
-        String mac=listgcvm.get(listgcvm.size()-1).getMaca();
+        listgcvm = (List<GiaoCaViewModel>) gcservice.getAllGiaoCaViewModel();
+        String mac = listgcvm.get(listgcvm.size() - 1).getMaca();
         ViewXacNhanGiaoCa v = new ViewXacNhanGiaoCa(mac);
         v.setVisible(true);
-        
-        
-        
-        
-        
-        
-
-
 
 //        setDangNhap.user = dangNhap_services.getOne(maNV, matKhau);
 //        if (maNV.isEmpty()) {

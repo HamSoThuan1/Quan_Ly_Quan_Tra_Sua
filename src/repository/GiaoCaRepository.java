@@ -15,21 +15,21 @@ import model.Nhanvien;
 import viewModel.GiaoCaViewModel;
 import viewModel.GiaoCaViewModel1;
 
-
 /**
  *
  * @author kn134
  */
 public class GiaoCaRepository {
-    public static List<GiaoCa> getAllGiaoCa(){
+
+    public static List<GiaoCa> getAllGiaoCa() {
         List<GiaoCa> listgiaoca = new ArrayList<>();
         ResultSet rs;
         String sql = "select * from giaoca";
-        rs=JDBC_Helper.selectTongQuat(sql);
+        rs = JDBC_Helper.selectTongQuat(sql);
         try {
             while (rs.next()) {
                 String id = rs.getString(1);
-                String ma=rs.getString(2);
+                String ma = rs.getString(2);
                 java.sql.Timestamp tdbd = rs.getTimestamp(3);
                 java.sql.Timestamp tdkt = rs.getTimestamp(4);
                 double tbd = rs.getDouble(5);
@@ -76,11 +76,12 @@ public class GiaoCaRepository {
 //            return null;
 //        }
 //    }
-    public static List<GiaoCaViewModel> getAllGiaoCaViewModel(){
+
+    public static List<GiaoCaViewModel> getAllGiaoCaViewModel() {
         List<GiaoCaViewModel> listgcvm = new ArrayList<>();
         ResultSet rs;
         String sql = "select MaCa,thoidiembatdau,sotienbandau,idnhanvien from giaoca order by CONVERT(int,SUBSTRING(MaCa,3,3)) asc";
-        rs=JDBC_Helper.selectTongQuat(sql);
+        rs = JDBC_Helper.selectTongQuat(sql);
         try {
             while (rs.next()) {
                 String maca = rs.getString(1);
@@ -97,17 +98,17 @@ public class GiaoCaRepository {
     }
 
     public int add(GiaoCaViewModel gcvm) {
-        String sql="insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
-        return JDBC_Helper.updateTongQuat(sql,gcvm.getMaca(),gcvm.getThoigianbatdau(),gcvm.getTienbandau(),gcvm.getIdnhanvien());
+        String sql = "insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
+        return JDBC_Helper.updateTongQuat(sql, gcvm.getMaca(), gcvm.getThoigianbatdau(), gcvm.getTienbandau(), gcvm.getIdnhanvien());
     }
 
     public GiaoCaViewModel getGiaoCaByMa(String mac) {
-        GiaoCaViewModel gcvm=null;
+        GiaoCaViewModel gcvm = null;
         ResultSet rs;
-        String sql ="select MaCa,thoidiembatdau,sotienbandau,idnhanvien from giaoca where maca=?";
-        rs=JDBC_Helper.selectTongQuat(sql,mac);
+        String sql = "select MaCa,thoidiembatdau,sotienbandau,idnhanvien from giaoca where maca=?";
+        rs = JDBC_Helper.selectTongQuat(sql, mac);
         try {
-            while(rs.next()){
+            while (rs.next()) {
                 String maca = rs.getString(1);
 //                java.sql.Timestamp tdbd = rs.getTimestamp(3);
 //                java.sql.Timestamp tdkt = rs.getTimestamp(4);
@@ -123,19 +124,19 @@ public class GiaoCaRepository {
     }
 
     public int delete(String mac) {
-        String sql="delete from giaoca where maca=?";
-        return JDBC_Helper.updateTongQuat(sql,mac);
+        String sql = "delete from giaoca where maca=?";
+        return JDBC_Helper.updateTongQuat(sql, mac);
     }
 
     public static GiaoCa getAllGiaoCaByMaCa(String mac) {
-        GiaoCa gca=null;
+        GiaoCa gca = null;
         ResultSet rs;
         String sql = "select*from giaoca where maca=?";
-        rs=JDBC_Helper.selectTongQuat(sql, mac);
+        rs = JDBC_Helper.selectTongQuat(sql, mac);
         try {
             while (rs.next()) {
                 String id = rs.getString(1);
-                String ma=rs.getString(2);
+                String ma = rs.getString(2);
                 Timestamp tdbd = rs.getTimestamp(3);
                 Timestamp tdkt = rs.getTimestamp(4);
                 double tbd = rs.getDouble(5);
@@ -163,16 +164,17 @@ public class GiaoCaRepository {
             return null;
         }
     }
+
     public static void main(String[] args) {
         List<GiaoCa> listcheck = new ArrayList<>();
-        listcheck=getAllGiaoCa();
+        listcheck = getAllGiaoCa();
         for (GiaoCa x : listcheck) {
             System.out.println(x.toString());
         }
     }
 
     public int add(GiaoCaViewModel1 gcvm) {
-        String sql="insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
-        return JDBC_Helper.updateTongQuat(sql,gcvm.getMaca(),gcvm.getThoigianbatdau(),gcvm.getTienbandau(),gcvm.getIdnhanvien());
+        String sql = "insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
+        return JDBC_Helper.updateTongQuat(sql, gcvm.getMaca(), gcvm.getThoigianbatdau(), gcvm.getTienbandau(), gcvm.getIdnhanvien());
     }
 }

@@ -17,62 +17,67 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import org.bouncycastle.asn1.cms.Time;
 import service.GiaoCa_service;
 import service.nhanvien_service;
 import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.Nhanvien_serviceimpl;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
  * @author hung2
  */
 public class ViewChinh extends javax.swing.JFrame {
+    
     private final String mac;
     private GiaoCa_service giaoca = new GiaoCa_serviceimpl();
     private nhanvien_service nhanvien = new Nhanvien_serviceimpl();
-    
 
     /**
      * Creates new form ViewChinh
      */
     private SetSize setSize = new SetSize();
     private SetColor setColor = new SetColor();
-
+    
     public ViewChinh(String mac) {
         initComponents();
-        this.mac=mac;
+        this.mac = mac;
         this.setViewChinh(new ViewTrangChu());
         new Thread() {
             public void run() {
                 while (true) {
-                    Calendar ca = new GregorianCalendar();
-                    int dd = ca.get(Calendar.DAY_OF_MONTH);
-                    int mm = ca.get(Calendar.MONTH);
-                    int yy = ca.get(Calendar.YEAR);
-                    int hour = ca.get(Calendar.HOUR);
-                    int minute = ca.get(Calendar.MINUTE);
-                    int second = ca.get(Calendar.SECOND);
-                    int AM_PM = ca.get(Calendar.AM_PM);
-                    String am;
-                    if (AM_PM == 1) {
-                        am = "PM";
-                    } else {
-                        am = "AM";
-                    }
-                    String time = hour + ":" + minute + ":" + second + ":" + am + "   " + dd + "-" + mm + "-" + yy;
-                    lblDate.setText(time);
+                    LocalDateTime current = LocalDateTime.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss   yyyy-MM-dd");
+                    String formatted = current.format(formatter);
+                    lblDate.setText(formatted);
+//                    Calendar ca = new GregorianCalendar();
+//                    int dd = ca.get(Calendar.DAY_OF_MONTH);
+//                    int mm = ca.get(Calendar.MONTH);
+//                    int yy = ca.get(Calendar.YEAR);
+//                    int hour = ca.get(Calendar.HOUR);
+//                    int minute = ca.get(Calendar.MINUTE);
+//                    int second = ca.get(Calendar.SECOND);
+//                    int AM_PM = ca.get(Calendar.AM_PM);
+//                    String am;
+//                    if (AM_PM == 1) {
+//                        am = "PM";
+//                    } else {
+//                        am = "AM";
+//                    }
+//                    String time = hour + ":" + minute + ":" + second + ":" + am + "   " + dd + "-" + mm + "-" + yy;
+//                    lblDate.setText(time);
                 }
             }
         }.start();
-        String idnv =giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        String idnv = giaoca.getGiaoCaByMa(mac).getIdnhanvien();
         lblTenNV.setText(nhanvien.getNVbyid(idnv).getHotenNv());
         lblChucVu.setText(nhanvien.getNVbyid(idnv).getChucvu());
-        
+
 //        setExtendedState(getExtendedState() | ViewChinh.MAXIMIZED_BOTH);
-    
     }
-
-
+    
     private void setViewChinh(Component frmSet) {
         pnMain.removeAll();
         pnMain.setLayout(new CardLayout(0, 0));
@@ -80,7 +85,7 @@ public class ViewChinh extends javax.swing.JFrame {
         pnMain.revalidate();
         pnMain.repaint();
     }
-
+    
     private JLabel[] getBtn() {
         final JLabel[] _lst = {lblTrangChu, lblBanHang, lblHoaDon, lblSanPham, lblKhuyenMai, lblThongKe, lblNhanVien, lblKhachHang};
         return _lst;
