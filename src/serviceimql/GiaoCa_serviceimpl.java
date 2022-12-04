@@ -10,6 +10,7 @@ import repository.GiaoCaRepository;
 import repository.Nhanvien_repository;
 import service.GiaoCa_service;
 import viewModel.GiaoCaViewModel;
+import viewModel.GiaoCaViewModel1;
 
 /**
  *
@@ -46,6 +47,11 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     @Override
     public GiaoCa getAllGiaoCaByMaCa(String mac) {
         return gcrepos.getAllGiaoCaByMaCa(mac);
+    }
+
+    @Override
+    public int add(GiaoCaViewModel1 gcvm) {
+        return gcrepos.add(gcvm);
     }
     
 }

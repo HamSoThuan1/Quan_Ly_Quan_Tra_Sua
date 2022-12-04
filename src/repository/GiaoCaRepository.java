@@ -5,14 +5,15 @@
 package repository;
 
 import entity.JDBC_Helper;
-import java.security.Timestamp;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import model.GiaoCa;
 import model.Nhanvien;
 import viewModel.GiaoCaViewModel;
+import viewModel.GiaoCaViewModel1;
 
 
 /**
@@ -83,7 +84,7 @@ public class GiaoCaRepository {
         try {
             while (rs.next()) {
                 String maca = rs.getString(1);
-                Date tdbd = rs.getDate(2);
+                Timestamp tdbd = rs.getTimestamp(2);
                 double tbd = rs.getDouble(3);
                 String idnv = rs.getString(4);
                 GiaoCaViewModel gcvm = new GiaoCaViewModel(maca, tdbd, tbd, idnv);
@@ -108,11 +109,11 @@ public class GiaoCaRepository {
         try {
             while(rs.next()){
                 String maca = rs.getString(1);
-                Date tdbd = rs.getDate(2);
-                String tba2 = rs.getDate(2).toString();
+//                java.sql.Timestamp tdbd = rs.getTimestamp(3);
+//                java.sql.Timestamp tdkt = rs.getTimestamp(4);
+                Timestamp tdbd = rs.getTimestamp(2);
                 double tbd = rs.getDouble(3);
                 String idnv = rs.getString(4);
-                System.out.println(tba2);
                 gcvm = new GiaoCaViewModel(maca, tdbd, tbd, idnv);
             }
             return gcvm;
@@ -135,8 +136,8 @@ public class GiaoCaRepository {
             while (rs.next()) {
                 String id = rs.getString(1);
                 String ma=rs.getString(2);
-                java.sql.Timestamp tdbd = rs.getTimestamp(3);
-                java.sql.Timestamp tdkt = rs.getTimestamp(4);
+                Timestamp tdbd = rs.getTimestamp(3);
+                Timestamp tdkt = rs.getTimestamp(4);
                 double tbd = rs.getDouble(5);
                 double tdt = rs.getDouble(6);
                 double tps = rs.getDouble(7);
@@ -168,5 +169,10 @@ public class GiaoCaRepository {
         for (GiaoCa x : listcheck) {
             System.out.println(x.toString());
         }
+    }
+
+    public int add(GiaoCaViewModel1 gcvm) {
+        String sql="insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
+        return JDBC_Helper.updateTongQuat(sql,gcvm.getMaca(),gcvm.getThoigianbatdau(),gcvm.getTienbandau(),gcvm.getIdnhanvien());
     }
 }

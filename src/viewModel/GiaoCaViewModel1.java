@@ -11,22 +11,22 @@ import java.sql.Timestamp;
  *
  * @author kn134
  */
-public class GiaoCaViewModel {
+public class GiaoCaViewModel1 {
     private String maca;
-    private Timestamp thoigianbatdau;
+    private Date thoigianbatdau;
     private double tienbandau;
     private String idnhanvien;
 
-    public GiaoCaViewModel() {
+    public GiaoCaViewModel1() {
     }
 
-    public GiaoCaViewModel(String maca, Timestamp thoigianbatdau, String idnhanvien) {
+    public GiaoCaViewModel1(String maca, Date thoigianbatdau, String idnhanvien) {
         this.maca = maca;
         this.thoigianbatdau = thoigianbatdau;
         this.idnhanvien = idnhanvien;
     }
 
-    public GiaoCaViewModel(String maca, Timestamp thoigianbatdau, double tienbandau, String idnhanvien) {
+    public GiaoCaViewModel1(String maca, Date thoigianbatdau, double tienbandau, String idnhanvien) {
         this.maca = maca;
         this.thoigianbatdau = thoigianbatdau;
         this.tienbandau = tienbandau;
@@ -50,11 +50,11 @@ public class GiaoCaViewModel {
         this.maca = maca;
     }
 
-    public Timestamp getThoigianbatdau() {
+    public Date getThoigianbatdau() {
         return thoigianbatdau;
     }
 
-    public void setThoigianbatdau(Timestamp thoigianbatdau) {
+    public void setThoigianbatdau(Date thoigianbatdau) {
         this.thoigianbatdau = thoigianbatdau;
     }
 

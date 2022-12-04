@@ -8,6 +8,7 @@ import java.util.List;
 import model.GiaoCa;
 import model.Nhanvien;
 import viewModel.GiaoCaViewModel;
+import viewModel.GiaoCaViewModel1;
 
 /**
  *
@@ -24,4 +25,6 @@ public interface GiaoCa_service {
     public int delete(String mac);
 
     public GiaoCa getAllGiaoCaByMaCa(String mac);
+
+    public int add(GiaoCaViewModel1 gcvm);
 }

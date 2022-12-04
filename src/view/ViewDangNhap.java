@@ -4,19 +4,36 @@
  */
 package view;
 
-import entity.setDangNhap;
+//import entity.setDangNhap;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Nhanvien;
-import repository.DangNhap_responsitory;
 import service.GiaoCa_service;
 import service.nhanvien_service;
-import serviceimql.DangNhap_servicesimpl;
 import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.Nhanvien_serviceimpl;
 import viewModel.GiaoCaViewModel;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import viewModel.GiaoCaViewModel1;
+
+////import java.sql.*;
+//import java.sql.Timestamp;
+//import java.util.ArrayList;
+//import java.util.Date;
+//import java.util.List;
+//import javax.swing.JOptionPane;
+//import model.Nhanvien;
+//import repository.DangNhap_responsitory;
+//import service.GiaoCa_service;
+//import service.nhanvien_service;
+//import serviceimql.DangNhap_servicesimpl;
+//import serviceimql.GiaoCa_serviceimpl;
+//import serviceimql.Nhanvien_serviceimpl;
+//import viewModel.GiaoCaViewModel;
 
 /**
  *
@@ -25,6 +42,7 @@ import viewModel.GiaoCaViewModel;
 public class ViewDangNhap extends javax.swing.JFrame {
     private List<Nhanvien> list=new ArrayList<>();
     private List<GiaoCaViewModel> listgcvm = new ArrayList<>();
+    private List<GiaoCaViewModel1> listgcvm1 = new ArrayList<>();
     
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
@@ -238,11 +256,12 @@ public class ViewDangNhap extends javax.swing.JFrame {
             return;
         }
         String idnhanvien = nv.getID();
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
         Date dt = new Date();
         int stt =gcservice.getAllGiaoCaViewModel().size()+1;
         String maca = "CA"+stt;
         double SoTienBanDau = 1000000;
-        GiaoCaViewModel gcvm = new GiaoCaViewModel(maca, dt, SoTienBanDau, idnhanvien);
+        GiaoCaViewModel1 gcvm = new GiaoCaViewModel1(maca, dt, SoTienBanDau, idnhanvien);
         gcservice.add(gcvm);
         this.dispose();
         listgcvm=(List<GiaoCaViewModel>) gcservice.getAllGiaoCaViewModel();

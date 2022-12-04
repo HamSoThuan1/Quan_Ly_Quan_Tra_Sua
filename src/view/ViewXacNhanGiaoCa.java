@@ -35,8 +35,7 @@ public class ViewXacNhanGiaoCa extends javax.swing.JFrame {
         this.mac = mac;
         lblMaCa.setText(mac);
         lbltbd.setText(gcservice.getGiaoCaByMa(mac).getTienbandau() + "");
-        Date dt = gcservice.getGiaoCaByMa(mac).getThoigianbatdau();
-        System.out.println(dt);
+        lbltgbd.setText(gcservice.getGiaoCaByMa(mac).getThoigianbatdau()+"");
 //        DateTimeFormatter dt = gcservice.getGiaoCaByMa(mac).getThoigianbatdau();
         
 //        String gi = gcservice.getGiaoCaByMa(mac).getThoigianbatdau();
