@@ -20,7 +20,9 @@ import java.util.ArrayList;
 public class LoaiSanPhamRepository {
 
     public List<LoaiSanPham> getAll() {
-        String query = "SELECT * FROM LOAISP";
+        String query = "SELECT *, CAST(SUBSTRING(LOAISP.MaLoaiSP, 4, 6) as int) as 'COT' \n"
+                + "FROM LOAISP\n"
+                + "ORDER BY COT asc";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             List<LoaiSanPham> listSP = new ArrayList<>();
             ResultSet rs = ps.executeQuery();

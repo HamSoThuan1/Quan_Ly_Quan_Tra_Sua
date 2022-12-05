@@ -15,32 +15,27 @@ import serviceimql.ToppingServiceImpl;
  * @author Nguyen Thanh Hung
  */
 public class ViewThongTinTopping extends javax.swing.JFrame {
+
     private String mac;
 
     /**
      * Creates new form ViewThongTinTopping
      */
-    
     private List<Topping> listTp;
     private DefaultComboBoxModel combobox;
     private ToppingServiceImpl toppingService;
-    
+
     public ViewThongTinTopping(String mac) {
         initComponents();
-        
+
         listTp = new ArrayList<>();
         combobox = new DefaultComboBoxModel();
         toppingService = new ToppingServiceImpl();
-        
-        listTp = toppingService.getAllToppings();
-        cbbTopping(listTp);
-    }
 
-    
-    public void cbbTopping(List<Topping> lists){
-        cbbTopping.setModel(combobox);
-        for (Topping list : lists) {
-            combobox.addElement(list.getTenToping());
+        listTp = toppingService.getAllToppings();
+        cbbTopping.removeAllItems();
+        for (int i = 0; i < listTp.size(); i++) {
+            cbbTopping.addItem(listTp.get(i).getTenToping().toString());
         }
     }
 
@@ -131,11 +126,14 @@ public class ViewThongTinTopping extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        this.getRootPane().setDefaultButton(btnDongY);
+        cbbTopping.setSelectedItem(ViewQuanLyBanHang.topping);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnDongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongYActionPerformed
         // TODO add your handling code here:
-//        ViewQuanLyBanHang
+        ViewQuanLyBanHang.topping = (String) cbbTopping.getSelectedItem();
+        this.dispose();
     }//GEN-LAST:event_btnDongYActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

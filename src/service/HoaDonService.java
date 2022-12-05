@@ -15,5 +15,8 @@ import viewModel.HoaDonViewModel;
 public interface HoaDonService {
 
     List<HoaDon> getAllHoaDon();
+
     public int add(HoaDonViewModel hd);
+
+    String update(HoaDon hd, String idHoaDon);
 }

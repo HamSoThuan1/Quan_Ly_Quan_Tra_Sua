@@ -22,7 +22,9 @@ import static repository.Nhanvien_repository.getallNV;
 public class Size_responsitory {
 
     public List<Size> getAllSizes() {
-        String sql = "select * from SIZE";
+        String sql = "select *, CAST(SUBSTRING(MaSize, 3, 5) as int) as 'COT' \n"
+                + "from SIZE\n"
+                + "order by COT asc";
         try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             List<Size> sizes = new ArrayList<>();
             ResultSet rs = pr.executeQuery();

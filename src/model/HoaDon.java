@@ -15,11 +15,11 @@ public class HoaDon {
 
     private String idHoaDon;
     private String MaHD;
-    private Timestamp ngayTao;
+    private Date ngayTao;
     private double tongTien;
     private double tienApDungKM;
     private double tienKHThanhToan;
-    private Timestamp ngayThanhToan;
+    private Date ngayThanhToan;
     private String ghiChu;
     private int trangThai;
     private String idnhanvien;
@@ -32,7 +32,7 @@ public class HoaDon {
     public HoaDon() {
     }
 
-    public HoaDon(String idHoaDon, String MaHD, Timestamp ngayTao, double tongTien, double tienApDungKM, double tienKHThanhToan, Timestamp ngayThanhToan, String ghiChu, int trangThai, String idnhanvien, String idkhachhang, String idkm) {
+    public HoaDon(String idHoaDon, String MaHD, Date ngayTao, double tongTien, double tienApDungKM, double tienKHThanhToan, Date ngayThanhToan, String ghiChu, int trangThai, String idnhanvien, String idkhachhang, String idkm) {
         this.idHoaDon = idHoaDon;
         this.MaHD = MaHD;
         this.ngayTao = ngayTao;
@@ -63,11 +63,11 @@ public class HoaDon {
         this.MaHD = MaHD;
     }
 
-    public Timestamp getNgayTao() {
+    public Date getNgayTao() {
         return ngayTao;
     }
 
-    public void setNgayTao(Timestamp ngayTao) {
+    public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
     }
 
@@ -95,11 +95,11 @@ public class HoaDon {
         this.tienKHThanhToan = tienKHThanhToan;
     }
 
-    public Timestamp getNgayThanhToan() {
+    public Date getNgayThanhToan() {
         return ngayThanhToan;
     }
 
-    public void setNgayThanhToan(Timestamp ngayThanhToan) {
+    public void setNgayThanhToan(Date ngayThanhToan) {
         this.ngayThanhToan = ngayThanhToan;
     }
 
@@ -147,5 +147,5 @@ public class HoaDon {
     public String toString() {
         return "HoaDon{" + "idHoaDon=" + idHoaDon + ", MaHD=" + MaHD + ", ngayTao=" + ngayTao + ", tongTien=" + tongTien + ", tienApDungKM=" + tienApDungKM + ", tienKHThanhToan=" + tienKHThanhToan + ", ngayThanhToan=" + ngayThanhToan + ", ghiChu=" + ghiChu + ", trangThai=" + trangThai + ", idnhanvien=" + idnhanvien + ", idkhachhang=" + idkhachhang + ", idkm=" + idkm + '}';
     }
-    
+
 }
