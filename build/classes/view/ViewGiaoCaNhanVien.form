@@ -72,12 +72,12 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel18" linkSize="3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel19" linkSize="4" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="txttongtiencahienco" linkSize="4" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel20" linkSize="3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel21" linkSize="4" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="txttienchuthu" linkSize="4" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -123,12 +123,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel18" linkSize="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel19" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txttongtiencahienco" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel20" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel21" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txttienchuthu" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -224,10 +224,19 @@
     <Component class="javax.swing.JLabel" name="jLabel12">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1000000"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="150000"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
+      <Events>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTextField1InputMethodTextChanged"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -261,6 +270,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Reset ca"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel18">
       <Properties>
@@ -270,7 +282,10 @@
         <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n ca hi&#x1ec7;n c&#xf3; : "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel19">
+    <Component class="javax.swing.JLabel" name="txttongtiencahienco">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1150000"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel20">
       <Properties>
@@ -280,7 +295,13 @@
         <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n ch&#x1ee7; thu :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel21">
+    <Component class="javax.swing.JLabel" name="txttienchuthu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="txttienchuthuInputMethodTextChanged"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
