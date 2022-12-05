@@ -13,8 +13,10 @@ import service.nhanvien_service;
  *
  * @author QUANGMINH
  */
-public class Nhanvien_serviceimpl implements nhanvien_service{
-Nhanvien_repository nvrepos= new Nhanvien_repository();
+public class Nhanvien_serviceimpl implements nhanvien_service {
+
+    Nhanvien_repository nvrepos = new Nhanvien_repository();
+
     @Override
     public List<Nhanvien> GetallNV() {
         return nvrepos.getallNV();
@@ -42,12 +44,12 @@ Nhanvien_repository nvrepos= new Nhanvien_repository();
 
     @Override
     public Nhanvien getNVByMaVaMatKhau(String maNV, String matKhau) {
-        return nvrepos.getNVByMaVaMatKhau(maNV,matKhau);
+        return nvrepos.getNVByMaVaMatKhau(maNV, matKhau);
     }
 
     @Override
     public Nhanvien getNVbyid(String idnv) {
         return nvrepos.getNVbyid(idnv);
     }
-    
+
 }

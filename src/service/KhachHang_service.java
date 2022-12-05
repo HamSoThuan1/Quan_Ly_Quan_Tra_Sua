@@ -20,7 +20,8 @@ public interface KhachHang_service {
     String deleteKH(String Makh);
 
     String updateKH(KhachHang kh, String makh);
-    String  add(KhachHang kh);
+
+    String add(KhachHang kh);
 
     public KhachHang getKHByID(String idkhachhang);
 }

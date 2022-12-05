@@ -11,10 +11,12 @@ import java.util.Date;
  * @author Nguyen Thanh Hung
  */
 public class HoaDonViewModel {
+
     private String maHD;
     private Date ngayTao;
     private int trangThai;
     private String idNhanVien;
+    private String idKhachHang;
 
     public HoaDonViewModel() {
     }
@@ -24,6 +26,14 @@ public class HoaDonViewModel {
         this.ngayTao = ngayTao;
         this.trangThai = trangThai;
         this.idNhanVien = idNhanVien;
+    }
+
+    public HoaDonViewModel(String maHD, Date ngayTao, int trangThai, String idNhanVien, String idKhachHang) {
+        this.maHD = maHD;
+        this.ngayTao = ngayTao;
+        this.trangThai = trangThai;
+        this.idNhanVien = idNhanVien;
+        this.idKhachHang = idKhachHang;
     }
 
     public String getMaHD() {
@@ -58,9 +68,18 @@ public class HoaDonViewModel {
         this.idNhanVien = idNhanVien;
     }
 
+    public String getIdKhachHang() {
+        return idKhachHang;
+    }
+
+    public void setIdKhachHang(String idKhachHang) {
+        this.idKhachHang = idKhachHang;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonViewModel{" + "maHD=" + maHD + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", idNhanVien=" + idNhanVien + '}';
+        return "HoaDonViewModel{" + "maHD=" + maHD + ", ngayTao=" + ngayTao + ", trangThai=" + trangThai + ", idNhanVien=" + idNhanVien + ", idKhachHang=" + idKhachHang + '}';
     }
-    
+
+
 }

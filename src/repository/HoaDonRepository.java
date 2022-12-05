@@ -26,24 +26,6 @@ import viewModel.HoaDonViewModel;
  */
 public class HoaDonRepository {
 
-//    public List<HoaDon> getAll() {
-//        String query = "select * from HOADON";
-//        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-//            List<HoaDon> listHD = new ArrayList<>();
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                Nhanvien nv = new Nhanvien(rs.getString(1));
-//                KhachHang kh = new KhachHang(rs.getString(2));
-//                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3),
-//                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6),
-//                        rs.getDate(7), rs.getString(8), rs.getInt(9), nv, kh);
-//            }
-//            return listHD;
-//        } catch (SQLException e) {
-//            e.printStackTrace(System.out);
-//        }
-//        return null;
-//    }
     public static List<HoaDon> getAllHoaDon() {
         List<HoaDon> listHD = new ArrayList<>();
         ResultSet rs;
@@ -71,11 +53,12 @@ public class HoaDonRepository {
             return null;
         }
     }
+
     public static List<HoaDonViewModel> getAllHDVM() {
         List<HoaDonViewModel> listhdvm = new ArrayList<>();
         ResultSet rs;
         String sql = "select mahD,ngaytao,trangthai,idnhanvien from HOADON";
-        rs=JDBC_Helper.selectTongQuat(sql);
+        rs = JDBC_Helper.selectTongQuat(sql);
         try {
             while (rs.next()) {
                 String ma = rs.getString(1);
@@ -91,35 +74,9 @@ public class HoaDonRepository {
         }
     }
 
-    public boolean insertHoaDon(HoaDonViewModel hd) {
-        String query = "INSERT INTO [dbo].[HOADON]\n"
-                + "           ([MaHD]\n"
-                + "           ,[NgayTao]\n"
-                + "           ,[TongTien]\n"
-                + "           ,[TrangThai]\n"
-                + "           ,[IdNhanVien]\n"
-                + "           ,[IdKhachHang])\n"
-                + "     VALUES(?,?,?,?,?,?)";
-        int check = 0;
-        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
-//            ps.setObject(1, hd.getMaHD());
-//            ps.setObject(2, hd.getNgayTao());
-//            ps.setObject(3, hd.getTongTien());
-//            ps.setObject(4, hd.getTrangThai());
-//            ps.setObject(5, hd.getTenNV());
-//            ps.setObject(6, hd.getTenKH());
-//            check = ps.executeUpdate();
-            System.out.println("Thành công");
-        } catch (SQLException e) {
-            System.out.println("Thất bại");
-            e.printStackTrace(System.out);
-        }
-        return check > 0;
-    }
-
     public static void main(String[] args) {
         List<HoaDon> list = new ArrayList<>();
-        list=getAllHoaDon();
+        list = getAllHoaDon();
         for (HoaDon x : list) {
             System.out.println(x.toString());
         }
@@ -127,6 +84,38 @@ public class HoaDonRepository {
 
     public int add(HoaDonViewModel hd) {
         String sql = "insert into hoadon(mahd,ngaytao,trangthai,idnhanvien) values(?,?,?,?)";
-        return JDBC_Helper.updateTongQuat(sql, hd.getMaHD(),hd.getNgayTao(),hd.getTrangThai(),hd.getIdNhanVien());
+        return JDBC_Helper.updateTongQuat(sql, hd.getMaHD(), hd.getNgayTao(), hd.getTrangThai(), hd.getIdNhanVien());
+    }
+
+    public boolean update(HoaDon hd, String idHoaDon) {
+        String query = "UPDATE [dbo].[HOADON]\n"
+                + "   SET [MaHD] = ?\n"
+                + "      ,[NgayTao] = ?\n"
+                + "      ,[TongTien] = ?\n"
+                + "      ,[TienApDungKM] = ?\n"
+                + "      ,[TienKHThanhToan] = ?\n"
+                + "      ,[NgayThanhToan] = ?\n"
+                + "      ,[GhiChu] = ?\n"
+                + "      ,[TrangThai] = ?\n"
+                + "      ,[IdNhanVien] = ?\n"
+                + "      ,[IdKM] = ?\n"
+                + " WHERE <[IdHoaDon] = ?";
+        int check = 0;
+        try(Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, hd.getMaHD());
+            ps.setObject(2, hd.getNgayTao());
+            ps.setObject(3, hd.getTongTien());
+            ps.setObject(4, hd.getTienApDungKM());
+            ps.setObject(5, hd.getTienKHThanhToan());
+            ps.setObject(6, hd.getNgayThanhToan());
+            ps.setObject(7, hd.getTrangThai());
+            ps.setObject(8, hd.getIdnhanvien());
+            ps.setObject(9, hd.getIdkm());
+            ps.setObject(10, idHoaDon);
+            check = ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return check > 0;
     }
 }

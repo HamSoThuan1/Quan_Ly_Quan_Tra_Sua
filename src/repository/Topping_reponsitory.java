@@ -19,7 +19,9 @@ import model.Topping;
 public class Topping_reponsitory {
 
     public List<Topping> getAllToppings() {
-        String sql = "select * from TOPPING";
+        String sql = "select *, CAST(SUBSTRING(MaTopping, 3, 5) as int) as 'COT' \n"
+                + "from TOPPING\n"
+                + "order by COT asc";
         try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             List<Topping> toppings = new ArrayList<>();
             ResultSet rs = pr.executeQuery();
@@ -33,10 +35,11 @@ public class Topping_reponsitory {
         }
         return null;
     }
-    public boolean addTopping(Topping t){
+
+    public boolean addTopping(Topping t) {
         String sql = "insert into TOPPING (MaTopping, TenTopping, Gia, TrangThai) values(?,?,?,?)";
         int check = 0;
-        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)){
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             pr.setObject(1, t.getMaTopping());
             pr.setObject(2, t.getTenToping());
             pr.setObject(3, t.getGia());
@@ -47,10 +50,11 @@ public class Topping_reponsitory {
         }
         return check > 0;
     }
-    public boolean deleteTopping(String ma){
+
+    public boolean deleteTopping(String ma) {
         String sql = "delete from TOPPING where MaTopping = ?";
         int check = 0;
-        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)){
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             pr.setObject(1, ma);
             check = pr.executeUpdate();
         } catch (Exception e) {
@@ -58,10 +62,11 @@ public class Topping_reponsitory {
         }
         return check > 0;
     }
-    public boolean updateTopping(Topping t, String ma){
+
+    public boolean updateTopping(Topping t, String ma) {
         String sql = "update TOPPING set TenTopping = ?, Gia = ?, TrangThai = ? where MaTopping = ?";
         int check = 0;
-        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql)){
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             pr.setObject(1, t.getTenToping());
             pr.setObject(2, t.getGia());
             pr.setObject(3, t.getTrangThai());

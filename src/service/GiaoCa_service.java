@@ -15,7 +15,9 @@ import viewModel.GiaoCaViewModel1;
  * @author kn134
  */
 public interface GiaoCa_service {
+
     public List<GiaoCa> getAllGiaoCa();
+
     public List<GiaoCaViewModel> getAllGiaoCaViewModel();
 
     public int add(GiaoCaViewModel gcvm);

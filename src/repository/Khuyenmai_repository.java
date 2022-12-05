@@ -4,11 +4,14 @@
  */
 package repository;
 
+import entity.DBContext;
 import entity.JDBC_Helper;
+import java.lang.System.Logger.Level;
 import java.util.List;
 import model.KhuyenMai;
 import java.sql.*;
 import java.util.ArrayList;
+import org.slf4j.Logger;
 
 /**
  *
@@ -19,20 +22,21 @@ public class Khuyenmai_repository {
     public static List<KhuyenMai> getAllKM() {
         ResultSet rs;
         List<KhuyenMai> listKM = new ArrayList<>();
-        String sql = "select MaKM, TenKM, NgayBatDau, NgayKetThuc, HinhThucKM, GiaTri, TrangThai from KHUYENMAI";
+        String sql = "select * from KHUYENMAI";
 
         rs = JDBC_Helper.selectTongQuat(sql);
         try {
             while (rs.next()) {
-                String ma = rs.getString(1);
-                String ten = rs.getString(2);
-                Date nbd = rs.getDate(3);
-                Date nkt = rs.getDate(4);
-                String htkm = rs.getString(5);
-                int gtri = rs.getInt(6);
-                int tt = rs.getInt(7);
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String ten = rs.getString(3);
+                Date nbd = rs.getDate(4);
+                Date nkt = rs.getDate(5);
+                String htkm = rs.getString(6);
+                int gtri = rs.getInt(7);
+                int tt = rs.getInt(8);
 
-                KhuyenMai km = new KhuyenMai(ma, ten, nbd, nkt, htkm, gtri, tt);
+                KhuyenMai km = new KhuyenMai(id, ma, ten, nbd, nkt, htkm, gtri, tt);
                 listKM.add(km);
             }
             return listKM;
@@ -89,6 +93,28 @@ public class Khuyenmai_repository {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    
+    public List<KhuyenMai> getListGiaTri() {
+        String select = "select IdKM, GiaTri from KhuyemMai";
+        List<KhuyenMai> list = new ArrayList<>();
+        try {
+            PreparedStatement ps = DBContext.getConnection().prepareStatement(select);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {                
+                KhuyenMai km = new KhuyenMai();
+//                km.setIdKM(rs.getInt(1));
+                km.setGiatri(rs.getInt(2));
+                list.add(km);
+            }
+            for (KhuyenMai khuyenMai : list) {
+                System.out.println(khuyenMai.toString());
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(BanhangRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
     public static int add(KhuyenMai km) {

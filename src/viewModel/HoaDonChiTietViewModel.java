@@ -10,39 +10,35 @@ package viewModel;
  */
 public class HoaDonChiTietViewModel {
 
-    private String idHoaDonCT;
+    private String idSanPham;
     private String maSP;
     private String tenSP;
     private String tenSize;
+    private String tenTopping;
     private double donGia;
+    private double giaSize;
     private int soLuong;
 
     public HoaDonChiTietViewModel() {
     }
 
-    public HoaDonChiTietViewModel(String idHoaDonCT, String maSP, String tenSP, String tenSize, double donGia, int soLuong) {
-        this.idHoaDonCT = idHoaDonCT;
+    public HoaDonChiTietViewModel(String idSanPham, String maSP, String tenSP, String tenSize, String tenTopping, double donGia, double giaSize, int soLuong) {
+        this.idSanPham = idSanPham;
         this.maSP = maSP;
         this.tenSP = tenSP;
         this.tenSize = tenSize;
+        this.tenTopping = tenTopping;
         this.donGia = donGia;
+        this.giaSize = giaSize;
         this.soLuong = soLuong;
     }
 
-    public HoaDonChiTietViewModel(String maSP, String tenSP, String tenSize, double donGia, int soLuong) {
-        this.maSP = maSP;
-        this.tenSP = tenSP;
-        this.tenSize = tenSize;
-        this.donGia = donGia;
-        this.soLuong = soLuong;
+    public String getIdSanPham() {
+        return idSanPham;
     }
 
-    public String getIdHoaDonCT() {
-        return idHoaDonCT;
-    }
-
-    public void setIdHoaDonCT(String idHoaDonCT) {
-        this.idHoaDonCT = idHoaDonCT;
+    public void setIdSanPham(String idSanPham) {
+        this.idSanPham = idSanPham;
     }
 
     public String getMaSP() {
@@ -69,12 +65,28 @@ public class HoaDonChiTietViewModel {
         this.tenSize = tenSize;
     }
 
+    public String getTenTopping() {
+        return tenTopping;
+    }
+
+    public void setTenTopping(String tenTopping) {
+        this.tenTopping = tenTopping;
+    }
+
     public double getDonGia() {
         return donGia;
     }
 
     public void setDonGia(double donGia) {
         this.donGia = donGia;
+    }
+
+    public double getGiaSize() {
+        return giaSize;
+    }
+
+    public void setGiaSize(double giaSize) {
+        this.giaSize = giaSize;
     }
 
     public int getSoLuong() {
@@ -87,8 +99,7 @@ public class HoaDonChiTietViewModel {
 
     @Override
     public String toString() {
-        return "HoaDonChiTietViewModel{" + "idHoaDonCT=" + idHoaDonCT + ", maSP=" + maSP + ", tenSP=" + tenSP + ", tenSize=" + tenSize + ", donGia=" + donGia + ", soLuong=" + soLuong + '}';
+        return "HoaDonChiTietViewModel{" + "idHoaDonCT=" + idSanPham + ", maSP=" + maSP + ", tenSP=" + tenSP + ", tenSize=" + tenSize + ", tenTopping=" + tenTopping + ", donGia=" + donGia + ", giaSize=" + giaSize + ", soLuong=" + soLuong + '}';
     }
-
 
 }
