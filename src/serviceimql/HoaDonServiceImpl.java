@@ -38,4 +38,8 @@ public class HoaDonServiceImpl implements HoaDonService {
         }
     }
 
+    @Override
+    public HoaDon getHoaDonByMaHD(String maHD) {
+        return hoaDon.getHoaDonByMaHD(maHD);
+    }
 }

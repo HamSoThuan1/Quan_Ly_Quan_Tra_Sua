@@ -19,4 +19,6 @@ public interface HoaDonService {
     public int add(HoaDonViewModel hd);
 
     String update(HoaDon hd, String idHoaDon);
+
+    public HoaDon getHoaDonByMaHD(String maHD);
 }

@@ -75,11 +75,7 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-        List<HoaDon> list = new ArrayList<>();
-        list = getAllHoaDon();
-        for (HoaDon x : list) {
-            System.out.println(x.toString());
-        }
+        
     }
 
     public int add(HoaDonViewModel hd) {
@@ -117,5 +113,32 @@ public class HoaDonRepository {
             e.printStackTrace(System.out);
         }
         return check > 0;
+    }
+
+    public HoaDon getHoaDonByMaHD(String maHD) {
+        HoaDon hd = null;
+        ResultSet rs;
+        String sql = "select * from hoadon where mahd=?";
+        rs=JDBC_Helper.selectTongQuat(sql, maHD);
+        try {
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                Timestamp ngaytao = rs.getTimestamp(3);
+                double tongtien = rs.getDouble(4);
+                double tienaodungkm = rs.getDouble(5);
+                double tienKHthanhtoan = rs.getDouble(6);
+                Timestamp ngaythanhtoan = rs.getTimestamp(7);
+                String ghichu = rs.getString(8);
+                int trangthai = rs.getInt(9);
+                String idnhanvien = rs.getString(10);
+                String idkhachhang = rs.getString(11);
+                String idkhuyenmai = rs.getString(12);
+                hd = new HoaDon(id, ma, ngaytao, tongtien, tienaodungkm, tienKHthanhtoan, ngaythanhtoan, ghichu, trangthai, idnhanvien, idkhachhang, idkhuyenmai);
+            }
+            return hd;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

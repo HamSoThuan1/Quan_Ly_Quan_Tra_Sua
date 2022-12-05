@@ -34,7 +34,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel8" linkSize="3" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jTextField1" linkSize="4" min="-2" pref="55" max="-2" attributes="0"/>
+                          <Component id="txttienphatsinh" linkSize="4" min="-2" pref="55" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel9" linkSize="3" min="-2" pref="100" max="-2" attributes="0"/>
@@ -61,18 +61,18 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel11" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="jLabel12" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="jLabel13" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="jLabel14" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lblthoidiembatdau" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lblthoidiemketthuc" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lblsotienbandau" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="lblsotiendoanhthu" linkSize="4" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel10" linkSize="4" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="lblmaca" linkSize="4" min="-2" pref="200" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel18" linkSize="3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txttongtiencahienco" linkSize="4" min="-2" pref="36" max="-2" attributes="0"/>
+                          <Component id="lbltongtiencahienco" linkSize="4" min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel20" linkSize="3" min="-2" max="-2" attributes="0"/>
@@ -98,15 +98,15 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel10" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblmaca" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel11" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblthoidiembatdau" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel12" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblthoidiemketthuc" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel13" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblsotienbandau" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel14" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblsotiendoanhthu" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel3" linkSize="2" min="-2" pref="35" max="-2" attributes="0"/>
@@ -123,7 +123,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel18" linkSize="2" min="-2" max="-2" attributes="0"/>
-                  <Component id="txttongtiencahienco" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbltongtiencahienco" linkSize="2" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -133,7 +133,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel8" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txttienphatsinh" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -217,25 +217,25 @@
         <Property name="text" type="java.lang.String" value="Ghi ch&#xfa; :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel10">
+    <Component class="javax.swing.JLabel" name="lblmaca">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel11">
+    <Component class="javax.swing.JLabel" name="lblthoidiembatdau">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel12">
+    <Component class="javax.swing.JLabel" name="lblthoidiemketthuc">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel13">
+    <Component class="javax.swing.JLabel" name="lblsotienbandau">
       <Properties>
         <Property name="text" type="java.lang.String" value="1000000"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel14">
+    <Component class="javax.swing.JLabel" name="lblsotiendoanhthu">
       <Properties>
         <Property name="text" type="java.lang.String" value="150000"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="txttienphatsinh">
       <Events>
-        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="jTextField1InputMethodTextChanged"/>
+        <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="txttienphatsinhInputMethodTextChanged"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -245,7 +245,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="txtghichu">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -282,7 +282,7 @@
         <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n ca hi&#x1ec7;n c&#xf3; : "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="txttongtiencahienco">
+    <Component class="javax.swing.JLabel" name="lbltongtiencahienco">
       <Properties>
         <Property name="text" type="java.lang.String" value="1150000"/>
       </Properties>

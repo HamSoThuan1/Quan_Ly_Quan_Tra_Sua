@@ -805,6 +805,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         hd.setTrangThai(0);
         hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
         hoaDonService.add(hd);
+        fillHDToTable();
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
@@ -875,6 +876,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
+        String maHD = txtMaHD.getText();
+        HoaDon hd = hdservice.getHoaDonByMaHD(maHD);
+        
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void cbbKhuyenMaiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbKhuyenMaiMouseEntered
