@@ -4,6 +4,7 @@
  */
 package serviceimql;
 
+import java.util.Date;
 import java.util.List;
 import model.GiaoCa;
 import repository.GiaoCaRepository;
@@ -52,6 +53,11 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     @Override
     public int add(GiaoCaViewModel1 gcvm) {
         return gcrepos.add(gcvm);
+    }
+
+    @Override
+    public GiaoCa getDoanhThuByThoiGianBatDau(Date dt) {
+        return gcrepos.getDoanhThuByThoiGianBatDau(dt);
     }
     
 }

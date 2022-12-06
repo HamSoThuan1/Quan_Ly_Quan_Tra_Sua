@@ -908,16 +908,19 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnThemToppingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemToppingActionPerformed
         // TODO add your handling code here:
-        int index = tblHoaDonCT.getSelectedRow();
-        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có thêm topping vào giỏ hàng không?");
-        if (confirm == JOptionPane.YES_OPTION) {
-            ViewChinh mainFormView = null;
-            ViewThongTinTopping option = new ViewThongTinTopping(mainFormView, true);
-            option.setVisible(true);
-            themToppingHDCT();
-        } else {
-            JOptionPane.showMessageDialog(this, "Chưa thêm sản phẩm");
-            return;
+        try {
+            int index = tblHoaDonCT.getSelectedRow();
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có thêm topping vào giỏ hàng không?");
+            if (confirm == JOptionPane.YES_OPTION) {
+                ViewChinh mainFormView = null;
+                ViewThongTinTopping option = new ViewThongTinTopping(mainFormView, true);
+                option.setVisible(true);
+                themToppingHDCT();
+            } else {
+                JOptionPane.showMessageDialog(this, "Chưa thêm sản phẩm");
+                return;
+            }
+        } catch (Exception e) {
         }
     }//GEN-LAST:event_btnThemToppingActionPerformed
 
@@ -940,7 +943,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if(txtMaHD.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Vui lòng chonk mã hóa đơn");
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn mã hóa đơn");
                 return;
             }
             HoaDon hd = new HoaDon();
@@ -960,6 +963,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             }
             hd.setTrangThai(1);
             hdservice.updateHD(hd);
+            fillHDToTable();
 //            hd.setIdkm(mac);
         } catch (Exception e) {
         }

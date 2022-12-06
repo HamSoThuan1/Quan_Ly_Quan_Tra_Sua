@@ -27,6 +27,10 @@ public class GiaoCa {
     public GiaoCa() {
     }
 
+    public GiaoCa(double tiendoanhthu) {
+        this.tiendoanhthu = tiendoanhthu;
+    }
+    
     public GiaoCa(String idgiaoca, String maca, java.sql.Timestamp thoidiembatdau, java.sql.Timestamp thoidiemketthuc, double tienbandau, double tiendoanhthu, double tonghienco, double tienphatsinh, double tienchuthu, String ghichu, String idnhanvien) {
         this.idgiaoca = idgiaoca;
         this.maca = maca;

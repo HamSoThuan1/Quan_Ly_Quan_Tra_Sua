@@ -11,7 +11,9 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.GiaoCa;
 import service.GiaoCa_service;
+import service.HoaDonService;
 import serviceimql.GiaoCa_serviceimpl;
+import serviceimql.HoaDonServiceImpl;
 
 /**
  *
@@ -22,6 +24,7 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
     DefaultTableModel model;
     private final String mac;
     private GiaoCa_service giaoca = new GiaoCa_serviceimpl();
+    private HoaDonService hoadon = new HoaDonServiceImpl();
 
     /**
      * Creates new form ViewGiaoCaNhanVien
@@ -35,6 +38,10 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         lblsotienbandau.setText(giaoca.getGiaoCaByMa(mac).getTienbandau()+"");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         lblthoidiembatdau.setText(sdf.format(giaoca.getGiaoCaByMa(mac).getThoigianbatdau()));
+        Date dt = giaoca.getGiaoCaByMa(mac).getThoigianbatdau();
+//        System.out.println(giaoca.getGiaoCaByMa(mac).getThoigianbatdau());
+        lblsotiendoanhthu.setText(giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu()+"");
+        lbltongtiencahienco.setText(giaoca.getGiaoCaByMa(mac).getTienbandau()+giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu()+"");
         
     }
 

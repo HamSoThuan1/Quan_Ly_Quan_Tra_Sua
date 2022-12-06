@@ -174,4 +174,19 @@ public class GiaoCaRepository {
         String sql = "insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
         return JDBC_Helper.updateTongQuat(sql, gcvm.getMaca(), gcvm.getThoigianbatdau(), gcvm.getTienbandau(), gcvm.getIdnhanvien());
     }
+
+    public GiaoCa getDoanhThuByThoiGianBatDau(Date dt) {
+        GiaoCa gca = null;
+        ResultSet rs;
+        String sql = "select SUM(TongTien) as doanhthu from HOADON where NgayTao > ? and NgayTao<GETDATE()";
+        rs = JDBC_Helper.selectTongQuat(sql, dt);
+        try {
+            while (rs.next()) {
+                double tt = rs.getDouble(1);
+                gca= new GiaoCa(tt);
+            }return gca;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

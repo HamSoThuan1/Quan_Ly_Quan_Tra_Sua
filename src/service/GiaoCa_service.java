@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.util.Date;
 import java.util.List;
 import model.GiaoCa;
 import model.Nhanvien;
@@ -29,4 +30,6 @@ public interface GiaoCa_service {
     public GiaoCa getAllGiaoCaByMaCa(String mac);
 
     public int add(GiaoCaViewModel1 gcvm);
+
+    public GiaoCa getDoanhThuByThoiGianBatDau(Date dt);
 }
