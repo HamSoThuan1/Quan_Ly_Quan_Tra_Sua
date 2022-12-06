@@ -166,11 +166,8 @@ public class GiaoCaRepository {
     }
 
     public static void main(String[] args) {
-        List<GiaoCa> listcheck = new ArrayList<>();
-        listcheck = getAllGiaoCa();
-        for (GiaoCa x : listcheck) {
-            System.out.println(x.toString());
-        }
+        GiaoCaViewModel gc= new GiaoCaRepository().getGiaoCaByMa("CA1");
+        System.out.println(gc);
     }
 
     public int add(GiaoCaViewModel1 gcvm) {

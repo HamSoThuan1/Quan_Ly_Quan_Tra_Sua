@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,14 +31,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         this.mac=mac;
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ViewGiaoCaNhanVien.DISPOSE_ON_CLOSE);
-        lblmaca.setText(giaoca.getAllGiaoCaByMaCa(mac).getMaca());
-//        lblthoidiembatdau.setText(giaoca.getAllGiaoCaByMaCa(mac).getThoidiembatdau()+"");
-//        lblthoidiemketthuc.setText(new Date()+"");
-//        txtghichu.setText(giaoca.getAllGiaoCaByMaCa(mac).getGhichu());
-//        lblsotiendoanhthu.setText(giaoca.getAllGiaoCaByMaCa(mac).getTiendoanhthu()+"");
-//        lblsotienbandau.setText(giaoca.getAllGiaoCaByMaCa(mac).getTienchuthu()+"");
-//        lbltongtienhienco.setText(giaoca.getAllGiaoCaByMaCa(mac).getTienchuthu()+"");
-//        txttienphatsinh.setText(giaoca.getAllGiaoCaByMaCa(mac).getTienphatsinh()+"");  
+        lblmaca.setText(mac);
+        lblsotienbandau.setText(giaoca.getGiaoCaByMa(mac).getTienbandau()+"");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        lblthoidiembatdau.setText(sdf.format(giaoca.getGiaoCaByMa(mac).getThoigianbatdau()));
+        
     }
 
     /**

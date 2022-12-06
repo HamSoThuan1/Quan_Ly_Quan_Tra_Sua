@@ -152,4 +152,9 @@ public class HoaDonRepository {
                 + " WHERE maHD = ?";
         return JDBC_Helper.updateTongQuat(sql, ghichu,maHD);
     }
+
+    public int updateHD(HoaDon hd) {
+        String sql = "update HOADON set TongTien=?,TienApDungKM=?,TienKHThanhToan=?,NgayThanhToan=?,GhiChu=?,TrangThai=? where MaHD=?";
+        return JDBC_Helper.updateTongQuat(sql, hd.getTongTien(),hd.getTienApDungKM(),hd.getTienKHThanhToan(),hd.getNgayThanhToan(),hd.getGhiChu(),hd.getTrangThai(),hd.getMaHD());
+    }
 }

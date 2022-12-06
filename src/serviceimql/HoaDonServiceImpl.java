@@ -47,4 +47,9 @@ public class HoaDonServiceImpl implements HoaDonService {
     public int update(String maHD,String ghichu) {
         return hoaDon.update(maHD,ghichu);
     }
+
+    @Override
+    public int updateHD(HoaDon hd) {
+        return hoaDon.updateHD(hd);
+    }
 }

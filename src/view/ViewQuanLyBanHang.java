@@ -225,9 +225,12 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     }
 
     public void fillHoaDon() {
-        int index = tblHoaDon.getSelectedRow();
-        txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
-        txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
+        try {
+            int index = tblHoaDon.getSelectedRow();
+            txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
+            txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
+        } catch (Exception e) {
+        }
     }
     
     /**
@@ -279,7 +282,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        txaGhiChu = new javax.swing.JTextArea();
+        txtghichu = new javax.swing.JTextArea();
         btnThanhToan = new javax.swing.JButton();
         btnHuyDon = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -604,9 +607,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
         jLabel19.setText("Ghi chú");
 
-        txaGhiChu.setColumns(20);
-        txaGhiChu.setRows(5);
-        jScrollPane4.setViewportView(txaGhiChu);
+        txtghichu.setColumns(20);
+        txtghichu.setRows(5);
+        jScrollPane4.setViewportView(txtghichu);
 
         btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnThanhToan.setText("Thanh Toán");
@@ -933,8 +936,31 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        String maHD = txtMaHD.getText();
-        HoaDon hd = hdservice.getHoaDonByMaHD(maHD);
+        try {
+            if(txtMaHD.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Vui lòng chonk mã hóa đơn");
+                return;
+            }
+            HoaDon hd = new HoaDon();
+            hd.setMaHD(txtMaHD.getText());
+            hd.setTongTien(Double.parseDouble(txtTongTien.getText()));
+            if(txtGiamGia.getText().equals("")){
+                hd.setTienApDungKM(Double.parseDouble("0"));
+            }else{
+                hd.setTienApDungKM(Double.parseDouble(txtGiamGia.getText()));
+            }
+            hd.setTienKHThanhToan(Double.parseDouble(txtTienKhachDua.getText()));
+            hd.setNgayThanhToan(new Date());
+            if (txtghichu.getText().equals("")) {
+                hd.setGhiChu("");
+            }else{
+                hd.setGhiChu(txtghichu.getText());
+            }
+            hd.setTrangThai(1);
+            hdservice.updateHD(hd);
+//            hd.setIdkm(mac);
+        } catch (Exception e) {
+        }
         
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
@@ -959,14 +985,14 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         if(txtMaHD.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Chưa chọn hóa đơn");
             return;
-        }else if(txaGhiChu.getText().equals("")){
+        }else if(txtghichu.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Mời nhập lý do hủy");
-            txaGhiChu.requestFocus();
+            txtghichu.requestFocus();
             txtTienKhachDua.disable();
             return;
         }else{
             String maHD = txtMaHD.getText();
-            String ghichu = txaGhiChu.getText();
+            String ghichu = txtghichu.getText();
             hdservice.update(maHD,ghichu);
             fillHDToTable();
             clearForm();
@@ -1027,7 +1053,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblHoaDonCT;
     private javax.swing.JTable tblSanPham;
-    private javax.swing.JTextArea txaGhiChu;
     private javax.swing.JTextField txtGiamGia;
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtNgayTao;
@@ -1036,6 +1061,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtTienThua;
     private javax.swing.JTextField txtTongTien;
     private javax.swing.JTextField txtTopping;
+    private javax.swing.JTextArea txtghichu;
     // End of variables declaration//GEN-END:variables
 
     private void fillHDToTable() {
@@ -1084,6 +1110,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         txtTongTien.setText("");
         txtTienKhachDua.setText("");
         txtTienThua.setText("");
-        txaGhiChu.setText("");
+        txtghichu.setText("");
     }
 }
