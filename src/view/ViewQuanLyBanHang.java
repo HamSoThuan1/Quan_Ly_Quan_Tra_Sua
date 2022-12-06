@@ -197,22 +197,36 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     public void themToppingHDCT() {
         int index = tblHoaDonCT.getSelectedRow();
-        String maSP = tblSanPham.getValueAt(index, 1).toString();
-        String tenSP = tblSanPham.getValueAt(index, 2).toString();
         SanPhamViewModel sp = listSP.get(index);
         HoaDonChiTietViewModel hoaDonCT = new HoaDonChiTietViewModel();
-        hoaDonCT.setIdSanPham(sp.getIdSanPham());
-        hoaDonCT.setMaSP(maSP);
-        hoaDonCT.setTenSP(tenSP);
-        hoaDonCT.setTenSize(sp.getSizeSP());
-        hoaDonCT.setSoLuong(Integer.parseInt(tblHoaDonCT.getValueAt(index, 3).toString()));
-        hoaDonCT.setDonGia(sp.getDonGia() + sp.getGiaSize());
-        hoaDonCT.setTenTopping(topping);
-        listHDCT.set(index, hoaDonCT);
-        listHDCT.add(hoaDonCT);
-        addTableHoaDonCT(listHDCT);
+        if (sp.getIdSanPham().equals(hoaDonCT.getIdSanPham())) {
+            listHDCT.remove(index);
+            addTableHoaDonCT(listHDCT);
+        } else {
+            String maSP = tblSanPham.getValueAt(index, 1).toString();
+            String tenSP = tblSanPham.getValueAt(index, 2).toString();
+            hoaDonCT.setIdSanPham(sp.getIdSanPham());
+            hoaDonCT.setMaSP(maSP);
+            hoaDonCT.setTenSP(tenSP);
+            hoaDonCT.setTenSize(sp.getSizeSP());
+            hoaDonCT.setSoLuong(Integer.parseInt(tblHoaDonCT.getValueAt(index, 3).toString()));
+            hoaDonCT.setDonGia(sp.getDonGia() + sp.getGiaSize());
+            hoaDonCT.setTenTopping(topping);
+            listHDCT.set(index, hoaDonCT);
+            addTableHoaDonCT(listHDCT);
+            return;
+        }
+        if (tblHoaDonCT.getRowCount() <= 0) {
+            txtTongTien.setText("0");
+        }
     }
 
+    public void fillHoaDon() {
+        int index = tblHoaDon.getSelectedRow();
+        txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
+        txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -806,6 +820,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
         hoaDonService.add(hd);
         fillHDToTable();
+        fillHoaDon();
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
@@ -841,9 +856,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:
-        int index = tblHoaDon.getSelectedRow();
-        txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
-        txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
+        fillHoaDon();
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void btnTatCaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTatCaActionPerformed
@@ -855,8 +868,16 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private void btnThemToppingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemToppingActionPerformed
         // TODO add your handling code here:
         int index = tblHoaDonCT.getSelectedRow();
-        ViewThongTinTopping viewTopping = new ViewThongTinTopping(mac);
-        viewTopping.setVisible(true);
+        int confirm = JOptionPane.showConfirmDialog(this, "Bạn có thêm topping vào giỏ hàng không?");
+        if (confirm == JOptionPane.YES_OPTION) {
+            ViewChinh mainFormView = null;
+            ViewThongTinTopping option = new ViewThongTinTopping(mainFormView, true);
+            option.setVisible(true);
+            themToppingHDCT();
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa thêm sản phẩm");
+            return;
+        }
     }//GEN-LAST:event_btnThemToppingActionPerformed
 
     private void txtTienKhachDuaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTienKhachDuaCaretUpdate

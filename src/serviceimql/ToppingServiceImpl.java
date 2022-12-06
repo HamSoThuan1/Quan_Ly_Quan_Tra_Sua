@@ -4,6 +4,7 @@
  */
 package serviceimql;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Topping;
 import repository.Topping_reponsitory;
@@ -50,6 +51,11 @@ public class ToppingServiceImpl implements ToppingService{
         }else{
             return"Sửa thất bại";
         }
+    }
+
+    @Override
+    public ArrayList<Topping> getListToppingDB() {
+        return topping.getListToppingDB();
     }
     
 }

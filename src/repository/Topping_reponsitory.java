@@ -35,6 +35,26 @@ public class Topping_reponsitory {
         }
         return null;
     }
+    
+    public ArrayList<Topping> getListToppingDB() {
+        ArrayList<Topping> listToppings = new ArrayList<>();
+        String query = "select * from view_xemThongTinTopping";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Topping topping = new Topping();
+                topping.setIdTopping(rs.getString(1));
+                topping.setMaTopping(rs.getString(2));
+                topping.setTenToping(rs.getString(3));
+                topping.setGia(rs.getDouble(4));
+                topping.setTrangThai(rs.getInt(5));
+                listToppings.add(topping);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listToppings;
+    }
 
     public boolean addTopping(Topping t) {
         String sql = "insert into TOPPING (MaTopping, TenTopping, Gia, TrangThai) values(?,?,?,?)";

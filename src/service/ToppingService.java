@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Topping;
 
@@ -14,7 +15,12 @@ import model.Topping;
 public interface ToppingService {
 
     List<Topping> getAllToppings();
-     String addTopping(Topping t);
-     String deleteTopping(String ma);
-     String updateTopping(Topping t, String ma);
+
+    String addTopping(Topping t);
+
+    String deleteTopping(String ma);
+
+    String updateTopping(Topping t, String ma);
+
+    ArrayList<Topping> getListToppingDB();
 }

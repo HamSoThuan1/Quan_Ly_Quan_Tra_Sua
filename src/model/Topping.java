@@ -76,7 +76,7 @@ public class Topping {
 
     @Override
     public String toString() {
-        return "Topping{" + "idTopping=" + idTopping + ", maTopping=" + maTopping + ", tenToping=" + tenToping + ", gia=" + gia + ", trangThai=" + trangThai + '}';
+        return tenToping ;
     }
 
 }
