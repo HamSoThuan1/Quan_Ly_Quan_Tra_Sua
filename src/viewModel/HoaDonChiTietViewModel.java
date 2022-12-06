@@ -100,7 +100,7 @@ public class HoaDonChiTietViewModel {
     }
 
     public double getThanhTien() {
-        return soLuong * donGia;
+        return thanhTien;
     }
 
     public void setThanhTien(double thanhTien) {
