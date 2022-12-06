@@ -11,7 +11,6 @@ import java.util.List;
 import model.KhuyenMai;
 import java.sql.*;
 import java.util.ArrayList;
-import org.slf4j.Logger;
 
 /**
  *
@@ -93,28 +92,6 @@ public class Khuyenmai_repository {
         } catch (Exception e) {
             return null;
         }
-    }
-    
-    
-    public List<KhuyenMai> getListGiaTri() {
-        String select = "select IdKM, GiaTri from KhuyemMai";
-        List<KhuyenMai> list = new ArrayList<>();
-        try {
-            PreparedStatement ps = DBContext.getConnection().prepareStatement(select);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {                
-                KhuyenMai km = new KhuyenMai();
-//                km.setIdKM(rs.getInt(1));
-                km.setGiatri(rs.getInt(2));
-                list.add(km);
-            }
-            for (KhuyenMai khuyenMai : list) {
-                System.out.println(khuyenMai.toString());
-            }
-        } catch (SQLException ex) {
-//            Logger.getLogger(BanhangRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return list;
     }
 
     public static int add(KhuyenMai km) {

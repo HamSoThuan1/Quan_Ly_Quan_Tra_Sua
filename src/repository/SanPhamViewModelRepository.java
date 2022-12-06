@@ -20,9 +20,10 @@ import viewModel.SanPhamViewModel;
 public class SanPhamViewModelRepository {
 
     public List<SanPhamViewModel> getAllSanPham() {
-        String query = "SELECT IdSanPham, MaSP, TenSP, TenLoaiSP, TenSize, DonGia, Gia,MoTa\n"
-                + "FROM SANPHAM JOIN LOAISP ON SANPHAM.IdLoaiSP = LOAISP.IdLoaiSP\n"
-                + "		JOIN SIZE ON SANPHAM.IdSize = SIZE.IdSize";
+        String query = "SELECT IdSanPham, MaSP, TenSP, TenLoaiSP, TenSize, DonGia, Gia, MoTa, CAST(SUBSTRING(MaSP, 3, 5) as int) as 'COT'\n"
+                + "              FROM SANPHAM JOIN LOAISP ON SANPHAM.IdLoaiSP = LOAISP.IdLoaiSP\n"
+                + "				JOIN SIZE ON SANPHAM.IdSize = SIZE.IdSize\n"
+                + "				order by COT asc";
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             List<SanPhamViewModel> listSP = new ArrayList<>();
             ResultSet rs = ps.executeQuery();

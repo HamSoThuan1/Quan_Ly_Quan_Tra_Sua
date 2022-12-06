@@ -18,11 +18,12 @@ public class HoaDonChiTietViewModel {
     private double donGia;
     private double giaSize;
     private int soLuong;
+    private double thanhTien;
 
     public HoaDonChiTietViewModel() {
     }
 
-    public HoaDonChiTietViewModel(String idSanPham, String maSP, String tenSP, String tenSize, String tenTopping, double donGia, double giaSize, int soLuong) {
+    public HoaDonChiTietViewModel(String idSanPham, String maSP, String tenSP, String tenSize, String tenTopping, double donGia, double giaSize, int soLuong, double thanhTien) {
         this.idSanPham = idSanPham;
         this.maSP = maSP;
         this.tenSP = tenSP;
@@ -31,6 +32,7 @@ public class HoaDonChiTietViewModel {
         this.donGia = donGia;
         this.giaSize = giaSize;
         this.soLuong = soLuong;
+        this.thanhTien = thanhTien;
     }
 
     public String getIdSanPham() {
@@ -97,9 +99,17 @@ public class HoaDonChiTietViewModel {
         this.soLuong = soLuong;
     }
 
+    public double getThanhTien() {
+        return soLuong * donGia;
+    }
+
+    public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
+    }
+
     @Override
     public String toString() {
-        return "HoaDonChiTietViewModel{" + "idHoaDonCT=" + idSanPham + ", maSP=" + maSP + ", tenSP=" + tenSP + ", tenSize=" + tenSize + ", tenTopping=" + tenTopping + ", donGia=" + donGia + ", giaSize=" + giaSize + ", soLuong=" + soLuong + '}';
+        return "HoaDonChiTietViewModel{" + "idSanPham=" + idSanPham + ", maSP=" + maSP + ", tenSP=" + tenSP + ", tenSize=" + tenSize + ", tenTopping=" + tenTopping + ", donGia=" + donGia + ", giaSize=" + giaSize + ", soLuong=" + soLuong + ", thanhTien=" + thanhTien + '}';
     }
 
 }

@@ -130,8 +130,9 @@ public class ViewChinh extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quản lý quán trà sữa");
+        setBackground(new java.awt.Color(125, 190, 125));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 102));
+        jPanel1.setBackground(new java.awt.Color(125, 190, 125));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 102));
@@ -152,7 +153,7 @@ public class ViewChinh extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
         );
 
-        jPanel6.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel6.setBackground(new java.awt.Color(125, 190, 125));
 
         lblSanPham.setBackground(new java.awt.Color(102, 255, 0));
         lblSanPham.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -182,7 +183,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jPanel4.setBackground(new java.awt.Color(255, 51, 255));
+        jPanel4.setBackground(new java.awt.Color(125, 190, 125));
 
         lblTrangChu.setBackground(new java.awt.Color(255, 255, 255));
         lblTrangChu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -212,7 +213,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel5.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel5.setBackground(new java.awt.Color(125, 190, 125));
 
         lblBanHang.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblBanHang.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,7 +242,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel7.setBackground(new java.awt.Color(0, 255, 51));
+        jPanel7.setBackground(new java.awt.Color(125, 190, 125));
 
         lblHoaDon.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblHoaDon.setForeground(new java.awt.Color(255, 255, 255));
@@ -270,7 +271,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 153, 255));
+        jPanel8.setBackground(new java.awt.Color(125, 190, 125));
 
         lblKhuyenMai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblKhuyenMai.setForeground(new java.awt.Color(255, 255, 255));
@@ -299,7 +300,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        jPanel9.setBackground(new java.awt.Color(0, 255, 204));
+        jPanel9.setBackground(new java.awt.Color(125, 190, 125));
 
         lblThongKe.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblThongKe.setForeground(new java.awt.Color(255, 255, 255));
@@ -328,7 +329,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jPanel10.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel10.setBackground(new java.awt.Color(125, 190, 125));
 
         lblNhanVien.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblNhanVien.setForeground(new java.awt.Color(255, 255, 255));
@@ -357,7 +358,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanel11.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel11.setBackground(new java.awt.Color(125, 190, 125));
 
         lblKhachHang.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblKhachHang.setForeground(new java.awt.Color(255, 255, 255));
@@ -425,6 +426,7 @@ public class ViewChinh extends javax.swing.JFrame {
                 .addContainerGap(75, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(125, 190, 125));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jButton6.setText("Giao Ca");
@@ -449,13 +451,17 @@ public class ViewChinh extends javax.swing.JFrame {
         });
 
         lblDate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblDate.setForeground(new java.awt.Color(255, 255, 255));
         lblDate.setText("11:11:11 AM  20-11-2022");
 
         lblChucVu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblChucVu.setForeground(new java.awt.Color(255, 255, 255));
         lblChucVu.setText("Quản lý");
         lblChucVu.setPreferredSize(new java.awt.Dimension(50, 13));
 
+        lblTenNV.setBackground(new java.awt.Color(255, 255, 255));
         lblTenNV.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblTenNV.setForeground(new java.awt.Color(255, 255, 255));
         lblTenNV.setText("Nguyễn Duy Thành thoại");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -493,6 +499,7 @@ public class ViewChinh extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton8, lblChucVu, lblDate, lblTenNV});
 
+        pnMain.setBackground(new java.awt.Color(125, 190, 125));
         pnMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout pnMainLayout = new javax.swing.GroupLayout(pnMain);

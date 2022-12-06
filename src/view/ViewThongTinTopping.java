@@ -31,10 +31,10 @@ public class ViewThongTinTopping extends javax.swing.JDialog {
 
         toppingService = new ToppingServiceImpl();
 
-        cbbTopping(toppingService.getListToppingDB());
+        cbbTopping(toppingService.getAllToppings());
     }
 
-    public void cbbTopping(ArrayList<Topping> lists) {
+    public void cbbTopping(List<Topping> lists) {
         combobox = (DefaultComboBoxModel) cbbTopping.getModel();
         for (Topping list : lists) {
             combobox.addElement(list);
@@ -148,6 +148,7 @@ public class ViewThongTinTopping extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnChonToppingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonToppingActionPerformed
@@ -162,7 +163,9 @@ public class ViewThongTinTopping extends javax.swing.JDialog {
     private void btnDongYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDongYActionPerformed
         // TODO add your handling code here:
         Topping topping = (Topping) cbbTopping.getSelectedItem();
-        ViewQuanLyBanHang.topping = topping.getTenToping();
+        ViewQuanLyBanHang.topping = topping.getTenToping() + " (" + topping.getGia() + ")";
+        ViewQuanLyBanHang.giaTopping = topping.getGia();
+        System.out.println(topping.getTenToping());
         this.dispose();
     }//GEN-LAST:event_btnDongYActionPerformed
 
@@ -219,6 +222,10 @@ public class ViewThongTinTopping extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
+    }
+    
+    void setData(){
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
