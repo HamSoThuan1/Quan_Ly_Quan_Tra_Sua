@@ -21,4 +21,6 @@ public interface HoaDonService {
     String update(HoaDon hd, String idHoaDon);
 
     public HoaDon getHoaDonByMaHD(String maHD);
+
+    public int update(String maHD,String ghichu);
 }

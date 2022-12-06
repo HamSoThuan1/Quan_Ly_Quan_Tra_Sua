@@ -30,7 +30,7 @@ public class HoaDonRepository {
         List<HoaDon> listHD = new ArrayList<>();
         ResultSet rs;
         String sql = "select *,CONVERT(int,SUBSTRING(MaHD,3,3)) as STT from HOADON order by STT";
-        rs = JDBCHeper.excuteQuery(sql);
+        rs = JDBC_Helper.selectTongQuat(sql);
         try {
             while (rs.next()) {
                 String id = rs.getString(1);
@@ -75,7 +75,11 @@ public class HoaDonRepository {
     }
 
     public static void main(String[] args) {
-        
+        List<HoaDon> listcheck = new ArrayList<>();
+        listcheck=getAllHoaDon();
+        for (HoaDon x : listcheck) {
+            System.out.println(x.toString());
+        }
     }
 
     public int add(HoaDonViewModel hd) {
@@ -140,5 +144,12 @@ public class HoaDonRepository {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public int update(String maHD,String ghichu) {
+        String sql = "UPDATE hoadon\n"
+                + "SET ghichu = ?, TrangThai = 2 \n"
+                + " WHERE maHD = ?";
+        return JDBC_Helper.updateTongQuat(sql, ghichu,maHD);
     }
 }

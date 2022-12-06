@@ -276,7 +276,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtghichu = new javax.swing.JTextArea();
         btnThanhToan = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -592,9 +592,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
         jLabel19.setText("Ghi chú");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane4.setViewportView(jTextArea1);
+        txtghichu.setColumns(20);
+        txtghichu.setRows(5);
+        jScrollPane4.setViewportView(txtghichu);
 
         btnThanhToan.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnThanhToan.setText("Thanh Toán");
@@ -605,6 +605,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         });
 
         jButton4.setText("Hủy hóa đơn");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Làm mới");
 
@@ -664,15 +669,14 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                                                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(txtTienKhachDua, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                                    .addComponent(jLabel8)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(txtNgayTao))
-                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                                    .addComponent(jLabel6)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel8)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtNgayTao))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                                .addComponent(jLabel6)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel15))
                                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -918,6 +922,25 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         txtTienThua.setText(String.valueOf(tienPhaiTra));
     }//GEN-LAST:event_txtTienThuaMouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        if(txtMaHD.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Chưa chọn hóa đơn");
+            return;
+        }else if(txtghichu.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mời nhập lý do hủy");
+            txtghichu.requestFocus();
+            txtTienKhachDua.disable();
+            return;
+        }else{
+            String maHD = txtMaHD.getText();
+            String ghichu = txtghichu.getText();
+            hdservice.update(maHD,ghichu);
+            fillHDToTable();
+            clearForm();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTaoHoaDon;
@@ -959,7 +982,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblMaCa;
@@ -973,6 +995,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private javax.swing.JTextField txtTienKhachDua;
     private javax.swing.JTextField txtTienThua;
     private javax.swing.JTextField txtTongTien;
+    private javax.swing.JTextArea txtghichu;
     // End of variables declaration//GEN-END:variables
 
     private void fillHDToTable() {
@@ -1013,5 +1036,14 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         hd.setTrangThai(1);
         hd.setIdnhanvien(idNhanVien);
         hd.setIdkm(idKhuyenMai);
+    }
+
+    private void clearForm() {
+        txtMaHD.setText("");
+        txtNgayTao.setText("");
+        txtTongTien.setText("");
+        txtTienKhachDua.setText("");
+        txtTienThua.setText("");
+        txtghichu.setText("");
     }
 }
