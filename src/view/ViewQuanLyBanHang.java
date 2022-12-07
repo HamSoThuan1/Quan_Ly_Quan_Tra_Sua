@@ -962,6 +962,19 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 hd.setGhiChu(txtghichu.getText());
             }
             hd.setTrangThai(1);
+            if(txtTienKhachDua.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Khách hàng chưa thanh toán");
+                txtTienKhachDua.requestFocus();
+                return;
+            }
+            if(Double.parseDouble(txtTienKhachDua.getText())<Double.parseDouble(txtTongTien.getText())){
+                JOptionPane.showMessageDialog(this, "Khách hàng chưa đưa đủ tiền");
+                txtTienKhachDua.requestFocus();
+                return;
+            }
+            
+            
+            
             hdservice.updateHD(hd);
             fillHDToTable();
 //            hd.setIdkm(mac);
