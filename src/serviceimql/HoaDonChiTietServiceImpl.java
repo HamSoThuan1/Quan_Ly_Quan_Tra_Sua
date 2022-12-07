@@ -4,9 +4,11 @@
  */
 package serviceimql;
 
+import java.util.List;
 import model.HoaDonChiTiet;
 import repository.HoaDonChiTietRepository;
 import service.HoaDonChiTietService;
+import viewModel.HoaDonViewModel1;
 
 /**
  *
@@ -17,6 +19,11 @@ public class HoaDonChiTietServiceImpl implements HoaDonChiTietService{
     @Override
     public int addHDCT(HoaDonChiTiet hdct) {
         return  hdctrepository.addHDCT(hdct);
+    }
+
+    @Override
+    public List<HoaDonViewModel1> getAll() {
+        return hdctrepository.getAll();
     }
     
 }

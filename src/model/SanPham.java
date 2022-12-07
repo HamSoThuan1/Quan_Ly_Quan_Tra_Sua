@@ -45,6 +45,11 @@ public class SanPham {
         this.trangThai = trangThai;
     }
 
+    public SanPham(String maSP, String tenSP) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+    }
+    
     public String getIdSanPham() {
         return idSanPham;
     }

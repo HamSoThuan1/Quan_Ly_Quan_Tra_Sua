@@ -4,17 +4,83 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.HoaDon;
+import model.HoaDonChiTiet;
+import serviceimql.HoaDonChiTietServiceImpl;
+import serviceimql.HoaDonServiceImpl;
+import viewModel.HoaDonChiTietViewModel;
+import viewModel.HoaDonViewModel1;
+
 /**
  *
  * @author hung2
  */
 public class ViewQuanLyHoaDon extends javax.swing.JPanel {
-
+private List<HoaDon> listhd;
+private HoaDonServiceImpl hoaDonServiceImpl;
+private List<HoaDonViewModel1> list;
+private HoaDonChiTietServiceImpl hoaDonChiTietServiceImpl;
     /**
      * Creates new form ViewQuanLyHoaDon
      */
     public ViewQuanLyHoaDon() {
         initComponents();
+        listhd = new ArrayList<>();
+        hoaDonServiceImpl = new HoaDonServiceImpl();
+        list = new ArrayList<>();
+        hoaDonChiTietServiceImpl = new HoaDonChiTietServiceImpl();
+        fillDataTable();
+        fillDataHDCT();
+        
+    }
+      public void fillDataTable() {
+        DefaultTableModel tblModel = new DefaultTableModel();
+        tblModel = (DefaultTableModel) tbl_hoaDon.getModel();
+        tblModel.setRowCount(0);
+        listhd = hoaDonServiceImpl.getAllHoaDon();
+        for (HoaDon hoaDon : listhd) {
+            tblModel.addRow(new Object[]{
+                hoaDon.getMaHD(),
+                hoaDon.getNgayTao(),
+                hoaDon.getNgayThanhToan(),
+                hoaDon.getTongTien(),
+                hoaDon.getTienApDungKM(),
+                hoaDon.getTienKHThanhToan(),
+                hoaDon.getTrangThai(),
+                hoaDon.getGhiChu()
+            });
+        }
+    }
+public void fillDataHDCT(){
+        DefaultTableModel Model = new DefaultTableModel();
+        Model = (DefaultTableModel) tbl_hoaDonChiTiet.getModel();
+        Model.setRowCount(0);
+        list = hoaDonChiTietServiceImpl.getAll();
+        for (HoaDonViewModel1 hd : list) {
+            Model.addRow(new Object[]{
+            hd.getIdHoaDonCT(),
+            hd.getIdSanPham(),
+            hd.getIdHoaDon(),
+            hd.getSoLuong(),
+            hd.getDonGia(),
+            hd.getGiaTopping(),
+            hd.getTrangThai()
+            });
+        }
+    }
+ public void showHoaDon(int index) {
+        HoaDon h = listhd.get(index);
+        lbl_maHD.setText(h.getMaHD());
+        lbl_ngayTao.setText(h.getNgayTao() + "");
+        lbl_ngayThanhToan.setText(h.getNgayThanhToan() + "");
+        lbl_tienApDung.setText(h.getTienApDungKM() + "");
+        lbl_tienKhachHangThanhToan.setText(h.getTienKHThanhToan() + "");
+        lbl_tongTienSanPham.setText(h.getTongTien() + "");
+        lbl_trangThai.setText(h.getTrangThai() + "");
+        tet_ghiChu.setText(h.getGhiChu());
     }
 
     /**
@@ -28,10 +94,10 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_hoaDon = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbl_hoaDonChiTiet = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -41,7 +107,7 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        tet_ghiChu = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
@@ -59,7 +125,7 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Hóa Đơn");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_hoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -67,12 +133,17 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
                 "Mã HD", "Ngày Tạo", "Ngày Thanh Toán", "Tổng Tiền", "Tiền Áp Dụng", "Tiền KH Thanh Toán", "Tình Trạng", "Ghi Chú"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_hoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_hoaDonMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_hoaDon);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Hóa Đơn Chi Tiết");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_hoaDonChiTiet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -80,7 +151,7 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
                 "Mã SP", "Tên SP Chi Tiết", "Số Lượng", "Đơn Giá", "Giá Topping", "Trạng Thái", "Thành Tiền"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbl_hoaDonChiTiet);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -105,9 +176,9 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel13.setText("Ghi Chú");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        tet_ghiChu.setColumns(20);
+        tet_ghiChu.setRows(5);
+        jScrollPane3.setViewportView(tet_ghiChu);
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel14.setText("Tình Trạng");
@@ -271,6 +342,12 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tbl_hoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoaDonMouseClicked
+        // TODO add your handling code here:
+          int index = tbl_hoaDon.getSelectedRow();
+        showHoaDon(index);
+    }//GEN-LAST:event_tbl_hoaDonMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -289,9 +366,6 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JLabel lbl_maHD;
     private javax.swing.JLabel lbl_ngayTao;
@@ -300,5 +374,8 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_tienKhachHangThanhToan;
     private javax.swing.JLabel lbl_tongTienSanPham;
     private javax.swing.JLabel lbl_trangThai;
+    private javax.swing.JTable tbl_hoaDon;
+    private javax.swing.JTable tbl_hoaDonChiTiet;
+    private javax.swing.JTextArea tet_ghiChu;
     // End of variables declaration//GEN-END:variables
 }

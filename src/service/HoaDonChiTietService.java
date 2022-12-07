@@ -4,13 +4,16 @@
  */
 package service;
 
+import java.util.List;
 import model.HoaDonChiTiet;
+import viewModel.HoaDonViewModel1;
 
 /**
  *
  * @author kn134
  */
 public interface HoaDonChiTietService {
+    List<HoaDonViewModel1> getAll();
 
     public int addHDCT(HoaDonChiTiet hdct);
     

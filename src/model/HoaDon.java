@@ -61,6 +61,10 @@ public class HoaDon {
         this.idkm = idkm;
     }
 
+    public HoaDon(double tongTien) {
+        this.tongTien = tongTien;
+    }    
+
     public String getIdHoaDon() {
         return idHoaDon;
     }
