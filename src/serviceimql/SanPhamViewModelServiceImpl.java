@@ -5,6 +5,7 @@
 package serviceimql;
 
 import java.util.List;
+import model.SanPham;
 import repository.SanPhamViewModelRepository;
 import viewModel.SanPhamViewModel;
 
@@ -14,21 +15,25 @@ import viewModel.SanPhamViewModel;
  */
 public class SanPhamViewModelServiceImpl implements service.SanPhamViewModelService{
     
-    SanPhamViewModelRepository sanPham = new SanPhamViewModelRepository();
+    SanPhamViewModelRepository sanPhamre = new SanPhamViewModelRepository();
 
     @Override
     public List<SanPhamViewModel> getAllSanPham() {
-        return sanPham.getAllSanPham();
+        return sanPhamre.getAllSanPham();
     }
 
     @Override
     public List<SanPhamViewModel> searchByName(String tenSP) {
-        return sanPham.searchByName(tenSP);
+        return sanPhamre.searchByName(tenSP);
     }
 
     @Override
     public List<SanPhamViewModel> getByLoaiSanPham(String tenLoaiSP) {
-        return sanPham.getByLoaiSanPham(tenLoaiSP);
+        return sanPhamre.getByLoaiSanPham(tenLoaiSP);
+    }
+
+    public SanPham getSPByMa(String maSP) {
+        return sanPhamre.getSPByMa(maSP);
     }
     
 }

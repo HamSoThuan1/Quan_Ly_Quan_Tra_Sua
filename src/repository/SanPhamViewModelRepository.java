@@ -5,12 +5,14 @@
 package repository;
 
 import entity.DBContext;
+import entity.JDBC_Helper;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.SanPham;
 import viewModel.SanPhamViewModel;
 
 /**
@@ -85,6 +87,30 @@ public class SanPhamViewModelRepository {
         List<SanPhamViewModel> lists = new SanPhamViewModelRepository().getAllSanPham();
         for (SanPhamViewModel sp : lists) {
             System.out.println(sp.toString());
+        }
+    }
+
+    public SanPham getSPByMa(String maSP) {
+        SanPham sp = null;
+        ResultSet rs;
+        String sql = "select IdSanPham,MaSP,TenSP,DonGia,HinhAnh,MoTa,TrangThai from SANPHAM where masp = ?";
+        rs=JDBC_Helper.selectTongQuat(sql, maSP);
+        try {
+            while (rs.next()) {
+                String id = rs.getString(1);
+//                String idlsp = rs.getString(2);
+//                String idsize = rs.getString(3);
+                String ma = rs.getString(2);
+                String tensp = rs.getString(3);
+                double dongia = rs.getDouble(4);
+                String hinhanh = rs.getString(5);
+                String mota = rs.getString(6);
+                int trangthai = rs.getInt(7);
+                sp = new SanPham(id, ma, tensp, dongia, hinhanh, mota, trangthai);
+            }
+            return sp;
+        } catch (Exception e) {
+            return null;
         }
     }
 }

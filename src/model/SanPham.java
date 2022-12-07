@@ -23,6 +23,16 @@ public class SanPham {
     public SanPham() {
     }
 
+    public SanPham(String idSanPham, String maSP, String tenSP, double donGia, String hinhAnh, String moTa, int trangThai) {
+        this.idSanPham = idSanPham;
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.donGia = donGia;
+        this.hinhAnh = hinhAnh;
+        this.moTa = moTa;
+        this.trangThai = trangThai;
+    }
+    
     public SanPham(String idSanPham, LoaiSanPham idLoaiSP, Size idSize, String maSP, String tenSP, double donGia, String hinhAnh, String moTa, int trangThai) {
         this.idSanPham = idSanPham;
         this.idLoaiSP = idLoaiSP;

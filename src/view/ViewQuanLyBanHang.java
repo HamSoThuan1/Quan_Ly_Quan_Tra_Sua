@@ -15,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HoaDon;
+import model.HoaDonChiTiet;
 import model.KhachHang;
 import model.KhuyenMai;
 import model.LoaiSanPham;
@@ -57,6 +58,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
      * Creates new form ViewQuanLyBanHang
      */
     private List<SanPhamViewModel> listSP;
+    private List<HoaDonChiTiet> listHDchitiet = new ArrayList<>();
     private List<KhachHang> listKH;
     private List<LoaiSanPham> listLSP;
     private List<HoaDonChiTietViewModel> listHDCT;
@@ -73,6 +75,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private Nhanvien_serviceimpl nhanVienService;
     private KhachHang_service khachhangService = new KhachHang_serviceimpl();
     private KhuyenMai_serviceimpl khuyenMaiService;
+//    private HoaDonChiTietS
     private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
     private final String mac;
     public static String topping;
@@ -919,7 +922,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Chưa thêm sản phẩm");
                 return;
-            }
+            }loadTien();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnThemToppingActionPerformed
@@ -973,11 +976,28 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 return;
             }
             
+            int sd = tblHoaDonCT.getRowCount();
+            for (int i = 1; i <= sd; i++) {
+                HoaDonChiTiet hdct = new HoaDonChiTiet();
+                double dongia = Double.parseDouble(tblHoaDonCT.getValueAt(i, 4).toString());
+                int soluong = Integer.parseInt(tblHoaDonCT.getValueAt(i, 3).toString());
+                double giaTP = giaTopping;
+                int trangthai =1;
+                String maSP = tblHoaDonCT.getValueAt(i, 1).toString();
+                String idsps = sanPhamService.getSPByMa(maSP).getIdSanPham();
+                String maHD = txtMaHD.getText();
+                String idhoadon =hoaDonService.getHoaDonByMaHD(maHD).getIdHoaDon();
+                hdct.setDonGia(dongia);
+                hdct.setSoLuong(soluong);
+                hdct.setGiaTopping(giaTP);
+                hdct.setTrangThai(trangthai);
+                hdct.setIdhoadon(idhoadon);
+                hdct.setIdsanpham(idsps);
+                
+            }
             
-            
-            hdservice.updateHD(hd);
+//            hdservice.updateHD(hd);
             fillHDToTable();
-//            hd.setIdkm(mac);
         } catch (Exception e) {
         }
         

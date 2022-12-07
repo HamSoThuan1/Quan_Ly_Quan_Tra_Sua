@@ -85,11 +85,8 @@ public class Nhanvien_repository {
     }
     public static void main(String[] args) {
         
-        List<Nhanvien> list = new Nhanvien_repository().getallNV();
-        
-        for (Nhanvien x : list) {
-            System.out.println(x.toString());
-        }
+        Nhanvien nv = new Nhanvien_repository().getNVByMaVaMatKhau("NV01", "123");
+        System.out.println(nv);
     }
 
     public static Nhanvien getNVByMaVaMatKhau(String maNV, String matKhau) {
