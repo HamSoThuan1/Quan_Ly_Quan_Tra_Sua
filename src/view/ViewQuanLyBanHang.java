@@ -24,10 +24,12 @@ import model.SanPham;
 import model.Topping;
 import repository.Khuyenmai_repository;
 import service.GiaoCa_service;
+import service.HoaDonChiTietService;
 import service.HoaDonService;
 import service.KhachHang_service;
 import service.nhanvien_service;
 import serviceimql.GiaoCa_serviceimpl;
+import serviceimql.HoaDonChiTietServiceImpl;
 import serviceimql.HoaDonServiceImpl;
 import serviceimql.KhachHang_serviceimpl;
 import serviceimql.KhuyenMai_serviceimpl;
@@ -75,7 +77,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private Nhanvien_serviceimpl nhanVienService;
     private KhachHang_service khachhangService = new KhachHang_serviceimpl();
     private KhuyenMai_serviceimpl khuyenMaiService;
-//    private HoaDonChiTietS
+    private HoaDonChiTietService hoadonchitietservice = new HoaDonChiTietServiceImpl();
     private SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
     private final String mac;
     public static String topping;
@@ -119,7 +121,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         listSP = sanPhamService.getAllSanPham();
         listLSP = loaiSanPhamService.getAll();
         listKM = khuyenMaiService.getAllKM();
-        
+
         showDataSanPham(listSP);
         cbbLoaiSP.removeAllItems();
         for (int i = 0; i < listLSP.size(); i++) {
@@ -128,8 +130,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         cbbKhuyenMai(listKM);
         fillHDToTable();
     }
-    
-    public void cbbKhuyenMai(List<KhuyenMai> lists){
+
+    public void cbbKhuyenMai(List<KhuyenMai> lists) {
         cbbKhuyenMai.setModel(comboboxKM);
         for (KhuyenMai km : lists) {
             comboboxKM.addElement(km.getGiatri());
@@ -236,7 +238,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -869,7 +871,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
         // TODO add your handling code here:
         int index = tblHoaDonCT.getSelectedRow();
-        String so_luong = JOptionPane.showInputDialog("Nhập số lượng: " );
+        String so_luong = JOptionPane.showInputDialog("Nhập số lượng: ");
         if (Integer.parseInt(so_luong) > Integer.parseInt(tblHoaDonCT.getValueAt(index, 3).toString())) {
             JOptionPane.showMessageDialog(this, "Bạn đã nhập quá số lượng\n Vui lòng nhập lại");
             return;
@@ -922,7 +924,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             } else {
                 JOptionPane.showMessageDialog(this, "Chưa thêm sản phẩm");
                 return;
-            }loadTien();
+            }
+            loadTien();
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btnThemToppingActionPerformed
@@ -977,27 +980,29 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             }
             
             int sd = tblHoaDonCT.getRowCount();
-            for (int i = 1; i <= sd; i++) {
+            for (int i = 0; i < sd; i++) {
                 HoaDonChiTiet hdct = new HoaDonChiTiet();
                 double dongia = Double.parseDouble(tblHoaDonCT.getValueAt(i, 4).toString());
                 int soluong = Integer.parseInt(tblHoaDonCT.getValueAt(i, 3).toString());
                 double giaTP = giaTopping;
-                int trangthai =1;
+                int trangthai = 1;
                 String maSP = tblHoaDonCT.getValueAt(i, 1).toString();
                 String idsps = sanPhamService.getSPByMa(maSP).getIdSanPham();
                 String maHD = txtMaHD.getText();
-                String idhoadon =hoaDonService.getHoaDonByMaHD(maHD).getIdHoaDon();
+                String idhoadon = hoaDonService.getHoaDonByMaHD(maHD).getIdHoaDon();
                 hdct.setDonGia(dongia);
-                hdct.setSoLuong(soluong);
+                hdct.setSoluong(soluong);
                 hdct.setGiaTopping(giaTP);
-                hdct.setTrangThai(trangthai);
+                hdct.setTrangthai(trangthai);
                 hdct.setIdhoadon(idhoadon);
                 hdct.setIdsanpham(idsps);
-                
+                System.out.println(hdct);
+                hoadonchitietservice.addHDCT(hdct);
             }
             
-//            hdservice.updateHD(hd);
+            hdservice.updateHD(hd);
             fillHDToTable();
+            
         } catch (Exception e) {
         }
         
@@ -1021,18 +1026,18 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     private void btnHuyDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyDonActionPerformed
         // TODO add your handling code here:
-        if(txtMaHD.getText().equals("")){
+        if (txtMaHD.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Chưa chọn hóa đơn");
             return;
-        }else if(txtghichu.getText().equals("")){
+        } else if (txtghichu.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Mời nhập lý do hủy");
             txtghichu.requestFocus();
             txtTienKhachDua.disable();
             return;
-        }else{
+        } else {
             String maHD = txtMaHD.getText();
             String ghichu = txtghichu.getText();
-            hdservice.update(maHD,ghichu);
+            hdservice.update(maHD, ghichu);
             fillHDToTable();
             clearForm();
         }
@@ -1123,8 +1128,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             model.addRow(data);
         }
     }
-    
-    public void thanhToan() throws ParseException{
+
+    public void thanhToan() throws ParseException {
         KhuyenMai kh = new KhuyenMai();
         String idKhuyenMai = khuyenMaiService.getAllKM().get(cbbKhuyenMai.getSelectedIndex()).getIdKM();
         HoaDon hd = new HoaDon();

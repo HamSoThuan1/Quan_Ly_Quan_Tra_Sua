@@ -4,10 +4,14 @@
  */
 package service;
 
+import model.HoaDonChiTiet;
+
 /**
  *
  * @author kn134
  */
 public interface HoaDonChiTietService {
+
+    public int addHDCT(HoaDonChiTiet hdct);
     
 }

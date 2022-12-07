@@ -4,6 +4,7 @@
  */
 package repository;
 
+import entity.JDBC_Helper;
 import java.util.List;
 import viewModel.HoaDonChiTietViewModel;
 import model.HoaDonChiTiet;
@@ -16,5 +17,10 @@ public class HoaDonChiTietRepository {
     public List<HoaDonChiTiet> getAll(){
         String query = "";
         return null;
+    }
+
+    public int addHDCT(HoaDonChiTiet hdct) {
+        String sql = "INSERT INTO [dbo].[HOADONCHITIET]([DonGia],[SoLuong],[Giatopping],[TrangThai],[IdHoaDon],[IdSanPham])VALUES(?,?,?,?,?,?)";
+        return JDBC_Helper.updateTongQuat(sql, hdct.getDonGia(),hdct.getSoluong(),hdct.getGiaTopping(),hdct.getTrangthai(),hdct.getIdhoadon(),hdct.getIdsanpham());
     }
 }

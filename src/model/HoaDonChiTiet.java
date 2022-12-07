@@ -12,49 +12,42 @@ public class HoaDonChiTiet {
 
     private String idHoaDonCT;
 //    private SanPham idSanPham;
-    private String idsanpham;
-//    private HoaDon idHoaDon;
-    private String idhoadon;
     private double donGia;
-    private int soLuong;
+//    private HoaDon idHoaDon;
+    private int soluong;
     private double giaTopping;
-    private int trangThai;
+    private int trangthai;
+    private String idhoadon;
+    private String idsanpham;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String idHoaDonCT, String idsanpham, String idhoadon, double donGia, int soLuong, double giaTopping, int trangThai) {
+    public HoaDonChiTiet(String idHoaDonCT, double donGia, int soluong, double giaTopping, int trangthai, String idhoadon, String idsanpham) {
         this.idHoaDonCT = idHoaDonCT;
-        this.idsanpham = idsanpham;
-        this.idhoadon = idhoadon;
         this.donGia = donGia;
-        this.soLuong = soLuong;
+        this.soluong = soluong;
         this.giaTopping = giaTopping;
-        this.trangThai = trangThai;
+        this.trangthai = trangthai;
+        this.idhoadon = idhoadon;
+        this.idsanpham = idsanpham;
     }
 
+    public HoaDonChiTiet(double donGia, int soluong, double giaTopping, int trangthai, String idhoadon, String idsanpham) {
+        this.donGia = donGia;
+        this.soluong = soluong;
+        this.giaTopping = giaTopping;
+        this.trangthai = trangthai;
+        this.idhoadon = idhoadon;
+        this.idsanpham = idsanpham;
+    }
+    
     public String getIdHoaDonCT() {
         return idHoaDonCT;
     }
 
     public void setIdHoaDonCT(String idHoaDonCT) {
         this.idHoaDonCT = idHoaDonCT;
-    }
-
-    public String getIdsanpham() {
-        return idsanpham;
-    }
-
-    public void setIdsanpham(String idsanpham) {
-        this.idsanpham = idsanpham;
-    }
-
-    public String getIdhoadon() {
-        return idhoadon;
-    }
-
-    public void setIdhoadon(String idhoadon) {
-        this.idhoadon = idhoadon;
     }
 
     public double getDonGia() {
@@ -65,12 +58,12 @@ public class HoaDonChiTiet {
         this.donGia = donGia;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public int getSoluong() {
+        return soluong;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 
     public double getGiaTopping() {
@@ -81,17 +74,33 @@ public class HoaDonChiTiet {
         this.giaTopping = giaTopping;
     }
 
-    public int getTrangThai() {
-        return trangThai;
+    public int getTrangthai() {
+        return trangthai;
     }
 
-    public void setTrangThai(int trangThai) {
-        this.trangThai = trangThai;
+    public void setTrangthai(int trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    public String getIdhoadon() {
+        return idhoadon;
+    }
+
+    public void setIdhoadon(String idhoadon) {
+        this.idhoadon = idhoadon;
+    }
+
+    public String getIdsanpham() {
+        return idsanpham;
+    }
+
+    public void setIdsanpham(String idsanpham) {
+        this.idsanpham = idsanpham;
     }
 
     @Override
     public String toString() {
-        return "HoaDonChiTiet{" + "idHoaDonCT=" + idHoaDonCT + ", idsanpham=" + idsanpham + ", idhoadon=" + idhoadon + ", donGia=" + donGia + ", soLuong=" + soLuong + ", giaTopping=" + giaTopping + ", trangThai=" + trangThai + '}';
+        return "HoaDonChiTiet{" + "idHoaDonCT=" + idHoaDonCT + ", donGia=" + donGia + ", soluong=" + soluong + ", giaTopping=" + giaTopping + ", trangthai=" + trangthai + ", idhoadon=" + idhoadon + ", idsanpham=" + idsanpham + '}';
     }
     
 }

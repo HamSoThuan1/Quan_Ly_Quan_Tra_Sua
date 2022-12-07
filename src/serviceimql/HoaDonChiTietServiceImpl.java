@@ -4,6 +4,8 @@
  */
 package serviceimql;
 
+import model.HoaDonChiTiet;
+import repository.HoaDonChiTietRepository;
 import service.HoaDonChiTietService;
 
 /**
@@ -11,5 +13,10 @@ import service.HoaDonChiTietService;
  * @author kn134
  */
 public class HoaDonChiTietServiceImpl implements HoaDonChiTietService{
+    HoaDonChiTietRepository hdctrepository = new HoaDonChiTietRepository();
+    @Override
+    public int addHDCT(HoaDonChiTiet hdct) {
+        return  hdctrepository.addHDCT(hdct);
+    }
     
 }

@@ -32,6 +32,20 @@ public class HoaDon {
     public HoaDon() {
     }
 
+    public HoaDon(String MaHD, Date ngayTao, double tongTien, double tienApDungKM, double tienKHThanhToan, Date ngayThanhToan, String ghiChu, int trangThai, String idnhanvien, String idkhachhang, String idkm) {
+        this.MaHD = MaHD;
+        this.ngayTao = ngayTao;
+        this.tongTien = tongTien;
+        this.tienApDungKM = tienApDungKM;
+        this.tienKHThanhToan = tienKHThanhToan;
+        this.ngayThanhToan = ngayThanhToan;
+        this.ghiChu = ghiChu;
+        this.trangThai = trangThai;
+        this.idnhanvien = idnhanvien;
+        this.idkhachhang = idkhachhang;
+        this.idkm = idkm;
+    }
+    
     public HoaDon(String idHoaDon, String MaHD, Date ngayTao, double tongTien, double tienApDungKM, double tienKHThanhToan, Date ngayThanhToan, String ghiChu, int trangThai, String idnhanvien, String idkhachhang, String idkm) {
         this.idHoaDon = idHoaDon;
         this.MaHD = MaHD;
