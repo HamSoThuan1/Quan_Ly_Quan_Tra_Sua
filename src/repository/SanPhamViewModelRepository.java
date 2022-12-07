@@ -82,6 +82,27 @@ public class SanPhamViewModelRepository {
         }
         return null;
     }
+    public SanPhamViewModel getspbyma(String ma) {
+        String query = "SELECT IdSanPham, MaSP, TenSP, TenLoaiSP, TenSize, DonGia, Gia, MoTa \n"
+                + "FROM SANPHAM JOIN LOAISP ON SANPHAM.IdLoaiSP = LOAISP.IdLoaiSP\n"
+                + "            JOIN SIZE ON SANPHAM.IdSize = SIZE.IdSize\n"
+                + "WHERE MaSP like ?";
+        SanPhamViewModel sp=null;
+        List<SanPhamViewModel> listSP = new ArrayList<>();
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ps.setObject(1, "%" + ma + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                sp = new SanPhamViewModel(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getString(5), rs.getDouble(6), rs.getDouble(7), rs.getString(8));
+                listSP.add(sp);
+            }
+            return sp;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         List<SanPhamViewModel> lists = new SanPhamViewModelRepository().getAllSanPham();

@@ -35,5 +35,10 @@ public class SanPhamViewModelServiceImpl implements service.SanPhamViewModelServ
     public SanPham getSPByMa(String maSP) {
         return sanPhamre.getSPByMa(maSP);
     }
+
+    @Override
+    public SanPhamViewModel getSanPhambyma(String ma) {
+        return sanPhamre.getspbyma(ma);
+    }
     
 }

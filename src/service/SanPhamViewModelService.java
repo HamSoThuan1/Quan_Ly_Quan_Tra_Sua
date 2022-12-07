@@ -17,5 +17,7 @@ public interface SanPhamViewModelService {
     
     List<SanPhamViewModel> searchByName(String tenSP);
     
+    SanPhamViewModel getSanPhambyma(String ma);
+    
     List<SanPhamViewModel> getByLoaiSanPham(String tenLoaiSP);
 }
