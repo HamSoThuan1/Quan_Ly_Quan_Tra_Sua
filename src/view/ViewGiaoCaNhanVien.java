@@ -25,6 +25,7 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
     private final String mac;
     private GiaoCa_service giaoca = new GiaoCa_serviceimpl();
     private HoaDonService hoadon = new HoaDonServiceImpl();
+    private double stcl;
 
     /**
      * Creates new form ViewGiaoCaNhanVien
@@ -44,6 +45,8 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         lbltongtiencahienco.setText(giaoca.getGiaoCaByMa(mac).getTienbandau()+giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu()+"");
         
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,10 +110,6 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel9.setText("Ghi chú :");
 
-        lblsotienbandau.setText("1000000");
-
-        lblsotiendoanhthu.setText("150000");
-
         txttienphatsinh.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -142,12 +141,9 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel18.setText("Tổng tiền ca hiện có : ");
 
-        lbltongtiencahienco.setText("1150000");
-
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
         jLabel20.setText("Tiền chủ thu :");
 
-        txttienchuthu.setText("0");
         txttienchuthu.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
@@ -291,11 +287,13 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        double tongtiencahienco =Double.parseDouble(lbltongtiencahienco.getText());
+        double ttchc =Double.parseDouble(lbltongtiencahienco.getText());
+        double tongtiencahienco =ttchc;
         ViewResetCa vrs = new ViewResetCa(tongtiencahienco);
         vrs.setVisible(true);
+        System.out.println(tongtiencahienco);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */

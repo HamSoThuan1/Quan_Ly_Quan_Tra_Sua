@@ -4,13 +4,15 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author kn134
  */
 public class ViewResetCa extends javax.swing.JFrame {
 
-    private final double tongtiencahienco;
+    private double tongtiencahienco;
 
     /**
      * Creates new form ViewResetCa
@@ -70,6 +72,11 @@ public class ViewResetCa extends javax.swing.JFrame {
         });
 
         jButton2.setText("Xác nhận");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         txttienlayra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,8 +178,21 @@ public class ViewResetCa extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        if(txttienlayra.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Mời nhập số tiền lấy ra");
+            txttienlayra.requestFocus();
+            return;
+        }
+        double stcl = Double.parseDouble(txttienlayra.getText());
+//        ViewGiaoCaNhanVien v = new ViewGiaoCaNhanVien(stcl);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
