@@ -129,6 +129,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         }
         cbbKhuyenMai(listKM);
         fillHDToTable();
+        if(txtTienKhachDua.getText().isEmpty() || txtTienKhachDua.getText().equalsIgnoreCase("0")){
+            btnThanhToan.setEnabled(false);
+        }
     }
 
     public void cbbKhuyenMai(List<KhuyenMai> lists) {

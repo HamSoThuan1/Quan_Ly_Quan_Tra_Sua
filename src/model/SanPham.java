@@ -32,7 +32,7 @@ public class SanPham {
         this.moTa = moTa;
         this.trangThai = trangThai;
     }
-    
+
     public SanPham(String idSanPham, LoaiSanPham idLoaiSP, Size idSize, String maSP, String tenSP, double donGia, String hinhAnh, String moTa, int trangThai) {
         this.idSanPham = idSanPham;
         this.idLoaiSP = idLoaiSP;
@@ -49,7 +49,7 @@ public class SanPham {
         this.maSP = maSP;
         this.tenSP = tenSP;
     }
-    
+
     public String getIdSanPham() {
         return idSanPham;
     }
@@ -126,6 +126,5 @@ public class SanPham {
     public String toString() {
         return "SanPham{" + "idSanPham=" + idSanPham + ", idLoaiSP=" + idLoaiSP + ", idSize=" + idSize + ", maSP=" + maSP + ", tenSP=" + tenSP + ", donGia=" + donGia + ", hinhAnh=" + hinhAnh + ", moTa=" + moTa + ", trangThai=" + trangThai + '}';
     }
-
 
 }

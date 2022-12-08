@@ -33,7 +33,6 @@ import serviceimql.Combosp_servieimpl;
 import serviceimql.SanPhamViewModelServiceImpl;
 import viewModel.SanPhamViewModel;
 
-
 /**
  *
  * @author hung2
@@ -53,6 +52,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private List<LoaiSanPham> listLSP;
     private List<Size> listSz;
     private List<Topping> listtp;
+    private DefaultTableModel modelSP;
     private DefaultTableModel model;
     private DefaultTableModel modeltp;
     private SanPhamServiceImpl sanPhamService;
@@ -73,13 +73,14 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         listSz = new ArrayList<>();
         listtp = new ArrayList<>();
         listcb = new ArrayList<>();
-        Listcbsp= new ArrayList<>();
+        Listcbsp = new ArrayList<>();
+        modelSP = new DefaultTableModel();
         model = new DefaultTableModel();
         modeltp = new DefaultTableModel();
         comboboxLSP = new DefaultComboBoxModel();
         comboboxLoaiSP = new DefaultComboBoxModel();
         comboboxSz = new DefaultComboBoxModel();
-        tblSanPham.setModel(model);
+        tblSanPham.setModel(modelSP);
         tbl_topping.setModel(modeltp);
         sanPhamService = new SanPhamServiceImpl();
         loaiSpService = new LoaiSanPhamServiceImpl();
@@ -90,12 +91,12 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         sanphamviewService = new SanPhamViewModelServiceImpl();
 
         String[] heard = {"STT", "Mã SP", "Tên SP", "Loại SP", "Size", "Đơn giá", "Giá size", "Hình ảnh", "Trạng thái", "Mô tả"};
-        model.setColumnIdentifiers(heard);
-        
-        String[] heardTopping = {"STT", "Mã Topping" , "Tên Topping", "Giá", "TrangThai"};
+        modelSP.setColumnIdentifiers(heard);
+
+        String[] heardTopping = {"STT", "Mã Topping", "Tên Topping", "Giá", "TrangThai"};
         modeltp.setColumnIdentifiers(heardTopping);
-        
-        Integer[] trangThai = {0,1};
+
+        Integer[] trangThai = {0, 1};
         cbo_trangThai.setModel(new DefaultComboBoxModel(trangThai));
 
         listSP = sanPhamService.getAll();
@@ -114,15 +115,17 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }
 
     public void showDataSanPham(List<SanPham> lists) {
-        model.setRowCount(0);
+        modelSP.setRowCount(0);
         int stt = 1;
         for (SanPham sp : lists) {
-            model.addRow(new Object[]{
-                stt++, sp.getMaSP(), sp.getTenSP(), sp.getIdLoaiSP().getTenLoaiSP(), sp.getIdSize().getTenSize(), sp.getDonGia(), sp.getIdSize().getGia(), sp.getHinhAnh(), sp.getMoTa(), sp.getTrangThai()
+            modelSP.addRow(new Object[]{
+                stt++, sp.getMaSP(), sp.getTenSP(), sp.getIdLoaiSP().getTenLoaiSP(), sp.getIdSize().getTenSize(),
+                sp.getDonGia(), sp.getIdSize().getGia(), sp.getHinhAnh(), sp.getTrangThai() == 1 ? "Còn hàng" : "Hết hàng", sp.getMoTa()
             });
         }
     }
-     public void showDataTopping(List<Topping> list) {
+
+    public void showDataTopping(List<Topping> list) {
         modeltp.setRowCount(0);
         int stt = 1;
         for (Topping topping : list) {
@@ -154,11 +157,12 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         }
         sp.setTrangThai(trangThai);
     }
-    public void fillDataTopping(int index){
+
+    public void fillDataTopping(int index) {
         Topping topping = listtp.get(index);
         txt_maTopping.setText(topping.getMaTopping());
         txt_tenTopping.setText(topping.getTenToping());
-        txt_gia.setText(topping.getGia()+"");
+        txt_gia.setText(topping.getGia() + "");
         cbo_trangThai.setSelectedIndex(topping.getTrangThai());
     }
 
@@ -168,7 +172,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
             comboboxLSP.addElement(loaiSanPham.getTenLoaiSP());
         }
     }
-    
+
     public void cbbLoaiSanPham(List<LoaiSanPham> listLsp) {
         cbbLoaiSP1.setModel(comboboxLoaiSP);
         for (LoaiSanPham loaiSanPham : listLsp) {
@@ -190,8 +194,8 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                 lblHinhAnh.getHeight(), anh.SCALE_SMOOTH));
         lblHinhAnh.setIcon(icon);
     }
-    
-    public void resetSP(){
+
+    public void resetSP() {
         txtMaSP.setText("");
         txtTenSP.setText("");
         cbbLoaiSP.setSelectedIndex(0);
@@ -202,43 +206,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         buttonGroup1.clearSelection();
     }
 
-    public void themSP() {
-        boolean isOK = true;
-        if (isOK) {
-            LoaiSanPham lsp = new LoaiSanPham();
-            String idLoaiSP = loaiSpService.getAll().get(cbbLoaiSP.getSelectedIndex()).getIdLoaiSP();
-            lsp.setIdLoaiSP(idLoaiSP);
-
-            Size size = new Size();
-            String idSize = sizeService.getAllSizes().get(cbbSize.getSelectedIndex()).getIdSize();
-            size.setIdSize(idSize);
-
-            SanPham sp = new SanPham();
-            int index = sanPhamService.getAll().size() + 1;
-            double donGia = Double.parseDouble(txtDonGia.getText());
-            sp.setIdLoaiSP(lsp);
-            sp.setIdSize(size);
-            sp.setMaSP("SP" + index);
-            sp.setTenSP(txtTenSP.getText());
-            sp.setDonGia(donGia);
-            if (strHinhAnh == null) {
-                sp.setHinhAnh("No Avatar");
-            } else {
-                sp.setHinhAnh(strHinhAnh);
-            }
-            sp.setMoTa(txtMoTa.getText());
-            int trangThai = sp.getTrangThai();
-            if (rbConHang.isSelected()) {
-                sp.setTrangThai(1);
-            }
-            if (rbHetHang.isSelected()) {
-                sp.setTrangThai(0);
-            }
-            JOptionPane.showMessageDialog(this, sanPhamService.insert(sp));
-            listSP = sanPhamService.getAll();
-            showDataSanPham(listSP);
-        }
-    }
     public void updateSP() {
         int index = tblSanPham.getSelectedRow();
         if (index == -1) {
@@ -282,15 +249,15 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
             }
         }
     }
-    
-    public void deleteSP(){
+
+    public void deleteSP() {
         int index = tblSanPham.getSelectedRow();
         if (index == -1) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn để xóa");
-        }else{
+        } else {
             int check = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không ?", "Thông báo!",
                     JOptionPane.YES_NO_OPTION);
-            if (check == JOptionPane.YES_OPTION){
+            if (check == JOptionPane.YES_OPTION) {
                 String id = sanPhamService.getAll().get(index).getIdSanPham();
                 JOptionPane.showMessageDialog(this, sanPhamService.delete(id));
                 listSP = sanPhamService.getAll();
@@ -298,7 +265,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
             }
         }
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -417,6 +384,8 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
         jLabel6.setText("Mã SP:");
 
+        txtMaSP.setEnabled(false);
+
         jLabel7.setText("Tên SP:");
 
         jLabel1.setText("Đơn Giá");
@@ -441,6 +410,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         jLabel8.setText("Trạng thái:");
 
         buttonGroup1.add(rbConHang);
+        rbConHang.setSelected(true);
         rbConHang.setText("Còn hàng");
 
         buttonGroup1.add(rbHetHang);
@@ -705,7 +675,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -811,9 +781,9 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                     .addComponent(btn_them)
                     .addComponent(tbn_sua)
                     .addComponent(btn_xoa))
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(332, Short.MAX_VALUE)
+                .addContainerGap(316, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -1136,7 +1106,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txttencbsp, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
                             .addComponent(txtsize))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addComponent(btnthemsp)
@@ -1186,9 +1156,9 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(96, 96, 96))
+                .addGap(105, 105, 105))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(507, 507, 507)
                 .addComponent(jLabel16)
@@ -1203,7 +1173,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(166, Short.MAX_VALUE))
+                        .addContainerGap(140, Short.MAX_VALUE))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -1216,7 +1186,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -1230,7 +1200,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1240,7 +1210,42 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
-        themSP();
+        boolean isOK = true;
+        if (isOK) {
+            LoaiSanPham lsp = new LoaiSanPham();
+            String idLoaiSP = loaiSpService.getAll().get(cbbLoaiSP.getSelectedIndex()).getIdLoaiSP();
+            lsp.setIdLoaiSP(idLoaiSP);
+
+            Size size = new Size();
+            String idSize = sizeService.getAllSizes().get(cbbSize.getSelectedIndex()).getIdSize();
+            size.setIdSize(idSize);
+
+            SanPham sp = new SanPham();
+            int index = sanPhamService.getAll().size() + 1;
+            double donGia = Double.parseDouble(txtDonGia.getText());
+            sp.setIdLoaiSP(lsp);
+            sp.setIdSize(size);
+            sp.setMaSP("SP" + index);
+            sp.setTenSP(txtTenSP.getText());
+            sp.setDonGia(donGia);
+            if (strHinhAnh == null) {
+                sp.setHinhAnh("No Avatar");
+            } else {
+                sp.setHinhAnh(strHinhAnh);
+            }
+            int trangThai = sp.getTrangThai();
+            if (rbConHang.isSelected()) {
+                sp.setTrangThai(1);
+            }
+            if (rbHetHang.isSelected()) {
+                sp.setTrangThai(0);
+            }
+            sp.setMoTa(txtMoTa.getText());
+            JOptionPane.showMessageDialog(this, sanPhamService.insert(sp));
+            listSP = sanPhamService.getAll();
+            showDataSanPham(listSP);
+            resetSP();
+        }
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSizeActionPerformed
@@ -1313,13 +1318,13 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-       Topping t = new Topping();
-       t.setMaTopping(txt_maTopping.getText());
-       t.setTenToping(txt_tenTopping.getText());
-       t.setGia(Double.parseDouble(txt_gia.getText()));
-       t.setTrangThai((int)cbo_trangThai.getSelectedItem());
-       JOptionPane.showMessageDialog(this, toppingService.addTopping(t));
-       listtp = toppingService.getAllToppings();
+        Topping t = new Topping();
+        t.setMaTopping(txt_maTopping.getText());
+        t.setTenToping(txt_tenTopping.getText());
+        t.setGia(Double.parseDouble(txt_gia.getText()));
+        t.setTrangThai((int) cbo_trangThai.getSelectedItem());
+        JOptionPane.showMessageDialog(this, toppingService.addTopping(t));
+        listtp = toppingService.getAllToppings();
         showDataTopping(listtp);
     }//GEN-LAST:event_btn_themActionPerformed
 
@@ -1338,24 +1343,24 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         t.setMaTopping(ma);
         t.setTenToping(txt_tenTopping.getText());
         t.setGia(Double.parseDouble(txt_gia.getText()));
-        t.setTrangThai((int)cbo_trangThai.getSelectedItem());
+        t.setTrangThai((int) cbo_trangThai.getSelectedItem());
         JOptionPane.showMessageDialog(this, toppingService.updateTopping(t, ma));
         listtp = toppingService.getAllToppings();
         showDataTopping(listtp);
     }//GEN-LAST:event_tbn_suaActionPerformed
 
     private void tblcomboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblcomboMouseClicked
-        int index =tblcombo.getSelectedRow();
+        int index = tblcombo.getSelectedRow();
         model = (DefaultTableModel) tblcombo.getModel();
         String ma = model.getValueAt(index, 0).toString();
-        Combo cb=comboservice.GetCBnyma(ma);
+        Combo cb = comboservice.GetCBnyma(ma);
         showdetail(cb);
         Loadcb();
     }//GEN-LAST:event_tblcomboMouseClicked
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         try {
-            Combo cb=getCBbyfrom();
+            Combo cb = getCBbyfrom();
             comboservice.add(cb);
             filltablecb();
             Loadcb();
@@ -1367,7 +1372,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
         try {
-            Combo cb=getCBbyfrom();
+            Combo cb = getCBbyfrom();
             comboservice.update(cb);
             filltablecb();
             Loadcb();
@@ -1378,7 +1383,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
         try {
-            Combo cb=getCBbyfrom();
+            Combo cb = getCBbyfrom();
             comboservice.delete(cb);
             filltablecb();
             Loadcb();
@@ -1388,9 +1393,9 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void cbomacbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbomacbItemStateChanged
-        if (cbomacb.getItemCount()>0) {
+        if (cbomacb.getItemCount() > 0) {
             String macbo = cbomacb.getSelectedItem().toString();
-            Combo cb =  comboservice.GetCBnyma(macbo);
+            Combo cb = comboservice.GetCBnyma(macbo);
             txttencbsp.setText(cb.getTencb());
         }
 
@@ -1401,19 +1406,19 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_cbomacbActionPerformed
 
     private void tblcbspMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblcbspMouseClicked
-        int index=tblcbsp.getSelectedRow();
-        String id=cbspService.getallCBSP().get(index).getID();
+        int index = tblcbsp.getSelectedRow();
+        String id = cbspService.getallCBSP().get(index).getID();
         Combosanpham cbsp = cbspService.getCBSPbyID(id);
         showdetailcbsp(cbsp);
 
     }//GEN-LAST:event_tblcbspMouseClicked
 
     private void cboloaicbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboloaicbItemStateChanged
-        if(cboloaicb.getItemCount()>0){
-            String ma=(String) cboloaicb.getSelectedItem();
-            ListVsp= sanphamviewService.getByLoaiSanPham(ma);
+        if (cboloaicb.getItemCount() > 0) {
+            String ma = (String) cboloaicb.getSelectedItem();
+            ListVsp = sanphamviewService.getByLoaiSanPham(ma);
             cbomasp.removeAllItems();
-            for(int i=0;i<ListVsp.size();i++){
+            for (int i = 0; i < ListVsp.size(); i++) {
                 cbomasp.addItem(ListVsp.get(i).getMaSP());
             }
         }
@@ -1421,8 +1426,8 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void cbomaspItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbomaspItemStateChanged
 
-        if(cbomasp.getItemCount()>0){
-            String ma=cbomasp.getSelectedItem().toString();
+        if (cbomasp.getItemCount() > 0) {
+            String ma = cbomasp.getSelectedItem().toString();
             SanPhamViewModel sp = sanphamviewService.getSanPhambyma(ma);
 
             txttenspcb.setText(sp.getTenSP());
@@ -1436,25 +1441,25 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_cbomaspActionPerformed
 
     private void btnthemspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemspActionPerformed
-        Combosanpham cb= Getcbspbyform();
+        Combosanpham cb = Getcbspbyform();
         cbspService.add(cb);
         filltablecbsp();
     }//GEN-LAST:event_btnthemspActionPerformed
 
     private void btnsuaspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaspActionPerformed
-        int index=tblcbsp.getSelectedRow();
-        String id=cbspService.getallCBSP().get(index).getID();
-        String macb=(String) cbomacb.getSelectedItem();
-        String tencb=txttencbsp.getText();
-        String tenloaisp=(String) cboloaicb.getSelectedItem();
-        String masp=(String) cbomasp.getSelectedItem();
-        String tensp=txttenspcb.getText();
-        String tensize=txtsize.getText();
+        int index = tblcbsp.getSelectedRow();
+        String id = cbspService.getallCBSP().get(index).getID();
+        String macb = (String) cbomacb.getSelectedItem();
+        String tencb = txttencbsp.getText();
+        String tenloaisp = (String) cboloaicb.getSelectedItem();
+        String masp = (String) cbomasp.getSelectedItem();
+        String tensp = txttenspcb.getText();
+        String tensize = txtsize.getText();
         int tt;
-        if(cbotrangthaicb.getSelectedItem().equals("Không kinh doanh")){
-            tt=0;
-        }else{
-            tt=1;
+        if (cbotrangthaicb.getSelectedItem().equals("Không kinh doanh")) {
+            tt = 0;
+        } else {
+            tt = 1;
         }
         int trangthai = tt;
         Combosanpham cbsp = new Combosanpham(id, macb, tencb, tenloaisp, masp, tensp, tensize, trangthai);
@@ -1463,14 +1468,14 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnsuaspActionPerformed
 
     private void btnxoaspActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaspActionPerformed
-        int index=tblcbsp.getSelectedRow();
-        String id=cbspService.getallCBSP().get(index).getID();
+        int index = tblcbsp.getSelectedRow();
+        String id = cbspService.getallCBSP().get(index).getID();
         Combosanpham cbsp = cbspService.getCBSPbyID(id);
         cbspService.delete(cbsp);
         filltablecbsp();
     }//GEN-LAST:event_btnxoaspActionPerformed
 
-public Combo getCBbyfrom() throws ParseException{
+    public Combo getCBbyfrom() throws ParseException {
         String ma = txtmacb.getText();
         String ten = txttencb.getText();
         double gia = Double.parseDouble(txtgiacb.getText());
@@ -1478,14 +1483,14 @@ public Combo getCBbyfrom() throws ParseException{
         Date ngaytao = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaytaocb.getText());
         String ghichu = txtghichu.getText();
         int tt;
-        if(cbotrangthaicb.getSelectedItem().equals("Không kinh doanh")){
-        tt=0;
-        }else{
-        tt=1;
+        if (cbotrangthaicb.getSelectedItem().equals("Không kinh doanh")) {
+            tt = 0;
+        } else {
+            tt = 1;
         }
-        int trangthai = tt; 
-       Combo cb = new Combo(ma, ten, gia, soluong, ngaytao, ghichu, trangthai);
-       return cb;
+        int trangthai = tt;
+        Combo cb = new Combo(ma, ten, gia, soluong, ngaytao, ghichu, trangthai);
+        return cb;
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChonAnh;
@@ -1587,107 +1592,105 @@ public Combo getCBbyfrom() throws ParseException{
     private javax.swing.JTextField txttenspcb;
     // End of variables declaration//GEN-END:variables
 
-private void filltablecb() {
+    private void filltablecb() {
         listcb = comboservice.getallCB();
-        model=(DefaultTableModel) tblcombo.getModel();
+        model = (DefaultTableModel) tblcombo.getModel();
         model.setRowCount(0);
-        for(int i=0;i<listcb.size();i++){
+        for (int i = 0; i < listcb.size(); i++) {
             String tt;
-            if(listcb.get(i).getTrangthai()==1){
-            tt="Đang kinh doanh";
-            }else{
-            tt="Không kinh doanh";
+            if (listcb.get(i).getTrangthai() == 1) {
+                tt = "Đang kinh doanh";
+            } else {
+                tt = "Không kinh doanh";
             }
-            
-            Object[] data= new Object[]{
-            listcb.get(i).getMacb(),listcb.get(i).getTencb(),listcb.get(i).getGiacb(),listcb.get(i).getSoluong(),listcb.get(i).getNgaytao(),listcb.get(i).getGhichu(),tt
+
+            Object[] data = new Object[]{
+                listcb.get(i).getMacb(), listcb.get(i).getTencb(), listcb.get(i).getGiacb(), listcb.get(i).getSoluong(), listcb.get(i).getNgaytao(), listcb.get(i).getGhichu(), tt
             };
             model.addRow(data);
         }
     }
-    
 
     private void showdetail(Combo cb) {
         txtmacb.setText(cb.getMacb());
         txttencb.setText(cb.getTencb());
-        txtgiacb.setText(cb.getGiacb()+"");
-        txtsoluongcb.setText(cb.getSoluong()+"");
-        txtngaytaocb.setText(cb.getNgaytao()+"");
+        txtgiacb.setText(cb.getGiacb() + "");
+        txtsoluongcb.setText(cb.getSoluong() + "");
+        txtngaytaocb.setText(cb.getNgaytao() + "");
         txtghichu.setText(cb.getGhichu());
-        String tt=null;
-        if(cb.getTrangthai()==1){
-            tt="Đang kinh doanh";
-            }
-        if(cb.getTrangthai()==0){
-            tt="Không kinh doanh";
-            }
+        String tt = null;
+        if (cb.getTrangthai() == 1) {
+            tt = "Đang kinh doanh";
+        }
+        if (cb.getTrangthai() == 0) {
+            tt = "Không kinh doanh";
+        }
         cbotrangthaicb.setSelectedItem(tt);
         Listcbsp = cbspService.getCBSPbyma(cb.getMacb());
-        model=(DefaultTableModel) tblcacsp.getModel();
+        model = (DefaultTableModel) tblcacsp.getModel();
         model.setRowCount(0);
-        for(int i=0;i<Listcbsp.size();i++){
-            Object[]data = new Object[]{Listcbsp.get(i).getTensp(),Listcbsp.get(i).getTensize()};
+        for (int i = 0; i < Listcbsp.size(); i++) {
+            Object[] data = new Object[]{Listcbsp.get(i).getTensp(), Listcbsp.get(i).getTensize()};
             model.addRow(data);
         }
-        
-        
-                }
+
+    }
 
     private void Loadcb() {
         cbomacb.removeAllItems();
         cboloaicb.removeAllItems();
-       
-        listcb=comboservice.getallCB();
-        listLSP=loaiSpService.getAll();
-        ListVsp=sanphamviewService.getAllSanPham();
-        
-        for(int i=0;i<listcb.size();i++){
+
+        listcb = comboservice.getallCB();
+        listLSP = loaiSpService.getAll();
+        ListVsp = sanphamviewService.getAllSanPham();
+
+        for (int i = 0; i < listcb.size(); i++) {
             cbomacb.addItem(listcb.get(i).getMacb());
         }
         /*for(int i=0;i<ListVsp.size();i++){
             cbomasp.addItem(ListVsp.get(i).getMaSP());
         }*/
-        for(int i=0;i<listLSP.size();i++){
+        for (int i = 0; i < listLSP.size(); i++) {
             cboloaicb.addItem(listLSP.get(i).getTenLoaiSP());
         }
-         
+
     }
 
     private Combosanpham Getcbspbyform() {
-        String macb=(String) cbomacb.getSelectedItem();
-        String tencb=txttencbsp.getText();
-        String tenloaisp=(String) cboloaicb.getSelectedItem();
-        String masp=(String) cbomasp.getSelectedItem();
-        String tensp=txttenspcb.getText();
-        String tensize=txtsize.getText();
+        String macb = (String) cbomacb.getSelectedItem();
+        String tencb = txttencbsp.getText();
+        String tenloaisp = (String) cboloaicb.getSelectedItem();
+        String masp = (String) cbomasp.getSelectedItem();
+        String tensp = txttenspcb.getText();
+        String tensize = txtsize.getText();
         int tt;
-        if(cbotrangthaicb.getSelectedItem().equals("Không kinh doanh")){
-        tt=0;
-        }else{
-        tt=1;
+        if (cbotrangthaicb.getSelectedItem().equals("Không kinh doanh")) {
+            tt = 0;
+        } else {
+            tt = 1;
         }
-        int trangthai = tt; 
+        int trangthai = tt;
         Combosanpham cb = new Combosanpham(macb, tencb, tenloaisp, masp, tensp, tensize, trangthai);
         return cb;
     }
 
     private void filltablecbsp() {
         Listcbsp = cbspService.getallCBSP();
-        model=(DefaultTableModel) tblcbsp.getModel();
+        model = (DefaultTableModel) tblcbsp.getModel();
         model.setRowCount(0);
-        for(int i=0;i<Listcbsp.size();i++){
-            Object[] data= new Object[]{
-            Listcbsp.get(i).getMacb(),Listcbsp.get(i).getTencb(),Listcbsp.get(i).getTenloaisp(),
-                Listcbsp.get(i).getMasp(),Listcbsp.get(i).getTensp(),Listcbsp.get(i).getTensize()
+        for (int i = 0; i < Listcbsp.size(); i++) {
+            Object[] data = new Object[]{
+                Listcbsp.get(i).getMacb(), Listcbsp.get(i).getTencb(), Listcbsp.get(i).getTenloaisp(),
+                Listcbsp.get(i).getMasp(), Listcbsp.get(i).getTensp(), Listcbsp.get(i).getTensize()
             };
 
             model.addRow(data);
         }
     }
-    private void showdetailcbsp(Combosanpham cbsp){
-       cbomacb.setSelectedItem(cbsp.getMacb());
-       cboloaicb.setSelectedItem(cbsp.getTenloaisp());
-       cbomasp.setSelectedItem(cbsp.getMasp());
+
+    private void showdetailcbsp(Combosanpham cbsp) {
+        cbomacb.setSelectedItem(cbsp.getMacb());
+        cboloaicb.setSelectedItem(cbsp.getTenloaisp());
+        cbomasp.setSelectedItem(cbsp.getMasp());
     }
 }
-

@@ -82,12 +82,13 @@ public class SanPhamViewModelRepository {
         }
         return null;
     }
+
     public SanPhamViewModel getspbyma(String ma) {
         String query = "SELECT IdSanPham, MaSP, TenSP, TenLoaiSP, TenSize, DonGia, Gia, MoTa \n"
                 + "FROM SANPHAM JOIN LOAISP ON SANPHAM.IdLoaiSP = LOAISP.IdLoaiSP\n"
                 + "            JOIN SIZE ON SANPHAM.IdSize = SIZE.IdSize\n"
                 + "WHERE MaSP like ?";
-        SanPhamViewModel sp=null;
+        SanPhamViewModel sp = null;
         List<SanPhamViewModel> listSP = new ArrayList<>();
         try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, "%" + ma + "%");
@@ -115,7 +116,7 @@ public class SanPhamViewModelRepository {
         SanPham sp = null;
         ResultSet rs;
         String sql = "select IdSanPham,MaSP,TenSP,DonGia,HinhAnh,MoTa,TrangThai from SANPHAM where masp = ?";
-        rs=JDBC_Helper.selectTongQuat(sql, maSP);
+        rs = JDBC_Helper.selectTongQuat(sql, maSP);
         try {
             while (rs.next()) {
                 String id = rs.getString(1);
