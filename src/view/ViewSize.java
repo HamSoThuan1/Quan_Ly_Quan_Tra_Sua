@@ -254,30 +254,30 @@ public class ViewSize extends javax.swing.JDialog {
 
     private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
         // TODO add your handling code here:
-//        String MaSize = txt_MaSize.getText();
-//        JOptionPane.showMessageDialog(this, size_servicesimpl.deleteSize(MaSize));
-//        list = size_servicesimpl.getAllSizes();
-//        loaddataTable();
+        String MaSize = txt_MaSize.getText();
+        JOptionPane.showMessageDialog(this, size_servicesimpl.deleteSize(MaSize));
+        list = size_servicesimpl.getAllSizes();
+        loaddataTable();
     }//GEN-LAST:event_btn_XoaActionPerformed
 
     private void btn_UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_UpdateActionPerformed
         // TODO add your handling code here:
-//        Size size = new Size();
-//        String ma = txt_MaSize.getText();
-//        size.setMaSize(ma);
-//        size.setTenSize(txt_TenSize.getText());
-//        size.setGia(Double.parseDouble(txt_Gia.getText()));
-//        size.setTrangThai((int) cbo_TrangThai.getSelectedItem());
-//        JOptionPane.showMessageDialog(this, size_servicesimpl.updateSize(size, ma));
-//        list = size_servicesimpl.getAllSizes();
-//        loaddataTable();
+        Size size = new Size();
+        String ma = txt_MaSize.getText();
+        size.setMaSize(ma);
+        size.setTenSize(txt_TenSize.getText());
+        size.setGia(Double.parseDouble(txt_Gia.getText()));
+        size.setTrangThai((int) cbo_TrangThai.getSelectedItem());
+        JOptionPane.showMessageDialog(this, size_servicesimpl.updateSize(size, ma));
+        list = size_servicesimpl.getAllSizes();
+        loaddataTable();
     }//GEN-LAST:event_btn_UpdateActionPerformed
 
     private void btn_QuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuayLaiActionPerformed
         // TODO add your handling code here:
-//        ViewQuanLySanPham view = new ViewQuanLySanPham();
-//        view.setVisible(true);
-//        this.dispose();
+        ViewQuanLySanPham view = new ViewQuanLySanPham();
+        view.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_QuayLaiActionPerformed
 
     private void tbl_SizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_SizeMouseClicked
@@ -288,14 +288,14 @@ public class ViewSize extends javax.swing.JDialog {
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         // TODO add your handling code here:
-//        Size size = new Size();
-//        size.setMaSize(txt_MaSize.getText());
-//        size.setTenSize(txt_TenSize.getText());
-//        size.setGia(Double.parseDouble(txt_Gia.getText()));
-//        size.setTrangThai((int) cbo_TrangThai.getSelectedItem());
-//        JOptionPane.showMessageDialog(this, size_servicesimpl.addSize(size));
-//        list = size_servicesimpl.getAllSizes();
-//        loaddataTable();
+        Size size = new Size();
+        size.setMaSize(txt_MaSize.getText());
+        size.setTenSize(txt_TenSize.getText());
+        size.setGia(Double.parseDouble(txt_Gia.getText()));
+        size.setTrangThai((int) cbo_TrangThai.getSelectedItem());
+        JOptionPane.showMessageDialog(this, size_servicesimpl.addSize(size));
+        list = size_servicesimpl.getAllSizes();
+        loaddataTable();
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     /**
