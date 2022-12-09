@@ -930,6 +930,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             }
             loadTien();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnThemToppingActionPerformed
 

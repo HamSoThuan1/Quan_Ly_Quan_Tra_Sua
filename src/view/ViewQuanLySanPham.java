@@ -1250,7 +1250,8 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btnSizeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSizeActionPerformed
         // TODO add your handling code here:
-        ViewSize size = new ViewSize();
+        ViewChinh mainFormView = null;
+        ViewSize size = new ViewSize(mainFormView, true);
         size.setVisible(true);
     }//GEN-LAST:event_btnSizeActionPerformed
 
@@ -1261,7 +1262,9 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btnLoaiSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoaiSPActionPerformed
         // TODO add your handling code here:
-        ViewLoaiSP loaiSP = new ViewLoaiSP();
+        ViewChinh mainFormView = null;
+//        ViewQuanLySanPham mainFormView = null;
+        ViewLoaiSanPham loaiSP = new ViewLoaiSanPham(mainFormView, true);
         loaiSP.setVisible(true);
     }//GEN-LAST:event_btnLoaiSPActionPerformed
 
