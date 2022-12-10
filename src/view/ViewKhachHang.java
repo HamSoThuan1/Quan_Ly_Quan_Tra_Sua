@@ -198,6 +198,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
         });
 
         btn_sua.setText("Sửa");
+        btn_sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaActionPerformed(evt);
+            }
+        });
 
         btn_lamMoi.setText("Làm Mới");
         btn_lamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -322,18 +327,18 @@ public class ViewKhachHang extends javax.swing.JFrame {
         kh.setMakh(txt_maKH.getText());
         kh.setTenkh(txt_tenKH.getText());
         boolean gioiTinh = kh.isGioitinh();
-        if(rdo_nam.isSelected()){
+        if (rdo_nam.isSelected()) {
             kh.setGioitinh(true);
         }
-        if(rdo_nu.isSelected()){
+        if (rdo_nu.isSelected()) {
             kh.setGioitinh(false);
         }
         kh.setSodt(txt_sdt.getText());
         int trangThai = kh.getTrangthai();
-        if(rdo_conHoatDong.isSelected()){
+        if (rdo_conHoatDong.isSelected()) {
             kh.setTrangthai(1);
         }
-        if(rdo_ngungHoatDong.isSelected()){
+        if (rdo_ngungHoatDong.isSelected()) {
             kh.setTrangthai(0);
         }
         kh.setDiachi(tet_diaChi.getText());
@@ -358,6 +363,34 @@ public class ViewKhachHang extends javax.swing.JFrame {
         tet_diaChi.setText("");
         tet_ghiChu.setText("");
     }//GEN-LAST:event_btn_lamMoiActionPerformed
+
+    private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
+        // TODO add your handling code here:
+        KhachHang kh = new KhachHang();
+        String maKH = txt_maKH.getText();
+        kh.setMakh(txt_maKH.getText());
+        kh.setTenkh(txt_tenKH.getText());
+        boolean gioiTinh = kh.isGioitinh();
+        if (rdo_nam.isSelected()) {
+            kh.setGioitinh(true);
+        }
+        if (rdo_nu.isSelected()) {
+            kh.setGioitinh(false);
+        }
+        kh.setSodt(txt_sdt.getText());
+        int trangThai = kh.getTrangthai();
+        if (rdo_conHoatDong.isSelected()) {
+            kh.setTrangthai(1);
+        }
+        if (rdo_ngungHoatDong.isSelected()) {
+            kh.setTrangthai(0);
+        }
+        kh.setDiachi(tet_diaChi.getText());
+        kh.setGhichu(tet_ghiChu.getText());
+        JOptionPane.showMessageDialog(this, khachHang_serviceimpl.updateKH(kh, maKH));
+        listKH = khachHang_serviceimpl.GetallKH();
+        fillData();
+    }//GEN-LAST:event_btn_suaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,7 +437,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 stt++,
                 khachHang.getMakh(),
                 khachHang.getTenkh(),
-                khachHang.isGioitinh()==true ? "Nam" : "Nữ",
+                khachHang.isGioitinh() == true ? "Nam" : "Nữ",
                 khachHang.getSodt(),
                 khachHang.getDiachi(),
                 khachHang.getGhichu(),
@@ -412,23 +445,24 @@ public class ViewKhachHang extends javax.swing.JFrame {
             });
         }
     }
-   private void showDeTai(int index) {
-       KhachHang kh = listKH.get(index);
-       txt_maKH.setText(kh.getMakh());
-       txt_tenKH.setText(kh.getTenkh());
+
+    private void showDeTai(int index) {
+        KhachHang kh = listKH.get(index);
+        txt_maKH.setText(kh.getMakh());
+        txt_tenKH.setText(kh.getTenkh());
         boolean gioiTinh = kh.isGioitinh();
-        if(rdo_nam.isSelected()){
+        if (rdo_nam.isSelected()) {
             kh.setGioitinh(true);
         }
-        if(rdo_nu.isSelected()){
+        if (rdo_nu.isSelected()) {
             kh.setGioitinh(false);
         }
         txt_sdt.setText(kh.getSodt());
         int trangThai = kh.getTrangthai();
-        if(rdo_conHoatDong.isSelected()){
+        if (rdo_conHoatDong.isSelected()) {
             kh.setTrangthai(1);
         }
-        if(rdo_ngungHoatDong.isSelected()){
+        if (rdo_ngungHoatDong.isSelected()) {
             kh.setTrangthai(0);
         }
         tet_diaChi.setText(kh.getDiachi());

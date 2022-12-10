@@ -95,11 +95,11 @@ public class KhachHang_repository {
         try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql)) {
             pr.setObject(1, kh.getTenkh());
             pr.setObject(2, kh.isGioitinh());
-            pr.setObject(4, kh.getSodt());
-            pr.setObject(5, kh.getDiachi());
-            pr.setObject(6, kh.getGhichu());
-            pr.setObject(7, kh.getTrangthai());
-            pr.setObject(8, maKH);
+            pr.setObject(3, kh.getSodt());
+            pr.setObject(4, kh.getDiachi());
+            pr.setObject(5, kh.getGhichu());
+            pr.setObject(6, kh.getTrangthai());
+            pr.setObject(7, maKH);
             check = pr.executeUpdate();
             return check > 0;
         } catch (Exception e) {
