@@ -106,7 +106,7 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
         showDataSanPham(listSP);
         showDataTopping(listtp);
-        cbbLoaiSP(listLSP);
+        cbbLoaiSP(loaiSpService.getAll());
         cbbLoaiSanPham(listLSP);
         cbbSize(listSz);
         filltablecb();

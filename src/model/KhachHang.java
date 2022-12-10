@@ -17,7 +17,6 @@ public class KhachHang {
     private String makh;
     private String tenkh;
     private boolean gioitinh;
-    private Timestamp ngaysinh;
     private String sodt;
     private String diachi;
     private String ghichu;
@@ -26,31 +25,15 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String idKhachHang, String makh, String tenkh, boolean gioitinh, Timestamp ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
+    public KhachHang(String idKhachHang, String makh, String tenkh, boolean gioitinh, String sodt, String diachi, String ghichu, int trangthai) {
         this.idKhachHang = idKhachHang;
         this.makh = makh;
         this.tenkh = tenkh;
         this.gioitinh = gioitinh;
-        this.ngaysinh = ngaysinh;
         this.sodt = sodt;
         this.diachi = diachi;
         this.ghichu = ghichu;
         this.trangthai = trangthai;
-    }
-
-    public KhachHang(String makh, String tenkh, boolean gioitinh, Timestamp ngaysinh, String sodt, String diachi, String ghichu, int trangthai) {
-        this.makh = makh;
-        this.tenkh = tenkh;
-        this.gioitinh = gioitinh;
-        this.ngaysinh = ngaysinh;
-        this.sodt = sodt;
-        this.diachi = diachi;
-        this.ghichu = ghichu;
-        this.trangthai = trangthai;
-    }
-
-    public KhachHang(String idKhachHang) {
-        this.idKhachHang = idKhachHang;
     }
 
     public String getIdKhachHang() {
@@ -83,14 +66,6 @@ public class KhachHang {
 
     public void setGioitinh(boolean gioitinh) {
         this.gioitinh = gioitinh;
-    }
-
-    public Timestamp getNgaysinh() {
-        return ngaysinh;
-    }
-
-    public void setNgaysinh(Timestamp ngaysinh) {
-        this.ngaysinh = ngaysinh;
     }
 
     public String getSodt() {
@@ -127,7 +102,7 @@ public class KhachHang {
 
     @Override
     public String toString() {
-        return "KhachHang{" + "idKhachHang=" + idKhachHang + ", makh=" + makh + ", tenkh=" + tenkh + ", gioitinh=" + gioitinh + ", ngaysinh=" + ngaysinh + ", sodt=" + sodt + ", diachi=" + diachi + ", ghichu=" + ghichu + ", trangthai=" + trangthai + '}';
+        return "KhachHang{" + "idKhachHang=" + idKhachHang + ", makh=" + makh + ", tenkh=" + tenkh + ", gioitinh=" + gioitinh + ", sodt=" + sodt + ", diachi=" + diachi + ", ghichu=" + ghichu + ", trangthai=" + trangthai + '}';
     }
-    
+
 }
