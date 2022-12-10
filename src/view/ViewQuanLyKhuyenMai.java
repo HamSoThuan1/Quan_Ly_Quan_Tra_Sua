@@ -103,6 +103,12 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Tìm khuyến mãi");
 
+        txtTimKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTimKMActionPerformed(evt);
+            }
+        });
+
         btnTimKM.setText("Tìm");
         btnTimKM.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -419,6 +425,10 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         String ma = txtTimKM.getText();
         fillTableMa(ma);
     }//GEN-LAST:event_btnTimKMMouseClicked
+
+    private void txtTimKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKMActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTimKMActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

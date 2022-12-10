@@ -5,6 +5,13 @@
         <group>
             <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/application/ViewApp.java</file>
             <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/entity/DBContext.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/entity/JDBCHeper.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/view/ViewQuanLySanPham.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/view/ViewSize.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/service/Size_services.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/view/ViewQuanLyNhanVien.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/model/Size.java</file>
+            <file>file:/D:/QuanLyDuAn1/Quan_Ly_Quan_Tra_Sua/src/repository/Size_responsitory.java</file>
         </group>
     </open-files>
 </project-private>

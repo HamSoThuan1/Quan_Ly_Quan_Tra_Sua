@@ -132,6 +132,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtTimKM">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTimKMActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnTimKM">
       <Properties>

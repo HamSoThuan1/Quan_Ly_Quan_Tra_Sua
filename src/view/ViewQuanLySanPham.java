@@ -593,6 +593,12 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
         jLabel3.setText("Tìm kiếm:");
 
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+
         btnSearch.setText("Tìm");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1477,6 +1483,10 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         cbspService.delete(cbsp);
         filltablecbsp();
     }//GEN-LAST:event_btnxoaspActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     public Combo getCBbyfrom() throws ParseException {
         String ma = txtmacb.getText();
