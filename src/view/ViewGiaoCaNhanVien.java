@@ -20,6 +20,9 @@ import serviceimql.HoaDonServiceImpl;
  * @author kn134
  */
 public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
+
+    static double tienconlai;
+    static double tienlayra;
     List<GiaoCa> listgc = new ArrayList<>();
     DefaultTableModel model;
     private final String mac;
@@ -32,21 +35,33 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
      */
     public ViewGiaoCaNhanVien(String mac) {
         initComponents();
-        this.mac=mac;
+        this.mac = mac;
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ViewGiaoCaNhanVien.DISPOSE_ON_CLOSE);
+        if(txtsotienbandau.getText().equals("")){
+            txtsotienbandau.setText("0");
+        }
+        if(txttongtiencahienco.getText().equals("")){
+            txttongtiencahienco.setText("0");
+        }
+        if(txttiendoanhthu.getText().equals("")){
+            txttiendoanhthu.setText("0");
+        }
+        if(txttienchuthu.getText().equals("")){
+            txttienchuthu.setText("0");
+        }
+        if(txttienphatsinh.getText().equals("")){
+            txttienphatsinh.setText("0");
+        }
         txtmaca.setText(mac);
-        txtsotienbandau.setText(giaoca.getGiaoCaByMa(mac).getTienbandau()+"");
+        txtsotienbandau.setText(giaoca.getGiaoCaByMa(mac).getTienbandau() + "");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         txtthoidiembatdau.setText(sdf.format(giaoca.getGiaoCaByMa(mac).getThoigianbatdau()));
         Date dt = giaoca.getGiaoCaByMa(mac).getThoigianbatdau();
-////        System.out.println(giaoca.getGiaoCaByMa(mac).getThoigianbatdau());
-        txttiendoanhthu.setText(giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu()+"");
-        txttongtiencahienco.setText(giaoca.getGiaoCaByMa(mac).getTienbandau()+giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu()+"");
+        txttiendoanhthu.setText(giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu() + "");
+        txttongtiencahienco.setText(giaoca.getGiaoCaByMa(mac).getTienbandau() + giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu() + "");
 //        
     }
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -256,8 +271,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
             double tthc = Double.parseDouble(txttongtiencahienco.getText());
             ViewResetCa vrs = new ViewResetCa(tthc);
             vrs.setVisible(true);
+            txttienchuthu.setText(tienlayra + "");
         } catch (Exception e) {
         }
+        txttienchuthu.setText(tienlayra + "");
+        txttongtiencahienco.setText(Double.parseDouble(txttongtiencahienco.getText()) - Double.parseDouble(txttienchuthu.getText()) + "");
 //        double ttchc =Double.parseDouble(lbltongtiencahienco.getText());
 //        double tongtiencahienco =ttchc;
 //        ViewResetCa vrs = new ViewResetCa(tongtiencahienco);
@@ -268,11 +286,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
     private void txttienphatsinhCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttienphatsinhCaretUpdate
         // TODO add your handling code here:
         try {
-            txttongtiencahienco.setText(Double.parseDouble(txttienphatsinh.getText())+Double.parseDouble(txttiendoanhthu.getText())+Double.parseDouble(txtsotienbandau.getText())+"");
+            txttongtiencahienco.setText(Double.parseDouble(txttienphatsinh.getText()) + Double.parseDouble(txttiendoanhthu.getText()) + Double.parseDouble(txtsotienbandau.getText()) + "");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_txttienphatsinhCaretUpdate
-    
+
     /**
      * @param args the command line arguments
      */
