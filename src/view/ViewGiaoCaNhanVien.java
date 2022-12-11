@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.sql.*;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.GiaoCa;
 import service.GiaoCa_service;
@@ -17,6 +21,7 @@ import service.nhanvien_service;
 import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.HoaDonServiceImpl;
 import serviceimql.Nhanvien_serviceimpl;
+import viewModel.GiaoCaViewModel2;
 
 /**
  *
@@ -142,6 +147,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         });
 
         jButton2.setText("Xác nhận");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Reset ca");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -281,7 +291,6 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        boolean tt=false;
         try {
             double tthc = Double.parseDouble(txttongtiencahienco.getText());
             ViewResetCa vrs = new ViewResetCa(tthc);
@@ -308,6 +317,36 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadTien();
     }//GEN-LAST:event_txtghichuCaretUpdate
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        GiaoCaViewModel2 gc = new GiaoCaViewModel2();
+        gc.setMaca(mac);
+        
+        String dt = txtthoidiemketthuc.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date1 = sdf.parse(dt);
+            gc.setThoidiemketthuc(date1);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewGiaoCaNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+//        gc.setThoidiemketthuc(new Date());
+        gc.setTiendoanhthu(Double.parseDouble(txttiendoanhthu.getText()));
+        gc.setTonghienco(Double.parseDouble(txttongtiencahienco.getText()));
+        gc.setTienchuthu(Double.parseDouble(txttienchuthu.getText()));
+        gc.setTienphatsinh(Double.parseDouble(txttienphatsinh.getText()));
+        if(txtghichu.getText().equals("")){
+            gc.setGhichu("");
+        }else{
+            gc.setGhichu(txtghichu.getText());
+        }
+        giaoca.updateGC(gc);
+        JOptionPane.showMessageDialog(this, "Giao ca thanh công");
+        System.exit(0);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -374,5 +413,9 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         txttienchuthu.setText(tienlayra + "");
         double tienKQ = Double.parseDouble(txtsotienbandau.getText()) + Double.parseDouble(txttiendoanhthu.getText()) + Double.parseDouble(txttienphatsinh.getText()) - Double.parseDouble(txttienchuthu.getText());
         txttongtiencahienco.setText(tienKQ + "");
+    }
+
+    private GiaoCa GetGCByForm() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

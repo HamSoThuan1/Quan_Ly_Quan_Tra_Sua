@@ -12,6 +12,7 @@ import repository.Nhanvien_repository;
 import service.GiaoCa_service;
 import viewModel.GiaoCaViewModel;
 import viewModel.GiaoCaViewModel1;
+import viewModel.GiaoCaViewModel2;
 
 /**
  *
@@ -58,6 +59,11 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     @Override
     public GiaoCa getDoanhThuByThoiGianBatDau(Date dt) {
         return gcrepos.getDoanhThuByThoiGianBatDau(dt);
+    }
+
+    @Override
+    public int updateGC(GiaoCaViewModel2 gc) {
+        return gcrepos.updateGC(gc);
     }
     
 }

@@ -10,6 +10,7 @@ import model.GiaoCa;
 import model.Nhanvien;
 import viewModel.GiaoCaViewModel;
 import viewModel.GiaoCaViewModel1;
+import viewModel.GiaoCaViewModel2;
 
 /**
  *
@@ -32,4 +33,6 @@ public interface GiaoCa_service {
     public int add(GiaoCaViewModel1 gcvm);
 
     public GiaoCa getDoanhThuByThoiGianBatDau(Date dt);
+
+    public int updateGC(GiaoCaViewModel2 gc);
 }
