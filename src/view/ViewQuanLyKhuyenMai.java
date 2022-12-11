@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.KhuyenMai;
 import service.KhuyenMai_service;
@@ -359,6 +360,44 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         // TODO add your handling code here:
         KhuyenMai km = null;          
         try {
+            if(txtMaKM.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Không để trống Mã!");
+                return;
+            }
+            for (KhuyenMai t : listKM) {
+                if(txtMaKM.getText().equals(t.getMaKM())){
+                    JOptionPane.showMessageDialog(this, "Không để trùng Mã!");
+                    return;
+                }
+            }
+            
+            if(txtTenKM.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Không để trống Tên!");
+                return;
+            }
+            
+            if(txtGiatri.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Không để trống Giá trị!");
+                return;
+            }
+            int giatri = Integer.parseInt(txtGiatri.getText());
+            try {
+                if(giatri<1){
+                    JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0!");
+                    return;
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Giá trị phải là số!");
+            }
+            if(txtNgayBD.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Không để trống Ngày bắt đầu!");
+                return;
+            }
+            
+            if(txtMaKM.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Không để trống Ngày kết thúc!");
+                return;
+            }
             km = getKMByForm();
             KMSer.add(km);
             fillTableKM();
@@ -547,12 +586,9 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         String tenkm = txtTenKM.getText();
         String loai =  rdoPT.isSelected() ? "%":"Tiền mặt";
         int gtri = Integer.parseInt(txtGiatri.getText());
-//        String ngaybd = txtNgayBD.getText();
         Date nbd = new SimpleDateFormat("yyyy-MM-dd").parse(txtNgayBD.getText());
-//        String ngaykt = txtNgayKT.getText();
         Date nkt = new SimpleDateFormat("yyyy-MM-dd").parse(txtNgayKT.getText());
         
-//        String tthai = cboTT.getSelectedItem().toString();
         int tthai;
         String tt= (String) cboTT.getSelectedItem();
         if(tt.equals("Đang hoạt động")){
