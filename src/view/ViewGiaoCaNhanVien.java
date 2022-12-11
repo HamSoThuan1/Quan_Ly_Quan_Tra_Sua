@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import model.GiaoCa;
 import service.GiaoCa_service;
@@ -42,6 +43,7 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         this.mac = mac;
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ViewGiaoCaNhanVien.DISPOSE_ON_CLOSE);
+        Date datte = new Date();
         if (txtsotienbandau.getText().equals("")) {
             txtsotienbandau.setText("0");
         }
@@ -64,6 +66,8 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         txtthoidiembatdau.setText(sdf.format(giaoca.getGiaoCaByMa(mac).getThoigianbatdau()));
         Date dt = giaoca.getGiaoCaByMa(mac).getThoigianbatdau();
         txttiendoanhthu.setText(giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu() + "");
+        Timestamp tdkt =giaoca.getDoanhThuByThoiGianBatDau(dt).getThoidiemketthuc();
+        txtthoidiemketthuc.setText(sdf.format(tdkt));
         txttongtiencahienco.setText(giaoca.getGiaoCaByMa(mac).getTienbandau() + giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu() + "");
         loadTien();
     }

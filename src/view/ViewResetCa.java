@@ -5,6 +5,11 @@
 package view;
 
 import javax.swing.JOptionPane;
+import model.Nhanvien;
+import service.GiaoCa_service;
+import service.nhanvien_service;
+import serviceimql.GiaoCa_serviceimpl;
+import serviceimql.Nhanvien_serviceimpl;
 
 /**
  *
@@ -13,6 +18,7 @@ import javax.swing.JOptionPane;
 public class ViewResetCa extends javax.swing.JFrame {
 
     private double tthc;
+    private nhanvien_service nhanvien = new Nhanvien_serviceimpl();
 
     /**
      * Creates new form ViewResetCa
@@ -48,13 +54,13 @@ public class ViewResetCa extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtmaql = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txttienhienco = new javax.swing.JLabel();
         txttienconlai = new javax.swing.JLabel();
         txttienlayra = new javax.swing.JTextField();
+        txtmatkhauql = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -112,9 +118,9 @@ public class ViewResetCa extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtmaql, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                                    .addComponent(txtmatkhauql)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -135,7 +141,7 @@ public class ViewResetCa extends javax.swing.JFrame {
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField1, jTextField2, txttienconlai, txttienhienco, txttienlayra});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtmaql, txttienconlai, txttienhienco, txttienlayra});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,14 +150,12 @@ public class ViewResetCa extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtmaql, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(txtmatkhauql))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
@@ -171,7 +175,7 @@ public class ViewResetCa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, jTextField1, jTextField2});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel2, jLabel3, jLabel4, jLabel5, jLabel6, txtmaql});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -200,6 +204,26 @@ public class ViewResetCa extends javax.swing.JFrame {
         }
         ViewGiaoCaNhanVien.tienconlai = Double.parseDouble(txttienconlai.getText());
         ViewGiaoCaNhanVien.tienlayra = Double.parseDouble(txttienlayra.getText());
+        if(txtmaql.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Chưa nhập mã");
+            txtmaql.requestFocus();
+            return;
+        }
+        if(txtmatkhauql.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Chưa mật khẩu");
+            txtmatkhauql.requestFocus();
+            return;
+        }
+        Nhanvien nv = nhanvien.getNVByMaVaMatKhau(txtmaql.getText(), txtmatkhauql.getText());
+        if (nv == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập lại");
+            return;
+        }
+        String chucvu = nv.getChucvu();
+        if(chucvu.equalsIgnoreCase("Nhan vien")){
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền reset");
+            return;
+        }
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -255,8 +279,8 @@ public class ViewResetCa extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField txtmaql;
+    private javax.swing.JPasswordField txtmatkhauql;
     private javax.swing.JLabel txttienconlai;
     private javax.swing.JLabel txttienhienco;
     private javax.swing.JTextField txttienlayra;

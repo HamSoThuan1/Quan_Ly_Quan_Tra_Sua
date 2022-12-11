@@ -178,12 +178,13 @@ public class GiaoCaRepository {
     public GiaoCa getDoanhThuByThoiGianBatDau(Date dt) {
         GiaoCa gca = null;
         ResultSet rs;
-        String sql = "select SUM(TongTien) as doanhthu from HOADON where NgayTao > ? and NgayTao<GETDATE()";
+        String sql = "select getdate(),SUM(TongTien) as doanhthu from HOADON where NgayTao > ? and NgayTao<GETDATE()";
         rs = JDBC_Helper.selectTongQuat(sql, dt);
         try {
             while (rs.next()) {
-                double tt = rs.getDouble(1);
-                gca= new GiaoCa(tt);
+                Timestamp tg = rs.getTimestamp(1);
+                double tt = rs.getDouble(2);
+                gca= new GiaoCa(tg, tt);
             }return gca;
         } catch (Exception e) {
             return null;
