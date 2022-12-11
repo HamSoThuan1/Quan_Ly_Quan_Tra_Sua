@@ -37,7 +37,6 @@ public class ViewDangNhap extends javax.swing.JFrame {
     public ViewDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
-//        dangNhap_services = new DangNhap_servicesimpl();
     }
 
     /**

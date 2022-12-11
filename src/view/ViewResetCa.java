@@ -204,6 +204,8 @@ public class ViewResetCa extends javax.swing.JFrame {
         }
         ViewGiaoCaNhanVien.tienconlai = Double.parseDouble(txttienconlai.getText());
         ViewGiaoCaNhanVien.tienlayra = Double.parseDouble(txttienlayra.getText());
+        ViewGiaoCaQuanLy.tienconlai1 = Double.parseDouble(txttienconlai.getText());
+        ViewGiaoCaQuanLy.tienlayra1 = Double.parseDouble(txttienlayra.getText());
         if(txtmaql.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Chưa nhập mã");
             txtmaql.requestFocus();
