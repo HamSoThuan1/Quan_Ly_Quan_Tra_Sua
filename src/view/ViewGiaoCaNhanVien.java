@@ -12,15 +12,18 @@ import javax.swing.table.DefaultTableModel;
 import model.GiaoCa;
 import service.GiaoCa_service;
 import service.HoaDonService;
+import service.nhanvien_service;
 import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.HoaDonServiceImpl;
+import serviceimql.Nhanvien_serviceimpl;
 
 /**
  *
  * @author kn134
  */
 public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
-
+    private double tcl = tienconlai;
+    private double tlr = tienlayra;
     static double tienconlai;
     static double tienlayra;
     List<GiaoCa> listgc = new ArrayList<>();
@@ -28,6 +31,7 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
     private final String mac;
     private GiaoCa_service giaoca = new GiaoCa_serviceimpl();
     private HoaDonService hoadon = new HoaDonServiceImpl();
+    private nhanvien_service nhanvien = new Nhanvien_serviceimpl();
     private double stcl;
 
     /**
@@ -156,6 +160,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
 
         txtghichu.setColumns(20);
         txtghichu.setRows(5);
+        txtghichu.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtghichuCaretUpdate(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtghichu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -268,16 +277,17 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        boolean tt=false;
         try {
             double tthc = Double.parseDouble(txttongtiencahienco.getText());
             ViewResetCa vrs = new ViewResetCa(tthc);
             vrs.setVisible(true);
-            txttienchuthu.setText(tienlayra + "");
         } catch (Exception e) {
         }
         txttienchuthu.setText(tienlayra + "");
         txttongtiencahienco.setText(Double.parseDouble(txttongtiencahienco.getText()) - Double.parseDouble(txttienchuthu.getText()) + "");
         loadTien();
+        txtghichu.setText("Đã rút tiền khỏi ca");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txttienphatsinhCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttienphatsinhCaretUpdate
@@ -289,6 +299,11 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         }
         loadTien();
     }//GEN-LAST:event_txttienphatsinhCaretUpdate
+
+    private void txtghichuCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtghichuCaretUpdate
+        // TODO add your handling code here:
+        loadTien();
+    }//GEN-LAST:event_txtghichuCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -352,8 +367,8 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void loadTien() {
-        txttienchuthu.setText(tienlayra+"");
-        double tienKQ = Double.parseDouble(txtsotienbandau.getText())+Double.parseDouble(txttiendoanhthu.getText())+Double.parseDouble(txttienphatsinh.getText())-Double.parseDouble(txttienchuthu.getText());
-        txttongtiencahienco.setText(tienKQ+"");
+        txttienchuthu.setText(tienlayra + "");
+        double tienKQ = Double.parseDouble(txtsotienbandau.getText()) + Double.parseDouble(txttiendoanhthu.getText()) + Double.parseDouble(txttienphatsinh.getText()) - Double.parseDouble(txttienchuthu.getText());
+        txttongtiencahienco.setText(tienKQ + "");
     }
 }
