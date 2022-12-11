@@ -13,6 +13,7 @@ import service.GiaoCa_service;
 import viewModel.GiaoCaViewModel;
 import viewModel.GiaoCaViewModel1;
 import viewModel.GiaoCaViewModel2;
+import viewModel.GiaoCaViewModel3;
 
 /**
  *
@@ -64,6 +65,11 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     @Override
     public int updateGC(GiaoCaViewModel2 gc) {
         return gcrepos.updateGC(gc);
+    }
+
+    @Override
+    public GiaoCaViewModel3 getsotienbandau() {
+        return gcrepos.getsotienbandau();
     }
     
 }

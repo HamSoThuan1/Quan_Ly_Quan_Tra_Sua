@@ -15,6 +15,7 @@ import model.Nhanvien;
 import viewModel.GiaoCaViewModel;
 import viewModel.GiaoCaViewModel1;
 import viewModel.GiaoCaViewModel2;
+import viewModel.GiaoCaViewModel3;
 
 /**
  *
@@ -177,5 +178,35 @@ public class GiaoCaRepository {
     public int updateGC(GiaoCaViewModel2 gc) {
         String sql = "update GIAOCA set ThoiDiemKetThuc=?,TienDoanhThu=?,TienPhatSinh=?,TienHienCo=?,TienChuThu=?,GhiChu=? where maca=?";
         return  JDBC_Helper.updateTongQuat(sql, gc.getThoidiemketthuc(),gc.getTiendoanhthu(),gc.getTienphatsinh(),gc.getTonghienco(),gc.getTienchuthu(),gc.getGhichu(),gc.getMaca());
+    }
+
+    public GiaoCaViewModel3 getsotienbandau() {
+        GiaoCaViewModel3 gc = null;
+        ResultSet rs;
+        String sql = "select Top 1 TienHienCo from giaoca order by CONVERT(int,SUBSTRING(MaCa,3,3)) desc";
+        rs = JDBC_Helper.selectTongQuat(sql);
+        try {
+            while (rs.next()) {
+                double tbd = rs.getDouble(1);
+                gc = new GiaoCaViewModel3(tbd);
+            }
+            return gc;
+        } catch (Exception e) {
+            return null;
+        }
+//        List<GiaoCaViewModel3> listgcvm3 = new ArrayList<>();
+//        ResultSet rs;
+//        String sql = "select Top 1 TienHienCo from giaoca order by CONVERT(int,SUBSTRING(MaCa,3,3)) desc";
+//        rs = JDBC_Helper.selectTongQuat(sql);
+//        try {
+//            while (rs.next()) {
+//                double tbd = rs.getDouble(1);
+//                GiaoCaViewModel3 gc = new GiaoCaViewModel3(tbd);
+//                listgcvm3.add(gc);
+//            }
+//            return listgcvm3;
+//        } catch (Exception e) {
+//            return null;
+//        }
     }
 }
