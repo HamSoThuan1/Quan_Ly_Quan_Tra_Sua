@@ -38,21 +38,22 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         this.mac = mac;
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ViewGiaoCaNhanVien.DISPOSE_ON_CLOSE);
-        if(txtsotienbandau.getText().equals("")){
+        if (txtsotienbandau.getText().equals("")) {
             txtsotienbandau.setText("0");
         }
-        if(txttongtiencahienco.getText().equals("")){
+        if (txttongtiencahienco.getText().equals("")) {
             txttongtiencahienco.setText("0");
         }
-        if(txttiendoanhthu.getText().equals("")){
+        if (txttiendoanhthu.getText().equals("")) {
             txttiendoanhthu.setText("0");
         }
-        if(txttienchuthu.getText().equals("")){
+        if (txttienchuthu.getText().equals("")) {
             txttienchuthu.setText("0");
         }
-        if(txttienphatsinh.getText().equals("")){
+        if (txttienphatsinh.getText().equals("")) {
             txttienphatsinh.setText("0");
         }
+        loadTien();
         txtmaca.setText(mac);
         txtsotienbandau.setText(giaoca.getGiaoCaByMa(mac).getTienbandau() + "");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -60,7 +61,7 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         Date dt = giaoca.getGiaoCaByMa(mac).getThoigianbatdau();
         txttiendoanhthu.setText(giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu() + "");
         txttongtiencahienco.setText(giaoca.getGiaoCaByMa(mac).getTienbandau() + giaoca.getDoanhThuByThoiGianBatDau(dt).getTiendoanhthu() + "");
-//        
+        loadTien();
     }
 
     /**
@@ -276,19 +277,17 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         }
         txttienchuthu.setText(tienlayra + "");
         txttongtiencahienco.setText(Double.parseDouble(txttongtiencahienco.getText()) - Double.parseDouble(txttienchuthu.getText()) + "");
-//        double ttchc =Double.parseDouble(lbltongtiencahienco.getText());
-//        double tongtiencahienco =ttchc;
-//        ViewResetCa vrs = new ViewResetCa(tongtiencahienco);
-//        vrs.setVisible(true);
-//        System.out.println(tongtiencahienco);
+        loadTien();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txttienphatsinhCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttienphatsinhCaretUpdate
         // TODO add your handling code here:
         try {
             txttongtiencahienco.setText(Double.parseDouble(txttienphatsinh.getText()) + Double.parseDouble(txttiendoanhthu.getText()) + Double.parseDouble(txtsotienbandau.getText()) + "");
+            loadTien();
         } catch (Exception e) {
         }
+        loadTien();
     }//GEN-LAST:event_txttienphatsinhCaretUpdate
 
     /**
@@ -351,4 +350,10 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
     private javax.swing.JTextField txttienphatsinh;
     private javax.swing.JLabel txttongtiencahienco;
     // End of variables declaration//GEN-END:variables
+
+    private void loadTien() {
+        txttienchuthu.setText(tienlayra+"");
+        double tienKQ = Double.parseDouble(txtsotienbandau.getText())+Double.parseDouble(txttiendoanhthu.getText())+Double.parseDouble(txttienphatsinh.getText())-Double.parseDouble(txttienchuthu.getText());
+        txttongtiencahienco.setText(tienKQ+"");
+    }
 }

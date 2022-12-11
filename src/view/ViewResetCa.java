@@ -18,10 +18,19 @@ public class ViewResetCa extends javax.swing.JFrame {
      * Creates new form ViewResetCa
      */
     public ViewResetCa(double tthc) {
-        this.tthc=tthc;
+        this.tthc = tthc;
         initComponents();
-        setLocationRelativeTo(null); 
-        txttienhienco.setText(tthc+"");
+        setLocationRelativeTo(null);
+        txttienhienco.setText(tthc + "");
+        if(txttienconlai.getText().equals("")){
+            txttienconlai.setText("0");
+        }
+        if(txttienhienco.getText().equals("")){
+            txttienhienco.setText("0");
+        }
+        if(txttienlayra.getText().equals("")){
+            txttienlayra.setText("0");
+        }
     }
 
     /**
@@ -169,20 +178,19 @@ public class ViewResetCa extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        if(txttienlayra.getText().equals("")){
+        if (txttienlayra.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng điền số tiền muốn lấy ra");
             txttienlayra.requestFocus();
             return;
         }
         try {
-            double tlr= Double.parseDouble(txttienlayra.getText());
-            if(tlr<0){
+            double tlr = Double.parseDouble(txttienlayra.getText());
+            if (tlr < 0) {
                 JOptionPane.showMessageDialog(this, "Số tiền nhập phải lớn hơn 0");
                 txttienlayra.requestFocus();
                 return;
@@ -190,15 +198,15 @@ public class ViewResetCa extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Số tiền nhập vào phải là số");
         }
-        ViewGiaoCaNhanVien.tienconlai=Double.parseDouble(txttienconlai.getText());
-        ViewGiaoCaNhanVien.tienlayra=Double.parseDouble(txttienlayra.getText());
+        ViewGiaoCaNhanVien.tienconlai = Double.parseDouble(txttienconlai.getText());
+        ViewGiaoCaNhanVien.tienlayra = Double.parseDouble(txttienlayra.getText());
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txttienlayraCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txttienlayraCaretUpdate
         // TODO add your handling code here
         try {
-            txttienconlai.setText(Double.parseDouble(txttienhienco.getText())-Double.parseDouble(txttienlayra.getText())+"");
+            txttienconlai.setText(Double.parseDouble(txttienhienco.getText()) - Double.parseDouble(txttienlayra.getText()) + "");
         } catch (Exception e) {
         }
     }//GEN-LAST:event_txttienlayraCaretUpdate
