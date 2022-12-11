@@ -24,4 +24,8 @@ public interface KhachHang_service {
     String add(KhachHang kh);
 
     public KhachHang getKHByID(String idkhachhang);
+
+    List<KhachHang> searchByname(String ten);
+
+    List<KhachHang> searchBysdt(String sdt);
 }

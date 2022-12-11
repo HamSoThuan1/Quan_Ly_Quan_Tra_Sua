@@ -395,6 +395,12 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void txtSearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchCaretUpdate
         // TODO add your handling code here:
+        String ten = txtSearch.getText();
+        String sdt = txtSearch.getText();
+        List<KhachHang> list1 = khachHang_serviceimpl.searchByname(ten);
+        List<KhachHang> list2 = khachHang_serviceimpl.searchBysdt(sdt);
+        showData(list1);
+        showData(list2);
     }//GEN-LAST:event_txtSearchCaretUpdate
 
     /**
@@ -470,6 +476,24 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     public void fillData() {
         modelKH = (DefaultTableModel) tblKhachHang.getModel();
+        modelKH.setRowCount(0);
+        listKH = khachHang_serviceimpl.GetallKH();
+        int stt = 1;
+        for (KhachHang khachHang : listKH) {
+            modelKH.addRow(new Object[]{
+                stt++,
+                khachHang.getMakh(),
+                khachHang.getTenkh(),
+                khachHang.isGioitinh() == true ? "Nam" : "Nữ",
+                khachHang.getSodt(),
+                khachHang.getDiachi(),
+                khachHang.getGhichu(),
+                khachHang.getTrangthai()
+            });
+        }
+    }
+    public void showData(List<KhachHang> list){
+         modelKH = (DefaultTableModel) tblKhachHang.getModel();
         modelKH.setRowCount(0);
         listKH = khachHang_serviceimpl.GetallKH();
         int stt = 1;

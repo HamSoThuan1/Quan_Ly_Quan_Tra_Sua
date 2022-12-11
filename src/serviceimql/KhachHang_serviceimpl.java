@@ -66,4 +66,14 @@ public class KhachHang_serviceimpl implements KhachHang_service {
     public KhachHang getKHByID(String idkhachhang) {
         return khrp.getKHByID(idkhachhang);
     }  
+
+    @Override
+    public List<KhachHang> searchByname(String ten) {
+        return khrp.searchByname(ten);
+    }
+
+    @Override
+    public List<KhachHang> searchBysdt(String sdt) {
+       return khrp.searchBysdt(sdt);
+    }
 }

@@ -161,5 +161,39 @@ public class KhachHang_repository {
             return null;
         }
     }
+public List<KhachHang> searchByname(String ten) {
+        String sql = "select * from KHACHHANG\n"
+                + "where HoTenKH like ?";
+         List<KhachHang> listkh = new ArrayList<>();
+        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql);){
+            pr.setObject(1, "%"+ten+"%");
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {                
+              KhachHang kh = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+              listkh.add(kh);
+            }
+            return listkh;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
+public List<KhachHang> searchBysdt(String sdt) {
+        String sql = "select * from KHACHHANG\n"
+                + "where SoDT like ?";
+         List<KhachHang> listkh = new ArrayList<>();
+        try (Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql);){
+            pr.setObject(1, "%"+sdt+"%");
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {                
+              KhachHang kh = new KhachHang(rs.getString(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getInt(8));
+              listkh.add(kh);
+            }
+            return listkh;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+        }
+        return null;
+    }
 
 }
