@@ -9,10 +9,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +28,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.GiaoCa_service;
 import serviceimql.GiaoCa_serviceimpl;
+import viewModel.GiaoCaViewModel2;
 
 /**
  *
@@ -405,7 +409,31 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-
+        GiaoCaViewModel2 gc = new GiaoCaViewModel2();
+        gc.setMaca(mac);
+        
+        String dt = txtthoidiemketthuc.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date1 = sdf.parse(dt);
+            gc.setThoidiemketthuc(date1);
+        } catch (ParseException ex) {
+            Logger.getLogger(ViewGiaoCaNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+//        gc.setThoidiemketthuc(new Date());
+        gc.setTiendoanhthu(Double.parseDouble(txttiendoanhthu.getText()));
+        gc.setTonghienco(Double.parseDouble(txttongtiencahienco.getText()));
+        gc.setTienchuthu(Double.parseDouble(txttienchuthu.getText()));
+        gc.setTienphatsinh(Double.parseDouble(txttienphatsinh.getText()));
+        if(txtghichu.getText().equals("")){
+            gc.setGhichu("");
+        }else{
+            gc.setGhichu(txtghichu.getText());
+        }
+        giaoca.updateGC(gc);
+        JOptionPane.showMessageDialog(this, "Giao ca thanh công");
+        System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
