@@ -13,8 +13,9 @@ import viewModel.HoaDonViewModel1;
  * @author kn134
  */
 public interface HoaDonChiTietService {
+
     List<HoaDonViewModel1> getAll();
 
     public int addHDCT(HoaDonChiTiet hdct);
-    
+
 }

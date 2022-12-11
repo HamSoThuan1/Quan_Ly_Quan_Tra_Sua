@@ -20,13 +20,17 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private List<KhachHang> listKH;
     private KhachHang_serviceimpl khachHang_serviceimpl;
-    DefaultTableModel modelKH;
+    private DefaultTableModel modelKH;
+    private static String mac;
+    public static String maKH = null;
+    public static String tenKH = null;
 
     /**
      * Creates new form ViewKhachHang
      */
     public ViewKhachHang() {
         initComponents();
+        
         listKH = new ArrayList<>();
         khachHang_serviceimpl = new KhachHang_serviceimpl();
         modelKH = new DefaultTableModel();
@@ -85,14 +89,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
         jLabel2.setText("Tìm kiếm:");
 
-        txtSearch.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtSearchMouseClicked(evt);
-            }
-        });
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
+        txtSearch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtSearchCaretUpdate(evt);
             }
         });
 
@@ -115,6 +114,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblKhachHang);
 
         btnChon.setText("Chọn");
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -133,11 +137,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnChon)
-                .addGap(296, 296, 296))
+                .addGap(295, 295, 295))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,9 +154,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(18, 18, 18)
                 .addComponent(btnChon)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Danh sách khách hàng", jPanel3);
@@ -313,14 +317,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtSearchMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchMouseClicked
-
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
         KhachHang kh = new KhachHang();
@@ -346,6 +342,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, khachHang_serviceimpl.add(kh));
         listKH = khachHang_serviceimpl.GetallKH();
         fillData();
+        clearKH();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
@@ -356,12 +353,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void btn_lamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lamMoiActionPerformed
         // TODO add your handling code here:
-        txt_maKH.setText("");
-        txt_tenKH.setText("");
-        buttonGroup1.clearSelection();
-        txt_sdt.setText("");
-        tet_diaChi.setText("");
-        tet_ghiChu.setText("");
+        clearKH();
     }//GEN-LAST:event_btn_lamMoiActionPerformed
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
@@ -391,6 +383,19 @@ public class ViewKhachHang extends javax.swing.JFrame {
         listKH = khachHang_serviceimpl.GetallKH();
         fillData();
     }//GEN-LAST:event_btn_suaActionPerformed
+
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+        // TODO add your handling code here:
+        int index = tblKhachHang.getSelectedRow();
+        ViewQuanLyBanHang viewBanHang = new ViewQuanLyBanHang(mac);
+        maKH = tblKhachHang.getValueAt(index, 1).toString();
+        tenKH = tblKhachHang.getValueAt(index, 2).toString();
+        this.dispose();
+    }//GEN-LAST:event_btnChonActionPerformed
+
+    private void txtSearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchCaretUpdate
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchCaretUpdate
 
     /**
      * @param args the command line arguments
@@ -426,6 +431,42 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
     }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChon;
+    private javax.swing.JButton btn_lamMoi;
+    private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_them;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JRadioButton rdo_conHoatDong;
+    private javax.swing.JRadioButton rdo_nam;
+    private javax.swing.JRadioButton rdo_ngungHoatDong;
+    private javax.swing.JRadioButton rdo_nu;
+    private javax.swing.JTable tblKhachHang;
+    private javax.swing.JTextArea tet_diaChi;
+    private javax.swing.JTextArea tet_ghiChu;
+    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txt_maKH;
+    private javax.swing.JTextField txt_sdt;
+    private javax.swing.JTextField txt_tenKH;
+    // End of variables declaration//GEN-END:variables
 
     public void fillData() {
         modelKH = (DefaultTableModel) tblKhachHang.getModel();
@@ -469,40 +510,12 @@ public class ViewKhachHang extends javax.swing.JFrame {
         tet_ghiChu.setText(kh.getGhichu());
     }
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChon;
-    private javax.swing.JButton btn_lamMoi;
-    private javax.swing.JButton btn_sua;
-    private javax.swing.JButton btn_them;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JRadioButton rdo_conHoatDong;
-    private javax.swing.JRadioButton rdo_nam;
-    private javax.swing.JRadioButton rdo_ngungHoatDong;
-    private javax.swing.JRadioButton rdo_nu;
-    private javax.swing.JTable tblKhachHang;
-    private javax.swing.JTextArea tet_diaChi;
-    private javax.swing.JTextArea tet_ghiChu;
-    private javax.swing.JTextField txtSearch;
-    private javax.swing.JTextField txt_maKH;
-    private javax.swing.JTextField txt_sdt;
-    private javax.swing.JTextField txt_tenKH;
-    // End of variables declaration//GEN-END:variables
+    public void clearKH() {
+        txt_maKH.setText("");
+        txt_tenKH.setText("");
+        buttonGroup1.clearSelection();
+        txt_sdt.setText("");
+        tet_diaChi.setText("");
+        tet_ghiChu.setText("");
+    }
 }
