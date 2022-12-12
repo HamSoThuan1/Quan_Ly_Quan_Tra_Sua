@@ -319,30 +319,30 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        KhachHang kh = new KhachHang();
-        kh.setMakh(txt_maKH.getText());
-        kh.setTenkh(txt_tenKH.getText());
-        boolean gioiTinh = kh.isGioitinh();
-        if (rdo_nam.isSelected()) {
-            kh.setGioitinh(true);
-        }
-        if (rdo_nu.isSelected()) {
-            kh.setGioitinh(false);
-        }
-        kh.setSodt(txt_sdt.getText());
-        int trangThai = kh.getTrangthai();
-        if (rdo_conHoatDong.isSelected()) {
-            kh.setTrangthai(1);
-        }
-        if (rdo_ngungHoatDong.isSelected()) {
-            kh.setTrangthai(0);
-        }
-        kh.setDiachi(tet_diaChi.getText());
-        kh.setGhichu(tet_ghiChu.getText());
-        JOptionPane.showMessageDialog(this, khachHang_serviceimpl.add(kh));
-        listKH = khachHang_serviceimpl.GetallKH();
-        fillData();
-        clearKH();
+//        KhachHang kh = new KhachHang();
+//        kh.setMakh(txt_maKH.getText());
+//        kh.setTenkh(txt_tenKH.getText());
+//        boolean gioiTinh = kh.isGioitinh();
+//        if (rdo_nam.isSelected()) {
+//            kh.setGioitinh(true);
+//        }
+//        if (rdo_nu.isSelected()) {
+//            kh.setGioitinh(false);
+//        }
+//        kh.setSodt(txt_sdt.getText());
+//        int trangThai = kh.getTrangthai();
+//        if (rdo_conHoatDong.isSelected()) {
+//            kh.setTrangthai(1);
+//        }
+//        if (rdo_ngungHoatDong.isSelected()) {
+//            kh.setTrangthai(0);
+//        }
+//        kh.setDiachi(tet_diaChi.getText());
+//        kh.setGhichu(tet_ghiChu.getText());
+//        JOptionPane.showMessageDialog(this, khachHang_serviceimpl.add(kh));
+//        listKH = khachHang_serviceimpl.GetallKH();
+//        fillData();
+//        clearKH();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
@@ -358,30 +358,30 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void btn_suaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaActionPerformed
         // TODO add your handling code here:
-        KhachHang kh = new KhachHang();
-        String maKH = txt_maKH.getText();
-        kh.setMakh(txt_maKH.getText());
-        kh.setTenkh(txt_tenKH.getText());
-        boolean gioiTinh = kh.isGioitinh();
-        if (rdo_nam.isSelected()) {
-            kh.setGioitinh(true);
-        }
-        if (rdo_nu.isSelected()) {
-            kh.setGioitinh(false);
-        }
-        kh.setSodt(txt_sdt.getText());
-        int trangThai = kh.getTrangthai();
-        if (rdo_conHoatDong.isSelected()) {
-            kh.setTrangthai(1);
-        }
-        if (rdo_ngungHoatDong.isSelected()) {
-            kh.setTrangthai(0);
-        }
-        kh.setDiachi(tet_diaChi.getText());
-        kh.setGhichu(tet_ghiChu.getText());
-        JOptionPane.showMessageDialog(this, khachHang_serviceimpl.updateKH(kh, maKH));
-        listKH = khachHang_serviceimpl.GetallKH();
-        fillData();
+//        KhachHang kh = new KhachHang();
+//        String maKH = txt_maKH.getText();
+//        kh.setMakh(txt_maKH.getText());
+//        kh.setTenkh(txt_tenKH.getText());
+//        boolean gioiTinh = kh.isGioitinh();
+//        if (rdo_nam.isSelected()) {
+//            kh.setGioitinh(true);
+//        }
+//        if (rdo_nu.isSelected()) {
+//            kh.setGioitinh(false);
+//        }
+//        kh.setSodt(txt_sdt.getText());
+//        int trangThai = kh.getTrangthai();
+//        if (rdo_conHoatDong.isSelected()) {
+//            kh.setTrangthai(1);
+//        }
+//        if (rdo_ngungHoatDong.isSelected()) {
+//            kh.setTrangthai(0);
+//        }
+//        kh.setDiachi(tet_diaChi.getText());
+//        kh.setGhichu(tet_ghiChu.getText());
+//        JOptionPane.showMessageDialog(this, khachHang_serviceimpl.updateKH(kh, maKH));
+//        listKH = khachHang_serviceimpl.GetallKH();
+//        fillData();
     }//GEN-LAST:event_btn_suaActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
@@ -395,12 +395,12 @@ public class ViewKhachHang extends javax.swing.JFrame {
 
     private void txtSearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtSearchCaretUpdate
         // TODO add your handling code here:
-        String ten = txtSearch.getText();
-        String sdt = txtSearch.getText();
-        List<KhachHang> list1 = khachHang_serviceimpl.searchByname(ten);
-        List<KhachHang> list2 = khachHang_serviceimpl.searchBysdt(sdt);
-        showData(list1);
-        showData(list2);
+//        String ten = txtSearch.getText();
+//        String sdt = txtSearch.getText();
+//        List<KhachHang> list1 = khachHang_serviceimpl.searchByname(ten);
+//        List<KhachHang> list2 = khachHang_serviceimpl.searchBysdt(sdt);
+//        showData(list1);
+//        showData(list2);
     }//GEN-LAST:event_txtSearchCaretUpdate
 
     /**
