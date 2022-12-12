@@ -13,6 +13,9 @@ import model.thongke;
  */
 public interface thongke_service {
     List<thongke> getallthongke();
-    List<thongke> getthongketheothang(String thang,String nam);
-    List<thongke> getthongketheonam(String nam);
+    List<thongke> getthongketheongay();
+    List<thongke> getthongketheothang();
+    List<thongke> getthongketheonam();
+    List<thongke> getthongkebythang(String thang,String nam);
+    List<thongke> getthongkebynam(String nam);
 }

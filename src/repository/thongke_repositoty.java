@@ -36,7 +36,64 @@ public class thongke_repositoty {
             return null;
         }
     }
-    public static List<thongke> getthongketheothang(String thang,String nam){
+    public static List<thongke> getthongketheongay(){
+    List<thongke> listtk = new ArrayList<>();
+    ResultSet rs;
+    String sql="select MaHD,NgayTao,TongTien,TrangThai from HOADON where day(NgayTao)=(DATEPART(day,GETDATE())) and month(NgayTao)=(DATEPART(MONTH,GETDATE()))and year(NgayTao)=(DATEPART(year,GETDATE()))";
+    rs=JDBC_Helper.selectTongQuat(sql);
+        try {
+            while(rs.next()){
+            String mahd=rs.getString(1);
+            Date ngaytao=rs.getDate(2);
+            double tongtien=rs.getDouble(3);
+            int trangthai=rs.getInt(4);
+            thongke tk = new thongke(mahd, ngaytao, tongtien, trangthai);
+            listtk.add(tk);
+            }
+            return listtk;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    public static List<thongke> getthongketheothang(){
+    List<thongke> listtk = new ArrayList<>();
+    ResultSet rs;
+    String sql="select MaHD,NgayTao,TongTien,TrangThai from HOADON where month(NgayTao)=(DATEPART(MONTH,GETDATE()))and year(NgayTao)=(DATEPART(year,GETDATE()))";
+    rs=JDBC_Helper.selectTongQuat(sql);
+        try {
+            while(rs.next()){
+            String mahd=rs.getString(1);
+            Date ngaytao=rs.getDate(2);
+            double tongtien=rs.getDouble(3);
+            int trangthai=rs.getInt(4);
+            thongke tk = new thongke(mahd, ngaytao, tongtien, trangthai);
+            listtk.add(tk);
+            }
+            return listtk;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    public static List<thongke> getthongketheonam(){
+    List<thongke> listtk = new ArrayList<>();
+    ResultSet rs;
+    String sql="select MaHD,NgayTao,TongTien,TrangThai from HOADON where year(NgayTao)=(DATEPART(year,GETDATE()))";
+    rs=JDBC_Helper.selectTongQuat(sql);
+        try {
+            while(rs.next()){
+            String mahd=rs.getString(1);
+            Date ngaytao=rs.getDate(2);
+            double tongtien=rs.getDouble(3);
+            int trangthai=rs.getInt(4);
+            thongke tk = new thongke(mahd, ngaytao, tongtien, trangthai);
+            listtk.add(tk);
+            }
+            return listtk;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    public static List<thongke> getthongkebythang(String thang,String nam){
     List<thongke> listtk = new ArrayList<>();
     ResultSet rs;
     String sql="select MaHD,NgayTao,TongTien,TrangThai from HOADON where month(NgayTao)=? and YEAR(NgayTao)=?";
@@ -55,7 +112,7 @@ public class thongke_repositoty {
             return null;
         }
     }
-    public static List<thongke> getthongketheonam(String nam){
+    public static List<thongke> getthongkebynam(String nam){
     List<thongke> listtk = new ArrayList<>();
     ResultSet rs;
     String sql="select MaHD,NgayTao,TongTien,TrangThai from HOADON where YEAR(NgayTao)=?";
@@ -75,7 +132,7 @@ public class thongke_repositoty {
         }
     }
     public static void main(String[] args) {
-         List<thongke>list= getthongketheonam("2022");
+         List<thongke>list= getthongketheonam();
          for (thongke x : list) {
              System.out.println(x.toString());
         }

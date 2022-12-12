@@ -21,13 +21,28 @@ public class thongke_serviceimpl implements thongke_service{
     }
 
     @Override
-    public List<thongke> getthongketheothang(String thang, String nam) {
-        return tk.getthongketheothang(thang, nam);
+    public List<thongke> getthongkebythang(String thang, String nam) {
+        return tk.getthongkebythang(thang, nam);
     }
 
     @Override
-    public List<thongke> getthongketheonam(String nam) {
-        return tk.getthongketheonam(nam);
+    public List<thongke> getthongkebynam(String nam) {
+        return tk.getthongkebynam(nam);
+    }
+
+    @Override
+    public List<thongke> getthongketheongay() {
+        return tk.getthongketheongay();
+    }
+
+    @Override
+    public List<thongke> getthongketheothang() {
+        return tk.getthongketheothang();
+    }
+
+    @Override
+    public List<thongke> getthongketheonam() {
+        return tk.getthongketheonam();
     }
     
 }
