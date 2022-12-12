@@ -21,6 +21,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private List<KhachHang> listKH;
     private KhachHang_serviceimpl khachHang_serviceimpl;
     private DefaultTableModel modelKH;
+    private DefaultTableModel model;
     private static String mac;
     public static String maKH = null;
     public static String tenKH = null;
@@ -30,12 +31,18 @@ public class ViewKhachHang extends javax.swing.JFrame {
      */
     public ViewKhachHang() {
         initComponents();
-        
+
         listKH = new ArrayList<>();
         khachHang_serviceimpl = new KhachHang_serviceimpl();
         modelKH = new DefaultTableModel();
+        model = new DefaultTableModel();
+        tblKhachHang.setModel(model);
 
-        fillData();
+        String[] heard = {"STT", "Mã KH", "Tên KH", "Giới tính", "Số ĐT", "Địa chỉ", "Ghi chú", "Trạng thái"};
+        model.setColumnIdentifiers(heard);
+
+        listKH = khachHang_serviceimpl.GetallKH();
+        showData(listKH);
     }
 
     /**
@@ -54,9 +61,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblKhachHang = new javax.swing.JTable();
         btnChon = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblKhachHang = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txt_tenKH = new javax.swing.JTextField();
@@ -95,15 +102,22 @@ public class ViewKhachHang extends javax.swing.JFrame {
             }
         });
 
+        btnChon.setText("Chọn");
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
+
         tblKhachHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "STT", "Mã KH", "Tên KH", "Giới Tính", "Số DT", "Địa Chỉ", "Ghi Chú", "Trạng Thái"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         tblKhachHang.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,14 +125,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 tblKhachHangMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblKhachHang);
-
-        btnChon.setText("Chọn");
-        btnChon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChonActionPerformed(evt);
-            }
-        });
+        jScrollPane4.setViewportView(tblKhachHang);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -135,13 +142,13 @@ public class ViewKhachHang extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(20, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnChon)
-                .addGap(295, 295, 295))
+                .addGap(307, 307, 307))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,11 +159,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnChon)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane2.addTab("Danh sách khách hàng", jPanel3);
@@ -345,12 +352,6 @@ public class ViewKhachHang extends javax.swing.JFrame {
         clearKH();
     }//GEN-LAST:event_btn_themActionPerformed
 
-    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
-        // TODO add your handling code here:
-        int index = tblKhachHang.getSelectedRow();
-        showDeTai(index);
-    }//GEN-LAST:event_tblKhachHangMouseClicked
-
     private void btn_lamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_lamMoiActionPerformed
         // TODO add your handling code here:
         clearKH();
@@ -387,7 +388,7 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
         // TODO add your handling code here:
         int index = tblKhachHang.getSelectedRow();
-        ViewQuanLyBanHang viewBanHang = new ViewQuanLyBanHang(mac);
+//        ViewQuanLyBanHang viewBanHang = new ViewQuanLyBanHang(mac);
         maKH = tblKhachHang.getValueAt(index, 1).toString();
         tenKH = tblKhachHang.getValueAt(index, 2).toString();
         this.dispose();
@@ -402,6 +403,12 @@ public class ViewKhachHang extends javax.swing.JFrame {
         showData(list1);
         showData(list2);
     }//GEN-LAST:event_txtSearchCaretUpdate
+
+    private void tblKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKhachHangMouseClicked
+        // TODO add your handling code here:
+        int index = tblKhachHang.getSelectedRow();
+        showDeTai(index);
+    }//GEN-LAST:event_tblKhachHangMouseClicked
 
     /**
      * @param args the command line arguments
@@ -457,9 +464,9 @@ public class ViewKhachHang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JRadioButton rdo_conHoatDong;
     private javax.swing.JRadioButton rdo_nam;
@@ -492,13 +499,12 @@ public class ViewKhachHang extends javax.swing.JFrame {
             });
         }
     }
-    public void showData(List<KhachHang> list){
-         modelKH = (DefaultTableModel) tblKhachHang.getModel();
-        modelKH.setRowCount(0);
-        listKH = khachHang_serviceimpl.GetallKH();
+    
+    public void showData(List<KhachHang> list) {
+        model.setRowCount(0);
         int stt = 1;
-        for (KhachHang khachHang : listKH) {
-            modelKH.addRow(new Object[]{
+        for (KhachHang khachHang : list) {
+            model.addRow(new Object[]{
                 stt++,
                 khachHang.getMakh(),
                 khachHang.getTenkh(),
@@ -516,12 +522,12 @@ public class ViewKhachHang extends javax.swing.JFrame {
         txt_maKH.setText(kh.getMakh());
         txt_tenKH.setText(kh.getTenkh());
         boolean gioiTinh = kh.isGioitinh();
-        if (rdo_nam.isSelected()) {
-            kh.setGioitinh(true);
+        if (gioiTinh == true) {
+            rdo_nam.setSelected(true);
+        }else{
+            rdo_nu.setSelected(true);
         }
-        if (rdo_nu.isSelected()) {
-            kh.setGioitinh(false);
-        }
+        kh.setGioitinh(gioiTinh);
         txt_sdt.setText(kh.getSodt());
         int trangThai = kh.getTrangthai();
         if (rdo_conHoatDong.isSelected()) {
