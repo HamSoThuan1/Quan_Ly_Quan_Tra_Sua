@@ -443,7 +443,21 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
         gc.setTiendoanhthu(Double.parseDouble(txttiendoanhthu.getText()));
         gc.setTonghienco(Double.parseDouble(txttongtiencahienco.getText()));
         gc.setTienchuthu(Double.parseDouble(txttienchuthu.getText()));
-        gc.setTienphatsinh(Double.parseDouble(txttienphatsinh.getText()));
+//        gc.setTienphatsinh(Double.parseDouble(txttienphatsinh.getText()));
+        
+        try {
+            double tps = Double.parseDouble(txttienphatsinh.getText());
+            if (tps < 0) {
+                JOptionPane.showMessageDialog(this, "Số tiền nhập phải lớn hơn 0");
+                txttienphatsinh.requestFocus();
+                return;
+            }
+            gc.setTienphatsinh(tps);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Số tiền nhập vào phải là số");
+            return;
+        }
+        
         if (txtghichu.getText().equals("")) {
             gc.setGhichu("");
         } else {
