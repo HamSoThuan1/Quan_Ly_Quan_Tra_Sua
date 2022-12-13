@@ -52,4 +52,9 @@ public class HoaDonServiceImpl implements HoaDonService {
     public int updateHD(HoaDon hd) {
         return hoaDon.updateHD(hd);
     }
+
+    @Override
+    public List<HoaDon> timKiemcbo(int trangthai) {
+      return hoaDon.timKiemcbo(trangthai);
+    }
 }

@@ -19,10 +19,12 @@ import viewModel.HoaDonViewModel1;
  * @author hung2
  */
 public class ViewQuanLyHoaDon extends javax.swing.JPanel {
-private List<HoaDon> listhd;
-private HoaDonServiceImpl hoaDonServiceImpl;
-private List<HoaDonViewModel1> list;
-private HoaDonChiTietServiceImpl hoaDonChiTietServiceImpl;
+
+    private List<HoaDon> listhd;
+    private HoaDonServiceImpl hoaDonServiceImpl;
+    private List<HoaDonViewModel1> list;
+    private HoaDonChiTietServiceImpl hoaDonChiTietServiceImpl;
+
     /**
      * Creates new form ViewQuanLyHoaDon
      */
@@ -34,9 +36,10 @@ private HoaDonChiTietServiceImpl hoaDonChiTietServiceImpl;
         hoaDonChiTietServiceImpl = new HoaDonChiTietServiceImpl();
         fillDataTable();
         fillDataHDCT();
-        
+
     }
-      public void fillDataTable() {
+
+    public void fillDataTable() {
         DefaultTableModel tblModel = new DefaultTableModel();
         tblModel = (DefaultTableModel) tbl_hoaDon.getModel();
         tblModel.setRowCount(0);
@@ -54,24 +57,25 @@ private HoaDonChiTietServiceImpl hoaDonChiTietServiceImpl;
             });
         }
     }
-public void fillDataHDCT(){
+
+    public void fillDataHDCT() {
         DefaultTableModel Model = new DefaultTableModel();
         Model = (DefaultTableModel) tbl_hoaDonChiTiet.getModel();
         Model.setRowCount(0);
         list = hoaDonChiTietServiceImpl.getAll();
         for (HoaDonViewModel1 hd : list) {
             Model.addRow(new Object[]{
-            hd.getIdSanPham().getMaSP(),
-            hd.getIdSanPham().getTenSP(),
-            hd.getSoLuong(),
-            hd.getDonGia(),
-            hd.getGiaTopping(),
-            hd.getTrangThai(),
-            hd.getIdHoaDon().getTongTien(),
-            });
+                hd.getIdSanPham().getMaSP(),
+                hd.getIdSanPham().getTenSP(),
+                hd.getSoLuong(),
+                hd.getDonGia(),
+                hd.getGiaTopping(),
+                hd.getTrangThai(),
+                hd.getIdHoaDon().getTongTien(),});
         }
     }
- public void showHoaDon(int index) {
+
+    public void showHoaDon(int index) {
         HoaDon h = listhd.get(index);
         lbl_maHD.setText(h.getMaHD());
         lbl_ngayTao.setText(h.getNgayTao() + "");
@@ -119,6 +123,7 @@ public void fillDataHDCT(){
         lbl_tongTienSanPham = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         lbl_trangThai = new javax.swing.JLabel();
+        cbo_trangThai = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1218, 746));
 
@@ -288,6 +293,13 @@ public void fillDataHDCT(){
                 .addGap(28, 28, 28))
         );
 
+        cbo_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã Thanh Toán", "Đã Hủy", "Chờ Thanh Toán", " " }));
+        cbo_trangThai.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_trangThaiItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -308,14 +320,17 @@ public void fillDataHDCT(){
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbo_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbo_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
@@ -331,12 +346,36 @@ public void fillDataHDCT(){
 
     private void tbl_hoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hoaDonMouseClicked
         // TODO add your handling code here:
-          int index = tbl_hoaDon.getSelectedRow();
+        int index = tbl_hoaDon.getSelectedRow();
         showHoaDon(index);
     }//GEN-LAST:event_tbl_hoaDonMouseClicked
 
+    private void cbo_trangThaiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_trangThaiItemStateChanged
+        // TODO add your handling code here:
+        int trangThai = cbo_trangThai.getSelectedIndex();
+        if (cbo_trangThai.getItemCount() > 0) {
+            List<HoaDon> list = hoaDonServiceImpl.timKiemcbo(trangThai);
+            DefaultTableModel tblModel = new DefaultTableModel();
+            tblModel = (DefaultTableModel) tbl_hoaDon.getModel();
+            tblModel.setRowCount(0);
+            for (HoaDon hoaDon : list) {
+                tblModel.addRow(new Object[]{
+                    hoaDon.getMaHD(),
+                    hoaDon.getNgayTao(),
+                    hoaDon.getNgayThanhToan(),
+                    hoaDon.getTongTien(),
+                    hoaDon.getTienApDungKM(),
+                    hoaDon.getTienKHThanhToan(),
+                    hoaDon.getTrangThai(),
+                    hoaDon.getGhiChu()
+                });
+            }
+        }
+    }//GEN-LAST:event_cbo_trangThaiItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbo_trangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

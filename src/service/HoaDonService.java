@@ -25,4 +25,5 @@ public interface HoaDonService {
     public int update(String maHD,String ghichu);
 
     public int updateHD(HoaDon hd);
+    List<HoaDon> timKiemcbo(int trangthai);
 }

@@ -157,4 +157,21 @@ public class HoaDonRepository {
         String sql = "update HOADON set TongTien=?,TienApDungKM=?,TienKHThanhToan=?,NgayThanhToan=?,GhiChu=?,TrangThai=? where MaHD=?";
         return JDBC_Helper.updateTongQuat(sql, hd.getTongTien(),hd.getTienApDungKM(),hd.getTienKHThanhToan(),hd.getNgayThanhToan(),hd.getGhiChu(),hd.getTrangThai(),hd.getMaHD());
     }
+public List<HoaDon> timKiemcbo(int trangthai) {
+        List<HoaDon> listHD = new ArrayList<>();
+        String sql = "select *,CONVERT(int,SUBSTRING(MaHD,3,3)) as STT from HOADON where TrangThai = ? order by STT";
+        try(Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql);) {
+            pr.setObject(1, trangthai);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3), 
+                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDate(7),
+                rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                listHD.add(hd);
+            }
+            return listHD;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
