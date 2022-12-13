@@ -22,8 +22,13 @@ public interface HoaDonService {
 
     public HoaDon getHoaDonByMaHD(String maHD);
 
-    public int update(String maHD,String ghichu);
+    public int update(String maHD, String ghichu);
 
     public int updateHD(HoaDon hd);
+
     List<HoaDon> timKiemcbo(int trangthai);
+
+    List<HoaDon> getlocTheothang(String thang);
+
+    List<HoaDon> getlocTheoNam(String nam);
 }

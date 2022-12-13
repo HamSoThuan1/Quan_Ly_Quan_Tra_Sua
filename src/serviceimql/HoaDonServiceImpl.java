@@ -57,4 +57,16 @@ public class HoaDonServiceImpl implements HoaDonService {
     public List<HoaDon> timKiemcbo(int trangthai) {
       return hoaDon.timKiemcbo(trangthai);
     }
+
+    @Override
+    public List<HoaDon> getlocTheothang(String thang) {
+       return hoaDon.getlocTheothang(thang);
+    }
+
+    @Override
+    public List<HoaDon> getlocTheoNam(String nam) {
+       return hoaDon.getlocTheoNam(nam);
+    }
+
+
 }

@@ -526,7 +526,7 @@ public class ViewQuanLyThongKe extends javax.swing.JPanel {
         String year= (String) jComboBox2.getSelectedItem();
          listtk=tkservice.getthongkebythang(month, year);
         model=(DefaultTableModel) tblthongke.getModel();
-        model.setRowCount(0);
+        model.setRowCount(0); 
         
         for(int i=0;i<listtk.size();i++){
             String tt;
