@@ -24,6 +24,7 @@ import serviceimql.GiaoCa_serviceimpl;
 import serviceimql.Nhanvien_serviceimpl;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -160,6 +161,9 @@ public class ViewChinh extends javax.swing.JFrame {
         lblSanPham.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSanPham.setText("Sản Phẩm");
         lblSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblSanPhamMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblSanPhamMousePressed(evt);
             }
@@ -528,6 +532,12 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void lblSanPhamMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMousePressed
         // TODO add your handling code here:
+        String idnv = giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        String chv = nhanvien.getNVbyid(idnv).getChucvu();
+        if(chv.equals("Nhan vien")){
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập");
+            return;
+        }
         this.setViewChinh(new ViewQuanLySanPham());
         this.setColor.changeColorBtn("Sản phẩm", getBtn());
     }//GEN-LAST:event_lblSanPhamMousePressed
@@ -539,7 +549,7 @@ public class ViewChinh extends javax.swing.JFrame {
     }//GEN-LAST:event_lblTrangChuMousePressed
 
     private void lblBanHangMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBanHangMousePressed
-        // TODO add your handling code here:
+        
         this.setViewChinh(new ViewQuanLyBanHang(mac));
         this.setColor.changeColorBtn("Bán hàng", getBtn());
     }//GEN-LAST:event_lblBanHangMousePressed
@@ -552,18 +562,36 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void lblKhuyenMaiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKhuyenMaiMousePressed
         // TODO add your handling code here:
+        String idnv = giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        String chv = nhanvien.getNVbyid(idnv).getChucvu();
+        if(chv.equals("Nhan vien")){
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập");
+            return;
+        }
         this.setViewChinh(new ViewQuanLyKhuyenMai());
         this.setColor.changeColorBtn("Khuyến mãi", getBtn());
     }//GEN-LAST:event_lblKhuyenMaiMousePressed
 
     private void lblThongKeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblThongKeMousePressed
         // TODO add your handling code here:
+        String idnv = giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        String chv = nhanvien.getNVbyid(idnv).getChucvu();
+        if(chv.equals("Nhan vien")){
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập");
+            return;
+        }
         this.setViewChinh(new ViewQuanLyThongKe());
         this.setColor.changeColorBtn("Thống kê", getBtn());
     }//GEN-LAST:event_lblThongKeMousePressed
 
     private void lblNhanVienMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNhanVienMousePressed
         // TODO add your handling code here:
+        String idnv = giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        String chv = nhanvien.getNVbyid(idnv).getChucvu();
+        if(chv.equals("Nhan vien")){
+            JOptionPane.showMessageDialog(this, "Bạn không có quyền truy cập");
+            return;
+        }
         this.setViewChinh(new ViewQuanLyNhanVien());
         this.setColor.changeColorBtn("Nhân viên", getBtn());
     }//GEN-LAST:event_lblNhanVienMousePressed
@@ -576,7 +604,9 @@ public class ViewChinh extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        if (lblChucVu.getText().equalsIgnoreCase("Nhan vien")) {
+        String idnv = giaoca.getGiaoCaByMa(mac).getIdnhanvien();
+        String chv = nhanvien.getNVbyid(idnv).getChucvu();
+        if (chv.equalsIgnoreCase("Nhan vien")) {
             ViewGiaoCaNhanVien v = new ViewGiaoCaNhanVien(mac);
             v.setVisible(true);
         } else {
@@ -591,6 +621,10 @@ public class ViewChinh extends javax.swing.JFrame {
         view.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void lblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSanPhamMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblSanPhamMouseClicked
 
     /**
      * @param args the command line arguments
