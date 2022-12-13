@@ -477,7 +477,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
 
             cell = row.createCell(4, CellType.STRING);
             cell.setCellValue("Tiền doanh thu");
-            
+
             cell = row.createCell(5, CellType.STRING);
             cell.setCellValue("Tổng tiền hiện có");
 
@@ -506,7 +506,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
 
                 cell = row.createCell(4, CellType.NUMERIC);
                 cell.setCellValue((double) tblgiaoca.getValueAt(i, 4));
-                
+
                 cell = row.createCell(5, CellType.NUMERIC);
                 cell.setCellValue((double) tblgiaoca.getValueAt(i, 5));
 
@@ -518,7 +518,6 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
 
                 cell = row.createCell(8, CellType.STRING);
                 cell.setCellValue((String) tblgiaoca.getValueAt(i, 8));
-
 
             }
             JFileChooser j = new JFileChooser();
@@ -580,20 +579,22 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        if(txttu.getCalendar()==null && txtden.getCalendar()==null){
+        if (txttu.getCalendar() == null && txtden.getCalendar() == null) {
             JOptionPane.showMessageDialog(this, "Mời bạn chọn giá trị để lọc");
-        }else if(txtden.getCalendar()==null){
-            JOptionPane.showMessageDialog(this, "Đến đang trống");
-            txtden.requestFocus();
-        }else if(txttu.getCalendar()==null){
-            JOptionPane.showMessageDialog(this, "TỪ đang trống");
+        } else if (txtden.getCalendar() == null) {
+            Date tu = txttu.getDate();
+            fillToTable(tu);
+//            JOptionPane.showMessageDialog(this, "Đến đang trống");
+//            txtden.requestFocus();
+        } else if (txttu.getCalendar() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn thời gian bắt đầu");
             txttu.requestFocus();
-        }else{
-            Date tu = txttu.getDate() ;
-            Date den = txtden.getDate() ;
-            fillToTable(tu,den);
+            return;
+        } else {
+            Date tu = txttu.getDate();
+            Date den = txtden.getDate();
+            fillToTable(tu, den);
         }
-        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
@@ -675,7 +676,7 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
             String idnv = listgc.get(i).getIdnhanvien();
             String tennv = nhanvien.getNVbyid(idnv).getHotenNv();
             Object[] data = new Object[]{
-                listgc.get(i).getMaca(), tennv,sdf.format(listgc.get(i).getThoidiembatdau()),listgc.get(i).getTienbandau(),listgc.get(i).getTiendoanhthu(),listgc.get(i).getTonghienco(),listgc.get(i).getTienchuthu(),listgc.get(i).getTienphatsinh(),listgc.get(i).getGhichu()
+                listgc.get(i).getMaca(), tennv, sdf.format(listgc.get(i).getThoidiembatdau()), listgc.get(i).getTienbandau(), listgc.get(i).getTiendoanhthu(), listgc.get(i).getTonghienco(), listgc.get(i).getTienchuthu(), listgc.get(i).getTienphatsinh(), listgc.get(i).getGhichu()
             };
             model.addRow(data);
         }
@@ -688,15 +689,30 @@ public class ViewGiaoCaQuanLy extends javax.swing.JFrame {
     }
 
     private void fillToTable(Date tu, Date den) {
-        listgc=giaoca.getGCByTG(tu,den);
-        model=(DefaultTableModel) tblgiaoca.getModel();
+        listgc = giaoca.getGCByTG(tu, den);
+        model = (DefaultTableModel) tblgiaoca.getModel();
         model.setRowCount(0);
         for (int i = 0; i < listgc.size(); i++) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String idnv = listgc.get(i).getIdnhanvien();
             String tennv = nhanvien.getNVbyid(idnv).getHotenNv();
             Object[] data = new Object[]{
-                listgc.get(i).getMaca(), tennv,sdf.format(listgc.get(i).getThoidiembatdau()),listgc.get(i).getTienbandau(),listgc.get(i).getTiendoanhthu(),listgc.get(i).getTonghienco(),listgc.get(i).getTienchuthu(),listgc.get(i).getTienphatsinh(),listgc.get(i).getGhichu()
+                listgc.get(i).getMaca(), tennv, sdf.format(listgc.get(i).getThoidiembatdau()), listgc.get(i).getTienbandau(), listgc.get(i).getTiendoanhthu(), listgc.get(i).getTonghienco(), listgc.get(i).getTienchuthu(), listgc.get(i).getTienphatsinh(), listgc.get(i).getGhichu()
+            };
+            model.addRow(data);
+        }
+    }
+
+    private void fillToTable(Date tu) {
+        listgc = giaoca.getGCByTG(tu);
+        model = (DefaultTableModel) tblgiaoca.getModel();
+        model.setRowCount(0);
+        for (int i = 0; i < listgc.size(); i++) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String idnv = listgc.get(i).getIdnhanvien();
+            String tennv = nhanvien.getNVbyid(idnv).getHotenNv();
+            Object[] data = new Object[]{
+                listgc.get(i).getMaca(), tennv, sdf.format(listgc.get(i).getThoidiembatdau()), listgc.get(i).getTienbandau(), listgc.get(i).getTiendoanhthu(), listgc.get(i).getTonghienco(), listgc.get(i).getTienchuthu(), listgc.get(i).getTienphatsinh(), listgc.get(i).getGhichu()
             };
             model.addRow(data);
         }

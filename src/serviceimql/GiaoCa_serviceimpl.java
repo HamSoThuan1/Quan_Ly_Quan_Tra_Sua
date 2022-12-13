@@ -19,8 +19,9 @@ import viewModel.GiaoCaViewModel3;
  *
  * @author kn134
  */
-public class GiaoCa_serviceimpl implements GiaoCa_service{
-    GiaoCaRepository gcrepos= new GiaoCaRepository();
+public class GiaoCa_serviceimpl implements GiaoCa_service {
+
+    GiaoCaRepository gcrepos = new GiaoCaRepository();
 
     @Override
     public List<GiaoCa> getAllGiaoCa() {
@@ -74,7 +75,11 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
 
     @Override
     public List<GiaoCa> getGCByTG(Date tu, Date den) {
-        return gcrepos.getGCByTG(tu,den);
+        return gcrepos.getGCByTG(tu, den);
     }
-    
+
+    @Override
+    public List<GiaoCa> getGCByTG(Date tu) {
+        return gcrepos.getGCByTG(tu);
+    }
 }

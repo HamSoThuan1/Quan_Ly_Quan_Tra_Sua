@@ -148,8 +148,9 @@ public class GiaoCaRepository {
             while (rs.next()) {
                 Timestamp tg = rs.getTimestamp(1);
                 double tt = rs.getDouble(2);
-                gca= new GiaoCa(tg, tt);
-            }return gca;
+                gca = new GiaoCa(tg, tt);
+            }
+            return gca;
         } catch (Exception e) {
             return null;
         }
@@ -157,7 +158,7 @@ public class GiaoCaRepository {
 
     public int updateGC(GiaoCaViewModel2 gc) {
         String sql = "update GIAOCA set ThoiDiemKetThuc=?,TienDoanhThu=?,TienPhatSinh=?,TienHienCo=?,TienChuThu=?,GhiChu=? where maca=?";
-        return  JDBC_Helper.updateTongQuat(sql, gc.getThoidiemketthuc(),gc.getTiendoanhthu(),gc.getTienphatsinh(),gc.getTonghienco(),gc.getTienchuthu(),gc.getGhichu(),gc.getMaca());
+        return JDBC_Helper.updateTongQuat(sql, gc.getThoidiemketthuc(), gc.getTiendoanhthu(), gc.getTienphatsinh(), gc.getTonghienco(), gc.getTienchuthu(), gc.getGhichu(), gc.getMaca());
     }
 
     public GiaoCaViewModel3 getsotienbandau() {
@@ -180,7 +181,34 @@ public class GiaoCaRepository {
         List<GiaoCa> listgiaoca = new ArrayList<>();
         ResultSet rs;
         String sql = "select *,CONVERT(int,SUBSTRING(MaCa,3,3)) as STT from giaoca where ThoiDiemBatDau BETWEEN cast(? as date) and cast(? as date) order by STT asc";
-        rs = JDBC_Helper.selectTongQuat(sql,tu,den);
+        rs = JDBC_Helper.selectTongQuat(sql, tu, den);
+        try {
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                java.sql.Timestamp tdbd = rs.getTimestamp(3);
+                java.sql.Timestamp tdkt = rs.getTimestamp(4);
+                double tbd = rs.getDouble(5);
+                double tdt = rs.getDouble(6);
+                double tps = rs.getDouble(7);
+                double thc = rs.getDouble(8);
+                double tct = rs.getDouble(9);
+                String gc = rs.getString(10);
+                String idnv = rs.getString(11);
+                GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, tps, thc, tct, gc, idnv);
+                listgiaoca.add(giaoca);
+            }
+            return listgiaoca;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<GiaoCa> getGCByTG(Date tu) {
+        List<GiaoCa> listgiaoca = new ArrayList<>();
+        ResultSet rs;
+        String sql = "select *,CONVERT(int,SUBSTRING(MaCa,3,3)) as STT from giaoca where ThoiDiemBatDau BETWEEN ? and GETDATE() order by STT asc";
+        rs = JDBC_Helper.selectTongQuat(sql, tu);
         try {
             while (rs.next()) {
                 String id = rs.getString(1);

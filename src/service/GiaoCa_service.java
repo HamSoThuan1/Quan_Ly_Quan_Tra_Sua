@@ -40,4 +40,6 @@ public interface GiaoCa_service {
     public GiaoCaViewModel3 getsotienbandau();
 
     public List<GiaoCa> getGCByTG(Date tu, Date den);
+
+    public List<GiaoCa> getGCByTG(Date tu);
 }
