@@ -71,5 +71,10 @@ public class GiaoCa_serviceimpl implements GiaoCa_service{
     public GiaoCaViewModel3 getsotienbandau() {
         return gcrepos.getsotienbandau();
     }
+
+    @Override
+    public List<GiaoCa> getGCByTG(Date tu, Date den) {
+        return gcrepos.getGCByTG(tu,den);
+    }
     
 }

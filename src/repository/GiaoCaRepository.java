@@ -41,17 +41,6 @@ public class GiaoCaRepository {
                 double tct = rs.getDouble(9);
                 String gc = rs.getString(10);
                 String idnv = rs.getString(11);
-//                String manv=rs.getString(14);
-//                String hoten=rs.getString(15);
-//                String sodt=rs.getString(16);
-//                String gioitinh=rs.getString(17);
-//                Date ngaysinh=rs.getDate(18);
-//                String email=rs.getString(19);
-//                String diachi=rs.getString(20);
-//                String chucvu=rs.getString(21);
-//                String matkhau = rs.getString(22);
-//                int trangthai=rs.getInt(23);
-//                Nhanvien nv = new Nhanvien(id, manv, hoten, sodt, gioitinh, ngaysinh, email, diachi, chucvu, matkhau, trangthai);
                 GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, tps, thc, tct, gc, idnv);
                 listgiaoca.add(giaoca);
             }
@@ -182,6 +171,33 @@ public class GiaoCaRepository {
                 gc = new GiaoCaViewModel3(tbd);
             }
             return gc;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<GiaoCa> getGCByTG(Date tu, Date den) {
+        List<GiaoCa> listgiaoca = new ArrayList<>();
+        ResultSet rs;
+        String sql = "select *,CONVERT(int,SUBSTRING(MaCa,3,3)) as STT from giaoca where ThoiDiemBatDau BETWEEN cast(? as date) and cast(? as date) order by STT asc";
+        rs = JDBC_Helper.selectTongQuat(sql,tu,den);
+        try {
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                java.sql.Timestamp tdbd = rs.getTimestamp(3);
+                java.sql.Timestamp tdkt = rs.getTimestamp(4);
+                double tbd = rs.getDouble(5);
+                double tdt = rs.getDouble(6);
+                double tps = rs.getDouble(7);
+                double thc = rs.getDouble(8);
+                double tct = rs.getDouble(9);
+                String gc = rs.getString(10);
+                String idnv = rs.getString(11);
+                GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, tps, thc, tct, gc, idnv);
+                listgiaoca.add(giaoca);
+            }
+            return listgiaoca;
         } catch (Exception e) {
             return null;
         }

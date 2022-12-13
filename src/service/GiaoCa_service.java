@@ -38,4 +38,6 @@ public interface GiaoCa_service {
     public int updateGC(GiaoCaViewModel2 gc);
 
     public GiaoCaViewModel3 getsotienbandau();
+
+    public List<GiaoCa> getGCByTG(Date tu, Date den);
 }
