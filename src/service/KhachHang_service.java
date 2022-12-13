@@ -28,4 +28,6 @@ public interface KhachHang_service {
     List<KhachHang> searchByname(String ten);
 
     List<KhachHang> searchBysdt(String sdt);
+
+    public KhachHang getKhachHangByMa(String makh);
 }

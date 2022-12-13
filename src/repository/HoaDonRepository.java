@@ -154,8 +154,8 @@ public class HoaDonRepository {
     }
 
     public int updateHD(HoaDon hd) {
-        String sql = "update HOADON set TongTien=?,TienApDungKM=?,TienKHThanhToan=?,NgayThanhToan=?,GhiChu=?,TrangThai=? where MaHD=?";
-        return JDBC_Helper.updateTongQuat(sql, hd.getTongTien(),hd.getTienApDungKM(),hd.getTienKHThanhToan(),hd.getNgayThanhToan(),hd.getGhiChu(),hd.getTrangThai(),hd.getMaHD());
+        String sql = "update HOADON set TongTien=?,TienApDungKM=?,TienKHThanhToan=?,NgayThanhToan=?,GhiChu=?,TrangThai=?,idkhachhang=? where MaHD=?";
+        return JDBC_Helper.updateTongQuat(sql, hd.getTongTien(),hd.getTienApDungKM(),hd.getTienKHThanhToan(),hd.getNgayThanhToan(),hd.getGhiChu(),hd.getTrangThai(),hd.getIdkhachhang(),hd.getMaHD());
     }
 public List<HoaDon> timKiemcbo(int trangthai) {
         List<HoaDon> listHD = new ArrayList<>();

@@ -196,4 +196,27 @@ public List<KhachHang> searchBysdt(String sdt) {
         return null;
     }
 
+    public KhachHang getKhachHangByMa(String makh) {
+        KhachHang kh = null;
+        ResultSet rs;
+        String sql = "select*from khachhang where makh=?";
+        rs = JDBC_Helper.selectTongQuat(sql, makh);
+        try {
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ma = rs.getString(2);
+                String hoten = rs.getString(3);
+                boolean gioitinh = rs.getBoolean(4);
+                String sodt = rs.getString(5);
+                String diachi = rs.getString(6);
+                String ghichu = rs.getString(7);
+                int trangthai = rs.getInt(8);
+                kh = new KhachHang(id, ma, hoten, gioitinh, sodt, diachi, ghichu, trangthai);
+            }
+            return kh;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }

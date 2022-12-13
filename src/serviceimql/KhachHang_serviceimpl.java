@@ -120,4 +120,9 @@ public class KhachHang_serviceimpl implements KhachHang_service {
     public List<KhachHang> searchBysdt(String sdt) {
         return khrp.searchBysdt(sdt);
     }
+
+    @Override
+    public KhachHang getKhachHangByMa(String makh) {
+        return khrp.getKhachHangByMa(makh);
+    }
 }

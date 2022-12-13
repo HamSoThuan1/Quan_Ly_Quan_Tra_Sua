@@ -1065,6 +1065,15 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 txtTienKhachDua.requestFocus();
                 return;
             }
+            
+            if(txtMaKH.getText().equals("")){
+                hd.setIdkhachhang(null);
+            }else{
+                String makh = txtMaKH.getText();
+                KhachHang kh = khachhangService.getKhachHangByMa(makh);
+                hd.setIdkhachhang(kh.getIdKhachHang());
+            }
+            
             if (Double.parseDouble(txtTienKhachDua.getText()) < Double.parseDouble(txtTongTien.getText())) {
                 JOptionPane.showMessageDialog(this, "Khách hàng chưa đưa đủ tiền");
                 txtTienKhachDua.requestFocus();
@@ -1091,7 +1100,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 System.out.println(hdct);
                 hoadonchitietservice.addHDCT(hdct);
             }
-
+            System.out.println(hd);
             hdservice.updateHD(hd);
             fillHDToTable();
             tblHoaDonCT.removeAll();
