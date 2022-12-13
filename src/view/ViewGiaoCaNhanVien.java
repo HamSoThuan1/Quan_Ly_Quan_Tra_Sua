@@ -343,7 +343,7 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
             gc.setGhichu(txtghichu.getText());
         }
         giaoca.updateGC(gc);
-        JOptionPane.showMessageDialog(this, "Giao ca thanh công");
+        JOptionPane.showMessageDialog(this, "Giao ca thành công");
         System.exit(0);
         
     }//GEN-LAST:event_jButton2ActionPerformed

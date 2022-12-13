@@ -26,7 +26,7 @@ public class GiaoCaRepository {
     public static List<GiaoCa> getAllGiaoCa() {
         List<GiaoCa> listgiaoca = new ArrayList<>();
         ResultSet rs;
-        String sql = "select * from giaoca";
+        String sql = "select *,CONVERT(int,SUBSTRING(MaCa,3,3)) as STT from giaoca order by STT asc";
         rs = JDBC_Helper.selectTongQuat(sql);
         try {
             while (rs.next()) {
@@ -130,17 +130,6 @@ public class GiaoCaRepository {
                 double tct = rs.getDouble(9);
                 String gc = rs.getString(10);
                 String idnv = rs.getString(11);
-//                String manv=rs.getString(14);
-//                String hoten=rs.getString(15);
-//                String sodt=rs.getString(16);
-//                String gioitinh=rs.getString(17);
-//                Date ngaysinh=rs.getDate(18);
-//                String email=rs.getString(19);
-//                String diachi=rs.getString(20);
-//                String chucvu=rs.getString(21);
-//                String matkhau = rs.getString(22);
-//                int trangthai=rs.getInt(23);
-//                Nhanvien nv = new Nhanvien(idnv, manv, hoten, sodt, gioitinh, ngaysinh, email, diachi, chucvu, matkhau, trangthai);
                 gca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, thc, tps, tct, gc, idnv);
             }
             return gca;
@@ -150,8 +139,10 @@ public class GiaoCaRepository {
     }
 
     public static void main(String[] args) {
-        GiaoCaViewModel gc= new GiaoCaRepository().getGiaoCaByMa("CA1");
-        System.out.println(gc);
+        List<GiaoCa> list = new GiaoCaRepository().getAllGiaoCa();
+        for (GiaoCa x : list) {
+            System.out.println(x.toString());
+        }
     }
 
     public int add(GiaoCaViewModel1 gcvm) {
@@ -194,19 +185,5 @@ public class GiaoCaRepository {
         } catch (Exception e) {
             return null;
         }
-//        List<GiaoCaViewModel3> listgcvm3 = new ArrayList<>();
-//        ResultSet rs;
-//        String sql = "select Top 1 TienHienCo from giaoca order by CONVERT(int,SUBSTRING(MaCa,3,3)) desc";
-//        rs = JDBC_Helper.selectTongQuat(sql);
-//        try {
-//            while (rs.next()) {
-//                double tbd = rs.getDouble(1);
-//                GiaoCaViewModel3 gc = new GiaoCaViewModel3(tbd);
-//                listgcvm3.add(gc);
-//            }
-//            return listgcvm3;
-//        } catch (Exception e) {
-//            return null;
-//        }
     }
 }
