@@ -93,6 +93,58 @@ public class Khuyenmai_repository {
             return null;
         }
     }
+    
+    public List<KhuyenMai> getKMByMaK(String mak) {
+        ResultSet rs;
+        
+        List<KhuyenMai> list = new ArrayList<>();
+        String sql = "select MaKM, TenKM, NgayBatDau, NgayKetThuc, HinhThucKM, GiaTri, TrangThai from KHUYENMAI where MaKM like '%"+mak+"%'";
+
+        rs = JDBC_Helper.selectTongQuat(sql);
+        try {
+            while (rs.next()) {
+                String ma = rs.getString(1);
+                String ten = rs.getString(2);
+                Date nbd = rs.getDate(3);
+                Date nkt = rs.getDate(4);
+                String htkm = rs.getString(5);
+                int gtri = rs.getInt(6);
+                int tt = rs.getInt(7);
+
+                KhuyenMai KM = new KhuyenMai(ma, ten, nbd, nkt, htkm, gtri, tt);
+                list.add(KM);
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<KhuyenMai> getKMByTen(String tenK) {
+        ResultSet rs;
+        
+        List<KhuyenMai> list = new ArrayList<>();
+        String sql = "select MaKM, TenKM, NgayBatDau, NgayKetThuc, HinhThucKM, GiaTri, TrangThai from KHUYENMAI where TenKM like '%"+tenK+"%'";
+
+        rs = JDBC_Helper.selectTongQuat(sql);
+        try {
+            while (rs.next()) {
+                String ma = rs.getString(1);
+                String ten = rs.getString(2);
+                Date nbd = rs.getDate(3);
+                Date nkt = rs.getDate(4);
+                String htkm = rs.getString(5);
+                int gtri = rs.getInt(6);
+                int tt = rs.getInt(7);
+
+                KhuyenMai KM = new KhuyenMai(ma, ten, nbd, nkt, htkm, gtri, tt);
+                list.add(KM);
+            }
+            return list;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     public static int add(KhuyenMai km) {
         String sql = "insert into KHUYENMAI(MaKM, TenKM, NgayBatDau, NgayKetThuc, HinhThucKM, GiaTri, TrangThai) values (?,?,?,?,?,?,?)";

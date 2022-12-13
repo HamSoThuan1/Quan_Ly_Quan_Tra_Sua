@@ -51,6 +51,11 @@ public class KhuyenMai_serviceimpl implements KhuyenMai_service{
         return this.KMrepo.getKMByTrangThai(i);
     }
 
+    @Override
+    public List<KhuyenMai> getKMByTen(String ten) {
+        return this.KMrepo.getKMByTen(ten);
+    }
+
     
     
 }

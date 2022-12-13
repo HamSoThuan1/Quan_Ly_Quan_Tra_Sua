@@ -20,6 +20,8 @@ public interface KhuyenMai_service {
     
     public List<KhuyenMai> getKMByTrangthai(int i);
     
+    public List<KhuyenMai> getKMByTen(String ten);
+    
     public int add(KhuyenMai km);
     
     public int update(KhuyenMai km);
