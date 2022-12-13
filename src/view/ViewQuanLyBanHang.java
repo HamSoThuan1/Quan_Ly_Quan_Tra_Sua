@@ -1108,6 +1108,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 //            tblHoaDonCT.removeAll();
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
             clearForm();
+//            xuatHoaDon();
         } catch (Exception e) {
         }
 

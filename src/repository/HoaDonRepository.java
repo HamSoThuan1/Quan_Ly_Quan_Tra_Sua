@@ -76,7 +76,7 @@ public class HoaDonRepository {
 
     public static void main(String[] args) {
         List<HoaDon> listcheck = new ArrayList<>();
-        listcheck=getAllHoaDon();
+        listcheck = getAllHoaDon();
         for (HoaDon x : listcheck) {
             System.out.println(x.toString());
         }
@@ -101,7 +101,7 @@ public class HoaDonRepository {
                 + "      ,[IdKM] = ?\n"
                 + " WHERE <[IdHoaDon] = ?";
         int check = 0;
-        try(Connection con = DBContext.getConnection(); PreparedStatement ps = con.prepareStatement(query);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement ps = con.prepareStatement(query);) {
             ps.setObject(1, hd.getMaHD());
             ps.setObject(2, hd.getNgayTao());
             ps.setObject(3, hd.getTongTien());
@@ -123,7 +123,7 @@ public class HoaDonRepository {
         HoaDon hd = null;
         ResultSet rs;
         String sql = "select * from hoadon where mahd=?";
-        rs=JDBC_Helper.selectTongQuat(sql, maHD);
+        rs = JDBC_Helper.selectTongQuat(sql, maHD);
         try {
             while (rs.next()) {
                 String id = rs.getString(1);
@@ -146,32 +146,34 @@ public class HoaDonRepository {
         }
     }
 
-    public int update(String maHD,String ghichu) {
+    public int update(String maHD, String ghichu) {
         String sql = "UPDATE hoadon\n"
                 + "SET ghichu = ?, TrangThai = 2 \n"
                 + " WHERE maHD = ?";
-        return JDBC_Helper.updateTongQuat(sql, ghichu,maHD);
+        return JDBC_Helper.updateTongQuat(sql, ghichu, maHD);
     }
 
     public int updateHD(HoaDon hd) {
         String sql = "update HOADON set TongTien=?,TienApDungKM=?,TienKHThanhToan=?,NgayThanhToan=?,GhiChu=?,TrangThai=?,idkhachhang=? where MaHD=?";
-        return JDBC_Helper.updateTongQuat(sql, hd.getTongTien(),hd.getTienApDungKM(),hd.getTienKHThanhToan(),hd.getNgayThanhToan(),hd.getGhiChu(),hd.getTrangThai(),hd.getIdkhachhang(),hd.getMaHD());
+        return JDBC_Helper.updateTongQuat(sql, hd.getTongTien(), hd.getTienApDungKM(), hd.getTienKHThanhToan(), hd.getNgayThanhToan(), hd.getGhiChu(), hd.getTrangThai(), hd.getIdkhachhang(), hd.getMaHD());
     }
-public List<HoaDon> timKiemcbo(int trangthai) {
+
+    public List<HoaDon> timKiemcbo(int trangthai) {
         List<HoaDon> listHD = new ArrayList<>();
         String sql = "select *,CONVERT(int,SUBSTRING(MaHD,3,3)) as STT from HOADON where TrangThai = ? order by STT";
-        try(Connection con = DBContext.getConnection(); PreparedStatement pr = con.prepareStatement(sql);) {
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql);) {
             pr.setObject(1, trangthai);
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3), 
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3),
                         rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDate(7),
-                rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                        rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
                 listHD.add(hd);
             }
             return listHD;
-        } catch (Exception e) {
-            return null;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
         }
+        return null;
     }
 }

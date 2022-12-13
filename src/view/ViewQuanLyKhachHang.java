@@ -64,6 +64,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         listkh = khsv.GetallKH();
         loadtable(listkh);
     }
+
     public void ADD() throws ParseException {
         KhachHang kh = new KhachHang();
         kh.setMakh(txtma.getText());
@@ -74,7 +75,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         }
         if (rdonu.isSelected()) {
             kh.setGioitinh(false);
-        }        
+        }
         kh.setSodt(txtso.getText());
         kh.setDiachi(txtdiachi.getText());
         kh.setGhichu(txtghichu.getText());
@@ -85,11 +86,11 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         if (rdooff.isSelected()) {
             kh.setTrangthai(1);
         }
-        JOptionPane.showMessageDialog(this,khsv.add(kh));
-        listkh=khsv.GetallKH();
+        JOptionPane.showMessageDialog(this, khsv.add(kh));
+        listkh = khsv.GetallKH();
         loadtable(listkh);
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -346,12 +347,12 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
         // TODO add your handling code here:
-     try {
+        try {
             ADD();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
 
     }//GEN-LAST:event_btnthemActionPerformed
 
