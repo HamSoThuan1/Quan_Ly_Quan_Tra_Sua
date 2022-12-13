@@ -63,7 +63,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
     private HoaDonService hdservice = new HoaDonServiceImpl();
-    private DefaultTableModel model;
+//    private DefaultTableModel model;
 
     /**
      * Creates new form ViewQuanLyBanHang
@@ -209,7 +209,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     public void themHoaDonChiTiet() {
         try {
-            loadTien();
+//            loadTien();
             int index = tblSanPham.getSelectedRow();
             int row = tblHoaDon.getSelectedRow();
             if (row < 0) {
@@ -244,7 +244,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                     if (sp.getIdSanPham().equals(hoaDonct.getIdSanPham())) {
                         int so_luong = hoaDonct.getSoLuong() + Integer.parseInt(soLuong);
                         hoaDonct.setSoLuong(so_luong);
+                        hoaDonct.setThanhTien(so_luong * Double.parseDouble(tblSanPham.getValueAt(index, 4).toString()));
                         addTableHoaDonCT(listHDCT);
+                        loadTien();
                         return;
                     }
                 }
@@ -290,11 +292,12 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     }
 
     public void fillHoaDon() {
+        int index = tblHoaDon.getSelectedRow();
         try {
-            int index = tblHoaDon.getSelectedRow();
             txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
             txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -952,7 +955,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         hd.setIdNhanVien(gcservice.getGiaoCaByMa(mac).getIdnhanvien());
         hoaDonService.add(hd);
         fillHDToTable();
-        fillHoaDon();
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     private void btnXoaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaSanPhamActionPerformed
@@ -1107,9 +1109,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             model.setRowCount(0);
 //            tblHoaDonCT.removeAll();
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            xuatHoaDon();
             clearForm();
-//            xuatHoaDon();
         } catch (Exception e) {
+            e.printStackTrace();
+            MsgBox.alert(this, "Thanh toán thất bại");
         }
 
     }//GEN-LAST:event_btnThanhToanActionPerformed
@@ -1246,9 +1250,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillHDToTable() {
+        modelHD = (DefaultTableModel) tblHoaDon.getModel();
+        modelHD.setRowCount(0);
         listHD = hdservice.getAllHoaDon();
-        model = (DefaultTableModel) tblHoaDon.getModel();
-        model.setRowCount(0);
         for (int i = 0; i < listHD.size(); i++) {
             String mahoadon = listHD.get(i).getMaHD();
             String ngaytao = listHD.get(i).getNgayTao() + "";
@@ -1261,7 +1265,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             Object[] data = new Object[]{
                 stt++, mahoadon, ngaytao, tennhanvien, trangthai == 0 ? "Chưa thanh toán" : trangthai == 1 ? "Đã thanh toán" : "Đã hủy"
             };
-            model.addRow(data);
+            modelHD.addRow(data);
         }
     }
 
@@ -1324,6 +1328,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     public void xuatHoaDon() {
         try {
+            int index = tblHoaDon.getSelectedRow();
             XWPFDocument document = new XWPFDocument();
             FileOutputStream out = new FileOutputStream(new File("D:\\DuAn1_IT17311\\Quan_Ly_Quan_Tra_Sua\\XuatHoaDon" + txtMaHD.getText() + ".docx"));
 
@@ -1354,9 +1359,9 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
             XWPFParagraph paragraph5 = document.createParagraph();
             XWPFRun run5 = paragraph5.createRun();
-            paragraph3.setAlignment(ParagraphAlignment.CENTER);
-            run3.setText("Số Hóa Đơn: " + txtMaHD.getText());
-            run3.setTextPosition(50);
+            paragraph5.setAlignment(ParagraphAlignment.CENTER);
+            run5.setText("Số Hóa Đơn: " + txtMaHD.getText());
+            run5.setTextPosition(50);
 
             XWPFParagraph paragraph6 = document.createParagraph();
             XWPFRun run6 = paragraph6.createRun();
@@ -1364,7 +1369,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
             XWPFParagraph paragraph9 = document.createParagraph();
             XWPFRun run9 = paragraph9.createRun();
-            run9.setText("Ngày lập: " + tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 2).toString());
+            run9.setText("Ngày lập: " + txtNgayTao.getText());
             run9.setTextPosition(20);
 
             XWPFTable table = document.createTable(tblHoaDonCT.getRowCount() + 2, 5);
@@ -1415,12 +1420,12 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 table.getRow(i + 1).getCell(1).setText(tblHoaDonCT.getValueAt(i, 2).toString());
                 table.getRow(i + 1).getCell(2).setText(tblHoaDonCT.getValueAt(i, 3).toString());
                 table.getRow(i + 1).getCell(3).setText(XMoney.themDauCham((long) tblHoaDonCT.getValueAt(i, 4)));
-                table.getRow(i + 1).getCell(4).setText(XMoney.themDauCham(XMoney.loaiBoVND(tblHoaDonCT.getValueAt(i, 5) + "") * Integer.parseInt(tblHoaDonCT.getValueAt(i, 2) + "")) + " VNĐ");
+                table.getRow(i + 1).getCell(4).setText(XMoney.themDauCham(XMoney.loaiBoVND(tblHoaDonCT.getValueAt(i, 5) + "") * Integer.parseInt(tblHoaDonCT.getValueAt(i, 4) + "")) + " VNĐ");
             }
 
             int tongSL = 0;
             for (int i = 0; i < tblHoaDonCT.getRowCount(); i++) {
-                tongSL += Integer.parseInt(tblHoaDonCT.getValueAt(i, 2) + "");
+                tongSL += Integer.parseInt(tblHoaDonCT.getValueAt(i, 3) + "");
             }
 
             table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(0).setText("TỔNG");
@@ -1466,10 +1471,13 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             run16.setBold(true);
             run16.setFontSize(15);
 
+            String idnhanvien = gcservice.getGiaoCaByMa(mac).getIdnhanvien();
+            String tennhanvien = nhanVienService.getNVbyid(idnhanvien).getHotenNv();
+
             XWPFParagraph paragraph17 = document.createParagraph();
             paragraph17.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun run17 = paragraph17.createRun();
-            run17.setText(tblHoaDon.getValueAt(tblHoaDon.getSelectedRow(), 3).toString());
+            run17.setText(tennhanvien);
             run17.setTextPosition(80);
 
             XWPFParagraph paragraph18 = document.createParagraph();
