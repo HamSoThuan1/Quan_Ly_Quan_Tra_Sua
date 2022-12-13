@@ -426,8 +426,4 @@ public class ViewGiaoCaNhanVien extends javax.swing.JFrame {
         double tienKQ = Double.parseDouble(txtsotienbandau.getText()) + Double.parseDouble(txttiendoanhthu.getText()) + Double.parseDouble(txttienphatsinh.getText()) - Double.parseDouble(txttienchuthu.getText());
         txttongtiencahienco.setText(tienKQ + "");
     }
-
-    private GiaoCa GetGCByForm() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

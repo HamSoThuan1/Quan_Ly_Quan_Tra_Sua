@@ -1065,15 +1065,15 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
                 txtTienKhachDua.requestFocus();
                 return;
             }
-            
-            if(txtMaKH.getText().equals("")){
+
+            if (txtMaKH.getText().equals("")) {
                 hd.setIdkhachhang(null);
-            }else{
+            } else {
                 String makh = txtMaKH.getText();
                 KhachHang kh = khachhangService.getKhachHangByMa(makh);
                 hd.setIdkhachhang(kh.getIdKhachHang());
             }
-            
+
             if (Double.parseDouble(txtTienKhachDua.getText()) < Double.parseDouble(txtTongTien.getText())) {
                 JOptionPane.showMessageDialog(this, "Khách hàng chưa đưa đủ tiền");
                 txtTienKhachDua.requestFocus();
@@ -1103,8 +1103,11 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             System.out.println(hd);
             hdservice.updateHD(hd);
             fillHDToTable();
-            tblHoaDonCT.removeAll();
+            DefaultTableModel model = (DefaultTableModel) tblHoaDonCT.getModel();
+            model.setRowCount(0);
+//            tblHoaDonCT.removeAll();
             JOptionPane.showMessageDialog(this, "Thanh toán thành công");
+            clearForm();
         } catch (Exception e) {
         }
 
@@ -1279,7 +1282,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 //        hd.setIdnhanvien(idNhanVien);
 //        hd.setIdkm(idKhuyenMai);
 //    }
-
     private void clearForm() {
         txtMaKH.setText("");
         txtTenKH.setText("");
@@ -1290,8 +1292,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         txtTienThua.setText("");
         txtghichu.setText("");
     }
-    
-    public void showKhachHang(){
+
+    public void showKhachHang() {
         if (!ViewKhachHang.maKH.equals("KH01")) {
             txtMaKH.setText(ViewKhachHang.maKH);
             txtMaKH.setForeground(Color.black);
@@ -1306,7 +1308,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         ViewKhachHang.maKH = null;
         ViewKhachHang.tenKH = null;
         MsgBox.alert(this, "Hiện Thị thành công!");
-
 //        List<HoaDonViewModel> hds = hoaDonServices.getALlhoaDon();
 //        List<KhachHang> list = nvImpl.getIDKhachHang(lblTenKh.getText());
 //        for (int i = 0; i < list.size(); i++) {
