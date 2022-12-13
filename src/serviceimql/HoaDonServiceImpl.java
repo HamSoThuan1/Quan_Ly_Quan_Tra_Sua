@@ -59,14 +59,13 @@ public class HoaDonServiceImpl implements HoaDonService {
     }
 
     @Override
-    public List<HoaDon> getlocTheothang(String thang) {
-       return hoaDon.getlocTheothang(thang);
+    public List<HoaDon> getlocTheoThang(String thang) {
+        return hoaDon.getlocTheoThang(thang);
     }
 
     @Override
     public List<HoaDon> getlocTheoNam(String nam) {
-       return hoaDon.getlocTheoNam(nam);
+        return hoaDon.getlocTheoNam(nam);
     }
-
 
 }

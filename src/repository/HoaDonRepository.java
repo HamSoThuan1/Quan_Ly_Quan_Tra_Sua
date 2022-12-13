@@ -18,6 +18,7 @@ import java.util.List;
 import model.HoaDon;
 import model.Nhanvien;
 import model.KhachHang;
+import model.thongke;
 import viewModel.HoaDonViewModel;
 
 /**
@@ -175,5 +176,47 @@ public class HoaDonRepository {
             e.printStackTrace(System.out);
         }
         return null;
+    }
+
+    public List<HoaDon> getlocTheoThang(String thang) {
+        List<HoaDon> listhd = new ArrayList<>();
+        String sql = "select *,CONVERT(int,SUBSTRING(MaHD,3,3)) as STT\n"
+                + "from HOADON\n"
+                + "where month(NgayTao)=?\n"
+                + "order by STT";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql);) {
+            pr.setObject(1, thang);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3), 
+                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getDate(7), 
+                        rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                listhd.add(hd);
+            }
+            return listhd;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+
+    public List<HoaDon> getlocTheoNam(String nam) {
+        List<HoaDon> listhd = new ArrayList<>();
+        String sql = "select *,CONVERT(int,SUBSTRING(MaHD,3,3)) as STT\n"
+                + "from HOADON\n"
+                + "where year(NgayTao)=?\n"
+                + "order by STT";
+        try ( Connection con = DBContext.getConnection();  PreparedStatement pr = con.prepareStatement(sql);) {
+            pr.setObject(1, nam);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(rs.getString(1), rs.getString(2), rs.getDate(3), 
+                        rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), 
+                        rs.getDate(7), rs.getString(8), rs.getInt(9), rs.getString(10), rs.getString(11), rs.getString(12));
+                listhd.add(hd);
+            }
+            return listhd;
+        } catch (SQLException ex) {
+            return null;
+        }
     }
 }

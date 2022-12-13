@@ -89,7 +89,7 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
 
     public void fillTbaleTheoThang() {
         String month = (String) cbo_month.getSelectedItem();
-        listhd = hoaDonServiceImpl.getlocTheothang(month);
+        listhd = hoaDonServiceImpl.getlocTheoThang(month);
         DefaultTableModel tblModel = new DefaultTableModel();
         tblModel = (DefaultTableModel) tbl_hoaDon.getModel();
         tblModel.setRowCount(0);
@@ -106,13 +106,14 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
             });
         }
     }
+
     public void fillTbaleTheonam() {
         String nam = (String) cbo_nam.getSelectedItem();
-        listhd = hoaDonServiceImpl.getlocTheoNam(nam);
+        List<HoaDon> listNam = hoaDonServiceImpl.getlocTheoNam(nam);
         DefaultTableModel tblModel = new DefaultTableModel();
         tblModel = (DefaultTableModel) tbl_hoaDon.getModel();
         tblModel.setRowCount(0);
-        for (HoaDon hoaDon : listhd) {
+        for (HoaDon hoaDon : listNam) {
             tblModel.addRow(new Object[]{
                 hoaDon.getMaHD(),
                 hoaDon.getNgayTao(),
@@ -379,7 +380,7 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
                 .addComponent(cbo_trangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(178, 178, 178)
                 .addComponent(cbo_month, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbo_nam, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(118, 118, 118))
         );

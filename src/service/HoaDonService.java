@@ -28,7 +28,7 @@ public interface HoaDonService {
 
     List<HoaDon> timKiemcbo(int trangthai);
 
-    List<HoaDon> getlocTheothang(String thang);
+    List<HoaDon> getlocTheoThang(String thang);
 
     List<HoaDon> getlocTheoNam(String nam);
 }
