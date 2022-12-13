@@ -11,10 +11,12 @@ import java.util.Date;
  * @author QUANGMINH
  */
 public class thongke {
+
     private String mahd;
     private Date ngaytao;
     private double tongtien;
     private int trangthai;
+
     public thongke() {
     }
 
@@ -24,8 +26,6 @@ public class thongke {
         this.tongtien = tongtien;
         this.trangthai = trangthai;
     }
-
-    
 
     public String getMahd() {
         return mahd;
@@ -51,10 +51,6 @@ public class thongke {
         this.trangthai = trangthai;
     }
 
-   
-
-   
-
     public double getTongtien() {
         return tongtien;
     }
@@ -68,6 +64,4 @@ public class thongke {
         return "thongke{" + "mahd=" + mahd + ", ngaytao=" + ngaytao + ", tongtien=" + tongtien + ", trangthai=" + trangthai + '}';
     }
 
-    
-    
 }

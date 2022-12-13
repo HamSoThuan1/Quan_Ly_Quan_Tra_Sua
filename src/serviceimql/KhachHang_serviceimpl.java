@@ -5,6 +5,7 @@
 package serviceimql;
 
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.KhachHang;
 import repository.KhachHang_repository;
@@ -34,6 +35,10 @@ public class KhachHang_serviceimpl implements KhachHang_service {
         }
         if (kh.getDiachi().trim().length() == 0) {
             return 5;
+        }
+        Pattern pattern = Pattern.compile(" ");
+        if(pattern.matcher(kh.getMakh()).find()){
+            return 6;
         }
         return 0;
     }
@@ -86,9 +91,12 @@ public class KhachHang_serviceimpl implements KhachHang_service {
         if (valiDate(kh) != 4) {
             return "số điện thoại phải là 10 số";
         }
-        
+
         if (valiDate(kh) == 5) {
             return "Địa chỉ không được bỏ trống";
+        }
+        if(valiDate(kh) != 6){
+            return "Không được để khoảng trống ở mã KH";
         }
         boolean add = khrp.add(kh);
         if (add) {

@@ -13,8 +13,10 @@ import service.thongke_service;
  *
  * @author QUANGMINH
  */
-public class thongke_serviceimpl implements thongke_service{
-            thongke_repositoty tk= new thongke_repositoty();
+public class thongke_serviceimpl implements thongke_service {
+
+    thongke_repositoty tk = new thongke_repositoty();
+
     @Override
     public List<thongke> getallthongke() {
         return tk.getallthongke();
@@ -44,5 +46,5 @@ public class thongke_serviceimpl implements thongke_service{
     public List<thongke> getthongketheonam() {
         return tk.getthongketheonam();
     }
-    
+
 }
