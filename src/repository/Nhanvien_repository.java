@@ -71,6 +71,56 @@ public class Nhanvien_repository {
             return null;
         }
     }
+    public static Nhanvien getNV(String ten){
+    Nhanvien nv=null;
+    ResultSet rs;
+    String sql ="select * from NHANVIEN where hotennv=? ";
+    rs=JDBC_Helper.selectTongQuat(sql,ten);
+        try {
+            while(rs.next()){
+           String ma=rs.getString(2);
+            String hoten=rs.getString(3);
+            String sodt=rs.getString(4);
+            String gioitinh=rs.getString(5);
+            Date ngaysinh=rs.getDate(6);
+            String email=rs.getString(7);
+            String diachi=rs.getString(8);
+            String chucvu=rs.getString(9);
+            String matkhau = rs.getString(10);
+            int trangthai=rs.getInt(11);
+            nv = new Nhanvien(ma, hoten, sodt, gioitinh, ngaysinh, email, diachi, chucvu, matkhau,trangthai);
+           
+            }
+            return nv;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
+    public List<Nhanvien> getNVbyten(String tenK){
+    List<Nhanvien> list = new ArrayList<>();
+    ResultSet rs;
+    String sql ="select * from NHANVIEN where hotennv like N'%"+tenK+"%'";
+    rs=JDBC_Helper.selectTongQuat(sql);
+        try {
+            while(rs.next()){
+           String ma=rs.getString(2);
+            String hoten=rs.getString(3);
+            String sodt=rs.getString(4);
+            String gioitinh=rs.getString(5);
+            Date ngaysinh=rs.getDate(6);
+            String email=rs.getString(7);
+            String diachi=rs.getString(8);
+            String chucvu=rs.getString(9);
+            String matkhau = rs.getString(10);
+            int trangthai=rs.getInt(11);
+             Nhanvien nv = new Nhanvien(ma, hoten, sodt, gioitinh, ngaysinh, email, diachi, chucvu, matkhau,trangthai);
+           list.add(nv);
+            }
+            return list;
+        } catch (SQLException ex) {
+            return null;
+        }
+    }
     public static int add(Nhanvien nv){
     String sql="insert into NHANVIEN (MaNV,HoTenNV,SoDT,GioiTinh,NgaySinh,email,DiaChi,MatKhau,TrangThai,ChucVu) values (?,?,?,?,?,?,?,?,?,?)";
     return JDBC_Helper.updateTongQuat(sql,nv.getMaNV(),nv.getHotenNv(),nv.getSoDt(),nv.getGioitinh(),nv.getNgaysinh(),nv.getEmail(),nv.getDiachi(),nv.getMatkhau(),nv.getTrangthai(),nv.getChucvu());
@@ -84,9 +134,10 @@ public class Nhanvien_repository {
     return JDBC_Helper.updateTongQuat(sql,nv.getMaNV(),nv.getHotenNv(),nv.getSoDt(),nv.getGioitinh(),nv.getNgaysinh(),nv.getEmail(),nv.getDiachi(),nv.getMatkhau(),nv.getTrangthai(),nv.getChucvu(),nv.getMaNV());
     }
     public static void main(String[] args) {
-        
-        Nhanvien nv = new Nhanvien_repository().getNVByMaVaMatKhau("NV01", "123");
-        System.out.println(nv);
+        List<Nhanvien> list =new Nhanvien_repository().getNVbyten("Phạm");
+        for (Nhanvien x : list) {
+            System.out.println(x.toString());
+        }
     }
 
     public static Nhanvien getNVByMaVaMatKhau(String maNV, String matKhau) {

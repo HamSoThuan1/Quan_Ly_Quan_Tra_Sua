@@ -4,6 +4,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.text.ParseException;
@@ -111,6 +112,9 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         cbbSize(listSz);
         filltablecb();
         filltablecbsp();
+        txttencbsp.disable();
+        txttenspcb.disable();
+        txtsize.disable();
         Loadcb();
     }
 
@@ -1368,6 +1372,61 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_tblcomboMouseClicked
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
+        if(txtmacb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mã combo ko được để trống");
+            return;
+        }
+        listcb=comboservice.getallCB();
+        for(int i=0;i<listcb.size();i++){
+            if(txtmacb.getText().equals(listcb.get(i).getMacb())){
+                JOptionPane.showMessageDialog(this,"Mã combo ko được để trùng");
+            return;
+            }
+        }
+        if(txttencb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"tên combo ko được để trống");
+            return;
+        }
+        if(txtgiacb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Giá combo ko được để trống");
+            return;
+        }
+        double gia;
+        try {
+            gia=Double.parseDouble(txtgiacb.getText());
+            if(gia<0){
+            JOptionPane.showMessageDialog(this,"Giá combo phải lớn hơn 0");
+            return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Giá combo phải là số");
+            return;
+        }
+        if(txtsoluongcb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"số lượng ko được để trống");
+            return;
+        }
+        int sl;
+        try {
+            sl =Integer.parseInt(txtsoluongcb.getText());
+            if(sl<0){
+            JOptionPane.showMessageDialog(this,"số lượng phải lớn hơn 0");
+            return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"số lượng phải là số");
+            return;
+        }
+        if(txtngaytaocb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"ngày tạo ko được để trống");
+            return;
+        }
+        try {
+            Date Ngaysinh = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaytaocb.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"sai định dạng ngày tạo, Mời nhập lại");
+                return;
+        }
         try {
             Combo cb = getCBbyfrom();
             comboservice.add(cb);
@@ -1380,6 +1439,56 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        if(txtmacb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mã combo ko được để trống");
+            return;
+        }
+        
+        
+        if(txttencb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"tên combo ko được để trống");
+            return;
+        }
+        if(txtgiacb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Giá combo ko được để trống");
+            return;
+        }
+        double gia;
+        try {
+            gia=Double.parseDouble(txtgiacb.getText());
+            if(gia<0){
+            JOptionPane.showMessageDialog(this,"Giá combo phải lớn hơn 0");
+            return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Giá combo phải là số");
+            return;
+        }
+        if(txtsoluongcb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"số lượng ko được để trống");
+            return;
+        }
+        int sl;
+        try {
+            sl =Integer.parseInt(txtsoluongcb.getText());
+            if(sl<0){
+            JOptionPane.showMessageDialog(this,"số lượng phải lớn hơn 0");
+            return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"số lượng phải là số");
+            return;
+        }
+        if(txtngaytaocb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"ngày tạo ko được để trống");
+            return;
+        }
+        try {
+            Date Ngaysinh = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaytaocb.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"sai định dạng ngày tạo, Mời nhập lại");
+                return;
+        }
         try {
             Combo cb = getCBbyfrom();
             comboservice.update(cb);
@@ -1391,6 +1500,10 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btnupdateActionPerformed
 
     private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        if(txtmacb.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mã combo ko được để trống");
+            return;
+        }
         try {
             Combo cb = getCBbyfrom();
             comboservice.delete(cb);
@@ -1402,6 +1515,8 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     }//GEN-LAST:event_btndeleteActionPerformed
 
     private void cbomacbItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbomacbItemStateChanged
+        
+        
         if (cbomacb.getItemCount() > 0) {
             String macbo = cbomacb.getSelectedItem().toString();
             Combo cb = comboservice.GetCBnyma(macbo);

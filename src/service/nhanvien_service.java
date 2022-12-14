@@ -14,6 +14,8 @@ import java.util.List;
 public interface nhanvien_service {
     public List<Nhanvien> GetallNV();
     public Nhanvien getNVbyma(String manv);
+    public Nhanvien getNVbyten(String ten);
+    public List<Nhanvien> getNVbytenabc(String tenK);
     public int add(Nhanvien nv);
     public int delete (Nhanvien nv);
     public int update(Nhanvien nv);

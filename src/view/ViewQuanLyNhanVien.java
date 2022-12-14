@@ -50,7 +50,6 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblnhanvien = new javax.swing.JTable();
         txtsearch = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -76,6 +75,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
         btnthem = new javax.swing.JButton();
         btnsua = new javax.swing.JButton();
         btnxoa = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1013, 703));
 
@@ -112,12 +112,10 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblnhanvien);
 
-        txtsearch.setForeground(new java.awt.Color(204, 204, 204));
-
-        jButton1.setText("Tìm kiếm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        txtsearch.setToolTipText("");
+        txtsearch.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtsearchCaretUpdate(evt);
             }
         });
 
@@ -304,6 +302,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {cbochucvu, cbott, txtdiachi, txtemail, txtmatkhau});
 
+        jLabel10.setText("Nhập tên nhân viên");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -314,10 +314,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
                 .addGap(73, 73, 73)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton1)))
+                    .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(452, 452, 452)
@@ -329,18 +327,16 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel12)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(87, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -515,10 +511,13 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnxoaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void txtsearchCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtsearchCaretUpdate
+        
         String ma = txtsearch.getText();
         filltotabletk(ma);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+       
+    }//GEN-LAST:event_txtsearchCaretUpdate
 
     public Nhanvien getNVbyfrom() throws ParseException {
         String manv = txtmaNV.getText();
@@ -548,8 +547,8 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
     private javax.swing.JButton btnxoa;
     private javax.swing.JComboBox<String> cbochucvu;
     private javax.swing.JComboBox<String> cbott;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -595,9 +594,9 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
     }
 
     private void filltotabletk(String ma) {
-        listtk.removeAll(listtk);
-        Nhanvien nv = nvservice.getNVbyma(ma);
-        listtk.add(nv);
+        
+        listnv=nvservice.getNVbytenabc(ma);
+        
         model = (DefaultTableModel) tblnhanvien.getModel();
         model.setRowCount(0);
         for (int i = 0; i < listnv.size(); i++) {
@@ -609,7 +608,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
                 tt = "Khong hoat dong";
             }
             Object[] data = new Object[]{
-                listtk.get(i).getMaNV(), listtk.get(i).getHotenNv(), listtk.get(i).getSoDt(), listtk.get(i).getMatkhau(), tt, listtk.get(i).getChucvu()
+                listnv.get(i).getMaNV(), listnv.get(i).getHotenNv(), listnv.get(i).getSoDt(), listnv.get(i).getMatkhau(), tt, listnv.get(i).getChucvu()
             };
             model.addRow(data);
         }

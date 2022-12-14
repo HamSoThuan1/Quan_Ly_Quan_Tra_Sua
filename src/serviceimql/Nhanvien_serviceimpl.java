@@ -52,4 +52,14 @@ public class Nhanvien_serviceimpl implements nhanvien_service {
         return nvrepos.getNVbyid(idnv);
     }
 
+    @Override
+    public Nhanvien getNVbyten(String ten) {
+        return nvrepos.getNV(ten);
+    }
+
+    @Override
+    public List<Nhanvien> getNVbytenabc(String tenK) {
+        return nvrepos.getNVbyten(tenK);
+    }
+
 }
