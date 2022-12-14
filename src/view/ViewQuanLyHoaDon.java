@@ -329,10 +329,15 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
                 .addGap(26, 26, 26))
         );
 
-        cbo_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã Thanh Toán", "Đã Hủy", "Chờ Thanh Toán", " " }));
+        cbo_trangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chờ thanh toán", "Đã Hủy", "Đã Thanh Toán", " " }));
         cbo_trangThai.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbo_trangThaiItemStateChanged(evt);
+            }
+        });
+        cbo_trangThai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_trangThaiActionPerformed(evt);
             }
         });
 
@@ -447,6 +452,10 @@ public class ViewQuanLyHoaDon extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillTbaleTheonam();
     }//GEN-LAST:event_cbo_namItemStateChanged
+
+    private void cbo_trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_trangThaiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbo_trangThaiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
