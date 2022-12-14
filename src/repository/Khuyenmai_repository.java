@@ -124,7 +124,7 @@ public class Khuyenmai_repository {
         ResultSet rs;
         
         List<KhuyenMai> list = new ArrayList<>();
-        String sql = "select MaKM, TenKM, NgayBatDau, NgayKetThuc, HinhThucKM, GiaTri, TrangThai from KHUYENMAI where TenKM like '%"+tenK+"%'";
+        String sql = "select MaKM, TenKM, NgayBatDau, NgayKetThuc, HinhThucKM, GiaTri, TrangThai from KHUYENMAI where TenKM like N'%"+tenK+"%'";
 
         rs = JDBC_Helper.selectTongQuat(sql);
         try {
