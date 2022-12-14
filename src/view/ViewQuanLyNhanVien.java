@@ -113,7 +113,6 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblnhanvien);
 
         txtsearch.setForeground(new java.awt.Color(204, 204, 204));
-        txtsearch.setText("Nhận mã NV");
 
         jButton1.setText("Tìm kiếm");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +318,7 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
                         .addComponent(txtsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addComponent(jButton1)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(452, 452, 452)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -354,36 +353,166 @@ public class ViewQuanLyNhanVien extends javax.swing.JPanel {
     }//GEN-LAST:event_tblnhanvienMouseClicked
 
     private void btnthemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthemActionPerformed
+        if(txtmaNV.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mã nhân viên không được để trống");
+            return;
+        }
+        listnv=nvservice.GetallNV();
+        for(int i=0;i<listnv.size();i++){
+            if(txtmaNV.getText().equals(listnv.get(i).getMaNV())){
+                JOptionPane.showMessageDialog(this,"Mã nhân viên không được trùng");
+            return;
+            }
+        }
+        if(txtHotenNV.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Họ tên không được để trống");
+            return;
+        }
+        if(txtsoDT.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"SDT không được để trống");
+            return;
+        }
+        String resdt="0\\d{9}";
+            if(!txtsoDT.getText().matches(resdt)){
+                JOptionPane.showMessageDialog(this,"sai định dạng số điện thoại, Mời nhập lại");
+                return;
+            }
+        if(txtngaysinh.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Ngày sinh không được để trống");
+            return;
+        }
+        try {
+            Date Ngaysinh = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaysinh.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"sai định dạng ngày sinh, Mời nhập lại");
+                return;
+        }
+        if(txtemail.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Email không được để trống");
+            return;
+        }
+        String reemail="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+            if(!txtemail.getText().matches(reemail)){
+                JOptionPane.showMessageDialog(this,"sai định dạng email, Mời nhập lại");
+                return;
+            }
+        if(txtdiachi.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"địa chỉ không được để trống");
+            return;
+        }
+        if(txtmatkhau.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mật khẩu không được để trống");
+            return;
+        }
         Nhanvien nv = null;
         try {
             nv = getNVbyfrom();
         } catch (ParseException ex) {
             Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        nvservice.add(nv);
-        filltotablenv();
+        try {
+            int chon=JOptionPane.showConfirmDialog(this,"Bạn có muốn thêm Nhân viên này ko","Thông báo",JOptionPane.YES_NO_CANCEL_OPTION);
+            if(chon==JOptionPane.YES_OPTION){
+                nvservice.add(nv);
+            filltotablenv();
+                JOptionPane.showMessageDialog(this,"Thêm nhân viên thành công");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"Thêm nhân viên thất bại");
+        }
+        
     }//GEN-LAST:event_btnthemActionPerformed
 
     private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
+        if(txtmaNV.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mã nhân viên không được để trống");
+            return;
+        }
+        
+        if(txtHotenNV.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Họ tên không được để trống");
+            return;
+        }
+        if(txtsoDT.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"SDT không được để trống");
+            return;
+        }
+        String resdt="0\\d{9}";
+            if(!txtsoDT.getText().matches(resdt)){
+                JOptionPane.showMessageDialog(this,"sai định dạng số điện thoại, Mời nhập lại");
+                return;
+            }
+        if(txtngaysinh.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Ngày sinh không được để trống");
+            return;
+        }
+        try {
+            Date Ngaysinh = new SimpleDateFormat("MM-dd-yyyy").parse(txtngaysinh.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"sai định dạng ngày sinh, Mời nhập lại");
+                return;
+        }
+        if(txtemail.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Email không được để trống");
+            return;
+        }
+        String reemail="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+            if(!txtemail.getText().matches(reemail)){
+                JOptionPane.showMessageDialog(this,"sai định dạng email, Mời nhập lại");
+                return;
+            }
+        if(txtdiachi.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"địa chỉ không được để trống");
+            return;
+        }
+        if(txtmatkhau.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mật khẩu không được để trống");
+            return;
+        }
         Nhanvien nv = null;
         try {
             nv = getNVbyfrom();
         } catch (ParseException ex) {
             Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        nvservice.update(nv);
-        filltotablenv();
+        try {
+            int chon=JOptionPane.showConfirmDialog(this,"Bạn có muốn sửa Nhân viên này ko","Thông báo",JOptionPane.YES_NO_CANCEL_OPTION);
+            if(chon==JOptionPane.YES_OPTION){
+                nvservice.update(nv);
+            filltotablenv();
+                JOptionPane.showMessageDialog(this,"sửa nhân viên thành công");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"sửa nhân viên thất bại");
+        }
     }//GEN-LAST:event_btnsuaActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
+        
+        if(txtmaNV.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Mã nhân viên không được để trống");
+            return;
+        }
+        
         Nhanvien nv = null;
         try {
             nv = getNVbyfrom();
         } catch (ParseException ex) {
             Logger.getLogger(ViewQuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
         }
-        nvservice.delete(nv);
-        filltotablenv();
+       try {
+            int chon=JOptionPane.showConfirmDialog(this,"Bạn có muốn xóa Nhân viên này ko","Thông báo",JOptionPane.YES_NO_CANCEL_OPTION);
+            if(chon==JOptionPane.YES_OPTION){
+                nvservice.delete(nv);
+            filltotablenv();
+                JOptionPane.showMessageDialog(this,"xóa nhân viên thành công");
+            }
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,"xóa nhân viên thất bại");
+        }
     }//GEN-LAST:event_btnxoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
