@@ -249,16 +249,16 @@
                       <Component id="txtGiatri" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="txtNgayBD" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel7" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="txtNgayKT" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="txtNgayBD" max="32767" attributes="0"/>
+                      <Component id="jLabel6" pref="32" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel7" pref="32" max="32767" attributes="0"/>
+                      <Component id="txtNgayKT" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel8" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="cboTT" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
@@ -360,10 +360,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtGiatri">
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNgayBD">
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtNgayKT">
-        </Component>
         <Component class="javax.swing.JRadioButton" name="rdoPT">
           <Properties>
             <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
@@ -403,7 +399,12 @@
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnDelMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtNgayBD">
+        </Component>
+        <Component class="javax.swing.JTextField" name="txtNgayKT">
         </Component>
       </SubComponents>
     </Container>

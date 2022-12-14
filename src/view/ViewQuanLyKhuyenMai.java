@@ -62,12 +62,12 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         txtMaKM = new javax.swing.JTextField();
         txtTenKM = new javax.swing.JTextField();
         txtGiatri = new javax.swing.JTextField();
-        txtNgayBD = new javax.swing.JTextField();
-        txtNgayKT = new javax.swing.JTextField();
         rdoPT = new javax.swing.JRadioButton();
         rdoTienmat = new javax.swing.JRadioButton();
         cboTT = new javax.swing.JComboBox<>();
         btnDel = new javax.swing.JButton();
+        txtNgayBD = new javax.swing.JTextField();
+        txtNgayKT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnALL = new javax.swing.JButton();
 
@@ -178,6 +178,11 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                 btnDelMouseClicked(evt);
             }
         });
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -248,14 +253,14 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtGiatri, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgayBD, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgayKT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNgayBD)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(txtNgayKT))
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cboTT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -340,51 +345,65 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         // TODO add your handling code here:
         int index = tblKM.getSelectedRow();
         mol = (DefaultTableModel) tblKM.getModel();
-        String mak = mol.getValueAt(index,0).toString();
+        String mak = mol.getValueAt(index, 0).toString();
         KhuyenMai km = KMSer.getKMByMa(mak);
         showdetail(km);
     }//GEN-LAST:event_tblKMMouseClicked
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        KhuyenMai km = null;          
+        KhuyenMai km = null;
         try {
-            if(txtMaKM.getText().equals("")){
+            if (txtMaKM.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Không để trống Mã!");
                 return;
             }
             for (KhuyenMai t : listKM) {
-                if(txtMaKM.getText().equals(t.getMaKM())){
+                if (txtMaKM.getText().equals(t.getMaKM())) {
                     JOptionPane.showMessageDialog(this, "Không để trùng Mã!");
                     return;
                 }
             }
-            
-            if(txtTenKM.getText().equals("")){
+
+            if (txtTenKM.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Không để trống Tên!");
                 return;
             }
-            
-            if(txtGiatri.getText().equals("")){
+
+            if (txtGiatri.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Không để trống Giá trị!");
                 return;
             }
             int giatri = Integer.parseInt(txtGiatri.getText());
             try {
-                if(giatri<1){
+                if (giatri < 1) {
                     JOptionPane.showMessageDialog(this, "Giá trị phải lớn hơn 0!");
                     return;
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Giá trị phải là số!");
             }
+
             if(txtNgayBD.getText().equals("")){
                 JOptionPane.showMessageDialog(this, "Không để trống Ngày bắt đầu!");
                 return;
             }
             
-            if(txtMaKM.getText().equals("")){
+            try {
+                Date ngaysinh = new SimpleDateFormat("yyyy-MM-dd").parse(txtNgayBD.getText()); 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Sai định dạng ngày bắt đầu, Mời nhập dạng yyyy-MM-dd");
+                return;
+            }
+            
+            if (txtNgayKT.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Không để trống Ngày kết thúc!");
+                return;
+            }
+            try {
+                Date ngaysinh = new SimpleDateFormat("yyyy-MM-dd").parse(txtNgayKT.getText()); 
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Sai định dạng ngày kết thúc, Mời nhập dạng yyyy-MM-dd");
                 return;
             }
             km = getKMByForm();
@@ -395,13 +414,13 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Lỗi!");
         }
-        
+
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try {
             KhuyenMai km = getKMByForm();
-            if(txtMaKM.getText().equals("")){
+            if (txtMaKM.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Chọn Khuyến mãi để sửa!");
                 return;
             }
@@ -409,32 +428,32 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
             fillTableKM();
             clearForm();
             JOptionPane.showMessageDialog(this, "Sửa thành công!");
-        } catch (ParseException ex) {
-            Logger.getLogger(ViewQuanLyKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi chưa chọn!");
         }
-        
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDelMouseClicked
         // TODO add your handling code here:
-        try {
-            KhuyenMai km = getKMByForm();
-            if(txtMaKM.getText().equals("")){
-                JOptionPane.showMessageDialog(this, "Chọn Khuyến mãi để xóa!");
-                return;
-            }
-            KMSer.delete(km);
-            fillTableKM();
-            clearForm();
-            JOptionPane.showMessageDialog(this, "Xóa thành công!");
-        } catch (ParseException ex) {
-            Logger.getLogger(ViewQuanLyKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            KhuyenMai km = getKMByForm();
+//            if (txtMaKM.getText().equals("")) {
+//                JOptionPane.showMessageDialog(this, "Chọn Khuyến mãi để xóa!");
+//                return;
+//            }
+//            KMSer.delete(km);
+//            fillTableKM();
+//            clearForm();
+//            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+//        } catch (ParseException ex) {
+//            Logger.getLogger(ViewQuanLyKhuyenMai.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_btnDelMouseClicked
 
     private void cboLocLoaiKMItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboLocLoaiKMItemStateChanged
         // TODO add your handling code here:
-        if(cboLocLoaiKM.getItemCount() > 0){
+        if (cboLocLoaiKM.getItemCount() > 0) {
             String mak = cboLocLoaiKM.getSelectedItem().toString();
             KhuyenMai km = KMSer.getKMByMa(mak);
             fillTableKM(mak);
@@ -456,6 +475,23 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         String tim = txtTimKM.getText();
         fillTableTen(tim);
     }//GEN-LAST:event_txtTimKMCaretUpdate
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        // TODO add your handling code here:
+        try {
+            KhuyenMai km = getKMByForm();
+            if (txtMaKM.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Chọn Khuyến mãi để xóa!");
+                return;
+            }
+            KMSer.delete(km);
+            fillTableKM();
+            clearForm();
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Lỗi chưa chọn!");
+        }
+    }//GEN-LAST:event_btnDelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -502,12 +538,11 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                 tt = "Dừng hoạt động";
             }
             Object[] data = new Object[]{
-                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri()+listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT(),
-            };
+                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri() + listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT(),};
             mol.addRow(data);
         }
     }
-    
+
     private void fillTableKM(String makm) {
         listKM = KMSer.getKMByMaKM(makm);
         mol = (DefaultTableModel) tblKM.getModel();
@@ -520,12 +555,12 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                 tt = "Dừng hoạt động";
             }
             Object[] data = new Object[]{
-                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri()+listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
+                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri() + listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
             };
             mol.addRow(data);
         }
     }
-    
+
     private void fillTableMa(String mak) {
         listKM.removeAll(listKM);
         KhuyenMai km = KMSer.getKMByMa(mak);
@@ -540,12 +575,12 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                 tt = "Dừng hoạt động";
             }
             Object[] data = new Object[]{
-                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri()+listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
+                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri() + listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
             };
             mol.addRow(data);
         }
     }
-    
+
     private void fillTableMaK(String mak) {
         listKM = KMSer.getKMByMaKM(mak);
         mol = (DefaultTableModel) tblKM.getModel();
@@ -558,12 +593,12 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                 tt = "Dừng hoạt động";
             }
             Object[] data = new Object[]{
-                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri()+listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
+                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri() + listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
             };
             mol.addRow(data);
         }
     }
-    
+
     private void fillTableTen(String tenK) {
         listKM = KMSer.getKMByTen(tenK);
         mol = (DefaultTableModel) tblKM.getModel();
@@ -576,12 +611,11 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
                 tt = "Dừng hoạt động";
             }
             Object[] data = new Object[]{
-                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri()+listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
+                listKM.get(i).getMaKM(), listKM.get(i).getTenKM(), listKM.get(i).getLoaiKM(), listKM.get(i).getGiatri() + listKM.get(i).getLoaiKM(), tt, listKM.get(i).getNgayBD(), listKM.get(i).getNgayKT()
             };
             mol.addRow(data);
         }
     }
-    
 
     private void showdetail(KhuyenMai km) {
         txtMaKM.setText(km.getMaKM());
@@ -592,8 +626,10 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
             rdoTienmat.setSelected(true);
         }
         txtGiatri.setText(km.getGiatri() + "");
-        txtNgayBD.setText(km.getNgayBD() + "");
-        txtNgayKT.setText(km.getNgayKT() + "");
+//        txtNgayBD.setDateFormatString(km.getNgayBD()+"");
+//        txtNgayKT.setDateFormatString(km.getNgayKT()+"");
+        txtNgayBD.setText(km.getNgayBD()+"");
+        txtNgayKT.setText(km.getNgayKT()+"");
         String tt = null;
         if (km.getTrangthai() == 0) {
             tt = "Đang hoạt động";
@@ -602,32 +638,37 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
         }
         cboTT.setSelectedItem(tt);
     }
-    
+
     public KhuyenMai getKMByForm() throws ParseException {
         String makm = txtMaKM.getText();
         String tenkm = txtTenKM.getText();
-        String loai =  rdoPT.isSelected() ? "%":"VNĐ";
+        String loai = rdoPT.isSelected() ? "%" : "VNĐ";
         int gtri = Integer.parseInt(txtGiatri.getText());
         Date nbd = new SimpleDateFormat("yyyy-MM-dd").parse(txtNgayBD.getText());
         Date nkt = new SimpleDateFormat("yyyy-MM-dd").parse(txtNgayKT.getText());
-        
+
+//        Date nbdd = txtNgayBD.getDate();
+//        Date nbkt = txtNgayBD.getDate();
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String nbd = dateFormat.format(nbdd);
+//        String nkt = dateFormat.format(nbkt);
         int tthai;
-        String tt= (String) cboTT.getSelectedItem();
-        if(tt.equals("Đang hoạt động")){
-            tthai=0;
-        }else {
-            tthai=1;
+        String tt = (String) cboTT.getSelectedItem();
+        if (tt.equals("Đang hoạt động")) {
+            tthai = 0;
+        } else {
+            tthai = 1;
         }
         return new KhuyenMai(makm, tenkm, nbd, nkt, loai, gtri, tthai);
     }
-    
+
     public void clearForm() {
         txtMaKM.setText("");
         txtTenKM.setText("");
         txtGiatri.setText("");
         txtNgayBD.setText("");
         txtNgayKT.setText("");
-        String tt="Đang hoạt động";
+        String tt = "Đang hoạt động";
         cboTT.setSelectedItem(tt);
     }
 
@@ -648,38 +689,33 @@ public class ViewQuanLyKhuyenMai extends javax.swing.JPanel {
 //            mol.addRow(data);
 //        }
 //    }
+//    private void fillTableKMByTT(List<KhuyenMai> km) {
+//        mol = (DefaultTableModel) tblKM.getModel();
+//        mol.setRowCount(0);
+//        for (int i = 0; i < listKM.size(); i++) {
+//            mol.addRow(new Object[]{
+//                listKM.get(i).getMaKM()
+//            });
+//        }
+//    }
 
-
-    private void fillTableKMByTT(List<KhuyenMai> km) {
-        mol=(DefaultTableModel) tblKM.getModel();
-        mol.setRowCount(0);
-        for (int i = 0; i < listKM.size(); i++) {
-            mol.addRow(new Object[]{
-                listKM.get(i).getMaKM()
-            });
-        }
-    }
-    
-    private void demNgay() throws ParseException{
-        String start = txtNgayBD.getText();
-        String end = txtNgayKT.getText();
-        
-        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date startdate = date.parse(start);
-            Date enddate = date.parse(end);
-            
-            long startVlue = startdate.getTime();
-            long endValue = enddate.getTime();
-            long tmp = Math.abs(startVlue-endValue);
-            
-            long result = tmp/(24*60*60*1000);
-            System.out.println("Số ngày: "+result);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        
-        
-    }
-    
+//    private void demNgay() throws ParseException{
+//        String start = txtNgayBD.getText();
+//        String end = txtNgayKT.getText();
+//        
+//        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date startdate = date.parse(start);
+//            Date enddate = date.parse(end);
+//            
+//            long startVlue = startdate.getTime();
+//            long endValue = enddate.getTime();
+//            long tmp = Math.abs(startVlue-endValue);
+//            
+//            long result = tmp/(24*60*60*1000);
+//            System.out.println("Số ngày: "+result);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//    }
 }
