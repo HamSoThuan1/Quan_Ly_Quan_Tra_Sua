@@ -1506,7 +1506,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 //            String Path = j.getSelectedFile().getAbsolutePath();
 //            String name = j.getSelectedFile().getName();
 //            String exclePath = Path + ".docx";
-            String exclePath = "C:\\QUAN_LY_QUAN_TRA_SUA\\XUATHOADON\\"+txtMaHD.getText()+".docx";
+            String exclePath = "C:\\Users\\Nguyen Thanh Hung\\Desktop\\Demo\\XuatHoaDon"+ txtMaHD.getText()+ ".docx";
             System.out.println(exclePath);
             try {
                 FileOutputStream fos = new FileOutputStream(exclePath);

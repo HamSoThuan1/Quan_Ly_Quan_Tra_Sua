@@ -108,7 +108,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         showDataSanPham(listSP);
         showDataTopping(listtp);
         cbbLoaiSP(loaiSpService.getAll());
-        cbbLoaiSanPham(listLSP);
         cbbSize(listSz);
         filltablecb();
         filltablecbsp();
@@ -174,13 +173,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         cbbLoaiSP.setModel(comboboxLSP);
         for (LoaiSanPham loaiSanPham : listlsp) {
             comboboxLSP.addElement(loaiSanPham.getTenLoaiSP());
-        }
-    }
-
-    public void cbbLoaiSanPham(List<LoaiSanPham> listLsp) {
-        cbbLoaiSP1.setModel(comboboxLoaiSP);
-        for (LoaiSanPham loaiSanPham : listLsp) {
-            comboboxLoaiSP.addElement(loaiSanPham.getTenLoaiSP());
         }
     }
 
@@ -313,8 +305,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        cbbLoaiSP1 = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
@@ -610,10 +600,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
             }
         });
 
-        jLabel10.setText("Lọc sản phẩm:");
-
-        cbbLoaiSP1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -623,28 +609,21 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSearch)
-                .addGap(76, 76, 76)
-                .addComponent(cbbLoaiSP1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(212, 212, 212))
+                .addGap(212, 566, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel10))
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch)
-                    .addComponent(cbbLoaiSP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnSearch))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
@@ -1220,6 +1199,20 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
+        try {
+            double donGia = Double.parseDouble(txtDonGia.getText());
+            if(txtDonGia.getText().equals("")){
+                JOptionPane.showMessageDialog(this, "Đơn giá Không được để trống");
+                return;
+            }
+            if (donGia < 0) {
+                JOptionPane.showMessageDialog(this, "Đơn giá phải lớn hơn 0");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Đơn giá phải là số");
+            return;
+        }
         boolean isOK = true;
         if (isOK) {
             LoaiSanPham lsp = new LoaiSanPham();
@@ -1639,7 +1632,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JButton btnxoasp;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbbLoaiSP;
-    private javax.swing.JComboBox<String> cbbLoaiSP1;
     private javax.swing.JComboBox<String> cbbSize;
     private javax.swing.JComboBox<String> cbo_trangThai;
     private javax.swing.JComboBox<String> cboloaicb;
@@ -1647,7 +1639,6 @@ public class ViewQuanLySanPham extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbomasp;
     private javax.swing.JComboBox<String> cbotrangthaicb;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
