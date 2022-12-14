@@ -102,6 +102,11 @@ public class ViewKhachHang extends javax.swing.JFrame {
                 txtSearchCaretUpdate(evt);
             }
         });
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
 
         btnChon.setText("Chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -427,6 +432,10 @@ public class ViewKhachHang extends javax.swing.JFrame {
         viewBanHang.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
 
     /**
      * @param args the command line arguments

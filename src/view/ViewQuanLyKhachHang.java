@@ -119,7 +119,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtso = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txt_timKiem = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblkhachang = new javax.swing.JTable();
         btnsua = new javax.swing.JButton();
@@ -236,6 +236,22 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         );
 
         jButton1.setText("Tìm kiếm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        txt_timKiem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_timKiemMouseClicked(evt);
+            }
+        });
+        txt_timKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_timKiemActionPerformed(evt);
+            }
+        });
 
         tblkhachang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,7 +307,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
                         .addGap(98, 98, 98)
                         .addComponent(jButton1)
                         .addGap(35, 35, 35)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(56, Short.MAX_VALUE)
@@ -314,7 +330,7 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -373,6 +389,24 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
         loadtable(listkh);
     }//GEN-LAST:event_btnxoaActionPerformed
 
+    private void txt_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_timKiemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_timKiemActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_timKiemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_timKiemMouseClicked
+        // TODO add your handling code here:
+           String ten = txt_timKiem.getText();
+        String sdt = txtso.getText();
+        List<KhachHang> list1 = khsv.searchByname(ten);
+        List<KhachHang> list2 = khsv.searchBysdt(sdt);
+        showData(list1);
+        showData(list2);
+    }//GEN-LAST:event_txt_timKiemMouseClicked
+
     private void Showdetail() {
 //        KhachHang kh= listkh.get(index);
 //      txtma.setText(kh.getMakh());
@@ -403,6 +437,21 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
             rdooff.setSelected(true);
         }
 
+    }
+     public void showData(List<KhachHang> list) {
+        tblmodel.setRowCount(0);
+        int stt = 1;
+        for (KhachHang khachHang : list) {
+            tblmodel.addRow(new Object[]{
+                khachHang.getMakh(),
+                khachHang.getTenkh(),
+                khachHang.isGioitinh() == true ? "Nam" : "Nữ",
+                khachHang.getSodt(),
+                khachHang.getDiachi(),
+                khachHang.getGhichu(),
+                khachHang.getTrangthai()
+            });
+        }
     }
 
     private void loadtable(List<KhachHang> listkh) {
@@ -435,13 +484,13 @@ public class ViewQuanLyKhachHang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JRadioButton rdonam;
     private javax.swing.JRadioButton rdonu;
     private javax.swing.JRadioButton rdooff;
     private javax.swing.JRadioButton rdoon;
     private javax.swing.JLabel soDT;
     private javax.swing.JTable tblkhachang;
+    private javax.swing.JTextField txt_timKiem;
     private javax.swing.JTextField txtdiachi;
     private javax.swing.JTextField txtghichu;
     private javax.swing.JTextField txtma;

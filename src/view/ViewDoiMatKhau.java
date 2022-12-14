@@ -22,6 +22,7 @@ public class ViewDoiMatKhau extends javax.swing.JFrame {
      */
     private List<Nhanvien> list;
     private DangNhap_servicesimpl dangNhap_servicesimpl;
+
     public ViewDoiMatKhau() {
         initComponents();
         setLocationRelativeTo(null);
@@ -182,26 +183,26 @@ public class ViewDoiMatKhau extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_QuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_QuayLaiActionPerformed
-//        ViewChinh view = new ViewChinh();
-//        new ViewChinh().setVisible(true);
-//        this.dispose();
+        ViewDangNhap view = new ViewDangNhap();
+        view.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_QuayLaiActionPerformed
 
     private void btn_xacNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xacNhanActionPerformed
         // TODO add your handling code here:
-        if(txt_tenDangNhap.getText().equals("")){
+        if (txt_tenDangNhap.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập tên tài khoản muốn đổi");
             return;
         }
-        if(new String(pwd_matKhauCu.getPassword()).equals("")){
+        if (new String(pwd_matKhauCu.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập mật khẩu cũ");
             return;
         }
-        if(new String(pwd_matKhauMoi.getPassword()).equals("")){
+        if (new String(pwd_matKhauMoi.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "vui lòng điền mật khẩu mới");
             return;
         }
-        if(new String(pwd_xacNhan.getPassword()).equals("")){
+        if (new String(pwd_xacNhan.getPassword()).equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng xác nhận mật khẩu mới");
             return;
         }
@@ -209,14 +210,14 @@ public class ViewDoiMatKhau extends javax.swing.JFrame {
         String mk = new String(pwd_matKhauCu.getPassword());
         String mkNew = new String(pwd_matKhauMoi.getPassword());
         String xacNhan = new String(pwd_xacNhan.getPassword());
-        if(!mkNew.equals(xacNhan)){
+        if (!mkNew.equals(xacNhan)) {
             JOptionPane.showMessageDialog(this, "Nhập lại mật khẩu chưa trùng khớp");
             return;
         }
-       JOptionPane.showMessageDialog(this, dangNhap_servicesimpl.updateMatKhau(maNV, xacNhan));
-       ViewDangNhap view = new ViewDangNhap();
-       view.setVisible(true);
-       this.dispose();
+        JOptionPane.showMessageDialog(this, dangNhap_servicesimpl.updateMatKhau(maNV, xacNhan));
+        ViewDangNhap view = new ViewDangNhap();
+        view.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_xacNhanActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
