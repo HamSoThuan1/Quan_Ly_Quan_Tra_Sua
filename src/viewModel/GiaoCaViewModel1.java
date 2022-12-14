@@ -15,6 +15,7 @@ public class GiaoCaViewModel1 {
     private String maca;
     private Date thoigianbatdau;
     private double tienbandau;
+    private double tongtiencahienco;
     private String idnhanvien;
 
     public GiaoCaViewModel1() {
@@ -26,6 +27,14 @@ public class GiaoCaViewModel1 {
         this.idnhanvien = idnhanvien;
     }
 
+    public GiaoCaViewModel1(String maca, Date thoigianbatdau, double tienbandau, double tongtiencahienco, String idnhanvien) {
+        this.maca = maca;
+        this.thoigianbatdau = thoigianbatdau;
+        this.tienbandau = tienbandau;
+        this.tongtiencahienco = tongtiencahienco;
+        this.idnhanvien = idnhanvien;
+    }
+    
     public GiaoCaViewModel1(String maca, Date thoigianbatdau, double tienbandau, String idnhanvien) {
         this.maca = maca;
         this.thoigianbatdau = thoigianbatdau;
@@ -33,6 +42,14 @@ public class GiaoCaViewModel1 {
         this.idnhanvien = idnhanvien;
     }
 
+    public double getTongtiencahienco() {
+        return tongtiencahienco;
+    }
+
+    public void setTongtiencahienco(double tongtiencahienco) {
+        this.tongtiencahienco = tongtiencahienco;
+    }
+    
     public double getTienbandau() {
         return tienbandau;
     }
@@ -68,7 +85,7 @@ public class GiaoCaViewModel1 {
 
     @Override
     public String toString() {
-        return "GiaoCaViewModel{" + "maca=" + maca + ", thoigianbatdau=" + thoigianbatdau + ", tienbandau=" + tienbandau + ", idnhanvien=" + idnhanvien + '}';
+        return "GiaoCaViewModel1{" + "maca=" + maca + ", thoigianbatdau=" + thoigianbatdau + ", tienbandau=" + tienbandau + ", tongtiencahienco=" + tongtiencahienco + ", idnhanvien=" + idnhanvien + '}';
     }
     
 }

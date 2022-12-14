@@ -31,6 +31,7 @@ public class ViewDangNhap extends javax.swing.JFrame {
     private nhanvien_service nvservice = new Nhanvien_serviceimpl();
     private GiaoCa_service gcservice = new GiaoCa_serviceimpl();
     private double SoTienBanDau ;
+    private double tienhienco;
 
 
 //    private DangNhap_servicesimpl dangNhap_services;
@@ -247,11 +248,13 @@ public class ViewDangNhap extends javax.swing.JFrame {
         String maca = "CA" + stt;
         if(stt==1){
             SoTienBanDau=1000000;
+            tienhienco=1000000;
         }else{
             GiaoCaViewModel3 gc = gcservice.getsotienbandau();
             SoTienBanDau=gc.getTienbandau();
+            tienhienco=gc.getTienbandau();
         }
-        GiaoCaViewModel1 gcvm = new GiaoCaViewModel1(maca, dt, SoTienBanDau, idnhanvien);
+        GiaoCaViewModel1 gcvm = new GiaoCaViewModel1(maca, dt, SoTienBanDau, tienhienco,idnhanvien);
         gcservice.add(gcvm);
         this.dispose();
         listgcvm = (List<GiaoCaViewModel>) gcservice.getAllGiaoCaViewModel();

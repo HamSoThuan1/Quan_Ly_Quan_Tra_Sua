@@ -41,7 +41,7 @@ public class GiaoCaRepository {
                 double tct = rs.getDouble(9);
                 String gc = rs.getString(10);
                 String idnv = rs.getString(11);
-                GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, tps, thc, tct, gc, idnv);
+                GiaoCa giaoca = new GiaoCa(id, ma, tdbd, tdkt, tbd, tdt, thc, tps, tct, gc, idnv);
                 listgiaoca.add(giaoca);
             }
             return listgiaoca;
@@ -135,8 +135,8 @@ public class GiaoCaRepository {
     }
 
     public int add(GiaoCaViewModel1 gcvm) {
-        String sql = "insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,IdNhanVien) values(?,?,?,?)";
-        return JDBC_Helper.updateTongQuat(sql, gcvm.getMaca(), gcvm.getThoigianbatdau(), gcvm.getTienbandau(), gcvm.getIdnhanvien());
+        String sql = "insert into GIAOCA(MaCa,ThoiDiemBatDau,SoTienBanDau,TienHienCo,IdNhanVien) values(?,?,?,?,?)";
+        return JDBC_Helper.updateTongQuat(sql, gcvm.getMaca(),gcvm.getThoigianbatdau(),gcvm.getTienbandau(),gcvm.getTongtiencahienco(),gcvm.getIdnhanvien());
     }
 
     public GiaoCa getDoanhThuByThoiGianBatDau(Date dt) {
