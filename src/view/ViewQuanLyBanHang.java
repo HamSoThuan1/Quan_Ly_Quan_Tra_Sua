@@ -293,12 +293,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 
     public void fillHoaDon() {
         int index = tblHoaDon.getSelectedRow();
-        try {
-            txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
-            txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        txtMaHD.setText(tblHoaDon.getValueAt(index, 1).toString());
+        txtNgayTao.setText(tblHoaDon.getValueAt(index, 2).toString());
     }
 
     /**
@@ -1253,6 +1249,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
         modelHD = (DefaultTableModel) tblHoaDon.getModel();
         modelHD.setRowCount(0);
         listHD = hdservice.getAllHoaDon();
+        int stt = 1;
         for (int i = 0; i < listHD.size(); i++) {
             String mahoadon = listHD.get(i).getMaHD();
             String ngaytao = listHD.get(i).getNgayTao() + "";
@@ -1261,7 +1258,6 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
 //            String idkhachhang = listHD.get(i).getIdkhachhang();
 //            String tenKH = khachhang.getKHByID(idkhachhang).getTenkh();
             int trangthai = listHD.get(i).getTrangThai();
-            int stt = 1;
             Object[] data = new Object[]{
                 stt++, mahoadon, ngaytao, tennhanvien, trangthai == 0 ? "Chưa thanh toán" : trangthai == 1 ? "Đã thanh toán" : "Đã hủy"
             };
@@ -1372,7 +1368,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             run9.setText("Ngày lập: " + txtNgayTao.getText());
             run9.setTextPosition(20);
 
-            XWPFTable table = document.createTable(tblHoaDonCT.getRowCount() + 2, 5);
+            XWPFTable table = document.createTable(tblHoaDonCT.getRowCount() + 2, 6);
             table.setWidth("100%");
 
             XWPFTableRow row = table.getRow(0);
@@ -1406,21 +1402,31 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             run13.setText("Đơn giá");
             run13.setBold(true);
             run13.setTextPosition(20);
-
+            
             XWPFTableRow row5 = table.getRow(0);
             XWPFParagraph paragraph14 = row.getCell(4).addParagraph();
             paragraph14.setAlignment(ParagraphAlignment.CENTER);
             XWPFRun run14 = paragraph14.createRun();
-            run14.setText("Thành tiền");
+            run14.setText("Tên topping");
             run14.setBold(true);
             run14.setTextPosition(20);
 
-            for (int i = 0; i < tblHoaDonCT.getRowCount(); i++) {
+            XWPFTableRow row6 = table.getRow(0);
+            XWPFParagraph paragraph30 = row.getCell(5).addParagraph();
+            paragraph30.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun run15 = paragraph30.createRun();
+            run15.setText("Thành tiền");
+            run15.setBold(true);
+            run15.setTextPosition(20);
+
+            for (int i = 0; i < tblHoaDonCT.getSelectedRow(); i++) {
                 table.getRow(i + 1).getCell(0).setText(tblHoaDonCT.getValueAt(i, 1).toString());
                 table.getRow(i + 1).getCell(1).setText(tblHoaDonCT.getValueAt(i, 2).toString());
                 table.getRow(i + 1).getCell(2).setText(tblHoaDonCT.getValueAt(i, 3).toString());
                 table.getRow(i + 1).getCell(3).setText(XMoney.themDauCham((long) tblHoaDonCT.getValueAt(i, 4)));
-                table.getRow(i + 1).getCell(4).setText(XMoney.themDauCham(XMoney.loaiBoVND(tblHoaDonCT.getValueAt(i, 5) + "") * Integer.parseInt(tblHoaDonCT.getValueAt(i, 4) + "")) + " VNĐ");
+                table.getRow(i + 1).getCell(4).setText(tblHoaDonCT.getValueAt(i, 6).toString());
+//                table.getRow(i + 1).getCell(5).setText(XMoney.themDauCham(XMoney.loaiBoVND(tblHoaDonCT.getValueAt(i, 4) + "") * Integer.parseInt(tblHoaDonCT.getValueAt(i, 3) + "")) + " VNĐ");
+                table.getRow(i + 1).getCell(5).setText(tblHoaDonCT.getValueAt(i, 5) + "");
             }
 
             int tongSL = 0;
@@ -1432,7 +1438,8 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(1).setText("");
             table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(2).setText(tongSL + "");
             table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(3).setText("");
-            table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(4).setText(txtTongTien.getText() + " VNĐ");
+            table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(4).setText("");
+            table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(5).setText(txtTongTien.getText() + " VNĐ");
 
             XWPFParagraph paragraph22 = document.createParagraph();
             paragraph22.setAlignment(ParagraphAlignment.LEFT);
@@ -1452,7 +1459,7 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             XWPFParagraph paragraph24 = document.createParagraph();
             paragraph24.setAlignment(ParagraphAlignment.LEFT);
             XWPFRun run24 = paragraph24.createRun();
-            run24.setText("Tiền mặt: " + ": " + txtTienKhachDua.getText() + " VNĐ");
+            run24.setText("Tiền mặt: " + txtTienKhachDua.getText() + " VNĐ");
 
             XWPFParagraph paragraph25 = document.createParagraph();
             paragraph25.setAlignment(ParagraphAlignment.LEFT);
