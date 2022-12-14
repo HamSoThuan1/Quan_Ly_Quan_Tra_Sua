@@ -50,6 +50,10 @@ import viewModel.HoaDonViewModel;
 import viewModel.SanPhamViewModel;
 import entity.XMoney;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -1325,50 +1329,49 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
     public void xuatHoaDon() {
         try {
             int index = tblHoaDon.getSelectedRow();
-            XWPFDocument document = new XWPFDocument();
-            FileOutputStream out = new FileOutputStream(new File("D:\\DuAn1_IT17311\\Quan_Ly_Quan_Tra_Sua\\XuatHoaDon" + txtMaHD.getText() + ".docx"));
+            XWPFDocument wordbook = new XWPFDocument();
 
-            XWPFParagraph paragraph = document.createParagraph();
+            XWPFParagraph paragraph = wordbook.createParagraph();
             XWPFRun run = paragraph.createRun();
             paragraph.setAlignment(ParagraphAlignment.CENTER);
             run.setText("Quán Trà Sữa");
             run.setFontSize(20);
             run.setBold(true);
 
-            XWPFParagraph paragraph2 = document.createParagraph();
+            XWPFParagraph paragraph2 = wordbook.createParagraph();
             XWPFRun run2 = paragraph2.createRun();
             paragraph2.setAlignment(ParagraphAlignment.CENTER);
             run2.setText("ĐC: Phố Trịnh Văn Bô, Xuân Phương, Nam Từ Liêm, Hà Nội");
 
-            XWPFParagraph paragraph3 = document.createParagraph();
+            XWPFParagraph paragraph3 = wordbook.createParagraph();
             XWPFRun run3 = paragraph3.createRun();
             paragraph3.setAlignment(ParagraphAlignment.CENTER);
             run3.setText("ĐT: 0353895062");
             run3.setTextPosition(50);
 
-            XWPFParagraph paragraph4 = document.createParagraph();
+            XWPFParagraph paragraph4 = wordbook.createParagraph();
             XWPFRun run4 = paragraph4.createRun();
             paragraph4.setAlignment(ParagraphAlignment.CENTER);
             run4.setText("HÓA ĐƠN BÁN HÀNG");
             run4.setFontSize(30);
             run4.setBold(true);
 
-            XWPFParagraph paragraph5 = document.createParagraph();
+            XWPFParagraph paragraph5 = wordbook.createParagraph();
             XWPFRun run5 = paragraph5.createRun();
             paragraph5.setAlignment(ParagraphAlignment.CENTER);
             run5.setText("Số Hóa Đơn: " + txtMaHD.getText());
             run5.setTextPosition(50);
 
-            XWPFParagraph paragraph6 = document.createParagraph();
+            XWPFParagraph paragraph6 = wordbook.createParagraph();
             XWPFRun run6 = paragraph6.createRun();
             run6.setText("Khách hàng: " + txtTenKH.getText());
 
-            XWPFParagraph paragraph9 = document.createParagraph();
+            XWPFParagraph paragraph9 = wordbook.createParagraph();
             XWPFRun run9 = paragraph9.createRun();
             run9.setText("Ngày lập: " + txtNgayTao.getText());
             run9.setTextPosition(20);
 
-            XWPFTable table = document.createTable(tblHoaDonCT.getRowCount() + 2, 6);
+            XWPFTable table = wordbook.createTable(tblHoaDonCT.getRowCount() + 2, 6);
             table.setWidth("100%");
 
             XWPFTableRow row = table.getRow(0);
@@ -1441,37 +1444,37 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(4).setText("");
             table.getRow(tblHoaDonCT.getRowCount() + 1).getCell(5).setText(txtTongTien.getText() + " VNĐ");
 
-            XWPFParagraph paragraph22 = document.createParagraph();
+            XWPFParagraph paragraph22 = wordbook.createParagraph();
             paragraph22.setAlignment(ParagraphAlignment.LEFT);
 
-            XWPFParagraph paragraph21 = document.createParagraph();
+            XWPFParagraph paragraph21 = wordbook.createParagraph();
             paragraph21.setAlignment(ParagraphAlignment.LEFT);
             XWPFRun run21 = paragraph21.createRun();
             run21.setText("GIẢM GIÁ: " + txtGiamGia.getText() + " VNĐ");
             run21.setBold(true);
 
-            XWPFParagraph paragraph15 = document.createParagraph();
+            XWPFParagraph paragraph15 = wordbook.createParagraph();
             paragraph15.setAlignment(ParagraphAlignment.LEFT);
             XWPFRun run20 = paragraph15.createRun();
             run20.setText("TỔNG TIỀN THANH TOÁN: " + txtTongTien.getText() + " VNĐ");
             run20.setBold(true);
 
-            XWPFParagraph paragraph24 = document.createParagraph();
+            XWPFParagraph paragraph24 = wordbook.createParagraph();
             paragraph24.setAlignment(ParagraphAlignment.LEFT);
             XWPFRun run24 = paragraph24.createRun();
             run24.setText("Tiền mặt: " + txtTienKhachDua.getText() + " VNĐ");
 
-            XWPFParagraph paragraph25 = document.createParagraph();
+            XWPFParagraph paragraph25 = wordbook.createParagraph();
             paragraph25.setAlignment(ParagraphAlignment.LEFT);
             XWPFRun run25 = paragraph25.createRun();
             run25.setText("Tiền trả lại: " + txtTienThua.getText() + " VNĐ");
 
-            XWPFParagraph paragraph23 = document.createParagraph();
+            XWPFParagraph paragraph23 = wordbook.createParagraph();
             paragraph23.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun run23 = paragraph23.createRun();
             run23.setText("------------------------------------------------------------------------------------------------------------------------------------------");
 
-            XWPFParagraph paragraph16 = document.createParagraph();
+            XWPFParagraph paragraph16 = wordbook.createParagraph();
             paragraph16.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun run16 = paragraph16.createRun();
             run16.setText("Người lập hóa đơn");
@@ -1481,27 +1484,49 @@ public class ViewQuanLyBanHang extends javax.swing.JPanel {
             String idnhanvien = gcservice.getGiaoCaByMa(mac).getIdnhanvien();
             String tennhanvien = nhanVienService.getNVbyid(idnhanvien).getHotenNv();
 
-            XWPFParagraph paragraph17 = document.createParagraph();
+            XWPFParagraph paragraph17 = wordbook.createParagraph();
             paragraph17.setAlignment(ParagraphAlignment.RIGHT);
             XWPFRun run17 = paragraph17.createRun();
             run17.setText(tennhanvien);
             run17.setTextPosition(80);
 
-            XWPFParagraph paragraph18 = document.createParagraph();
+            XWPFParagraph paragraph18 = wordbook.createParagraph();
             paragraph18.setAlignment(ParagraphAlignment.CENTER);
             XWPFRun run18 = paragraph18.createRun();
             run18.setText("Cảm ơn quý khách đã mua hàng!");
 
-            XWPFParagraph paragraph19 = document.createParagraph();
+            XWPFParagraph paragraph19 = wordbook.createParagraph();
             paragraph19.setAlignment(ParagraphAlignment.CENTER);
             XWPFRun run19 = paragraph19.createRun();
             run19.setText("Hẹn gặp lại!");
-
-            document.write(out);
-            out.close();
-            document.close();
-
-            System.out.println("Thành công");
+            
+//            JFileChooser j = new JFileChooser();
+//            j.setDialogTitle("Hãy chọn địa chỉ muốn xuất file !");
+//            int rs = j.showSaveDialog(null);
+//            String Path = j.getSelectedFile().getAbsolutePath();
+//            String name = j.getSelectedFile().getName();
+//            String exclePath = Path + ".docx";
+            String exclePath = "C:\\QUAN_LY_QUAN_TRA_SUA\\XUATHOADON\\"+txtMaHD.getText()+".docx";
+            System.out.println(exclePath);
+            try {
+                FileOutputStream fos = new FileOutputStream(exclePath);
+                wordbook.write(fos);
+                fos.close();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            Desktop.getDesktop().open(new File(exclePath));
+            JOptionPane.showMessageDialog(this, "Success");
+//            FileOutputStream fos = new FileOutputStream(new File("C:\\DuAn1_IT17311\\Quan_Ly_Quan_Tra_Sua\\XuatHoaDon" + txtMaHD.getText() + ".docx"));
+//            try {
+//                wordbook.write(fos);
+//                fos.close();
+//                wordbook.close();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
